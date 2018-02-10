@@ -1,0 +1,58 @@
+<!--
+  ~ Copyright 2018 Andrey Tolpeev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">Back in time: Buy Bitcoin</string>
+
+    <string name="app_description">Time traveling is just too dangerous. Better that I devote myself to study the other great mystery of the universe: women! © Dr. Emmett Brown</string>
+    <string name="button_set_date_title">Set date</string>
+    <string name="button_set_amount_title">Set amount</string>
+    <string name="button_share_title">Share with friends</string>
+    <string name="button_start_over_title">Start over</string>
+    <string name="button_buy_bitcoin_title">Buy bitcoin</string>
+    <string name="button_confirm_amount_title">OK</string>
+    <string name="hint_set_amount">Set amount (%s)</string>
+    <string name="error_set_amount_empty">Come on, dude! We give you a once-in-a-lifetime opportunity and you can\'t even put a correct value in the field?</string>
+    <string name="error_set_amount_zero">You gotta be kidding us! Put at least one %s!</string>
+    <string name="error_set_amount_rich">Sure you need this? Looks like money is not a problem for you.</string>
+    <string name="result_title_1">That would be so easy, right? We can\'t help you, your future is whatever you make it.</string>
+    <string name="result_title_2">Hey! Take it easy, dude. You went too far in the past, Bitcoin hadn\'t been invented yet.</string>
+    <string name="result_title_3">Bitcoin price is basically nothing now. Anyway, give yourself a big hand, nobody got as close as you, my friend.</string>
+    <string name="result_title_4">Hello, Satoshi. It\'s been a while. We\'ve finally found you.</string>
+    <string name="result_title_5">Hey, Laszlo. How was that pizza? Worth it?</string>
+    <string name="donate_text">How\'s it going, time traveller? With good luck and proper investment, you should\'ve become filthy rich already. Wanna say hi to the app developers and help them make their dreams come true (we\'re all wannabe caretakers of some tropical island)?</string>
+    <string name="donate_button">Copy BTC wallet address</string>
+    <string name="donate_copy_label">BTC wallet address</string>
+    <string name="donate_toast">BTC wallet has been copied</string>
+    <string name="donate_btc_wallet_address">136kaKNv1PdoFpbTUotaMC28UjXnWv2Hpq</string>
+    <string name="result_dollar_symbol">$</string>
+    <string name="result_destination_time">Destination time</string>
+    <string name="result_present_time">Present time</string>
+    <string name="result_mon_title">Mon</string>
+    <string name="result_year_title">Year</string>
+    <string name="result_amount_title">Amount</string>
+    <string name="url_google_play">http://play.google.com/store/apps/details?id=%s</string>
+    <string name="text_share"><![CDATA[Hey, what’s up? I just travelled back to %s and bought some Bitcoins! Now I’m exorbitantly rich with my %s! Check this app out %s]]></string>
+    <string name="text_hashtag">backintimebuybitcoinapp</string>
+    <string name="retry_title">Great Scott!</string>
+    <string name="retry_button_text">Retry</string>
+    <string name="retry_description">Nowadays time machine only needs to have a good internet connection instead of libyan plutonium.\nNo worries, we just need that once. Happy time travelling!</string>
+
+
+    <!--FB-->
+    <string name="facebook_app_id">155974878366011</string>
+    <string name="fb_login_protocol_scheme">fb155974878366011</string>
+</resources>

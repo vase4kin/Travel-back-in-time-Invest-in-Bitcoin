@@ -1,0 +1,108 @@
+<!--
+  ~ Copyright 2018 Andrey Tolpeev
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~    http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="VideoGameTextStyle">
+        <item name="android:fontFamily">@font/vt323</item>
+    </style>
+
+    <style name="Display" />
+
+    <style name="Display.Hint">
+        <item name="android:fontFamily">@font/press_start_2p</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="Display.Value">
+        <item name="android:fontFamily">@font/digitaldreamfatnarrow</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:background">@drawable/shape_diplay_value</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:lines">1</item>
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="autoSizeMaxTextSize">28sp</item>
+        <item name="autoSizeMinTextSize">12sp</item>
+    </style>
+
+    <style name="Display.Value.Dollar">
+        <item name="android:fontFamily">@font/vt323</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:text">@string/result_dollar_symbol</item>
+    </style>
+
+    <style name="VideoGameButtonStyle" parent="VideoGameTextStyle">
+        <item name="android:layout_height">64dp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:background">@drawable/shape_button</item>
+    </style>
+
+    <style name="VideoGameButtonStyle.BottomSheet">
+        <item name="android:background">@drawable/shape_button_bottom_sheet</item>
+    </style>
+
+    <style name="EditTextFloatingLabel" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse">
+        <item name="android:textSize">26sp</item>
+        <item name="android:fontFamily">@font/vt323</item>
+    </style>
+
+    <style name="EditTextLayoutStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse">
+        <item name="android:fontFamily">@font/vt323</item>
+    </style>
+
+    <style name="EditTextStyle" parent="VideoGameTextStyle">
+        <item name="android:theme">@style/EditTextTheme</item>
+    </style>
+
+    <style name="TextErrorAppearance" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/vt323</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="EditTextTheme">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">30sp</item>
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlActivated">?android:attr/textColorSecondaryInverse</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+    </style>
+
+</resources>
