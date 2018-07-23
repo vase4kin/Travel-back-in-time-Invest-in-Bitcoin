@@ -18,12 +18,13 @@ package com.travelbackintime.buybitcoin.loading.router;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment;
 import com.travelbackintime.buybitcoin.loading.view.LoadingFragment;
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult;
-import com.travelbackintime.buybitcoin.transition.TransitionHelper;
+import com.travelbackintime.buybitcoin.transition.TransitionUtilsKt;
 
 import javax.inject.Inject;
 
@@ -46,17 +47,20 @@ public class LoadingRouterImpl implements LoadingRouter {
         if (args != null) {
             final TimeTravelResult result = args.getParcelable(EXTRA_RESULT);
             Fragment homeComingFragment = HomeComingFragment.createInstance(result);
-            TransitionHelper.addTransitions(homeComingFragment, fragment.getContext());
-            FragmentManager fragmentManager = fragment.getActivity().getSupportFragmentManager();
-            fragmentManager
-                    .beginTransaction()
-                    .remove(fragment)
-                    .commit();
-            fragmentManager
-                    .beginTransaction()
-                    .add(R.id.container, homeComingFragment)
-                    .addToBackStack(null)
-                    .commit();
+            FragmentActivity activity = fragment.getActivity();
+            if (activity != null) {
+                TransitionUtilsKt.addTransitions(homeComingFragment, activity.getApplicationContext());
+                FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                fragmentManager
+                        .beginTransaction()
+                        .remove(fragment)
+                        .commit();
+                fragmentManager
+                        .beginTransaction()
+                        .add(R.id.container, homeComingFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
         }
     }
 }

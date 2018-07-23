@@ -22,7 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.travelbackintime.buybitcoin.loading.view.LoadingFragment;
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult;
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment;
-import com.travelbackintime.buybitcoin.transition.TransitionHelper;
+import com.travelbackintime.buybitcoin.transition.TransitionUtilsKt;
 
 import javax.inject.Inject;
 
@@ -40,7 +40,7 @@ public class TimeTravelRouterImpl implements TimeTravelRouter {
     @Override
     public void openLoadingActivity(TimeTravelResult result) {
         Fragment fragment = LoadingFragment.createInstance(result);
-        TransitionHelper.addTransitions(fragment, activity);
+        TransitionUtilsKt.addTransitions(fragment, activity.getApplicationContext());
         activity.getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.container, fragment)
