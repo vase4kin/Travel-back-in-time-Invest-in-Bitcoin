@@ -14,26 +14,17 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.splash.router;
+package com.travelbackintime.buybitcoin.splash.dagger
 
-import android.app.Activity;
+import com.travelbackintime.buybitcoin.splash.router.SplashRouter
+import com.travelbackintime.buybitcoin.splash.router.SplashRouterImpl
 
-import com.travelbackintime.buybitcoin.splash.view.SplashActivity;
-import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity;
+import dagger.Binds
+import dagger.Module
 
-import javax.inject.Inject;
+@Module
+abstract class SplashModule {
 
-public class SplashRouterImpl implements SplashRouter {
-
-    private final Activity activity;
-
-    @Inject
-    SplashRouterImpl(SplashActivity activity) {
-        this.activity = activity;
-    }
-
-    @Override
-    public void openTimeTravelActivity() {
-        TimeTravelActivity.start(activity);
-    }
+    @Binds
+    internal abstract fun providesSplashRouter(router: SplashRouterImpl): SplashRouter
 }
