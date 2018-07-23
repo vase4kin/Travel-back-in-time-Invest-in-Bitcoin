@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.dagger;
+package com.travelbackintime.buybitcoin.dagger
 
-import javax.inject.Scope;
+import javax.inject.Scope
 
 @Scope
-@interface ActivityScoped {
-}
+internal annotation class ActivityScoped

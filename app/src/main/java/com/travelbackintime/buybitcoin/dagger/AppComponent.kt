@@ -14,32 +14,26 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.dagger;
+package com.travelbackintime.buybitcoin.dagger
 
-import android.app.Application;
-
-import com.travelbackintime.buybitcoin.app.BackInTimeBuyBitcoinApplication;
-
-import javax.inject.Singleton;
-
-import dagger.BindsInstance;
-import dagger.Component;
-import dagger.android.AndroidInjector;
-import dagger.android.support.AndroidSupportInjectionModule;
+import android.app.Application
+import com.travelbackintime.buybitcoin.app.BackInTimeBuyBitcoinApplication
+import dagger.BindsInstance
+import dagger.Component
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
+import javax.inject.Singleton
 
 @Singleton
-@Component(modules = {
-        AppModule.class,
-        ActivityBindingModule.class,
-        AndroidSupportInjectionModule.class})
-public interface AppComponent extends AndroidInjector<BackInTimeBuyBitcoinApplication> {
+@Component(modules = [AppModule::class, ActivityBindingModule::class, AndroidSupportInjectionModule::class])
+interface AppComponent : AndroidInjector<BackInTimeBuyBitcoinApplication> {
 
     @Component.Builder
     interface Builder {
 
         @BindsInstance
-        Builder application(Application application);
+        fun application(application: Application): Builder
 
-        AppComponent build();
+        fun build(): AppComponent
     }
 }
