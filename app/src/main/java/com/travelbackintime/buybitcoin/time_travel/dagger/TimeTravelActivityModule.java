@@ -18,8 +18,6 @@ package com.travelbackintime.buybitcoin.time_travel.dagger;
 
 import com.travelbackintime.buybitcoin.home_coming.dagger.HomeComingFragmentModule;
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment;
-import com.travelbackintime.buybitcoin.loading.dagger.LoadingFragmentModule;
-import com.travelbackintime.buybitcoin.loading.view.LoadingFragment;
 import com.travelbackintime.buybitcoin.time_travel.view.SetAmountBottomSheetDialog;
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment;
 
@@ -31,9 +29,6 @@ public abstract class TimeTravelActivityModule {
 
     @ContributesAndroidInjector(modules = TimeTravelFragmentModule.class)
     abstract TimeTravelFragment timeTravelFragment();
-
-    @ContributesAndroidInjector(modules = LoadingFragmentModule.class)
-    abstract LoadingFragment loadingFragment();
 
     @ContributesAndroidInjector(modules = HomeComingFragmentModule.class)
     abstract HomeComingFragment homeComingFragment();

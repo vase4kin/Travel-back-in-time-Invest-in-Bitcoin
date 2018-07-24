@@ -19,7 +19,7 @@ package com.travelbackintime.buybitcoin.time_travel.router;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 
-import com.travelbackintime.buybitcoin.loading.view.LoadingFragment;
+import com.travelbackintime.buybitcoin.loading.LoadingFragmentKt;
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult;
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment;
 import com.travelbackintime.buybitcoin.transition.TransitionUtilsKt;
@@ -39,7 +39,7 @@ public class TimeTravelRouterImpl implements TimeTravelRouter {
 
     @Override
     public void openLoadingActivity(TimeTravelResult result) {
-        Fragment fragment = LoadingFragment.createInstance(result);
+        Fragment fragment = LoadingFragmentKt.createInstance(result);
         TransitionUtilsKt.addTransitions(fragment, activity.getApplicationContext());
         activity.getSupportFragmentManager()
                 .beginTransaction()
