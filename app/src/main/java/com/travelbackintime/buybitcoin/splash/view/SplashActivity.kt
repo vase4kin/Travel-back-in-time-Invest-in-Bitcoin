@@ -32,10 +32,8 @@ class SplashActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding: ActivitySplashBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
-        viewModel.apply {
-            binding.viewModel = this
-            this.onCreate()
-        }
+        binding.viewModel = viewModel
+        viewModel.onCreate()
     }
 
     override fun onBackPressed() {}
