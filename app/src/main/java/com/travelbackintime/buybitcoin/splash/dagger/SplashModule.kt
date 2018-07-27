@@ -26,5 +26,5 @@ import dagger.Module
 abstract class SplashModule {
 
     @Binds
-    internal abstract fun providesSplashRouter(router: SplashRouterImpl): SplashRouter
+    abstract fun providesSplashRouter(router: SplashRouterImpl): SplashRouter
 }

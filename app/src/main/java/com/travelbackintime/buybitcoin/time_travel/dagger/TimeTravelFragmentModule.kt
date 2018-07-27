@@ -14,9 +14,17 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel.presenter;
+package com.travelbackintime.buybitcoin.time_travel.dagger
 
-public interface TimeTravelPresenter {
+import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouter
+import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouterImpl
 
-    void handleOnCreate();
+import dagger.Binds
+import dagger.Module
+
+@Module
+abstract class TimeTravelFragmentModule {
+
+    @Binds
+    abstract fun providesRouter(router: TimeTravelRouterImpl): TimeTravelRouter
 }

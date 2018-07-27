@@ -19,6 +19,7 @@ package com.travelbackintime.buybitcoin.loading
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,13 +28,13 @@ import com.crashlytics.android.Crashlytics
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment.EXTRA_RESULT
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
-import com.travelbackintime.buybitcoin.transition.addTransitions
+import com.travelbackintime.buybitcoin.utils.addTransitions
 import pl.droidsonroids.gif.GifDrawable
 
 private const val LOOP_COUNT = 1
 private const val SPEED: Float = 0.8f
 
-fun createInstance(result: TimeTravelResult): Fragment {
+fun createLoadingFragment(result: TimeTravelResult): Fragment {
     val bundle = Bundle()
     bundle.putParcelable(EXTRA_RESULT, result)
     val loadingFragment = LoadingFragment()
@@ -71,20 +72,18 @@ class LoadingFragment : Fragment() {
         if (args != null) {
             val result: TimeTravelResult = args.getParcelable(EXTRA_RESULT)
             val homeComingFragment = HomeComingFragment.createInstance(result)
-            val activity = activity
-            if (activity != null) {
-                addTransitions(homeComingFragment, activity.applicationContext)
-                val fragmentManager = activity.supportFragmentManager
-                fragmentManager
-                        .beginTransaction()
-                        .remove(this)
-                        .commit()
-                fragmentManager
-                        .beginTransaction()
-                        .add(R.id.container, homeComingFragment)
-                        .addToBackStack(null)
-                        .commit()
-            }
+            val activity = activity as AppCompatActivity
+            addTransitions(homeComingFragment, activity.applicationContext)
+            val fragmentManager = activity.supportFragmentManager
+            fragmentManager
+                    .beginTransaction()
+                    .remove(this)
+                    .commit()
+            fragmentManager
+                    .beginTransaction()
+                    .add(R.id.container, homeComingFragment)
+                    .addToBackStack(null)
+                    .commit()
         }
     }
 }

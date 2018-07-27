@@ -19,4 +19,4 @@ package com.travelbackintime.buybitcoin.dagger
 import javax.inject.Scope
 
 @Scope
-internal annotation class ActivityScoped
+annotation class ActivityScoped

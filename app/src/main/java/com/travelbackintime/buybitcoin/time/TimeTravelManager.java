@@ -16,21 +16,24 @@
 
 package com.travelbackintime.buybitcoin.time;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.travelbackintime.buybitcoin.time.model.TimeEvent;
 
 import java.util.Date;
 
 public interface TimeTravelManager {
 
-    void initFlowCapacitor(FlowCapacitorInitListener listener);
+    void initFlowCapacitor(@NonNull FlowCapacitorInitListener listener);
 
-    double getBitcoinPrice(Date date);
+    double getBitcoinPrice(@Nullable Date date);
 
     double getBitcoinCurrentPrice();
 
-    BitcoinStatus getBitcoinStatus(Date date);
+    BitcoinStatus getBitcoinStatus(@Nullable Date date);
 
-    TimeEvent getTimeEvent(Date date);
+    TimeEvent getTimeEvent(@Nullable Date date);
 
     interface FlowCapacitorInitListener {
         void onSuccess();

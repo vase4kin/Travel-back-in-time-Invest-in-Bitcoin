@@ -24,12 +24,13 @@ import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment;
-import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment;
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
 import javax.inject.Inject;
 
 import bitcoin.backintime.com.backintimebuybitcoin.R;
+
+import static com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragmentKt.createTimeTravelFragment;
 
 public class HomeComingRouterImpl implements HomeComingRouter {
 
@@ -44,7 +45,7 @@ public class HomeComingRouterImpl implements HomeComingRouter {
     public void openTimeTravelActivity() {
         activity.getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container, TimeTravelFragment.createInstance())
+                .replace(R.id.container, createTimeTravelFragment())
                 .commit();
     }
 

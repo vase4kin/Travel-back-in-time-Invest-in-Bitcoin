@@ -14,11 +14,16 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel.router;
+package com.travelbackintime.buybitcoin.time_travel.entity
 
-import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult;
+import android.os.Parcelable
+import com.travelbackintime.buybitcoin.time.TimeTravelManager
+import kotlinx.android.parcel.Parcelize
+import java.util.*
 
-public interface TimeTravelRouter {
-
-    void openLoadingActivity(TimeTravelResult result);
-}
+@Parcelize
+data class TimeTravelResult(val status: TimeTravelManager.BitcoinStatus,
+                            val eventType: TimeTravelManager.EventType = TimeTravelManager.EventType.NO_EVENT,
+                            val profit: Double? = null,
+                            val investedMoney: Double? = null,
+                            val timeToTravel: Date? = null) : Parcelable

@@ -50,7 +50,7 @@ public class SetAmountBottomSheetDialog extends DaggerAppCompatDialogFragment {
     @Inject
     Tracker tracker;
 
-    private SetAmountListener listener;
+    private SetInvestedMoneyListener listener;
     private int errorRichCount = 0;
 
     public SetAmountBottomSheetDialog() {
@@ -114,7 +114,7 @@ public class SetAmountBottomSheetDialog extends DaggerAppCompatDialogFragment {
                 errorRichCount++;
                 tracker.trackUserSeesYouReachError();
             } else {
-                listener.onAmountSet(Double.valueOf(amount));
+                listener.onInvestedMoneySet(Double.valueOf(amount));
                 errorRichCount = 0;
                 dismiss();
             }
@@ -124,11 +124,11 @@ public class SetAmountBottomSheetDialog extends DaggerAppCompatDialogFragment {
         }
     }
 
-    public interface SetAmountListener {
-        void onAmountSet(Double amount);
+    public interface SetInvestedMoneyListener {
+        void onInvestedMoneySet(@NonNull Double investedMoney);
     }
 
-    public void setListener(SetAmountListener listener) {
+    public void setListener(SetInvestedMoneyListener listener) {
         this.listener = listener;
     }
 }

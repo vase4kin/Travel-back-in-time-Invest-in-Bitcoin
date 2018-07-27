@@ -25,13 +25,13 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-internal abstract class ActivityBindingModule {
+abstract class ActivityBindingModule {
 
     @ActivityScoped
     @ContributesAndroidInjector(modules = [SplashModule::class])
-    internal abstract fun splashActivity(): SplashActivity
+    abstract fun splashActivity(): SplashActivity
 
     @ActivityScoped
     @ContributesAndroidInjector(modules = [TimeTravelActivityModule::class])
-    internal abstract fun timeTravelActivity(): TimeTravelActivity
+    abstract fun timeTravelActivity(): TimeTravelActivity
 }

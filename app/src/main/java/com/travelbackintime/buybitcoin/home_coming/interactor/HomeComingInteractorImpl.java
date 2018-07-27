@@ -81,7 +81,7 @@ public class HomeComingInteractorImpl implements HomeComingInteractor {
     @Override
     public String createShareText(TimeTravelResult result) {
         String googlePlayLink = createGooglePlayLink();
-        Date date = result.getDate();
+        Date date = result.getTimeToTravel();
         Double profitValue = result.getProfit();
         String profit = formatter.formatPrice(profitValue);
         return fragment.getString(R.string.text_share, formatter.formatDateToShareText(date), profit, googlePlayLink);

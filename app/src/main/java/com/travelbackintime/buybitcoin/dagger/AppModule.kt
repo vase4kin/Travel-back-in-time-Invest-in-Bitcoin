@@ -32,6 +32,7 @@ import com.travelbackintime.buybitcoin.time.TimeTravelManager
 import com.travelbackintime.buybitcoin.time.TimeTravelManagerImpl
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.tracker.TrackerImpl
+import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import dagger.Module
 import dagger.Provides
 import java.text.NumberFormat
@@ -43,36 +44,36 @@ class AppModule {
 
     @Singleton
     @Provides
-    internal fun providesBitcoinManager(database: FirebaseDatabase, sharedPreferences: SharedPreferences): TimeTravelManager {
+    fun providesBitcoinManager(database: FirebaseDatabase, sharedPreferences: SharedPreferences): TimeTravelManager {
         return TimeTravelManagerImpl(database, sharedPreferences)
     }
 
     @Provides
-    internal fun providesNumberFormat(): NumberFormat {
+    fun providesNumberFormat(): NumberFormat {
         return NumberFormat.getCurrencyInstance(Locale.US)
     }
 
     @Singleton
     @Provides
-    internal fun providesFirebaseAnalytics(app: Application): FirebaseAnalytics {
+    fun providesFirebaseAnalytics(app: Application): FirebaseAnalytics {
         return FirebaseAnalytics.getInstance(app.applicationContext)
     }
 
     @Singleton
     @Provides
-    internal fun providesTracker(analytics: FirebaseAnalytics): Tracker {
+    fun providesTracker(analytics: FirebaseAnalytics): Tracker {
         return TrackerImpl(analytics)
     }
 
     @Singleton
     @Provides
-    internal fun providesFormat(numberFormat: NumberFormat): Formatter {
+    fun providesFormat(numberFormat: NumberFormat): Formatter {
         return Formatter(numberFormat)
     }
 
     @Singleton
     @Provides
-    internal fun providesFirebaseRemoteConfig(): FirebaseRemoteConfig {
+    fun providesFirebaseRemoteConfig(): FirebaseRemoteConfig {
         val firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
         val configSettings = FirebaseRemoteConfigSettings.Builder()
                 .setDeveloperModeEnabled(BuildConfig.DEBUG)
@@ -84,14 +85,14 @@ class AppModule {
 
     @Singleton
     @Provides
-    internal fun providesRemoteConfigService(firebaseRemoteConfig: FirebaseRemoteConfig): RemoteConfigService {
+    fun providesRemoteConfigService(firebaseRemoteConfig: FirebaseRemoteConfig): RemoteConfigService {
         val cacheSecs = if (BuildConfig.DEBUG) 30L else 43200L
         return RemoteConfigServiceImpl(firebaseRemoteConfig, cacheSecs)
     }
 
     @Singleton
     @Provides
-    internal fun providesFirebaseDatabase(): FirebaseDatabase {
+    fun providesFirebaseDatabase(): FirebaseDatabase {
         val firebaseDatabase = FirebaseDatabase.getInstance()
         firebaseDatabase.setPersistenceEnabled(true)
         firebaseDatabase.reference.keepSynced(true)
@@ -100,8 +101,14 @@ class AppModule {
 
     @Singleton
     @Provides
-    internal fun providesSharedPreferences(app: Application): SharedPreferences {
+    fun providesSharedPreferences(app: Application): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(app.applicationContext)
+    }
+
+    @Singleton
+    @Provides
+    fun providesResourceProvider(app: Application): ResourcesProviderUtils {
+        return ResourcesProviderUtils(app.applicationContext)
     }
 
 }

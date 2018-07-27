@@ -17,6 +17,8 @@
 package com.travelbackintime.buybitcoin.time;
 
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.database.DataSnapshot;
@@ -57,7 +59,7 @@ public class TimeTravelManagerImpl implements TimeTravelManager {
     }
 
     @Override
-    public void initFlowCapacitor(final FlowCapacitorInitListener listener) {
+    public void initFlowCapacitor(@NonNull final FlowCapacitorInitListener listener) {
         database.getReference(REF_CONNECTION).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -83,7 +85,8 @@ public class TimeTravelManagerImpl implements TimeTravelManager {
     }
 
     @Override
-    public double getBitcoinPrice(final Date date) {
+    public double getBitcoinPrice(@Nullable final Date date) {
+        if (date == null) return Double.NaN;
         String serverDate = convertDateToServerDate(date);
         return getBitcoinPrice(serverDate);
     }
@@ -104,7 +107,9 @@ public class TimeTravelManagerImpl implements TimeTravelManager {
     }
 
     @Override
-    public BitcoinStatus getBitcoinStatus(Date date) {
+    public BitcoinStatus getBitcoinStatus(@Nullable Date date) {
+        // TODO: Return error here
+        if (date == null) return BitcoinStatus.EXIST;
         Date dateFirst = parseServerDateToDate(DATE_FIRST);
         if (dateFirst.after(date)) {
             return BitcoinStatus.NOT_BORN;
@@ -116,7 +121,8 @@ public class TimeTravelManagerImpl implements TimeTravelManager {
     }
 
     @Override
-    public TimeEvent getTimeEvent(Date date) {
+    public TimeEvent getTimeEvent(@Nullable Date date) {
+        if (date == null) return new TimeEvent(EventType.NO_EVENT.name());
         String eventServerDate = convertDateToEventServerDate(date);
         TimeEvent timeEvent = timeEvents.get(eventServerDate);
         return timeEvent != null ? timeEvent : new TimeEvent(EventType.NO_EVENT.name());

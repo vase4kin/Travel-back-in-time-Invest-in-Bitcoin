@@ -113,8 +113,8 @@ public class HomeComingPresenterImpl implements HomeComingPresenter {
                     default:
                         Double profitValue = result.getProfit();
                         String profit = formatter.formatPriceAsOnlyDigits(profitValue);
-                        String amount = formatter.formatPriceAsOnlyDigits(result.getInvestedAmount());
-                        Date date = result.getDate();
+                        String amount = formatter.formatPriceAsOnlyDigits(result.getInvestedMoney());
+                        Date date = result.getTimeToTravel();
                         view.setDisplayValues(profit, amount, formatter.formatMonth(date), formatter.formatYear(date));
                         view.showShareView();
                         view.showParamInfo();
