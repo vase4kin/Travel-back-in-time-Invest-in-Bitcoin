@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.format
+package com.travelbackintime.buybitcoin.utils
 
 import java.text.NumberFormat
 import java.util.*
 
-class Formatter(private val numberFormat: NumberFormat) {
+class FormatterUtils(private val numberFormat: NumberFormat) {
 
     fun formatPrice(amount: Double?): String {
         return numberFormat.format(amount)

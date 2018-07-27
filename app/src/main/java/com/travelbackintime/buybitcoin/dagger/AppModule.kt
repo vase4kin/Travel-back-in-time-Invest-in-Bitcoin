@@ -25,13 +25,13 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import com.travelbackintime.buybitcoin.format.Formatter
 import com.travelbackintime.buybitcoin.remote_config.RemoteConfigService
 import com.travelbackintime.buybitcoin.remote_config.RemoteConfigServiceImpl
 import com.travelbackintime.buybitcoin.time.TimeTravelManager
 import com.travelbackintime.buybitcoin.time.TimeTravelManagerImpl
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.tracker.TrackerImpl
+import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import dagger.Module
 import dagger.Provides
@@ -67,8 +67,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun providesFormat(numberFormat: NumberFormat): Formatter {
-        return Formatter(numberFormat)
+    fun providesFormatterUtils(numberFormat: NumberFormat): FormatterUtils {
+        return FormatterUtils(numberFormat)
     }
 
     @Singleton

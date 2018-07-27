@@ -22,10 +22,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.travelbackintime.buybitcoin.format.Formatter;
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment;
 import com.travelbackintime.buybitcoin.remote_config.RemoteConfigService;
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult;
+import com.travelbackintime.buybitcoin.utils.FormatterUtils;
 
 import java.util.Date;
 
@@ -39,13 +39,13 @@ public class HomeComingInteractorImpl implements HomeComingInteractor {
 
     private final HomeComingFragment fragment;
     private final RemoteConfigService configService;
-    private final Formatter formatter;
+    private final FormatterUtils formatterUtils;
 
     @Inject
-    HomeComingInteractorImpl(HomeComingFragment fragment, RemoteConfigService configService, Formatter formatter) {
+    HomeComingInteractorImpl(HomeComingFragment fragment, RemoteConfigService configService, FormatterUtils formatter) {
         this.fragment = fragment;
         this.configService = configService;
-        this.formatter = formatter;
+        this.formatterUtils = formatter;
     }
 
     @Nullable
@@ -83,7 +83,7 @@ public class HomeComingInteractorImpl implements HomeComingInteractor {
         String googlePlayLink = createGooglePlayLink();
         Date date = result.getTimeToTravel();
         Double profitValue = result.getProfit();
-        String profit = formatter.formatPrice(profitValue);
-        return fragment.getString(R.string.text_share, formatter.formatDateToShareText(date), profit, googlePlayLink);
+        String profit = formatterUtils.formatPrice(profitValue);
+        return fragment.getString(R.string.text_share, formatterUtils.formatDateToShareText(date), profit, googlePlayLink);
     }
 }

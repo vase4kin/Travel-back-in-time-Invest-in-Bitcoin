@@ -3,18 +3,18 @@ package com.travelbackintime.buybitcoin.time_travel.view
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.travelbackintime.buybitcoin.format.Formatter
 import com.travelbackintime.buybitcoin.time.TimeTravelManager
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouter
 import com.travelbackintime.buybitcoin.tracker.Tracker
+import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import java.util.*
 import javax.inject.Inject
 
 class TimeTravelViewModel @Inject constructor(
         private val tracker: Tracker,
-        private val formatter: Formatter,
+        private val formatterUtils: FormatterUtils,
         private val timeTravelManager: TimeTravelManager,
         private val router: TimeTravelRouter,
         resourcesProviderUtils: ResourcesProviderUtils) {
@@ -38,7 +38,7 @@ class TimeTravelViewModel @Inject constructor(
     fun setTimeToTravel(year: Int, monthOfYear: Int, dayOfMonth: Int) {
         val timeToTravel = getTimeToTravel(year, monthOfYear, dayOfMonth)
         this.timeToTravel = timeToTravel
-        val formattedTimeToTravel = formatter.formatDate(timeToTravel)
+        val formattedTimeToTravel = formatterUtils.formatDate(timeToTravel)
         tracker.trackUserSetsTime(formattedTimeToTravel)
         timeToTravelText.set(formattedTimeToTravel)
         enableBuyBitcoinButton()
@@ -46,7 +46,7 @@ class TimeTravelViewModel @Inject constructor(
 
     fun setInvestedMoney(investedMoney: Double) {
         this.investedMoney = investedMoney
-        val formattedInvestedMoney = formatter.formatPrice(investedMoney)
+        val formattedInvestedMoney = formatterUtils.formatPrice(investedMoney)
         tracker.trackUserSetsMoney(formattedInvestedMoney)
         investedMoneyText.set(formattedInvestedMoney)
         enableBuyBitcoinButton()

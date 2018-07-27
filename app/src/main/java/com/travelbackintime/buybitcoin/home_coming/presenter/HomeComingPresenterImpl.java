@@ -16,13 +16,13 @@
 
 package com.travelbackintime.buybitcoin.home_coming.presenter;
 
-import com.travelbackintime.buybitcoin.format.Formatter;
 import com.travelbackintime.buybitcoin.home_coming.interactor.HomeComingInteractor;
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter;
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingView;
 import com.travelbackintime.buybitcoin.time.TimeTravelManager;
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult;
 import com.travelbackintime.buybitcoin.tracker.Tracker;
+import com.travelbackintime.buybitcoin.utils.FormatterUtils;
 
 import java.util.Date;
 
@@ -34,19 +34,19 @@ public class HomeComingPresenterImpl implements HomeComingPresenter {
     private final HomeComingInteractor interactor;
     private final HomeComingRouter router;
     private final Tracker tracker;
-    private final Formatter formatter;
+    private final FormatterUtils formatterUtils;
 
     @Inject
     HomeComingPresenterImpl(HomeComingView view,
                             HomeComingInteractor interactor,
                             HomeComingRouter router,
                             Tracker tracker,
-                            Formatter formatter) {
+                            FormatterUtils formatter) {
         this.view = view;
         this.interactor = interactor;
         this.router = router;
         this.tracker = tracker;
-        this.formatter = formatter;
+        this.formatterUtils = formatter;
     }
 
     @Override
@@ -112,10 +112,10 @@ public class HomeComingPresenterImpl implements HomeComingPresenter {
                     case EXIST:
                     default:
                         Double profitValue = result.getProfit();
-                        String profit = formatter.formatPriceAsOnlyDigits(profitValue);
-                        String amount = formatter.formatPriceAsOnlyDigits(result.getInvestedMoney());
+                        String profit = formatterUtils.formatPriceAsOnlyDigits(profitValue);
+                        String amount = formatterUtils.formatPriceAsOnlyDigits(result.getInvestedMoney());
                         Date date = result.getTimeToTravel();
-                        view.setDisplayValues(profit, amount, formatter.formatMonth(date), formatter.formatYear(date));
+                        view.setDisplayValues(profit, amount, formatterUtils.formatMonth(date), formatterUtils.formatYear(date));
                         view.showShareView();
                         view.showParamInfo();
                         view.showProfitView();
