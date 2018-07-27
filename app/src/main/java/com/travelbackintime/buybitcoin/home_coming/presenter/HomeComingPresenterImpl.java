@@ -19,8 +19,8 @@ package com.travelbackintime.buybitcoin.home_coming.presenter;
 import com.travelbackintime.buybitcoin.home_coming.interactor.HomeComingInteractor;
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter;
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingView;
-import com.travelbackintime.buybitcoin.time.TimeTravelManager;
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult;
+import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine;
 import com.travelbackintime.buybitcoin.tracker.Tracker;
 import com.travelbackintime.buybitcoin.utils.FormatterUtils;
 
@@ -89,7 +89,7 @@ public class HomeComingPresenterImpl implements HomeComingPresenter {
                 }
             });
 
-            if (result.getEventType().equals(TimeTravelManager.EventType.NO_EVENT)) {
+            if (result.getEventType().equals(TimeTravelMachine.EventType.NO_EVENT)) {
                 switch (result.getStatus()) {
                     case AM_I_A_MAGICIAN_TO_KNOW:
                         view.hideShareView();

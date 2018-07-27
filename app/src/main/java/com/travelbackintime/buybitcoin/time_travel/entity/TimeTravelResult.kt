@@ -17,13 +17,13 @@
 package com.travelbackintime.buybitcoin.time_travel.entity
 
 import android.os.Parcelable
-import com.travelbackintime.buybitcoin.time.TimeTravelManager
+import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
-data class TimeTravelResult(val status: TimeTravelManager.BitcoinStatus,
-                            val eventType: TimeTravelManager.EventType = TimeTravelManager.EventType.NO_EVENT,
+data class TimeTravelResult(val status: TimeTravelMachine.BitcoinStatus,
+                            val eventType: TimeTravelMachine.EventType = TimeTravelMachine.EventType.NO_EVENT,
                             val profit: Double? = null,
                             val investedMoney: Double? = null,
                             val timeToTravel: Date? = null) : Parcelable

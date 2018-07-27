@@ -3,9 +3,9 @@ package com.travelbackintime.buybitcoin.time_travel.view
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.travelbackintime.buybitcoin.time.TimeTravelManager
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouter
+import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class TimeTravelViewModel @Inject constructor(
         private val tracker: Tracker,
         private val formatterUtils: FormatterUtils,
-        private val timeTravelManager: TimeTravelManager,
+        private val timeTravelMachine: TimeTravelMachine,
         private val router: TimeTravelRouter,
         resourcesProviderUtils: ResourcesProviderUtils) {
 
@@ -66,12 +66,12 @@ class TimeTravelViewModel @Inject constructor(
     }
 
     private fun processData() {
-        val event = timeTravelManager.getTimeEvent(timeToTravel)
+        val event = timeTravelMachine.getTimeEvent(timeToTravel)
         when (event.type) {
-            TimeTravelManager.EventType.NO_EVENT -> {
-                val status = timeTravelManager.getBitcoinStatus(timeToTravel)
+            TimeTravelMachine.EventType.NO_EVENT -> {
+                val status = timeTravelMachine.getBitcoinStatus(timeToTravel)
                 when (status) {
-                    TimeTravelManager.BitcoinStatus.EXIST -> {
+                    TimeTravelMachine.BitcoinStatus.EXIST -> {
                         val profit = calculateProfit()
                         val timeTravelResult = TimeTravelResult(
                                 status = status,
@@ -86,15 +86,15 @@ class TimeTravelViewModel @Inject constructor(
             else -> {
                 router.openLoadingActivity(
                         TimeTravelResult(
-                                status = TimeTravelManager.BitcoinStatus.EXIST,
+                                status = TimeTravelMachine.BitcoinStatus.EXIST,
                                 eventType = event.type))
             }
         }
     }
 
     private fun calculateProfit(): Double {
-        val pricePerBitcoinInThePast = timeTravelManager.getBitcoinPrice(timeToTravel)
-        val pricePerBitcoinNow = timeTravelManager.bitcoinCurrentPrice
+        val pricePerBitcoinInThePast = timeTravelMachine.getBitcoinPrice(timeToTravel)
+        val pricePerBitcoinNow = timeTravelMachine.bitcoinCurrentPrice
         val bitcoinInvestment = investedMoney / pricePerBitcoinInThePast
         return pricePerBitcoinNow * bitcoinInvestment
     }

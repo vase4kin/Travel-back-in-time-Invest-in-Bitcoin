@@ -27,8 +27,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.travelbackintime.buybitcoin.remote_config.RemoteConfigService
 import com.travelbackintime.buybitcoin.remote_config.RemoteConfigServiceImpl
-import com.travelbackintime.buybitcoin.time.TimeTravelManager
-import com.travelbackintime.buybitcoin.time.TimeTravelManagerImpl
+import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
+import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachineImpl
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.tracker.TrackerImpl
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
@@ -44,8 +44,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun providesBitcoinManager(database: FirebaseDatabase, sharedPreferences: SharedPreferences): TimeTravelManager {
-        return TimeTravelManagerImpl(database, sharedPreferences)
+    fun providesTimeTravelMachine(database: FirebaseDatabase, sharedPreferences: SharedPreferences): TimeTravelMachine {
+        return TimeTravelMachineImpl(database, sharedPreferences)
     }
 
     @Provides
