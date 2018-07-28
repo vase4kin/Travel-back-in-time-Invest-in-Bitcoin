@@ -24,6 +24,6 @@ import java.util.*
 @Parcelize
 data class TimeTravelResult(val status: TimeTravelMachine.BitcoinStatus,
                             val eventType: TimeTravelMachine.EventType = TimeTravelMachine.EventType.NO_EVENT,
-                            val profit: Double? = null,
+                            val profitMoney: Double? = null,
                             val investedMoney: Double? = null,
                             val timeToTravel: Date? = null) : Parcelable

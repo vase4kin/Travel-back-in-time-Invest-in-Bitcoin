@@ -14,9 +14,17 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.home_coming.presenter;
+package com.travelbackintime.buybitcoin.home_coming.interactor
 
-public interface HomeComingPresenter {
+import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 
-    void handleOnCreate();
+interface HomeComingInteractor {
+
+    val result: TimeTravelResult?
+
+    val isAdsEnabled: Boolean
+
+    fun createGooglePlayLink(): String
+
+    fun createShareText(result: TimeTravelResult): String
 }

@@ -25,8 +25,8 @@ import android.view.View
 import android.view.ViewGroup
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.crashlytics.android.Crashlytics
-import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
-import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment.EXTRA_RESULT
+import com.travelbackintime.buybitcoin.home_coming.view.EXTRA_RESULT
+import com.travelbackintime.buybitcoin.home_coming.view.createHomecomingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.utils.addTransitions
 import pl.droidsonroids.gif.GifDrawable
@@ -71,7 +71,7 @@ class LoadingFragment : Fragment() {
         val args = arguments
         if (args != null) {
             val result: TimeTravelResult = args.getParcelable(EXTRA_RESULT)
-            val homeComingFragment = HomeComingFragment.createInstance(result)
+            val homeComingFragment = createHomecomingFragment(result)
             val activity = activity as AppCompatActivity
             addTransitions(homeComingFragment, activity.applicationContext)
             val fragmentManager = activity.supportFragmentManager

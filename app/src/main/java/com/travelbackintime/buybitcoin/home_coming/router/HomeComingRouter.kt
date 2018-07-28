@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.home_coming.router;
+package com.travelbackintime.buybitcoin.home_coming.router
 
-public interface HomeComingRouter {
+interface HomeComingRouter {
 
-    void openTimeTravelActivity();
+    fun openTimeTravelActivity()
 
-    void shareWithFriends(String textToShare);
+    fun shareWithFriends(textToShare: String)
 
-    void shareToTwitter(String textToShare);
+    fun shareToTwitter(textToShare: String)
 
-    void shareToFaceBook(String googlePlayLink);
+    fun shareToFaceBook(googlePlayLink: String)
 }

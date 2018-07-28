@@ -73,7 +73,7 @@ class TimeTravelViewModel @Inject constructor(
                         val profit = calculateProfit()
                         val timeTravelResult = TimeTravelResult(
                                 status = status,
-                                profit = profit,
+                                profitMoney = profit,
                                 investedMoney = investedMoney,
                                 timeToTravel = timeToTravel)
                         router.openLoadingActivity(timeTravelResult)

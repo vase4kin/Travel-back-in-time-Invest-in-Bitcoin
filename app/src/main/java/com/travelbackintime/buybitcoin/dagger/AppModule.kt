@@ -31,8 +31,10 @@ import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachineImpl
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.tracker.TrackerImpl
+import com.travelbackintime.buybitcoin.utils.ClipboardUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
+import com.travelbackintime.buybitcoin.utils.ToastUtils
 import dagger.Module
 import dagger.Provides
 import java.text.NumberFormat
@@ -109,6 +111,18 @@ class AppModule {
     @Provides
     fun providesResourceProvider(app: Application): ResourcesProviderUtils {
         return ResourcesProviderUtils(app.applicationContext)
+    }
+
+    @Singleton
+    @Provides
+    fun providesToastUtils(app: Application): ToastUtils {
+        return ToastUtils(app.applicationContext)
+    }
+
+    @Singleton
+    @Provides
+    fun providesClipboardUtils(app: Application): ClipboardUtils {
+        return ClipboardUtils(app.applicationContext)
     }
 
 }
