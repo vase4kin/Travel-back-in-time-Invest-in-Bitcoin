@@ -34,8 +34,12 @@ class HomeComingRouterImpl @Inject constructor(fragment: HomeComingFragment, pri
 
     private val activity = fragment.activity as AppCompatActivity
 
-    override fun openTimeTravelActivity() {
-        activity.supportFragmentManager
+    override fun openTimeTravelFragment() {
+        val fragmentManager = activity.supportFragmentManager
+        if (fragmentManager.backStackEntryCount > 0) {
+            fragmentManager.popBackStackImmediate()
+        }
+        fragmentManager
                 .beginTransaction()
                 .replace(R.id.container, createTimeTravelFragment())
                 .commit()

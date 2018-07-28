@@ -97,7 +97,7 @@ class HomeComingViewModel @Inject constructor(
     }
 
     fun onStartOver() {
-        router.openTimeTravelActivity()
+        router.openTimeTravelFragment()
         tracker.trackUserStartsOver()
     }
 

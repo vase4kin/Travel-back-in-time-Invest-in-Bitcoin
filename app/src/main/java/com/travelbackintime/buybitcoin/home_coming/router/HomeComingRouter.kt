@@ -20,7 +20,7 @@ import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 
 interface HomeComingRouter {
 
-    fun openTimeTravelActivity()
+    fun openTimeTravelFragment()
 
     fun shareWithFriends(result: TimeTravelResult)
 

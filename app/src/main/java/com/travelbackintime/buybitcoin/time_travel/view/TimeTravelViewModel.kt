@@ -29,6 +29,8 @@ import com.travelbackintime.buybitcoin.utils.onChanged
 import java.util.*
 import javax.inject.Inject
 
+private const val DEFAULT_INVESTED_MONEY: Double = 0.0
+
 class TimeTravelViewModel @Inject constructor(
         private val tracker: Tracker,
         private val formatterUtils: FormatterUtils,
@@ -44,7 +46,7 @@ class TimeTravelViewModel @Inject constructor(
         enableBuyBitcoinButton()
     }
 
-    private var investedMoney: Double = Double.NaN
+    private var investedMoney: Double = DEFAULT_INVESTED_MONEY
     private var timeToTravel: Date? = null
 
     fun onBuyBitcoinButtonClick() {
@@ -113,7 +115,7 @@ class TimeTravelViewModel @Inject constructor(
     }
 
     private fun isBuyBitcoinButtonEnabled(): Boolean {
-        return timeToTravel != null && investedMoney != Double.NaN
+        return timeToTravel != null && investedMoney != DEFAULT_INVESTED_MONEY
     }
 
     private fun enableBuyBitcoinButton() {
