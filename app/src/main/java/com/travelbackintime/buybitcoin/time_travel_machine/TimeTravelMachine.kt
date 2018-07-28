@@ -14,40 +14,36 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time;
+package com.travelbackintime.buybitcoin.time_travel_machine
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import com.travelbackintime.buybitcoin.time_travel_machine.model.TimeTravelEvent
+import java.util.*
 
-import com.travelbackintime.buybitcoin.time.model.TimeEvent;
+interface TimeTravelMachine {
 
-import java.util.Date;
+    fun initFlowCapacitor(listener: FlowCapacitorInitListener)
 
-public interface TimeTravelManager {
+    fun getBitcoinPrice(timeToTravel: Date?): Double
 
-    void initFlowCapacitor(@NonNull FlowCapacitorInitListener listener);
+    fun getBitcoinCurrentPrice(): Double
 
-    double getBitcoinPrice(@Nullable Date date);
+    fun getBitcoinStatus(timeToTravel: Date?): BitcoinStatus
 
-    double getBitcoinCurrentPrice();
-
-    BitcoinStatus getBitcoinStatus(@Nullable Date date);
-
-    TimeEvent getTimeEvent(@Nullable Date date);
+    fun getTimeEvent(timeToTravel: Date?): TimeTravelEvent
 
     interface FlowCapacitorInitListener {
-        void onSuccess();
+        fun onSuccess()
 
-        void onError();
+        fun onError()
 
-        void onDataNotDownloaded();
+        fun onDataNotDownloaded()
     }
 
-    enum BitcoinStatus {
+    enum class BitcoinStatus {
         EXIST, NOT_BORN, AM_I_A_MAGICIAN_TO_KNOW
     }
 
-    enum EventType {
+    enum class EventType {
         BASICALLY_NOTHING, HELLO_SATOSHI, PIZZA_LOVER, NO_EVENT
     }
 }

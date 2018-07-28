@@ -9,6 +9,7 @@ import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
+import com.travelbackintime.buybitcoin.utils.onChanged
 import java.util.*
 import javax.inject.Inject
 
@@ -19,16 +20,21 @@ class TimeTravelViewModel @Inject constructor(
         private val router: TimeTravelRouter,
         resourcesProviderUtils: ResourcesProviderUtils) {
 
-    val isBuyBitcoinButtonEnabled = ObservableBoolean(false)
-    val timeToTravelText = ObservableField<String>(resourcesProviderUtils.getString(R.string.button_set_date_title))
-    val investedMoneyText = ObservableField<String>(resourcesProviderUtils.getString(R.string.button_set_amount_title))
+    val isBuyBitcoinButtonEnabled
+        get() = ObservableBoolean(timeToTravel != null && investedMoney != Double.NaN)
+    val timeToTravelText = ObservableField<String>(resourcesProviderUtils.getString(R.string.button_set_date_title)).onChanged {
+        isBuyBitcoinButtonEnabled.set(true)
+    }
+    val investedMoneyText = ObservableField<String>(resourcesProviderUtils.getString(R.string.button_set_amount_title)).onChanged {
+        isBuyBitcoinButtonEnabled.set(true)
+    }
 
     private var investedMoney: Double = Double.NaN
     private var timeToTravel: Date? = null
 
     fun onBuyBitcoinButtonClick() {
         tracker.trackUserTravelsBackAndBuys()
-        processData()
+        travelInTime()
     }
 
     fun onSetInvestedMoneyButtonClick() = router.showAmountDialog()
@@ -41,7 +47,6 @@ class TimeTravelViewModel @Inject constructor(
         val formattedTimeToTravel = formatterUtils.formatDate(timeToTravel)
         tracker.trackUserSetsTime(formattedTimeToTravel)
         timeToTravelText.set(formattedTimeToTravel)
-        enableBuyBitcoinButton()
     }
 
     fun setInvestedMoney(investedMoney: Double) {
@@ -49,7 +54,6 @@ class TimeTravelViewModel @Inject constructor(
         val formattedInvestedMoney = formatterUtils.formatPrice(investedMoney)
         tracker.trackUserSetsMoney(formattedInvestedMoney)
         investedMoneyText.set(formattedInvestedMoney)
-        enableBuyBitcoinButton()
     }
 
     private fun getTimeToTravel(year: Int, monthOfYear: Int, dayOfMonth: Int): Date {
@@ -59,13 +63,7 @@ class TimeTravelViewModel @Inject constructor(
         return timeToTravelCalendar.time
     }
 
-    private fun enableBuyBitcoinButton() {
-        if (timeToTravel != null && investedMoney != Double.NaN) {
-            isBuyBitcoinButtonEnabled.set(true)
-        }
-    }
-
-    private fun processData() {
+    private fun travelInTime() {
         val event = timeTravelMachine.getTimeEvent(timeToTravel)
         when (event.type) {
             TimeTravelMachine.EventType.NO_EVENT -> {
@@ -94,7 +92,7 @@ class TimeTravelViewModel @Inject constructor(
 
     private fun calculateProfit(): Double {
         val pricePerBitcoinInThePast = timeTravelMachine.getBitcoinPrice(timeToTravel)
-        val pricePerBitcoinNow = timeTravelMachine.bitcoinCurrentPrice
+        val pricePerBitcoinNow = timeTravelMachine.getBitcoinCurrentPrice()
         val bitcoinInvestment = investedMoney / pricePerBitcoinInThePast
         return pricePerBitcoinNow * bitcoinInvestment
     }
