@@ -110,9 +110,9 @@ class TimeTravelMachineImpl(
     private fun fetchData(listener: TimeTravelMachine.FlowCapacitorInitListener) {
         database.reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val timeGenericTypeIndicator = object : GenericTypeIndicator<Map<String, TimeTravelInfo>>() {}
+                val timeGenericTypeIndicator = object : GenericTypeIndicator<Map<@JvmSuppressWildcards String, @JvmSuppressWildcards TimeTravelInfo>>() {}
                 timeTraveInfos = dataSnapshot.child(REF_TIME).getValue(timeGenericTypeIndicator) ?: HashMap()
-                val timeEventsGenericTypeIndicator = object : GenericTypeIndicator<Map<String, TimeTravelEvent>>() {}
+                val timeEventsGenericTypeIndicator = object : GenericTypeIndicator<Map<@JvmSuppressWildcards String, @JvmSuppressWildcards TimeTravelEvent>>() {}
                 timeTravelEvents = dataSnapshot.child(REF_EVENTS).getValue(timeEventsGenericTypeIndicator) ?: HashMap()
                 listener.onSuccess()
             }

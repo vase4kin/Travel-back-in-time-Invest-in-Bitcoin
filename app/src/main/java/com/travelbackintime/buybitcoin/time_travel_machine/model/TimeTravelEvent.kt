@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel_machine.model;
+package com.travelbackintime.buybitcoin.time_travel_machine.model
 
-public class TimeTravelInfo {
+import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
 
-    private Double price;
+class TimeTravelEvent(val type: String? = null) {
 
-    public TimeTravelInfo() {
-    }
-
-    public TimeTravelInfo(Double price) {
-        this.price = price;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
+    val eventType: TimeTravelMachine.EventType
+        get() {
+            return if (type == null) {
+                TimeTravelMachine.EventType.NO_EVENT
+            } else {
+                TimeTravelMachine.EventType.valueOf(type)
+            }
+        }
 }

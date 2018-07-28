@@ -36,13 +36,12 @@ class TimeTravelViewModel @Inject constructor(
         private val router: TimeTravelRouter,
         resourcesProviderUtils: ResourcesProviderUtils) {
 
-    val isBuyBitcoinButtonEnabled
-        get() = ObservableBoolean(timeToTravel != null && investedMoney != Double.NaN)
+    val isBuyBitcoinButtonEnabled = ObservableBoolean(false)
     val timeToTravelText = ObservableField<String>(resourcesProviderUtils.getString(R.string.button_set_date_title)).onChanged {
-        isBuyBitcoinButtonEnabled.set(true)
+        enableBuyBitcoinButton()
     }
     val investedMoneyText = ObservableField<String>(resourcesProviderUtils.getString(R.string.button_set_amount_title)).onChanged {
-        isBuyBitcoinButtonEnabled.set(true)
+        enableBuyBitcoinButton()
     }
 
     private var investedMoney: Double = Double.NaN
@@ -81,7 +80,7 @@ class TimeTravelViewModel @Inject constructor(
 
     private fun travelInTime() {
         val event = timeTravelMachine.getTimeEvent(timeToTravel)
-        when (event.type) {
+        when (event.eventType) {
             TimeTravelMachine.EventType.NO_EVENT -> {
                 val status = timeTravelMachine.getBitcoinStatus(timeToTravel)
                 when (status) {
@@ -101,7 +100,7 @@ class TimeTravelViewModel @Inject constructor(
                 router.openLoadingActivity(
                         TimeTravelResult(
                                 status = TimeTravelMachine.BitcoinStatus.EXIST,
-                                eventType = event.type))
+                                eventType = event.eventType))
             }
         }
     }
@@ -111,5 +110,15 @@ class TimeTravelViewModel @Inject constructor(
         val pricePerBitcoinNow = timeTravelMachine.getBitcoinCurrentPrice()
         val bitcoinInvestment = investedMoney / pricePerBitcoinInThePast
         return pricePerBitcoinNow * bitcoinInvestment
+    }
+
+    private fun isBuyBitcoinButtonEnabled(): Boolean {
+        return timeToTravel != null && investedMoney != Double.NaN
+    }
+
+    private fun enableBuyBitcoinButton() {
+        if (isBuyBitcoinButtonEnabled()) {
+            isBuyBitcoinButtonEnabled.set(true)
+        }
     }
 }
