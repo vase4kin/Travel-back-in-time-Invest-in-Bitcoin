@@ -3,8 +3,8 @@ package com.travelbackintime.buybitcoin.home_coming.view
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.travelbackintime.buybitcoin.home_coming.interactor.HomeComingInteractor
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter
+import com.travelbackintime.buybitcoin.remote_config.RemoteConfigService
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.tracker.Tracker
@@ -12,9 +12,9 @@ import com.travelbackintime.buybitcoin.utils.*
 import javax.inject.Inject
 
 class HomeComingViewModel @Inject constructor(
-        private val interactor: HomeComingInteractor,
         private val router: HomeComingRouter,
         private val tracker: Tracker,
+        private val configService: RemoteConfigService,
         private val formatterUtils: FormatterUtils,
         private val resourcesProviderUtils: ResourcesProviderUtils,
         private val toastUtils: ToastUtils,
@@ -33,46 +33,47 @@ class HomeComingViewModel @Inject constructor(
     val monthText = ObservableField<String>()
     val yearText = ObservableField<String>()
 
-    val isAdsEnabled = interactor.isAdsEnabled
+    val isAdsEnabled: Boolean
+        get() = configService.isAdsEnabled
+
+    var result: TimeTravelResult? = null
 
     fun handleOnCreate() {
-        val result = interactor.result
-        if (result != null) {
-            when {
-                result.eventType == TimeTravelMachine.EventType.NO_EVENT -> {
-                    when (result.status) {
-                        TimeTravelMachine.BitcoinStatus.AM_I_A_MAGICIAN_TO_KNOW -> {
-                            showInfoText(R.string.result_title_1)
-                            tracker.trackUserGetsToMagician()
-                        }
-                        TimeTravelMachine.BitcoinStatus.NOT_BORN -> {
-                            showInfoText(R.string.result_title_2)
-                            tracker.trackUserGetsToNotBorn()
-                        }
-                        TimeTravelMachine.BitcoinStatus.EXIST -> {
-                            setTimeMachineDisplay(result)
-                            isShareViewVisible.set(true)
-                            isParamViewVisible.set(true)
-                            isProfitViewVisible.set(true)
-                            tracker.trackUserGetsToExist()
-                        }
+        val result = this.result ?: return
+        when {
+            result.eventType == TimeTravelMachine.EventType.NO_EVENT -> {
+                when (result.status) {
+                    TimeTravelMachine.BitcoinStatus.AM_I_A_MAGICIAN_TO_KNOW -> {
+                        showInfoText(R.string.result_title_1)
+                        tracker.trackUserGetsToMagician()
+                    }
+                    TimeTravelMachine.BitcoinStatus.NOT_BORN -> {
+                        showInfoText(R.string.result_title_2)
+                        tracker.trackUserGetsToNotBorn()
+                    }
+                    TimeTravelMachine.BitcoinStatus.EXIST -> {
+                        setTimeMachineDisplay(result)
+                        isShareViewVisible.set(true)
+                        isParamViewVisible.set(true)
+                        isProfitViewVisible.set(true)
+                        tracker.trackUserGetsToExist()
                     }
                 }
-                else -> {
-                    when (result.eventType) {
-                        TimeTravelMachine.EventType.HELLO_SATOSHI -> {
-                            showInfoText(R.string.result_title_4)
-                            isDonateViewVisible.set(true)
-                            tracker.trackUserGetsToSatoshi()
-                        }
-                        TimeTravelMachine.EventType.PIZZA_LOVER -> {
-                            showInfoText(R.string.result_title_5)
-                            tracker.trackUserGetsToPizzaLover()
-                        }
-                        TimeTravelMachine.EventType.BASICALLY_NOTHING, TimeTravelMachine.EventType.NO_EVENT -> {
-                            showInfoText(R.string.result_title_3)
-                            tracker.trackUserGetsToBasicallyNothing()
-                        }
+            }
+            else -> {
+                when (result.eventType) {
+                    TimeTravelMachine.EventType.HELLO_SATOSHI -> {
+                        showInfoText(R.string.result_title_4)
+                        isDonateViewVisible.set(true)
+                        tracker.trackUserGetsToSatoshi()
+                    }
+                    TimeTravelMachine.EventType.PIZZA_LOVER -> {
+                        showInfoText(R.string.result_title_5)
+                        tracker.trackUserGetsToPizzaLover()
+                    }
+                    TimeTravelMachine.EventType.BASICALLY_NOTHING, TimeTravelMachine.EventType.NO_EVENT -> {
+                        showInfoText(R.string.result_title_3)
+                        tracker.trackUserGetsToBasicallyNothing()
                     }
                 }
             }
@@ -85,22 +86,19 @@ class HomeComingViewModel @Inject constructor(
     }
 
     fun onShareWithFriends() {
-        val result = interactor.result ?: return
-        val textToShare = interactor.createShareText(result)
-        router.shareWithFriends(textToShare)
+        val result = this.result ?: return
+        router.shareWithFriends(result)
         tracker.trackUserSharesWithFriends()
     }
 
     fun onShareOnFacebook() {
-        val googlePlayLink = interactor.createGooglePlayLink()
-        router.shareToFaceBook(googlePlayLink)
+        router.shareToFaceBook()
         tracker.trackUserSharesOnFb()
     }
 
     fun onShareOnTwitter() {
-        val result = interactor.result ?: return
-        val textToShare = interactor.createShareText(result)
-        router.shareToTwitter(textToShare)
+        val result = this.result ?: return
+        router.shareToTwitter(result)
         tracker.trackUserSharesOnTwitter()
     }
 

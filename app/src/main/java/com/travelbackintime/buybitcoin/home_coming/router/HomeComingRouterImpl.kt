@@ -24,11 +24,13 @@ import com.facebook.share.model.ShareHashtag
 import com.facebook.share.model.ShareLinkContent
 import com.facebook.share.widget.ShareDialog
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
+import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel.view.createTimeTravelFragment
+import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.twitter.sdk.android.tweetcomposer.TweetComposer
 import javax.inject.Inject
 
-class HomeComingRouterImpl @Inject constructor(fragment: HomeComingFragment) : HomeComingRouter {
+class HomeComingRouterImpl @Inject constructor(fragment: HomeComingFragment, private val formatterUtils: FormatterUtils) : HomeComingRouter {
 
     private val activity = fragment.activity as AppCompatActivity
 
@@ -39,14 +41,16 @@ class HomeComingRouterImpl @Inject constructor(fragment: HomeComingFragment) : H
                 .commit()
     }
 
-    override fun shareWithFriends(textToShare: String) {
+    override fun shareWithFriends(result: TimeTravelResult) {
+        val textToShare = createShareText(result)
         ShareCompat.IntentBuilder.from(activity)
                 .setHtmlText(textToShare)
                 .setType("infoText/html")
                 .startChooser()
     }
 
-    override fun shareToTwitter(textToShare: String) {
+    override fun shareToTwitter(result: TimeTravelResult) {
+        val textToShare = createShareText(result)
         val textToShareBuilder = StringBuilder(textToShare)
         textToShareBuilder.append(" #")
         textToShareBuilder.append(activity.getString(R.string.text_hashtag))
@@ -55,11 +59,24 @@ class HomeComingRouterImpl @Inject constructor(fragment: HomeComingFragment) : H
         builder.show()
     }
 
-    override fun shareToFaceBook(googlePlayLink: String) {
+    override fun shareToFaceBook() {
+        val googlePlayLink = createGooglePlayLink()
         val content = ShareLinkContent.Builder()
                 .setContentUrl(Uri.parse(googlePlayLink))
                 .setShareHashtag(ShareHashtag.Builder().setHashtag(activity.getString(R.string.text_hashtag)).build())
                 .build()
         ShareDialog.show(activity, content)
+    }
+
+    private fun createGooglePlayLink(): String {
+        return activity.getString(R.string.url_google_play, activity.packageName)
+    }
+
+    private fun createShareText(result: TimeTravelResult): String {
+        val googlePlayLink = createGooglePlayLink()
+        val date = result.timeToTravel
+        val profitValue = result.profitMoney
+        val profit = formatterUtils.formatPrice(profitValue)
+        return activity.getString(R.string.text_share, formatterUtils.formatDateToShareText(date!!), profit, googlePlayLink)
     }
 }

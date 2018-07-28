@@ -16,19 +16,13 @@
 
 package com.travelbackintime.buybitcoin.home_coming.dagger
 
-import com.travelbackintime.buybitcoin.home_coming.interactor.HomeComingInteractor
-import com.travelbackintime.buybitcoin.home_coming.interactor.HomeComingInteractorImpl
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouterImpl
-
 import dagger.Binds
 import dagger.Module
 
 @Module
 abstract class HomeComingFragmentModule {
-
-    @Binds
-    abstract fun providesInteractor(interactor: HomeComingInteractorImpl): HomeComingInteractor
 
     @Binds
     abstract fun providesRouter(router: HomeComingRouterImpl): HomeComingRouter

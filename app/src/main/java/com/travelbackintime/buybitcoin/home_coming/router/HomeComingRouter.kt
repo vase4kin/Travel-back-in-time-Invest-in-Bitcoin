@@ -16,13 +16,15 @@
 
 package com.travelbackintime.buybitcoin.home_coming.router
 
+import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
+
 interface HomeComingRouter {
 
     fun openTimeTravelActivity()
 
-    fun shareWithFriends(textToShare: String)
+    fun shareWithFriends(result: TimeTravelResult)
 
-    fun shareToTwitter(textToShare: String)
+    fun shareToTwitter(result: TimeTravelResult)
 
-    fun shareToFaceBook(googlePlayLink: String)
+    fun shareToFaceBook()
 }

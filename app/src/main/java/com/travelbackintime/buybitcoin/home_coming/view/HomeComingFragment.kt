@@ -48,6 +48,7 @@ class HomeComingFragment : DaggerFragment() {
                               savedInstanceState: Bundle?): View? {
         val binding: FragmentHomeComingBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_home_coming, container, false)
+        viewModel.result = arguments?.getParcelable(EXTRA_RESULT)
         binding.viewModel = viewModel
         return binding.root
     }
