@@ -79,8 +79,7 @@ class TimeTravelMachineImpl(
     }
 
     override fun getBitcoinStatus(timeToTravel: Date?): TimeTravelMachine.BitcoinStatus {
-        // TODO: Return error here
-        timeToTravel ?: return TimeTravelMachine.BitcoinStatus.EXIST
+        timeToTravel ?: return TimeTravelMachine.BitcoinStatus.AM_I_A_MAGICIAN_TO_KNOW
         return when {
             isDateBeforeBitcoinBirth(timeToTravel) -> TimeTravelMachine.BitcoinStatus.NOT_BORN
             isDateTheFuture(timeToTravel) -> TimeTravelMachine.BitcoinStatus.AM_I_A_MAGICIAN_TO_KNOW

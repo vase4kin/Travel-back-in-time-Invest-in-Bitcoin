@@ -102,9 +102,7 @@ dependencies {
     implementation "com.facebook.android:facebook-share:$rootProject.facebookShare"
     implementation "com.twitter.sdk.android:tweet-composer:$rootProject.tweetComposer"
 
-    //TODO: Move to constants
-    implementation 'com.android.support:multidex:1.0.3'
-
+    implementation "com.android.support:multidex:$rootProject.multiDex"
 
     testImplementation "junit:junit:$rootProject.junitVersion"
 
