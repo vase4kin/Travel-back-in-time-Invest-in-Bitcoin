@@ -14,65 +14,74 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    tools:context="com.travelbackintime.buybitcoin.splash.view.SplashActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/splash_view"
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.travelbackintime.buybitcoin.splash.view.SplashViewModel" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_splash" />
+        android:animateLayoutChanges="true"
+        tools:context="com.travelbackintime.buybitcoin.splash.view.SplashActivity">
 
-    <LinearLayout
-        android:id="@+id/retry_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@color/bsp_transparent_black"
-        android:gravity="center"
-        android:visibility="gone"
-        tools:visibility="visible">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_splash" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@color/bsp_transparent_black"
             android:gravity="center"
-            android:orientation="vertical">
+            android:visibility="@{viewModel.isRetryVisible ? View.VISIBLE : View.GONE}">
 
-            <TextView
-                style="@style/VideoGameTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="36sp"
-                android:textColor="@color/colorWhite"
-                android:text="@string/retry_title" />
+                android:orientation="vertical">
 
-            <TextView
-                style="@style/VideoGameTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="24sp"
-                android:textColor="@color/colorWhite"
-                android:text="@string/retry_description" />
+                <TextView
+                    style="@style/VideoGameTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center"
+                    android:textSize="36sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/retry_title" />
+
+                <TextView
+                    style="@style/VideoGameTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/retry_description" />
+
+            </LinearLayout>
+
+            <Button
+                style="@style/VideoGameButtonStyle"
+                android:layout_width="match_parent"
+                android:text="@string/retry_button_text"
+                android:onClick="@{() -> viewModel.onRetryButtonClick()}" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/retry_button"
-            style="@style/VideoGameButtonStyle"
-            android:layout_width="match_parent"
-            android:text="@string/retry_button_text" />
-
-    </LinearLayout>
-
-</FrameLayout>
+    </FrameLayout>
+</layout>
