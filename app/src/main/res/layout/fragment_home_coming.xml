@@ -139,7 +139,7 @@
                             style="@style/Display.Hint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/result_amount_title" />
+                            android:text="@string/result_invested_money_title" />
 
                         <TextView
                             style="@style/Display.Value"
@@ -184,7 +184,8 @@
                     android:gravity="center"
                     android:paddingBottom="4dp"
                     android:text="@string/result_destination_time"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -203,7 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/press_start_2p"
-                    android:text="@string/result_amount_title" />
+                    android:text="@string/result_profit_money_title" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -243,7 +244,8 @@
                     android:gravity="center"
                     android:paddingBottom="4dp"
                     android:text="@string/result_present_time"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 

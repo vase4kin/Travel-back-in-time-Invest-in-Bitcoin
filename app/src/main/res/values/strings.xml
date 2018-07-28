@@ -18,13 +18,13 @@
     <string name="app_name">Back in time: Buy Bitcoin</string>
 
     <string name="app_description">Time traveling is just too dangerous. Better that I devote myself to study the other great mystery of the universe: women! © Dr. Emmett Brown</string>
-    <string name="button_set_date_title">Set date</string>
-    <string name="button_set_amount_title">Set amount</string>
+    <string name="button_set_date_title">Set date to travel</string>
+    <string name="button_set_amount_title">Set money to invest</string>
     <string name="button_share_title">Share with friends</string>
     <string name="button_start_over_title">Start over</string>
     <string name="button_buy_bitcoin_title">Buy bitcoin</string>
     <string name="button_confirm_amount_title">OK</string>
-    <string name="hint_set_amount">Set amount (%s)</string>
+    <string name="hint_set_amount">Set money to invest (%s)</string>
     <string name="error_set_amount_empty">Come on, dude! We give you a once-in-a-lifetime opportunity and you can\'t even put a correct value in the field?</string>
     <string name="error_set_amount_zero">You gotta be kidding us! Put at least one %s!</string>
     <string name="error_set_amount_rich">Sure you need this? Looks like money is not a problem for you.</string>
@@ -43,7 +43,8 @@
     <string name="result_present_time">Present time</string>
     <string name="result_mon_title">Mon</string>
     <string name="result_year_title">Year</string>
-    <string name="result_amount_title">Amount</string>
+    <string name="result_invested_money_title">Invested money</string>
+    <string name="result_profit_money_title">Profit money</string>
     <string name="url_google_play">http://play.google.com/store/apps/details?id=%s</string>
     <string name="text_share"><![CDATA[Hey, what’s up? I just travelled back to %1$s and bought some Bitcoins! Now I’m exorbitantly rich with my %2$s! Check this app out %3$s]]></string>
     <string name="text_hashtag">backintimebuybitcoinapp</string>
