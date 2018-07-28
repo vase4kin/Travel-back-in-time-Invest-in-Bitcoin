@@ -56,7 +56,7 @@ class SplashViewModel @Inject constructor(
 
             override fun onDataNotDownloaded() {
                 tracker.trackDataNotDownloaded()
-                isRetryVisible.set(false)
+                isRetryVisible.set(true)
             }
         })
     }
