@@ -33,7 +33,7 @@ fun createTimeTravelFragment(): Fragment {
     return TimeTravelFragment()
 }
 
-class TimeTravelFragment : DaggerFragment(), DatePickerDialog.OnDateSetListener, SetAmountBottomSheetDialog.SetInvestedMoneyListener {
+class TimeTravelFragment : DaggerFragment(), DatePickerDialog.OnDateSetListener, InvestMoneyBottomSheetDialog.InvestMoneyListener {
 
     @Inject
     lateinit var viewModel: TimeTravelViewModel

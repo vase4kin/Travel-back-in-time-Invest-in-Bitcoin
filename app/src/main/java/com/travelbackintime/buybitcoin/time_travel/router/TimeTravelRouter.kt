@@ -21,7 +21,7 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
 import com.travelbackintime.buybitcoin.loading.createLoadingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
-import com.travelbackintime.buybitcoin.time_travel.view.SetAmountBottomSheetDialog
+import com.travelbackintime.buybitcoin.time_travel.view.InvestMoneyBottomSheetDialog
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
 import com.travelbackintime.buybitcoin.utils.addTransitions
 import java.util.*
@@ -41,9 +41,9 @@ class TimeTravelRouterImpl @Inject constructor(private val fragment: TimeTravelF
     val activity: AppCompatActivity = fragment.activity as AppCompatActivity
 
     override fun showAmountDialog() {
-        val dialog = SetAmountBottomSheetDialog()
+        val dialog = InvestMoneyBottomSheetDialog()
         dialog.setListener(fragment)
-        dialog.show(activity.supportFragmentManager, SetAmountBottomSheetDialog::class.java.name)
+        dialog.show(activity.supportFragmentManager, InvestMoneyBottomSheetDialog::class.java.name)
     }
 
     override fun showSetDateDialog() {
