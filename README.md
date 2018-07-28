@@ -1,6 +1,6 @@
 
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![Release](https://img.shields.io/badge/release-1.0.5-blue.svg)](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/releases/latest)
+[![Release](https://img.shields.io/badge/release-1.0.6-blue.svg)](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/releases/latest)
 # Back in time: Buy Bitcoin
 
 This GitHub repository hosts the code for the Android application [Back in time: Buy Bitcoin](https://play.google.com/store/apps/details?id=com.travelbackintime.buybitcoin).
