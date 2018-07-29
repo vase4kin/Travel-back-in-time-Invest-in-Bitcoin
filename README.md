@@ -5,6 +5,8 @@
 
 This GitHub repository hosts the code for the Android application [Back in time: Buy Bitcoin](https://play.google.com/store/apps/details?id=com.travelbackintime.buybitcoin).
 
+The app is written on [Kotlin](https://kotlinlang.org/) using [Data Binding Library](https://developer.android.com/topic/libraries/data-binding/).
+
 ## Details
 
 Screenshot 1 | Screenshot 2 | Screenshot 3  
