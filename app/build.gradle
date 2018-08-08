@@ -104,6 +104,8 @@ dependencies {
 
     implementation "com.android.support:multidex:$rootProject.multiDex"
 
+    implementation project(":timetravelmachine")
+
     testImplementation "junit:junit:$rootProject.junitVersion"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

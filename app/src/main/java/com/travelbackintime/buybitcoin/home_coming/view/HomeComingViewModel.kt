@@ -19,10 +19,10 @@ package com.travelbackintime.buybitcoin.home_coming.view
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter
 import com.travelbackintime.buybitcoin.remote_config.RemoteConfigService
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
-import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.utils.*
 import javax.inject.Inject

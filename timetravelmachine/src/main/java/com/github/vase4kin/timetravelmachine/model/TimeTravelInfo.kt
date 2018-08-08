@@ -14,18 +14,9 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel_machine.model
+package com.github.vase4kin.timetravelmachine.model
 
-import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
+import android.support.annotation.Keep
 
-class TimeTravelEvent(val type: String? = null) {
-
-    val eventType: TimeTravelMachine.EventType
-        get() {
-            return if (type == null) {
-                TimeTravelMachine.EventType.NO_EVENT
-            } else {
-                TimeTravelMachine.EventType.valueOf(type)
-            }
-        }
-}
+@Keep
+class TimeTravelInfo(val price: Double? = null)

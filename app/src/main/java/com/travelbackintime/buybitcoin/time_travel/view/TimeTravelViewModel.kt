@@ -19,9 +19,9 @@ package com.travelbackintime.buybitcoin.time_travel.view
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouter
-import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils

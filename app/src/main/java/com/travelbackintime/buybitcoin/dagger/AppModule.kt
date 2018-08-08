@@ -21,14 +21,14 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import bitcoin.backintime.com.backintimebuybitcoin.BuildConfig
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.timetravelmachine.TimeTravelMachine
+import com.github.vase4kin.timetravelmachine.TimeTravelMachineImpl
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.travelbackintime.buybitcoin.remote_config.RemoteConfigService
 import com.travelbackintime.buybitcoin.remote_config.RemoteConfigServiceImpl
-import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
-import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachineImpl
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.tracker.TrackerImpl
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils

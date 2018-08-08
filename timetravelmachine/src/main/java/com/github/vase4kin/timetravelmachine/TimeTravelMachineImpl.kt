@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel_machine
+package com.github.vase4kin.timetravelmachine
 
 import android.content.SharedPreferences
 import com.crashlytics.android.Crashlytics
+import com.github.vase4kin.timetravelmachine.model.TimeTravelEvent
+import com.github.vase4kin.timetravelmachine.model.TimeTravelInfo
 import com.google.firebase.database.*
-import com.travelbackintime.buybitcoin.time_travel_machine.model.TimeTravelEvent
-import com.travelbackintime.buybitcoin.time_travel_machine.model.TimeTravelInfo
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
