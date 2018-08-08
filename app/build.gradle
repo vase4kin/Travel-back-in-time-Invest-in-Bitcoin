@@ -89,11 +89,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'gridlayout-v7'
     }
-    implementation "com.google.firebase:firebase-core:$rootProject.playServices"
-    implementation "com.google.firebase:firebase-crash:$rootProject.playServices"
-    implementation "com.google.firebase:firebase-ads:$rootProject.playServices"
-    implementation "com.google.firebase:firebase-config:$rootProject.playServices"
-    implementation "com.google.firebase:firebase-database:$rootProject.playServices"
+    implementation "com.google.firebase:firebase-core:16.0.1"
+    implementation "com.google.firebase:firebase-crash:16.0.1"
+    implementation "com.google.firebase:firebase-ads:15.0.1"
+    implementation "com.google.firebase:firebase-config:16.0.0"
+    implementation "com.google.firebase:firebase-database:16.0.1"
     implementation("com.crashlytics.sdk.android:crashlytics:$rootProject.crashlytics") {
         transitive = true
     }
