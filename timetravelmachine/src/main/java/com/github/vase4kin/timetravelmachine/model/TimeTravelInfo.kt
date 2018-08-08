@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel_machine.model
+package com.github.vase4kin.timetravelmachine.model
 
 class TimeTravelInfo(val price: Double? = null)

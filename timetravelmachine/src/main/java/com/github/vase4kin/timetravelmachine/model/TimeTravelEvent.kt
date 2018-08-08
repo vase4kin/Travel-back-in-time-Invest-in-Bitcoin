@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel_machine.model
+package com.github.vase4kin.timetravelmachine.model
 
-import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
+import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 
 class TimeTravelEvent(val type: String? = null) {
 

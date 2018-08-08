@@ -17,7 +17,7 @@
 package com.travelbackintime.buybitcoin.time_travel.entity
 
 import android.os.Parcelable
-import com.travelbackintime.buybitcoin.time_travel_machine.TimeTravelMachine
+import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 

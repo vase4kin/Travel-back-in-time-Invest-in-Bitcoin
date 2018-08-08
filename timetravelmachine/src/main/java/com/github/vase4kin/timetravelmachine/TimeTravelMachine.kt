@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel_machine
+package com.github.vase4kin.timetravelmachine
 
-import com.travelbackintime.buybitcoin.time_travel_machine.model.TimeTravelEvent
+import com.github.vase4kin.timetravelmachine.model.TimeTravelEvent
 import java.util.*
 
 interface TimeTravelMachine {
