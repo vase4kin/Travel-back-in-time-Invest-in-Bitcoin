@@ -29,11 +29,13 @@ import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-fun createTimeTravelFragment(): Fragment {
-    return TimeTravelFragment()
-}
-
 class TimeTravelFragment : DaggerFragment(), DatePickerDialog.OnDateSetListener, InvestMoneyBottomSheetDialog.InvestMoneyListener {
+
+    companion object {
+        fun create(): Fragment {
+            return TimeTravelFragment()
+        }
+    }
 
     @Inject
     lateinit var viewModel: TimeTravelViewModel

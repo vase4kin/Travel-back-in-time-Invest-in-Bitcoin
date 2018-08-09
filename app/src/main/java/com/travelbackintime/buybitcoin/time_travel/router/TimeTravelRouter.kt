@@ -19,7 +19,7 @@ package com.travelbackintime.buybitcoin.time_travel.router
 import android.support.v7.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
-import com.travelbackintime.buybitcoin.loading.createLoadingFragment
+import com.travelbackintime.buybitcoin.loading.LoadingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel.view.InvestMoneyBottomSheetDialog
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
@@ -59,7 +59,7 @@ class TimeTravelRouterImpl @Inject constructor(private val fragment: TimeTravelF
     }
 
     override fun openLoadingActivity(result: TimeTravelResult) {
-        val fragment = createLoadingFragment(result)
+        val fragment = LoadingFragment.create(result)
         addTransitions(fragment, activity.applicationContext)
         activity.supportFragmentManager
                 .beginTransaction()

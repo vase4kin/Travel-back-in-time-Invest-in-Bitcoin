@@ -35,7 +35,7 @@ class TimeTravelActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_time_travel)
         supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container, createTimeTravelFragment())
+                .add(R.id.container, TimeTravelFragment.create())
                 .commit()
     }
 }

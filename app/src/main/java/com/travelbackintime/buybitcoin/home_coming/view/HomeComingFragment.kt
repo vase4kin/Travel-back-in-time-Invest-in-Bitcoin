@@ -31,15 +31,17 @@ import javax.inject.Inject
 
 const val EXTRA_RESULT = "extra_result"
 
-fun createHomecomingFragment(result: TimeTravelResult): Fragment {
-    val bundle = Bundle()
-    bundle.putParcelable(EXTRA_RESULT, result)
-    val homeComingFragment = HomeComingFragment()
-    homeComingFragment.arguments = bundle
-    return homeComingFragment
-}
-
 class HomeComingFragment : DaggerFragment() {
+
+    companion object {
+        fun create(result: TimeTravelResult): Fragment {
+            val bundle = Bundle()
+            bundle.putParcelable(EXTRA_RESULT, result)
+            val homeComingFragment = HomeComingFragment()
+            homeComingFragment.arguments = bundle
+            return homeComingFragment
+        }
+    }
 
     @Inject
     lateinit var viewModel: HomeComingViewModel

@@ -26,7 +26,7 @@ import android.view.ViewGroup
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.crashlytics.android.Crashlytics
 import com.travelbackintime.buybitcoin.home_coming.view.EXTRA_RESULT
-import com.travelbackintime.buybitcoin.home_coming.view.createHomecomingFragment
+import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.utils.addTransitions
 import pl.droidsonroids.gif.GifDrawable
@@ -34,15 +34,17 @@ import pl.droidsonroids.gif.GifDrawable
 private const val LOOP_COUNT = 1
 private const val SPEED: Float = 0.8f
 
-fun createLoadingFragment(result: TimeTravelResult): Fragment {
-    val bundle = Bundle()
-    bundle.putParcelable(EXTRA_RESULT, result)
-    val loadingFragment = LoadingFragment()
-    loadingFragment.arguments = bundle
-    return loadingFragment
-}
-
 class LoadingFragment : Fragment() {
+
+    companion object {
+        fun create(result: TimeTravelResult): Fragment {
+            val bundle = Bundle()
+            bundle.putParcelable(EXTRA_RESULT, result)
+            val loadingFragment = LoadingFragment()
+            loadingFragment.arguments = bundle
+            return loadingFragment
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -71,7 +73,7 @@ class LoadingFragment : Fragment() {
         val args = arguments
         if (args != null) {
             val result: TimeTravelResult = args.getParcelable(EXTRA_RESULT)
-            val homeComingFragment = createHomecomingFragment(result)
+            val homeComingFragment = HomeComingFragment.create(result)
             val activity = activity as AppCompatActivity
             addTransitions(homeComingFragment, activity.applicationContext)
             val fragmentManager = activity.supportFragmentManager
