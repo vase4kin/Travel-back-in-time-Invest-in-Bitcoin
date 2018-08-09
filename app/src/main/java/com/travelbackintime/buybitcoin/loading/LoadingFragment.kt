@@ -83,7 +83,7 @@ class LoadingFragment : Fragment() {
                     .commit()
             fragmentManager
                     .beginTransaction()
-                    .add(R.id.container, homeComingFragment)
+                    .replace(R.id.container, homeComingFragment)
                     .addToBackStack(null)
                     .commit()
         }

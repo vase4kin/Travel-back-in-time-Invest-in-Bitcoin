@@ -37,7 +37,7 @@ class SplashRouterImpl @Inject constructor(fragment: SplashFragment) : SplashRou
         addTransitions(fragment, activity.applicationContext)
         activity.supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container, fragment)
+                .replace(R.id.container, fragment)
                 .commitAllowingStateLoss()
     }
 }
