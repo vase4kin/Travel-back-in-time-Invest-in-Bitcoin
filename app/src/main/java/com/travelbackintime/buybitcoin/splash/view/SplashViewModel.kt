@@ -33,7 +33,7 @@ class SplashViewModel @Inject constructor(
 
     val isRetryVisible = ObservableBoolean(false)
 
-    fun onCreate() {
+    fun handleOnCreate() {
         Handler(Looper.getMainLooper()).postDelayed({ initFlowCapacitor() }, TIMEOUT_SPLASH)
     }
 
@@ -46,7 +46,7 @@ class SplashViewModel @Inject constructor(
         timeTravelMachine.initFlowCapacitor(object : TimeTravelMachine.FlowCapacitorInitListener {
             override fun onSuccess() {
                 tracker.trackDataDownloadedSuccessfully()
-                router.openTimeTravelActivity()
+                router.openTimeTravelFragment()
             }
 
             override fun onError() {

@@ -25,7 +25,7 @@ import com.facebook.share.model.ShareLinkContent
 import com.facebook.share.widget.ShareDialog
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
-import com.travelbackintime.buybitcoin.time_travel.view.createTimeTravelFragment
+import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.twitter.sdk.android.tweetcomposer.TweetComposer
 import javax.inject.Inject
@@ -41,7 +41,7 @@ class HomeComingRouterImpl @Inject constructor(fragment: HomeComingFragment, pri
         }
         fragmentManager
                 .beginTransaction()
-                .replace(R.id.container, createTimeTravelFragment())
+                .replace(R.id.container, TimeTravelFragment.create())
                 .commit()
     }
 

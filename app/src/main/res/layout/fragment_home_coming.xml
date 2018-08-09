@@ -68,7 +68,7 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="26sp"
                 android:text="@{viewModel.infoText}"
-                android:visibility="@{viewModel.isInfoTextViewVisible ? View.VISIBLE : View.GONE}"
+                bind:visibility="@{viewModel.isInfoTextViewVisible}"
                 tools:text="INFO" />
 
             <LinearLayout
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_diplay"
                 android:orientation="vertical"
-                android:visibility="@{viewModel.isParamViewVisible ? View.VISIBLE : View.GONE}">
+                bind:visibility="@{viewModel.isParamViewVisible}">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -196,7 +196,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/shape_diplay"
                 android:orientation="vertical"
-                android:visibility="@{viewModel.isProfitViewVisible ? View.VISIBLE : View.GONE}">
+                bind:visibility="@{viewModel.isProfitViewVisible}">
 
                 <TextView
                     style="@style/Display.Hint"
@@ -269,7 +269,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="vertical"
-                android:visibility="@{viewModel.isShareViewVisible ? View.VISIBLE : View.GONE}">
+                bind:visibility="@{viewModel.isShareViewVisible}">
 
                 <TextView
                     style="@style/VideoGameTextStyle"
@@ -328,7 +328,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:orientation="vertical"
-                android:visibility="@{viewModel.isDonateViewVisible ? View.VISIBLE : View.GONE}">
+                bind:visibility="@{viewModel.isDonateViewVisible}">
 
                 <TextView
                     style="@style/VideoGameTextStyle"

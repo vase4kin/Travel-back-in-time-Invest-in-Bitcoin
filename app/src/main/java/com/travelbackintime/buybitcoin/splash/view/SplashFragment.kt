@@ -18,23 +18,36 @@ package com.travelbackintime.buybitcoin.splash.view
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import bitcoin.backintime.com.backintimebuybitcoin.databinding.ActivitySplashBinding
-import dagger.android.support.DaggerAppCompatActivity
+import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentSplashBinding
+import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class SplashActivity : DaggerAppCompatActivity() {
+class SplashFragment : DaggerFragment() {
+
+    companion object {
+        fun create(): Fragment {
+            return SplashFragment()
+        }
+    }
 
     @Inject
     lateinit var viewModel: SplashViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val binding: ActivitySplashBinding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val binding: FragmentSplashBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_splash, container, false)
         binding.viewModel = viewModel
-        viewModel.onCreate()
+        return binding.root
     }
 
-    override fun onBackPressed() {}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.handleOnCreate()
+    }
 }

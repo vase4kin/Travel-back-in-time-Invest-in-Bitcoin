@@ -39,3 +39,12 @@ fun AdView.showAds(isAdsEnabled: Boolean) {
         visibility = View.VISIBLE
     }
 }
+
+@BindingAdapter("visibility")
+fun setVisibility(view: View, isVisible: Boolean) {
+    view.visibility = if (isVisible) {
+        View.VISIBLE
+    } else {
+        View.GONE
+    }
+}

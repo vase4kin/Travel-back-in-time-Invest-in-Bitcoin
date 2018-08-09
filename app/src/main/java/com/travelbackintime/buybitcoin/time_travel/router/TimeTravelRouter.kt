@@ -19,17 +19,17 @@ package com.travelbackintime.buybitcoin.time_travel.router
 import android.support.v7.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
-import com.travelbackintime.buybitcoin.loading.createLoadingFragment
+import com.travelbackintime.buybitcoin.loading.LoadingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel.view.InvestMoneyBottomSheetDialog
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
-import com.travelbackintime.buybitcoin.utils.addTransitions
+import com.travelbackintime.buybitcoin.utils.addFragmentSlideTransitions
 import java.util.*
 import javax.inject.Inject
 
 interface TimeTravelRouter {
 
-    fun openLoadingActivity(result: TimeTravelResult)
+    fun openLoadingFragment(result: TimeTravelResult)
 
     fun showAmountDialog()
 
@@ -58,9 +58,9 @@ class TimeTravelRouterImpl @Inject constructor(private val fragment: TimeTravelF
         dateDialog.show(activity.supportFragmentManager, DatePickerDialog::class.java.name)
     }
 
-    override fun openLoadingActivity(result: TimeTravelResult) {
-        val fragment = createLoadingFragment(result)
-        addTransitions(fragment, activity.applicationContext)
+    override fun openLoadingFragment(result: TimeTravelResult) {
+        val fragment = LoadingFragment.create(result)
+        addFragmentSlideTransitions(fragment, activity.applicationContext)
         activity.supportFragmentManager
                 .beginTransaction()
                 .add(R.id.container, fragment)
