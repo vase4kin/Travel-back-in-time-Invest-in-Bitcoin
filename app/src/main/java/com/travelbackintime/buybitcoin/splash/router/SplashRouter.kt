@@ -20,7 +20,7 @@ import android.support.v7.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.travelbackintime.buybitcoin.splash.view.SplashFragment
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
-import com.travelbackintime.buybitcoin.utils.addTransitions
+import com.travelbackintime.buybitcoin.utils.addFragmentFadeTransitions
 import javax.inject.Inject
 
 interface SplashRouter {
@@ -34,7 +34,7 @@ class SplashRouterImpl @Inject constructor(fragment: SplashFragment) : SplashRou
 
     override fun openTimeTravelFragment() {
         val fragment = TimeTravelFragment.create()
-        addTransitions(fragment, activity.applicationContext)
+        addFragmentFadeTransitions(fragment, activity.applicationContext)
         activity.supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, fragment)

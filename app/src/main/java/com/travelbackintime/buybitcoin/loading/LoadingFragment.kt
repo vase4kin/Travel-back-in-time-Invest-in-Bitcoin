@@ -28,7 +28,7 @@ import com.crashlytics.android.Crashlytics
 import com.travelbackintime.buybitcoin.home_coming.view.EXTRA_RESULT
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
-import com.travelbackintime.buybitcoin.utils.addTransitions
+import com.travelbackintime.buybitcoin.utils.addFragmentSlideTransitions
 import pl.droidsonroids.gif.GifDrawable
 
 private const val LOOP_COUNT = 1
@@ -75,7 +75,7 @@ class LoadingFragment : Fragment() {
             val result: TimeTravelResult = args.getParcelable(EXTRA_RESULT)
             val homeComingFragment = HomeComingFragment.create(result)
             val activity = activity as AppCompatActivity
-            addTransitions(homeComingFragment, activity.applicationContext)
+            addFragmentSlideTransitions(homeComingFragment, activity.applicationContext)
             val fragmentManager = activity.supportFragmentManager
             fragmentManager
                     .beginTransaction()

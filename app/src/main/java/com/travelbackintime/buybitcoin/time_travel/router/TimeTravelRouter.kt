@@ -23,7 +23,7 @@ import com.travelbackintime.buybitcoin.loading.LoadingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel.view.InvestMoneyBottomSheetDialog
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
-import com.travelbackintime.buybitcoin.utils.addTransitions
+import com.travelbackintime.buybitcoin.utils.addFragmentSlideTransitions
 import java.util.*
 import javax.inject.Inject
 
@@ -60,7 +60,7 @@ class TimeTravelRouterImpl @Inject constructor(private val fragment: TimeTravelF
 
     override fun openLoadingFragment(result: TimeTravelResult) {
         val fragment = LoadingFragment.create(result)
-        addTransitions(fragment, activity.applicationContext)
+        addFragmentSlideTransitions(fragment, activity.applicationContext)
         activity.supportFragmentManager
                 .beginTransaction()
                 .add(R.id.container, fragment)
