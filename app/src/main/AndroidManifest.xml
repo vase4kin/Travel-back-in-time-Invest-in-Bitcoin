@@ -28,11 +28,6 @@
         <activity
             android:name="com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.travelbackintime.buybitcoin.splash.view.SplashActivity"
-            android:noHistory="true"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

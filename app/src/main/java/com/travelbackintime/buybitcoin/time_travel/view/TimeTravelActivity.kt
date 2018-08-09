@@ -16,17 +16,10 @@
 
 package com.travelbackintime.buybitcoin.time_travel.view
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.travelbackintime.buybitcoin.splash.view.SplashFragment
 import dagger.android.support.DaggerAppCompatActivity
-
-fun startTimeTravelActivity(activity: Activity) {
-    val intent = Intent(activity, TimeTravelActivity::class.java)
-    activity.startActivity(intent)
-}
 
 class TimeTravelActivity : DaggerAppCompatActivity() {
 
@@ -35,7 +28,7 @@ class TimeTravelActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_time_travel)
         supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container, TimeTravelFragment.create())
+                .add(R.id.container, SplashFragment.create())
                 .commit()
     }
 }

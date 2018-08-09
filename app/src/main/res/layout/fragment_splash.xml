@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        tools:context="com.travelbackintime.buybitcoin.splash.view.SplashActivity">
+        tools:context="com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity">
 
         <ImageView
             android:layout_width="match_parent"

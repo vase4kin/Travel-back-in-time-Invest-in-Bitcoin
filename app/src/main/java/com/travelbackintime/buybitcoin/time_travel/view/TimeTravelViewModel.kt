@@ -93,13 +93,13 @@ class TimeTravelViewModel @Inject constructor(
                                 profitMoney = profit,
                                 investedMoney = investedMoney,
                                 timeToTravel = timeToTravel)
-                        router.openLoadingActivity(timeTravelResult)
+                        router.openLoadingFragment(timeTravelResult)
                     }
-                    else -> router.openLoadingActivity(TimeTravelResult(status = status))
+                    else -> router.openLoadingFragment(TimeTravelResult(status = status))
                 }
             }
             else -> {
-                router.openLoadingActivity(
+                router.openLoadingFragment(
                         TimeTravelResult(
                                 status = TimeTravelMachine.BitcoinStatus.EXIST,
                                 eventType = event.eventType))

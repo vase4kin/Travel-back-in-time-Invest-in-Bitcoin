@@ -18,6 +18,8 @@ package com.travelbackintime.buybitcoin.time_travel.dagger
 
 import com.travelbackintime.buybitcoin.home_coming.dagger.HomeComingFragmentModule
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
+import com.travelbackintime.buybitcoin.splash.dagger.SplashModule
+import com.travelbackintime.buybitcoin.splash.view.SplashFragment
 import com.travelbackintime.buybitcoin.time_travel.view.InvestMoneyBottomSheetDialog
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
 
@@ -26,6 +28,9 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class TimeTravelActivityModule {
+
+    @ContributesAndroidInjector(modules = [SplashModule::class])
+    abstract fun splashFragment(): SplashFragment
 
     @ContributesAndroidInjector(modules = [TimeTravelFragmentModule::class])
     abstract fun timeTravelFragment(): TimeTravelFragment

@@ -29,7 +29,7 @@ import javax.inject.Inject
 
 interface TimeTravelRouter {
 
-    fun openLoadingActivity(result: TimeTravelResult)
+    fun openLoadingFragment(result: TimeTravelResult)
 
     fun showAmountDialog()
 
@@ -58,7 +58,7 @@ class TimeTravelRouterImpl @Inject constructor(private val fragment: TimeTravelF
         dateDialog.show(activity.supportFragmentManager, DatePickerDialog::class.java.name)
     }
 
-    override fun openLoadingActivity(result: TimeTravelResult) {
+    override fun openLoadingFragment(result: TimeTravelResult) {
         val fragment = LoadingFragment.create(result)
         addTransitions(fragment, activity.applicationContext)
         activity.supportFragmentManager
