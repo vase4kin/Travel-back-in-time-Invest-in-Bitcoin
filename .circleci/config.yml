@@ -59,7 +59,7 @@ jobs:
           path: app/build/test-results/testDebugUnitTest
 workflows:
   version: 2
-  build_checks_unit_and_ui_tests_coverage:
+  build_checks_tests:
     jobs:
       - build
       - checks:
