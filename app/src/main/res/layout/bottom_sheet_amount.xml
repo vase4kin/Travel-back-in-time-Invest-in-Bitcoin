@@ -31,7 +31,7 @@
         app:hintTextAppearance="@style/EditTextFloatingLabel">
 
         <EditText
-            android:id="@+id/edit_text_set_amount"
+            android:id="@+id/edit_text_set_invested_money"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/button_set_amount"
+        android:id="@+id/button_set_invested_money"
         style="@style/VideoGameButtonStyle.BottomSheet"
         android:layout_width="match_parent"
         android:layout_height="64dp"

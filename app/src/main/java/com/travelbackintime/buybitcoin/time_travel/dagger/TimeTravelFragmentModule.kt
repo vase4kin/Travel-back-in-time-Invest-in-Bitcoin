@@ -14,4 +14,17 @@
  * limitations under the License.
  */
 
-include ':app', ':timetravelmachine'
+package com.travelbackintime.buybitcoin.time_travel.dagger
+
+import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouter
+import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouterImpl
+
+import dagger.Binds
+import dagger.Module
+
+@Module
+abstract class TimeTravelFragmentModule {
+
+    @Binds
+    abstract fun providesRouter(router: TimeTravelRouterImpl): TimeTravelRouter
+}

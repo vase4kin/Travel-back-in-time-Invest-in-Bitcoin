@@ -14,4 +14,9 @@
  * limitations under the License.
  */
 
-include ':app', ':timetravelmachine'
+package com.travelbackintime.buybitcoin.dagger
+
+import javax.inject.Scope
+
+@Scope
+annotation class ActivityScoped

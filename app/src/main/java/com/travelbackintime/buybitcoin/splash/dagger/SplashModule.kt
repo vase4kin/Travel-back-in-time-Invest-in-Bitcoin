@@ -14,4 +14,17 @@
  * limitations under the License.
  */
 
-include ':app', ':timetravelmachine'
+package com.travelbackintime.buybitcoin.splash.dagger
+
+import com.travelbackintime.buybitcoin.splash.router.SplashRouter
+import com.travelbackintime.buybitcoin.splash.router.SplashRouterImpl
+
+import dagger.Binds
+import dagger.Module
+
+@Module
+abstract class SplashModule {
+
+    @Binds
+    abstract fun providesSplashRouter(router: SplashRouterImpl): SplashRouter
+}

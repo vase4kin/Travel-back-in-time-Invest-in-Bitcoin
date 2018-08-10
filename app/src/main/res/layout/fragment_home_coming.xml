@@ -14,139 +14,214 @@
   ~ limitations under the License.
   -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
     tools:context="com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity">
 
-    <LinearLayout
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.travelbackintime.buybitcoin.home_coming.view.HomeComingViewModel" />
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/colorPrimary"
-        android:padding="16dp">
-
-        <TextView
-            style="@style/VideoGameTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:textColor="@color/colorWhite"
-            android:gravity="center"
-            android:textSize="36sp"
-            android:text="@string/app_name" />
-
-        <android.support.v4.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/info"
-            style="@style/VideoGameTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:textColor="@color/colorWhite"
-            android:gravity="center"
-            android:textSize="26sp"
-            android:lineSpacingMultiplier="1.2"
-            tools:text="INFO" />
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/paramView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:orientation="vertical"
-            android:background="@drawable/shape_diplay">
+            android:padding="16dp">
+
+            <TextView
+                style="@style/VideoGameTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:text="@string/app_name"
+                android:textColor="@color/colorWhite"
+                android:textSize="36sp" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/VideoGameTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.2"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="26sp"
+                android:text="@{viewModel.infoText}"
+                bind:visibility="@{viewModel.isInfoTextViewVisible}"
+                tools:text="INFO" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:background="@drawable/shape_diplay"
+                android:orientation="vertical"
+                bind:visibility="@{viewModel.isParamViewVisible}">
 
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginStart="4dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/Display.Hint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/press_start_2p"
+                            android:text="@string/result_mon_title" />
+
+                        <TextView
+                            style="@style/Display.Value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:text="@{viewModel.monthText}"
+                            tools:text="NOV" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/Display.Hint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/result_year_title" />
+
+                        <TextView
+                            style="@style/Display.Value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:text="@{viewModel.yearText}"
+                            tools:text="1988" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/Display.Hint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/result_invested_money_title" />
+
+                        <TextView
+                            style="@style/Display.Value"
+                            android:layout_width="match_parent"
+                            android:layout_height="44dp"
+                            android:text="@{viewModel.investedMoneyText}"
+                            tools:text="1234567890.00" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/Display.Hint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            style="@style/Display.Value.Dollar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorGrey" />
+
+                <TextView
+                    style="@style/VideoGameTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="4dp"
+                    android:text="@string/result_destination_time"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_diplay"
+                android:orientation="vertical"
+                bind:visibility="@{viewModel.isProfitViewVisible}">
+
+                <TextView
+                    style="@style/Display.Hint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/press_start_2p"
+                    android:text="@string/result_profit_money_title" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/Display.Hint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/press_start_2p"
-                        android:text="@string/result_mon_title" />
-
-                    <TextView
-                        android:id="@+id/month"
-                        style="@style/Display.Value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="44dp"
-                        tools:text="NOV" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/Display.Hint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/result_year_title" />
-
-                    <TextView
-                        android:id="@+id/year"
-                        style="@style/Display.Value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="44dp"
-                        tools:text="1988" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/Display.Hint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/result_amount_title" />
-
-                    <TextView
-                        android:id="@+id/amount"
-                        style="@style/Display.Value"
-                        android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        tools:text="1234567890.00" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
-                    android:orientation="vertical">
+                    android:layout_marginStart="4dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
-                        style="@style/Display.Hint"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        style="@style/Display.Value"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:text="@{viewModel.profitMoneyText}"
+                        tools:text="100" />
 
                     <TextView
                         style="@style/Display.Value.Dollar"
@@ -155,188 +230,136 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:background="@color/colorGrey" />
+
+                <TextView
+                    style="@style/VideoGameTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="4dp"
+                    android:text="@string/result_present_time"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
             </LinearLayout>
 
-            <View
+            <android.support.v4.widget.Space
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:background="@color/colorGrey" />
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
-            <TextView
-                style="@style/VideoGameTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:gravity="center"
-                android:textColor="@color/colorWhite"
-                android:text="@string/result_destination_time" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/profitView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="vertical"
-            android:background="@drawable/shape_diplay">
-
-            <TextView
-                style="@style/Display.Hint"
+            <com.google.android.gms.ads.AdView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/press_start_2p"
-                android:text="@string/result_amount_title" />
+                app:adSize="BANNER"
+                app:adUnitId="@string/ad_mob_id"
+                android:visibility="gone"
+                bind:showAds="@{viewModel.isAdsEnabled}"
+                tools:visibility="visible" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="2dp">
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                bind:visibility="@{viewModel.isShareViewVisible}">
 
                 <TextView
-                    android:id="@+id/profitValue"
-                    style="@style/Display.Value"
-                    android:layout_width="0dp"
-                    android:layout_height="44dp"
-                    android:layout_weight="1"
-                    tools:text="100" />
+                    style="@style/VideoGameTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.2"
+                    android:paddingBottom="8dp"
+                    android:text="@string/button_share_title"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
-                <TextView
-                    style="@style/Display.Value.Dollar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="44dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        style="@style/VideoGameButtonStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="64dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:padding="12dp"
+                        android:scaleType="fitCenter"
+                        android:onClick="@{() -> viewModel.onShareOnFacebook()}"
+                        app:srcCompat="@drawable/ic_facebook" />
+
+                    <ImageButton
+                        style="@style/VideoGameButtonStyle"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:padding="12dp"
+                        android:scaleType="fitCenter"
+                        android:onClick="@{() -> viewModel.onShareOnTwitter()}"
+                        app:srcCompat="@drawable/ic_twitter" />
+
+                    <ImageButton
+                        style="@style/VideoGameButtonStyle"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:padding="12dp"
+                        android:scaleType="fitCenter"
+                        android:onClick="@{() -> viewModel.onShareWithFriends()}"
+                        app:srcCompat="@drawable/ic_share" />
+
+                </LinearLayout>
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:background="@color/colorGrey" />
-
-            <TextView
-                style="@style/VideoGameTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:gravity="center"
-                android:textColor="@color/colorWhite"
-                android:text="@string/result_present_time" />
-
-        </LinearLayout>
-
-        <android.support.v4.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <include
-            layout="@layout/layout_adview"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/share_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/VideoGameTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:textColor="@color/colorWhite"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:lineSpacingMultiplier="1.2"
-                android:text="@string/button_share_title" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                bind:visibility="@{viewModel.isDonateViewVisible}">
 
-                <ImageButton
-                    android:id="@+id/button_share_facebook"
-                    style="@style/VideoGameButtonStyle"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:layout_height="64dp"
-                    android:layout_width="0dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_facebook" />
+                <TextView
+                    style="@style/VideoGameTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lineSpacingMultiplier="1.2"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="16dp"
+                    android:text="@string/donate_text"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp" />
 
-                <ImageButton
-                    android:id="@+id/button_share_twitter"
+                <Button
                     style="@style/VideoGameButtonStyle"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="4dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_twitter" />
-
-                <ImageButton
-                    android:id="@+id/button_share"
-                    style="@style/VideoGameButtonStyle"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="4dp"
-                    android:padding="12dp"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_share" />
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/donate_button"
+                    android:onClick="@{() -> viewModel.onCopyWalletAddress()}" />
 
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/donate_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="8dp">
-
-            <TextView
-                style="@style/VideoGameTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:textColor="@color/colorWhite"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:lineSpacingMultiplier="1.2"
-                android:text="@string/donate_text" />
 
             <Button
-                android:id="@+id/button_donate"
                 style="@style/VideoGameButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_marginTop="8dp"
-                android:text="@string/donate_button" />
+                android:text="@string/button_start_over_title"
+                android:onClick="@{() -> viewModel.onStartOver()}" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button_start_over"
-            style="@style/VideoGameButtonStyle"
-            android:layout_width="match_parent"
-            android:layout_marginTop="8dp"
-            android:text="@string/button_start_over_title" />
+    </ScrollView>
 
-    </LinearLayout>
-
-</ScrollView>
+</layout>
