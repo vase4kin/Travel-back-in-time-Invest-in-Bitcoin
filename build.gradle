@@ -54,7 +54,7 @@ task clean(type: Delete) {
 
 ext {
     // versions
-    versionCode = 11
+    versionCode = 12
     versionName = "1.0.6"
 
     // sdk and tools
