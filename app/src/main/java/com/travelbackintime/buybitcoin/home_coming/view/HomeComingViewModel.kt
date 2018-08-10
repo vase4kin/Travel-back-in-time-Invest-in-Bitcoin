@@ -21,6 +21,7 @@ import android.databinding.ObservableField
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter
+import com.travelbackintime.buybitcoin.home_coming.share.ShareHelper
 import com.travelbackintime.buybitcoin.remote_config.RemoteConfigService
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.tracker.Tracker
@@ -29,6 +30,7 @@ import javax.inject.Inject
 
 class HomeComingViewModel @Inject constructor(
         private val router: HomeComingRouter,
+        private val shareHelper: ShareHelper,
         private val tracker: Tracker,
         private val configService: RemoteConfigService,
         private val formatterUtils: FormatterUtils,
@@ -103,18 +105,18 @@ class HomeComingViewModel @Inject constructor(
 
     fun onShareWithFriends() {
         val result = this.result ?: return
-        router.shareWithFriends(result)
+        shareHelper.shareWithFriends(result)
         tracker.trackUserSharesWithFriends()
     }
 
     fun onShareOnFacebook() {
-        router.shareToFaceBook()
+        shareHelper.shareToFaceBook()
         tracker.trackUserSharesOnFb()
     }
 
     fun onShareOnTwitter() {
         val result = this.result ?: return
-        router.shareToTwitter(result)
+        shareHelper.shareToTwitter(result)
         tracker.trackUserSharesOnTwitter()
     }
 

@@ -16,15 +16,29 @@
 
 package com.travelbackintime.buybitcoin.home_coming.router
 
-import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
+import android.support.v7.app.AppCompatActivity
+import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
+import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
+import javax.inject.Inject
 
 interface HomeComingRouter {
 
     fun openTimeTravelFragment()
+}
 
-    fun shareWithFriends(result: TimeTravelResult)
+class HomeComingRouterImpl @Inject constructor(fragment: HomeComingFragment) : HomeComingRouter {
 
-    fun shareToTwitter(result: TimeTravelResult)
+    private val activity = fragment.activity as AppCompatActivity
 
-    fun shareToFaceBook()
+    override fun openTimeTravelFragment() {
+        val fragmentManager = activity.supportFragmentManager
+        if (fragmentManager.backStackEntryCount > 0) {
+            fragmentManager.popBackStackImmediate()
+        }
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.container, TimeTravelFragment.create())
+                .commit()
+    }
 }
