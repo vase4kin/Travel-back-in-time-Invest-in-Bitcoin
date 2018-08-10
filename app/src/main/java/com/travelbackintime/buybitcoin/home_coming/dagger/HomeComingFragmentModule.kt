@@ -18,6 +18,8 @@ package com.travelbackintime.buybitcoin.home_coming.dagger
 
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouterImpl
+import com.travelbackintime.buybitcoin.home_coming.share.ShareHelper
+import com.travelbackintime.buybitcoin.home_coming.share.ShareHelperImpl
 import dagger.Binds
 import dagger.Module
 
@@ -26,4 +28,7 @@ abstract class HomeComingFragmentModule {
 
     @Binds
     abstract fun providesRouter(router: HomeComingRouterImpl): HomeComingRouter
+
+    @Binds
+    abstract fun providesShareHelper(shareHelperImpl: ShareHelperImpl): ShareHelper
 }
