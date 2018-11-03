@@ -91,11 +91,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'gridlayout-v7'
     }
-    implementation "com.google.firebase:firebase-core:16.0.1"
-    implementation "com.google.firebase:firebase-crash:16.0.1"
-    implementation "com.google.firebase:firebase-ads:15.0.1"
-    implementation "com.google.firebase:firebase-config:16.0.0"
-    implementation "com.google.firebase:firebase-database:16.0.1"
+    implementation "com.google.firebase:firebase-core:16.0.5"
+    implementation "com.google.firebase:firebase-crash:16.2.1"
+    implementation "com.google.firebase:firebase-ads:17.0.0"
+    implementation "com.google.firebase:firebase-config:16.1.0"
+    implementation "com.google.firebase:firebase-database:16.0.4"
     implementation("com.crashlytics.sdk.android:crashlytics:$rootProject.crashlytics") {
         transitive = true
     }
@@ -103,8 +103,6 @@ dependencies {
 
     implementation "com.facebook.android:facebook-share:$rootProject.facebookShare"
     implementation "com.twitter.sdk.android:tweet-composer:$rootProject.tweetComposer"
-
-    implementation "com.android.support:multidex:$rootProject.multiDex"
 
     implementation project(":timetravelmachine")
 
