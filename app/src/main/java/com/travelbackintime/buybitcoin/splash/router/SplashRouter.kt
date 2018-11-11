@@ -16,7 +16,7 @@
 
 package com.travelbackintime.buybitcoin.splash.router
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.travelbackintime.buybitcoin.splash.view.SplashFragment
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment

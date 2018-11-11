@@ -16,8 +16,6 @@
 
 package com.travelbackintime.buybitcoin.app
 
-import android.content.Context
-import android.support.multidex.MultiDex
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.google.android.gms.ads.MobileAds
 import com.travelbackintime.buybitcoin.dagger.DaggerAppComponent
@@ -35,8 +33,4 @@ class BackInTimeBuyBitcoinApplication : DaggerApplication() {
         return DaggerAppComponent.builder().application(this).build()
     }
 
-    override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(base)
-        MultiDex.install(this)
-    }
 }

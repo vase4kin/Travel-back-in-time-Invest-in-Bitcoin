@@ -16,10 +16,10 @@
 
 package com.travelbackintime.buybitcoin.utils
 
-import android.databinding.BaseObservable
-import android.databinding.BindingAdapter
-import android.databinding.Observable
 import android.view.View
+import androidx.databinding.BaseObservable
+import androidx.databinding.BindingAdapter
+import androidx.databinding.Observable
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 

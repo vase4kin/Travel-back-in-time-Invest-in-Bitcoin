@@ -16,7 +16,7 @@
 
 package com.travelbackintime.buybitcoin.time_travel.router
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
 import com.travelbackintime.buybitcoin.loading.LoadingFragment

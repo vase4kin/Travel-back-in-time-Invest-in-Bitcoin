@@ -26,11 +26,11 @@
             type="com.travelbackintime.buybitcoin.time_travel.view.TimeTravelViewModel" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
@@ -54,7 +54,7 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="36sp" />
 
-                <android.support.v4.widget.Space
+                <androidx.legacy.widget.Space
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
@@ -68,7 +68,7 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="22sp" />
 
-                <android.support.v4.widget.Space
+                <androidx.legacy.widget.Space
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1" />
@@ -100,8 +100,8 @@
 
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

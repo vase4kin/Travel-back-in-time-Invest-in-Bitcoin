@@ -16,7 +16,7 @@
 
 package com.github.vase4kin.timetravelmachine.model
 
-import android.support.annotation.Keep
+import androidx.annotation.Keep
 
 @Keep
 class TimeTravelInfo(val price: Double? = null)

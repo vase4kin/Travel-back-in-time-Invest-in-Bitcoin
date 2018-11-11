@@ -18,11 +18,11 @@ package com.travelbackintime.buybitcoin.loading
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.crashlytics.android.Crashlytics
 import com.travelbackintime.buybitcoin.home_coming.view.EXTRA_RESULT
@@ -72,7 +72,7 @@ class LoadingFragment : Fragment() {
     private fun openHomecoming() {
         val args = arguments
         if (args != null) {
-            val result: TimeTravelResult = args.getParcelable(EXTRA_RESULT)
+            val result: TimeTravelResult = args.getParcelable(EXTRA_RESULT) ?: return
             val homeComingFragment = HomeComingFragment.create(result)
             val activity = activity as AppCompatActivity
             addFragmentSlideTransitions(homeComingFragment, activity.applicationContext)

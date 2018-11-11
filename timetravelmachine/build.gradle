@@ -10,14 +10,14 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.google.firebase:firebase-database:16.0.1"
+    implementation "com.google.firebase:firebase-database:16.0.5"
     implementation("com.crashlytics.sdk.android:crashlytics:$rootProject.crashlytics") {
         transitive = true
     }
