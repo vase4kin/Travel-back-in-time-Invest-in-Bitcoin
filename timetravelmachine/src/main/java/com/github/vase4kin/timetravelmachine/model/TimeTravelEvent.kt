@@ -16,7 +16,7 @@
 
 package com.github.vase4kin.timetravelmachine.model
 
-import android.support.annotation.Keep
+import androidx.annotation.Keep
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 
 @Keep

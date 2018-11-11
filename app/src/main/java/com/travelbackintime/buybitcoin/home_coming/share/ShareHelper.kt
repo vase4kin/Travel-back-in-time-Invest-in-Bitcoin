@@ -1,8 +1,8 @@
 package com.travelbackintime.buybitcoin.home_coming.share
 
 import android.net.Uri
-import android.support.v4.app.ShareCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ShareCompat
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.facebook.share.model.ShareHashtag
 import com.facebook.share.model.ShareLinkContent

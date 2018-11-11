@@ -16,9 +16,9 @@
 
 package com.travelbackintime.buybitcoin.splash.view
 
-import android.databinding.ObservableBoolean
 import android.os.Handler
 import android.os.Looper
+import androidx.databinding.ObservableBoolean
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.splash.router.SplashRouter
 import com.travelbackintime.buybitcoin.tracker.Tracker

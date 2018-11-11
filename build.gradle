@@ -29,7 +29,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath 'com.google.gms:google-services:4.0.2'
+        classpath 'com.google.gms:google-services:4.1.0'
         classpath 'io.fabric.tools:gradle:1.25.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
@@ -64,10 +64,9 @@ ext {
     buildToolsVersion = '28.0.3'
 
     // dependencies
-    supportLibraryVersion = '28.0.0'
-    daggerVersion = '2.19'
+    daggerVersion = '2.16'
     bottomsheetpickers = '2.4.1'
-    crashlytics = '2.9.3'
+    crashlytics = '2.9.5'
     gif = '1.2.9'
     facebookShare = '4.33.0'
     tweetComposer = '3.1.1'

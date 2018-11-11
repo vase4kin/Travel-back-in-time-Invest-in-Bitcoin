@@ -18,15 +18,15 @@ package com.travelbackintime.buybitcoin.utils
 
 import android.content.Context
 import android.os.Build
-import android.support.v4.app.Fragment
 import android.transition.TransitionInflater
+import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 
 fun addFragmentSlideTransitions(fragment: Fragment, context: Context) {
     addFragmentTransitions(fragment, context, R.transition.fragment_slide_right, R.transition.fragment_slide_left)
 }
 
-fun addFragmentFadeTransitions(fragment: Fragment, context: Context) {
+fun addFragmentFadeTransitions(fragment: androidx.fragment.app.Fragment, context: Context) {
     addFragmentTransitions(fragment, context, R.transition.fragment_fade_in, R.transition.fragment_fade_out)
 }
 

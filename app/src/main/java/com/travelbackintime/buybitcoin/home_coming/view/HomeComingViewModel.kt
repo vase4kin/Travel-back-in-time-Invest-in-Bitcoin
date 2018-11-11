@@ -16,8 +16,8 @@
 
 package com.travelbackintime.buybitcoin.home_coming.view
 
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter
