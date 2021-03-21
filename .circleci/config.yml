@@ -4,7 +4,7 @@ references:
       ~/app
   container_config: &container_config
     docker:
-      - image: circleci/android:api-27-alpha
+      - image: circleci/android:api-29
     working_directory: *workspace_root
   attach_workspace: &attach_workspace
     attach_workspace:
@@ -21,8 +21,8 @@ jobs:
       - run:
           name: Download sdk
           command: |
-           echo y | sdkmanager "tools" "platform-tools" "build-tools;27.0.3" "extras;android;m2repository" "platforms;android-27" "emulator" --verbose
-           sdkmanager --update --verbose
+            echo y | sdkmanager "tools" "platform-tools" "build-tools;30.0.2" "extras;android;m2repository" "platforms;android-30" "emulator" --verbose
+            sdkmanager --update --verbose
       - run:
           name: Download dependencies
           command: ./gradlew dependencies
