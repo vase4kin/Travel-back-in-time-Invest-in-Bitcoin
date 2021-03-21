@@ -52,7 +52,7 @@ class HomeComingViewModel @Inject constructor(
     val yearText = ObservableField<String>()
 
     val isAdsEnabled: Boolean
-        get() = configService.isAdsEnabled
+        get() = result?.eventType != TimeTravelMachine.EventType.HELLO_SATOSHI && configService.isAdsEnabled
 
     var result: TimeTravelResult? = null
 
