@@ -75,7 +75,7 @@ class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
 
         editTextWrapper.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                val window = dialog.window
+                val window = dialog?.window
                 window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
             }
         }

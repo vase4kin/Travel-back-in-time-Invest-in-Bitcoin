@@ -15,5 +15,6 @@
   -->
 
 <resources>
-    <string name="ad_mob_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_mob_app_id">ca-app-pub-7314501551011227~9187360621</string>
+    <string name="ad_mob_id">ca-app-pub-7314501551011227/8612645557</string>
 </resources>
