@@ -14,4 +14,7 @@
  * limitations under the License.
  */
 
-include ':app', ':timetravelmachine'
+include ':app'
+include ':timetravelmachine'
+include ':repository'
+include ':coindesk-service'

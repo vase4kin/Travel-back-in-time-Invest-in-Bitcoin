@@ -21,6 +21,9 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import bitcoin.backintime.com.backintimebuybitcoin.BuildConfig
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.coindesk.service.CoinDeskService
+import com.github.vase4kin.repository.Repository
+import com.github.vase4kin.repository.RepositoryImpl
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.timetravelmachine.TimeTravelMachineImpl
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -37,6 +40,10 @@ import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import com.travelbackintime.buybitcoin.utils.ToastUtils
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.text.NumberFormat
 import java.util.*
 import javax.inject.Singleton
@@ -46,8 +53,11 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun providesTimeTravelMachine(database: FirebaseDatabase, sharedPreferences: SharedPreferences): TimeTravelMachine {
-        return TimeTravelMachineImpl(database, sharedPreferences)
+    fun providesTimeTravelMachine(database: FirebaseDatabase,
+                                  sharedPreferences: SharedPreferences,
+                                  repository: Repository
+    ): TimeTravelMachine {
+        return TimeTravelMachineImpl(database, sharedPreferences, repository)
     }
 
     @Provides
@@ -124,4 +134,19 @@ class AppModule {
         return ClipboardUtils(app.applicationContext)
     }
 
+    @Provides
+    fun provideCoinDeskService(): CoinDeskService {
+        return Retrofit.Builder()
+                .baseUrl(CoinDeskService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(OkHttpClient())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+                .create(CoinDeskService::class.java)
+    }
+
+    @Provides
+    fun provideRepository(service: CoinDeskService): Repository {
+        return RepositoryImpl(service)
+    }
 }

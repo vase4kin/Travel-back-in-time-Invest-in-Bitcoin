@@ -46,7 +46,7 @@ class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
     private var errorRichCount = 0
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return BottomSheetDialog(context!!, theme)
+        return BottomSheetDialog(requireContext(), R.style.DialogStyle)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

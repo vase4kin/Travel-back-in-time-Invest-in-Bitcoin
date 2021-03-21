@@ -30,7 +30,7 @@ interface SplashRouter {
 
 class SplashRouterImpl @Inject constructor(fragment: SplashFragment) : SplashRouter {
 
-    val activity: AppCompatActivity = fragment.activity as AppCompatActivity
+    private val activity: AppCompatActivity = fragment.activity as AppCompatActivity
 
     override fun openTimeTravelFragment() {
         val fragment = TimeTravelFragment.create()

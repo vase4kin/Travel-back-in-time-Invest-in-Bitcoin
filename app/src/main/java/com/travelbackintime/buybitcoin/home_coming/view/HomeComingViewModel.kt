@@ -58,42 +58,34 @@ class HomeComingViewModel @Inject constructor(
 
     fun handleOnCreate() {
         val result = this.result ?: return
-        when {
-            result.eventType == TimeTravelMachine.EventType.NO_EVENT -> {
-                when (result.status) {
-                    TimeTravelMachine.BitcoinStatus.AM_I_A_MAGICIAN_TO_KNOW -> {
-                        showInfoText(R.string.result_title_1)
-                        tracker.trackUserGetsToMagician()
-                    }
-                    TimeTravelMachine.BitcoinStatus.NOT_BORN -> {
-                        showInfoText(R.string.result_title_2)
-                        tracker.trackUserGetsToNotBorn()
-                    }
-                    TimeTravelMachine.BitcoinStatus.EXIST -> {
-                        setTimeMachineDisplay(result)
-                        isShareViewVisible.set(true)
-                        isParamViewVisible.set(true)
-                        isProfitViewVisible.set(true)
-                        tracker.trackUserGetsToExist()
-                    }
-                }
+        when (result.eventType) {
+            TimeTravelMachine.EventType.NO_EVENT -> {
+                processResult(result)
             }
-            else -> {
-                when (result.eventType) {
-                    TimeTravelMachine.EventType.HELLO_SATOSHI -> {
-                        showInfoText(R.string.result_title_4)
-                        isDonateViewVisible.set(true)
-                        tracker.trackUserGetsToSatoshi()
-                    }
-                    TimeTravelMachine.EventType.PIZZA_LOVER -> {
-                        showInfoText(R.string.result_title_5)
-                        tracker.trackUserGetsToPizzaLover()
-                    }
-                    TimeTravelMachine.EventType.BASICALLY_NOTHING, TimeTravelMachine.EventType.NO_EVENT -> {
-                        showInfoText(R.string.result_title_3)
-                        tracker.trackUserGetsToBasicallyNothing()
-                    }
-                }
+            TimeTravelMachine.EventType.HELLO_SATOSHI -> {
+                showInfoText(R.string.result_title_4)
+                isDonateViewVisible.set(true)
+                tracker.trackUserGetsToSatoshi()
+            }
+            TimeTravelMachine.EventType.PIZZA_LOVER -> {
+                showInfoText(R.string.result_title_5)
+                tracker.trackUserGetsToPizzaLover()
+            }
+        }
+    }
+
+    private fun processResult(result: TimeTravelResult) {
+        when (result.status) {
+            TimeTravelMachine.BitcoinStatus.EXIST -> {
+                setTimeMachineDisplay(result)
+                isShareViewVisible.set(true)
+                isParamViewVisible.set(true)
+                isProfitViewVisible.set(true)
+                tracker.trackUserGetsToExist()
+            }
+            TimeTravelMachine.BitcoinStatus.BASICALLY_NOTHING -> {
+                showInfoText(R.string.result_title_3)
+                tracker.trackUserGetsToBasicallyNothing()
             }
         }
     }

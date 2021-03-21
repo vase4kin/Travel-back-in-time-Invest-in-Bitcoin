@@ -21,7 +21,6 @@ import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 
 @Keep
 class TimeTravelEvent(val type: String? = null) {
-
     val eventType: TimeTravelMachine.EventType
         get() {
             return if (type == null) {
