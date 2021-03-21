@@ -297,6 +297,7 @@
                         android:onClick="@{() -> viewModel.onShareOnFacebook()}"
                         android:padding="12dp"
                         android:scaleType="fitCenter"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/ic_facebook" />
 
                     <ImageButton
