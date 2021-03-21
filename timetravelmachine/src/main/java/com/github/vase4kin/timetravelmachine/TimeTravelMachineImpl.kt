@@ -17,27 +17,28 @@
 package com.github.vase4kin.timetravelmachine
 
 import android.content.SharedPreferences
+import com.github.vase4kin.repository.Repository
 import com.github.vase4kin.timetravelmachine.model.TimeTravelEvent
-import com.github.vase4kin.timetravelmachine.model.TimeTravelInfo
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.database.*
+import io.reactivex.Single
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
 private const val REF_CONNECTION = ".info/connected"
-private const val REF_TIME = "time"
 private const val REF_EVENTS = "events"
 private const val KEY_DATA_DOWNLOADED = "key_data_downloaded"
-private const val PATTERN_TIME_DATE = "yyyy-MM"
+private const val PATTERN_TIME_DATE = "yyyy-MM-dd"
 private const val PATTERN_TIME_EVENT_DATE = "yyyy-MM-dd"
-private const val DATE_FIRST = "2009-01"
+private const val DATE_PRICE_AVAILABLE = "2010-7-18"
 
 class TimeTravelMachineImpl(
         private val database: FirebaseDatabase,
-        private val sharedPreferences: SharedPreferences) : TimeTravelMachine {
+        private val sharedPreferences: SharedPreferences,
+        private val repository: Repository
+) : TimeTravelMachine {
 
-    private var timeTraveInfos: Map<String, TimeTravelInfo> = HashMap()
     private var timeTravelEvents: Map<String, TimeTravelEvent> = HashMap()
 
     private var isDataDownloaded: Boolean
@@ -67,22 +68,20 @@ class TimeTravelMachineImpl(
         })
     }
 
-    override fun getBitcoinPrice(timeToTravel: Date?): Double {
-        timeToTravel ?: return Double.NaN
+    override fun getBitcoinPriceByDate(timeToTravel: Date?): Single<Double> {
+        timeToTravel ?: return Single.just(Double.NaN)
         val serverDate = convertDateToServerDateFormat(timeToTravel)
-        return getBitcoinPrice(serverDate)
+        return repository.getBitcoinPriceByDate(serverDate)
     }
 
-    override fun getBitcoinCurrentPrice(): Double {
-        val todayDate = convertDateToServerDateFormat(Date())
-        return getBitcoinPrice(todayDate)
+    override fun getBitcoinCurrentPrice(): Single<Double> {
+        return repository.getCurrentBitcoinPrice()
     }
 
     override fun getBitcoinStatus(timeToTravel: Date?): TimeTravelMachine.BitcoinStatus {
-        timeToTravel ?: return TimeTravelMachine.BitcoinStatus.AM_I_A_MAGICIAN_TO_KNOW
+        timeToTravel ?: return TimeTravelMachine.BitcoinStatus.BASICALLY_NOTHING
         return when {
-            isDateBeforeBitcoinBirth(timeToTravel) -> TimeTravelMachine.BitcoinStatus.NOT_BORN
-            isDateTheFuture(timeToTravel) -> TimeTravelMachine.BitcoinStatus.AM_I_A_MAGICIAN_TO_KNOW
+            isDateBeforePriceIsAvailable(timeToTravel) -> TimeTravelMachine.BitcoinStatus.BASICALLY_NOTHING
             else -> TimeTravelMachine.BitcoinStatus.EXIST
         }
     }
@@ -94,24 +93,14 @@ class TimeTravelMachineImpl(
         return timeTravelEvent ?: TimeTravelEvent(TimeTravelMachine.EventType.NO_EVENT.name)
     }
 
-    private fun getBitcoinPrice(serverDate: String): Double {
-        val timeTravelInfo = timeTraveInfos[serverDate]
-        return timeTravelInfo?.price ?: Double.NaN
-    }
-
-    private fun isDateBeforeBitcoinBirth(date: Date): Boolean {
-        val dateFirst = parseServerDateToDate(DATE_FIRST)
+    private fun isDateBeforePriceIsAvailable(date: Date): Boolean {
+        val dateFirst = parseServerDateToDate(DATE_PRICE_AVAILABLE)
         return dateFirst.after(date)
     }
-
-    private fun isDateTheFuture(date: Date): Boolean = Date().before(date)
 
     private fun fetchData(listener: TimeTravelMachine.FlowCapacitorInitListener) {
         database.reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val timeGenericTypeIndicator = object : GenericTypeIndicator<Map<@JvmSuppressWildcards String, @JvmSuppressWildcards TimeTravelInfo>>() {}
-                timeTraveInfos = dataSnapshot.child(REF_TIME).getValue(timeGenericTypeIndicator)
-                        ?: HashMap()
                 val timeEventsGenericTypeIndicator = object : GenericTypeIndicator<Map<@JvmSuppressWildcards String, @JvmSuppressWildcards TimeTravelEvent>>() {}
                 timeTravelEvents = dataSnapshot.child(REF_EVENTS).getValue(timeEventsGenericTypeIndicator)
                         ?: HashMap()

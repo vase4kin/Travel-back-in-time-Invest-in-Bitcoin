@@ -18,6 +18,8 @@ package com.travelbackintime.buybitcoin.time_travel.router
 
 import androidx.appcompat.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.maxDate
+import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.minDate
 import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
 import com.travelbackintime.buybitcoin.loading.LoadingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
@@ -28,17 +30,16 @@ import java.util.*
 import javax.inject.Inject
 
 interface TimeTravelRouter {
-
     fun openLoadingFragment(result: TimeTravelResult)
-
     fun showAmountDialog()
-
     fun showSetDateDialog()
 }
 
-class TimeTravelRouterImpl @Inject constructor(private val fragment: TimeTravelFragment) : TimeTravelRouter {
+class TimeTravelRouterImpl @Inject constructor(
+        private val fragment: TimeTravelFragment
+) : TimeTravelRouter {
 
-    val activity: AppCompatActivity = fragment.activity as AppCompatActivity
+    private val activity: AppCompatActivity = fragment.activity as AppCompatActivity
 
     override fun showAmountDialog() {
         val dialog = InvestMoneyBottomSheetDialog()
@@ -52,8 +53,10 @@ class TimeTravelRouterImpl @Inject constructor(private val fragment: TimeTravelF
                 fragment,
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH))
+                calendar.get(Calendar.DAY_OF_WEEK))
                 .setThemeDark(true)
+                .setMaxDate(maxDate)
+                .setMinDate(minDate)
                 .build()
         dateDialog.show(activity.supportFragmentManager, DatePickerDialog::class.java.name)
     }

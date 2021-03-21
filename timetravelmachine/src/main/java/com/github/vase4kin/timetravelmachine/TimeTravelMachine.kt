@@ -17,15 +17,16 @@
 package com.github.vase4kin.timetravelmachine
 
 import com.github.vase4kin.timetravelmachine.model.TimeTravelEvent
+import io.reactivex.Single
 import java.util.*
 
 interface TimeTravelMachine {
 
     fun initFlowCapacitor(listener: FlowCapacitorInitListener)
 
-    fun getBitcoinPrice(timeToTravel: Date?): Double
+    fun getBitcoinPriceByDate(timeToTravel: Date?): Single<Double>
 
-    fun getBitcoinCurrentPrice(): Double
+    fun getBitcoinCurrentPrice(): Single<Double>
 
     fun getBitcoinStatus(timeToTravel: Date?): BitcoinStatus
 
@@ -33,17 +34,25 @@ interface TimeTravelMachine {
 
     interface FlowCapacitorInitListener {
         fun onSuccess()
-
         fun onError()
-
         fun onDataNotDownloaded()
     }
 
     enum class BitcoinStatus {
-        EXIST, NOT_BORN, AM_I_A_MAGICIAN_TO_KNOW
+        EXIST, BASICALLY_NOTHING
     }
 
     enum class EventType {
-        BASICALLY_NOTHING, HELLO_SATOSHI, PIZZA_LOVER, NO_EVENT
+        HELLO_SATOSHI, PIZZA_LOVER, NO_EVENT
+    }
+
+    companion object {
+        // Set a max date to minus one as coin desk does not support current date
+        val maxDate: Calendar = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_WEEK, -1)
+        }
+
+        // Set a minimum date to 2009/1/03
+        val minDate = GregorianCalendar(2009, 0, 3)
     }
 }

@@ -26,6 +26,10 @@ import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import com.travelbackintime.buybitcoin.utils.onChanged
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
 
@@ -36,13 +40,14 @@ class TimeTravelViewModel @Inject constructor(
         private val formatterUtils: FormatterUtils,
         private val timeTravelMachine: TimeTravelMachine,
         private val router: TimeTravelRouter,
-        resourcesProviderUtils: ResourcesProviderUtils) {
+        resourcesProviderUtils: ResourcesProviderUtils
+) {
 
     val isBuyBitcoinButtonEnabled = ObservableBoolean(false)
-    val timeToTravelText = ObservableField<String>(resourcesProviderUtils.getString(R.string.button_set_date_title)).onChanged {
+    val timeToTravelText = ObservableField(resourcesProviderUtils.getString(R.string.button_set_date_title)).onChanged {
         enableBuyBitcoinButton()
     }
-    val investedMoneyText = ObservableField<String>(resourcesProviderUtils.getString(R.string.button_set_amount_title)).onChanged {
+    val investedMoneyText = ObservableField(resourcesProviderUtils.getString(R.string.button_set_amount_title)).onChanged {
         enableBuyBitcoinButton()
     }
 
@@ -87,13 +92,27 @@ class TimeTravelViewModel @Inject constructor(
                 val status = timeTravelMachine.getBitcoinStatus(timeToTravel)
                 when (status) {
                     TimeTravelMachine.BitcoinStatus.EXIST -> {
-                        val profit = calculateProfit()
-                        val timeTravelResult = TimeTravelResult(
-                                status = status,
-                                profitMoney = profit,
-                                investedMoney = investedMoney,
-                                timeToTravel = timeToTravel)
-                        router.openLoadingFragment(timeTravelResult)
+                        Single.zip(
+                                timeTravelMachine.getBitcoinPriceByDate(timeToTravel),
+                                timeTravelMachine.getBitcoinCurrentPrice(),
+                                { t1, t2 -> calculateProfit(t1, t2) }
+                        )
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeBy(
+                                        onSuccess = {
+                                            val profit = it
+                                            val timeTravelResult = TimeTravelResult(
+                                                    status = status,
+                                                    profitMoney = profit,
+                                                    investedMoney = investedMoney,
+                                                    timeToTravel = timeToTravel)
+                                            router.openLoadingFragment(timeTravelResult)
+                                        },
+                                        onError = {
+                                            val exception = it // TODO handle exception
+                                        }
+                                )
                     }
                     else -> router.openLoadingFragment(TimeTravelResult(status = status))
                 }
@@ -107,11 +126,10 @@ class TimeTravelViewModel @Inject constructor(
         }
     }
 
-    private fun calculateProfit(): Double {
-        val pricePerBitcoinInThePast = timeTravelMachine.getBitcoinPrice(timeToTravel)
-        val pricePerBitcoinNow = timeTravelMachine.getBitcoinCurrentPrice()
-        val bitcoinInvestment = investedMoney / pricePerBitcoinInThePast
-        return pricePerBitcoinNow * bitcoinInvestment
+    private fun calculateProfit(bitcoinHistoricalPrice: Double,
+                                bitcoinCurrentPrice: Double): Double {
+        val bitcoinInvestment = investedMoney / bitcoinHistoricalPrice
+        return bitcoinCurrentPrice * bitcoinInvestment
     }
 
     private fun isBuyBitcoinButtonEnabled(): Boolean {

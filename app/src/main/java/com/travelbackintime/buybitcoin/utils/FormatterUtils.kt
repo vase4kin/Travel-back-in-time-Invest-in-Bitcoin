@@ -30,7 +30,7 @@ class FormatterUtils(private val numberFormat: NumberFormat) {
     }
 
     fun formatDate(date: Date): String {
-        return String.format(Locale.US, "%1\$tb %1\$tY", date)
+        return String.format(Locale.US, "%1\$td %1\$tb %1\$tY", date)
     }
 
     fun formatDateToShareText(date: Date): String {
