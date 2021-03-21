@@ -24,7 +24,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.travelbackintime.buybitcoin.home_coming.view.EXTRA_RESULT
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
@@ -64,7 +64,7 @@ class LoadingFragment : Fragment() {
             view.findViewById<View>(R.id.image_view).background = gifFromResource
             gifFromResource.addAnimationListener { openHomecoming() }
         } catch (e: Exception) {
-            Crashlytics.logException(e)
+            FirebaseCrashlytics.getInstance().recordException(e)
             openHomecoming()
         }
     }

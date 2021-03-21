@@ -17,9 +17,9 @@
 package com.github.vase4kin.timetravelmachine
 
 import android.content.SharedPreferences
-import com.crashlytics.android.Crashlytics
 import com.github.vase4kin.timetravelmachine.model.TimeTravelEvent
 import com.github.vase4kin.timetravelmachine.model.TimeTravelInfo
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.database.*
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -61,7 +61,7 @@ class TimeTravelMachineImpl(
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Crashlytics.logException(databaseError.toException())
+                FirebaseCrashlytics.getInstance().recordException(databaseError.toException())
                 listener.onError()
             }
         })
@@ -110,14 +110,16 @@ class TimeTravelMachineImpl(
         database.reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val timeGenericTypeIndicator = object : GenericTypeIndicator<Map<@JvmSuppressWildcards String, @JvmSuppressWildcards TimeTravelInfo>>() {}
-                timeTraveInfos = dataSnapshot.child(REF_TIME).getValue(timeGenericTypeIndicator) ?: HashMap()
+                timeTraveInfos = dataSnapshot.child(REF_TIME).getValue(timeGenericTypeIndicator)
+                        ?: HashMap()
                 val timeEventsGenericTypeIndicator = object : GenericTypeIndicator<Map<@JvmSuppressWildcards String, @JvmSuppressWildcards TimeTravelEvent>>() {}
-                timeTravelEvents = dataSnapshot.child(REF_EVENTS).getValue(timeEventsGenericTypeIndicator) ?: HashMap()
+                timeTravelEvents = dataSnapshot.child(REF_EVENTS).getValue(timeEventsGenericTypeIndicator)
+                        ?: HashMap()
                 listener.onSuccess()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Crashlytics.logException(databaseError.toException())
+                FirebaseCrashlytics.getInstance().recordException(databaseError.toException())
                 listener.onError()
             }
         })

@@ -16,6 +16,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -27,62 +28,71 @@
             type="com.travelbackintime.buybitcoin.splash.view.SplashViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
+        android:background="@color/bsp_transparent_black"
         tools:context="com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity">
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_splash" />
+            android:src="@drawable/ic_splash"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+        <TextView
+            android:id="@+id/textView"
+            style="@style/VideoGameTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:padding="16dp"
-            android:background="@color/bsp_transparent_black"
             android:gravity="center"
-            bind:visibility="@{viewModel.isRetryVisible}">
+            android:text="@string/retry_title"
+            android:textColor="@color/colorWhite"
+            android:textSize="36sp"
+            app:layout_constraintBottom_toTopOf="@id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:visibility="@{viewModel.isRetryVisible}" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/VideoGameTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center"
+            android:text="@string/retry_description"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/button2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            bind:visibility="@{viewModel.isRetryVisible}" />
 
-                <TextView
-                    style="@style/VideoGameTextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:gravity="center"
-                    android:textSize="36sp"
-                    android:textColor="@color/colorWhite"
-                    android:text="@string/retry_title" />
+        <Button
+            android:id="@+id/button2"
+            style="@style/VideoGameButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{() -> viewModel.onRetryButtonClick()}"
+            android:text="@string/retry_button_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            bind:visibility="@{viewModel.isRetryVisible}" />
 
-                <TextView
-                    style="@style/VideoGameTextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="24sp"
-                    android:textColor="@color/colorWhite"
-                    android:text="@string/retry_description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-
-            <Button
-                style="@style/VideoGameButtonStyle"
-                android:layout_width="match_parent"
-                android:text="@string/retry_button_text"
-                android:onClick="@{() -> viewModel.onRetryButtonClick()}" />
-
-        </LinearLayout>
-
-    </FrameLayout>
 </layout>

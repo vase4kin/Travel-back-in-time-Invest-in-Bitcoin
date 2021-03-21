@@ -16,13 +16,12 @@
 
 package com.travelbackintime.buybitcoin.remote_config
 
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 
 private const val CONFIG_VALUE_ADS_ENABLED = "ads_enabled"
 
 interface RemoteConfigService {
-
     val isAdsEnabled: Boolean
 }
 
@@ -39,9 +38,11 @@ class RemoteConfigServiceImpl(private val firebaseRemoteConfig: FirebaseRemoteCo
     private fun fetch() {
         firebaseRemoteConfig.fetch(cacheSecs).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                firebaseRemoteConfig.activateFetched()
+                firebaseRemoteConfig.activate()
             } else {
-                Crashlytics.logException(task.exception)
+                task.exception?.let {
+                    FirebaseCrashlytics.getInstance().recordException(it)
+                }
             }
         }
     }
