@@ -17,6 +17,7 @@
 package com.travelbackintime.buybitcoin.time_travel.view
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,11 +42,18 @@ class TimeTravelFragment : DaggerFragment(), DatePickerDialog.OnDateSetListener,
     lateinit var viewModel: TimeTravelViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         val binding: FragmentTimeTravelBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_time_travel, container, false)
         binding.viewModel = viewModel
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewLifecycleOwnerLiveData.observe(viewLifecycleOwner, {
+            it.lifecycle.addObserver(viewModel)
+        })
     }
 
     override fun onDateSet(dialog: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
