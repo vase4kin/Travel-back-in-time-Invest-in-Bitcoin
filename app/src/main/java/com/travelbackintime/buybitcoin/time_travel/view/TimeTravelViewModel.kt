@@ -18,6 +18,9 @@ package com.travelbackintime.buybitcoin.time_travel.view
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
@@ -28,6 +31,8 @@ import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import com.travelbackintime.buybitcoin.utils.onChanged
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import java.util.*
@@ -41,7 +46,7 @@ class TimeTravelViewModel @Inject constructor(
         private val timeTravelMachine: TimeTravelMachine,
         private val router: TimeTravelRouter,
         resourcesProviderUtils: ResourcesProviderUtils
-) {
+) : LifecycleObserver {
 
     val isBuyBitcoinButtonEnabled = ObservableBoolean(false)
     val timeToTravelText = ObservableField(resourcesProviderUtils.getString(R.string.button_set_date_title)).onChanged {
@@ -53,6 +58,13 @@ class TimeTravelViewModel @Inject constructor(
 
     private var investedMoney: Double = DEFAULT_INVESTED_MONEY
     private var timeToTravel: Date? = null
+
+    private val compositeDisposable = CompositeDisposable()
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onUnBind() {
+        compositeDisposable.clear()
+    }
 
     fun onBuyBitcoinButtonClick() {
         tracker.trackUserTravelsBackAndBuys()
@@ -113,6 +125,7 @@ class TimeTravelViewModel @Inject constructor(
                                             val exception = it // TODO handle exception
                                         }
                                 )
+                                .addTo(compositeDisposable)
                     }
                     else -> router.openLoadingFragment(TimeTravelResult(status = status))
                 }
