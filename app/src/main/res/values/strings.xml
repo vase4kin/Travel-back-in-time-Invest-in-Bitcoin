@@ -58,6 +58,7 @@
     <string name="retry_button_text">Retry</string>
     <string name="retry_description">Nowadays time machine only needs to have a good internet connection instead of libyan plutonium.\nHappy time travelling!</string>
     <string name="powered_by_coindesk">Powered by <a href="https://www.coindesk.com/price/bitcoin/">CoinDesk</a></string>
+    <string name="powered_by_coindesk_url">https://www.coindesk.com/price/bitcoin/</string>
 
 
     <!--FB-->

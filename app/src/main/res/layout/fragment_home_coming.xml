@@ -360,13 +360,13 @@
                 android:text="@string/button_start_over_title" />
 
             <TextView
+                android:id="@+id/powered_by_coindesk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:autoLink="all"
-                android:linksClickable="true"
                 android:gravity="center"
+                android:onClick="@{() -> viewModel.openPoweredByCoinDeskUrl()}"
                 android:text="@string/powered_by_coindesk"
                 android:textColor="@color/colorWhite" />
 

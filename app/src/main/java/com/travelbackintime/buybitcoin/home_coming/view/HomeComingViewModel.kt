@@ -120,6 +120,10 @@ class HomeComingViewModel @Inject constructor(
         tracker.trackUserCopiesBtcWalletAddress()
     }
 
+    fun openPoweredByCoinDeskUrl() {
+        router.openPoweredByCoinDeskUrl()
+    }
+
     private fun setTimeMachineDisplay(result: TimeTravelResult) {
         val profitMoney = formatterUtils.formatPriceAsOnlyDigits(result.profitMoney)
         val investedMoney = formatterUtils.formatPriceAsOnlyDigits(result.investedMoney)
