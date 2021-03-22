@@ -24,6 +24,12 @@
     <string name="button_start_over_title">Start over</string>
     <string name="button_buy_bitcoin_title">Buy bitcoin</string>
     <string name="button_confirm_amount_title">OK</string>
+    <string name="button_confirm_amount_title_1">$1</string>
+    <string name="button_confirm_amount_title_10">$10.00</string>
+    <string name="button_confirm_amount_title_100">$100.00</string>
+    <string name="text_1">1</string>
+    <string name="text_10">10</string>
+    <string name="text_100">100</string>
     <string name="hint_set_amount">Set money to invest (%s)</string>
     <string name="error_set_amount_empty">Come on, dude! We give you a once-in-a-lifetime opportunity and you can\'t even put a correct value in the field?</string>
     <string name="error_set_amount_zero">You gotta be kidding us! Put at least one %s!</string>
