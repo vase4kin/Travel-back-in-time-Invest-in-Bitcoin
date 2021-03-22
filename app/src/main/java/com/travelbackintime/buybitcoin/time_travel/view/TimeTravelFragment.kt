@@ -51,7 +51,7 @@ class TimeTravelFragment : DaggerFragment(), DatePickerDialog.OnDateSetListener,
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewLifecycleOwnerLiveData.observe(viewLifecycleOwner, {
+        viewLifecycleOwnerLiveData.observe(this, {
             it.lifecycle.addObserver(viewModel)
         })
     }

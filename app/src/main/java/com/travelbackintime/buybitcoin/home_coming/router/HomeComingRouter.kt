@@ -16,6 +16,8 @@
 
 package com.travelbackintime.buybitcoin.home_coming.router
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
@@ -23,8 +25,8 @@ import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
 import javax.inject.Inject
 
 interface HomeComingRouter {
-
     fun openTimeTravelFragment()
+    fun openPoweredByCoinDeskUrl()
 }
 
 class HomeComingRouterImpl @Inject constructor(fragment: HomeComingFragment) : HomeComingRouter {
@@ -40,5 +42,10 @@ class HomeComingRouterImpl @Inject constructor(fragment: HomeComingFragment) : H
                 .beginTransaction()
                 .replace(R.id.container, TimeTravelFragment.create())
                 .commit()
+    }
+
+    override fun openPoweredByCoinDeskUrl() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(activity.resources.getString(R.string.powered_by_coindesk_url)))
+        activity.startActivity(browserIntent)
     }
 }
