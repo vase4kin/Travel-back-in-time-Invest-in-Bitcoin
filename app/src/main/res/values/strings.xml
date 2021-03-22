@@ -37,7 +37,7 @@
     <string name="donate_button">Copy BTC wallet address</string>
     <string name="donate_copy_label">BTC wallet address</string>
     <string name="donate_toast">BTC wallet has been copied</string>
-    <string name="donate_btc_wallet_address">136kaKNv1PdoFpbTUotaMC28UjXnWv2Hpq</string>
+    <string name="donate_btc_wallet_address">12YMXvm4etDaDQU6uBbhvaS13cYoZXsz66</string>
     <string name="result_dollar_symbol">$</string>
     <string name="result_destination_time">Destination time</string>
     <string name="result_present_time">Present time</string>
