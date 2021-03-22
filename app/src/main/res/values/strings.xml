@@ -50,7 +50,7 @@
     <string name="text_hashtag">backintimebuybitcoinapp</string>
     <string name="retry_title">Great Scott!</string>
     <string name="retry_button_text">Retry</string>
-    <string name="retry_description">Nowadays time machine only needs to have a good internet connection instead of libyan plutonium.\nNo worries, we just need that once. Happy time travelling!</string>
+    <string name="retry_description">Nowadays time machine only needs to have a good internet connection instead of libyan plutonium.\nHappy time travelling!</string>
     <string name="powered_by_coindesk">Powered by <a href="https://www.coindesk.com/price/bitcoin/">CoinDesk</a></string>
 
 
