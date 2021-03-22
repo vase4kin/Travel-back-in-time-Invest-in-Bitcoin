@@ -16,11 +16,45 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@color/colorPrimaryOld">
+    android:background="@color/colorPrimaryOld"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_set_1"
+            style="@style/VideoGameButtonStyle.BottomSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="@string/button_confirm_amount_title_1" />
+
+        <Button
+            android:id="@+id/button_set_10"
+            style="@style/VideoGameButtonStyle.BottomSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="@string/button_confirm_amount_title_10" />
+
+        <Button
+            android:id="@+id/button_set_100"
+            style="@style/VideoGameButtonStyle.BottomSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:text="@string/button_confirm_amount_title_100" />
+
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edit_text_wrapper"
@@ -35,11 +69,11 @@
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:longClickable="false"
-            android:lines="1"
-            android:maxLength="10"
+            android:imeOptions="actionDone"
             android:inputType="numberDecimal"
-            android:imeOptions="actionDone" />
+            android:lines="1"
+            android:longClickable="false"
+            android:maxLength="10" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

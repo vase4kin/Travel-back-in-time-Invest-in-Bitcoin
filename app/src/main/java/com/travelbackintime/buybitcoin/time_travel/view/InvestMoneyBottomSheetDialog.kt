@@ -73,6 +73,21 @@ class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
 
         view.findViewById<View>(R.id.button_set_invested_money).setOnClickListener { saveInvestedMoney(editTextWrapper) }
 
+        view.findViewById<View>(R.id.button_set_1).setOnClickListener {
+            editTextWrapper.editText?.setText(R.string.text_1)
+            saveInvestedMoney(editTextWrapper)
+        }
+
+        view.findViewById<View>(R.id.button_set_10).setOnClickListener {
+            editTextWrapper.editText?.setText(R.string.text_10)
+            saveInvestedMoney(editTextWrapper)
+        }
+
+        view.findViewById<View>(R.id.button_set_100).setOnClickListener {
+            editTextWrapper.editText?.setText(R.string.text_100)
+            saveInvestedMoney(editTextWrapper)
+        }
+
         editTextWrapper.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 val window = dialog?.window
