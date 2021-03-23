@@ -104,9 +104,9 @@ dependencies {
 }
 
 dependencies {
-    implementation project(":timetravelmachine")
-    implementation project(":repository")
-    implementation project(":coindesk-service")
+    implementation project(":libraries:timetravelmachine")
+    implementation project(":libraries:repository")
+    implementation project(":libraries:coindesk-service")
 }
 
 dependencies {
