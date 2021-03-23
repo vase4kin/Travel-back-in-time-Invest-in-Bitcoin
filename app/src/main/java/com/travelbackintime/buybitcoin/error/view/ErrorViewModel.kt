@@ -25,6 +25,7 @@ class ErrorViewModel @Inject constructor(
         private val router: ErrorRouter) {
 
     fun onRetryButtonClick() {
+        tracker.trackUserRetries()
         router.openTimeTravelFragment()
     }
 }
