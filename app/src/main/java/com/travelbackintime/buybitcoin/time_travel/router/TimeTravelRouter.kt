@@ -21,6 +21,7 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.maxDate
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.minDate
 import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
+import com.travelbackintime.buybitcoin.error.view.ErrorFragment
 import com.travelbackintime.buybitcoin.loading.LoadingFragment
 import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel.view.InvestMoneyBottomSheetDialog
@@ -33,6 +34,7 @@ interface TimeTravelRouter {
     fun openLoadingFragment(result: TimeTravelResult)
     fun showAmountDialog()
     fun showSetDateDialog()
+    fun openErrorFragment()
 }
 
 class TimeTravelRouterImpl @Inject constructor(
@@ -67,6 +69,16 @@ class TimeTravelRouterImpl @Inject constructor(
         activity.supportFragmentManager
                 .beginTransaction()
                 .add(R.id.container, fragment)
+                .commit()
+    }
+
+    override fun openErrorFragment() {
+        val fragment = ErrorFragment.create()
+        addFragmentSlideTransitions(fragment, activity.applicationContext)
+        activity.supportFragmentManager
+                .beginTransaction()
+                .add(R.id.container, fragment)
+                .addToBackStack("")
                 .commit()
     }
 }

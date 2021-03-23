@@ -16,4 +16,5 @@
 
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <item name="alpha_value" format="float" type="integer">0.2</item>
 </resources>

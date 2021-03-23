@@ -17,8 +17,6 @@
 package com.travelbackintime.buybitcoin.dagger
 
 import android.app.Application
-import android.content.SharedPreferences
-import android.preference.PreferenceManager
 import bitcoin.backintime.com.backintimebuybitcoin.BuildConfig
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.service.CoinDeskService
@@ -54,10 +52,9 @@ class AppModule {
     @Singleton
     @Provides
     fun providesTimeTravelMachine(database: FirebaseDatabase,
-                                  sharedPreferences: SharedPreferences,
                                   repository: Repository
     ): TimeTravelMachine {
-        return TimeTravelMachineImpl(database, sharedPreferences, repository)
+        return TimeTravelMachineImpl(database, repository)
     }
 
     @Provides
@@ -108,12 +105,6 @@ class AppModule {
         firebaseDatabase.setPersistenceEnabled(true)
         firebaseDatabase.reference.keepSynced(true)
         return FirebaseDatabase.getInstance()
-    }
-
-    @Singleton
-    @Provides
-    fun providesSharedPreferences(app: Application): SharedPreferences {
-        return PreferenceManager.getDefaultSharedPreferences(app.applicationContext)
     }
 
     @Singleton

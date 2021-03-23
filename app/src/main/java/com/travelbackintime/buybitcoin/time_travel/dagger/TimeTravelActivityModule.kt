@@ -16,6 +16,8 @@
 
 package com.travelbackintime.buybitcoin.time_travel.dagger
 
+import com.travelbackintime.buybitcoin.error.dagger.ErrorModule
+import com.travelbackintime.buybitcoin.error.view.ErrorFragment
 import com.travelbackintime.buybitcoin.home_coming.dagger.HomeComingFragmentModule
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.splash.dagger.SplashModule
@@ -40,4 +42,7 @@ abstract class TimeTravelActivityModule {
 
     @ContributesAndroidInjector
     abstract fun setAmountBottomSheetDialogFragment(): InvestMoneyBottomSheetDialog
+
+    @ContributesAndroidInjector(modules = [ErrorModule::class])
+    abstract fun errorFragment(): ErrorFragment
 }

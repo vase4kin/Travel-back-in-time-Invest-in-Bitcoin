@@ -14,24 +14,21 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.splash.view
+package com.travelbackintime.buybitcoin.error.router
 
-import android.os.Handler
-import android.os.Looper
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import com.travelbackintime.buybitcoin.splash.router.SplashRouter
+import androidx.appcompat.app.AppCompatActivity
+import com.travelbackintime.buybitcoin.error.view.ErrorFragment
 import javax.inject.Inject
 
-private const val TIMEOUT_SPLASH: Long = 1500
+interface ErrorRouter {
+    fun openTimeTravelFragment()
+}
 
-class SplashViewModel @Inject constructor(
-        private val router: SplashRouter
-) : LifecycleObserver {
+class ErrorRouterImpl @Inject constructor(fragment: ErrorFragment) : ErrorRouter {
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    fun handleOnCreate() {
-        Handler(Looper.getMainLooper()).postDelayed({ router.openTimeTravelFragment() }, TIMEOUT_SPLASH)
+    private val activity: AppCompatActivity = fragment.activity as AppCompatActivity
+
+    override fun openTimeTravelFragment() {
+        activity.supportFragmentManager.popBackStackImmediate()
     }
 }
