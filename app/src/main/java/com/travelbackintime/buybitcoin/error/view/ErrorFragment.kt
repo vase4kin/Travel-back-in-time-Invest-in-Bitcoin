@@ -14,38 +14,35 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.splash.view
+package com.travelbackintime.buybitcoin.error.view
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentErrorBinding
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class SplashFragment : DaggerFragment() {
+class ErrorFragment : DaggerFragment() {
 
     companion object {
         fun create(): Fragment {
-            return SplashFragment()
+            return ErrorFragment()
         }
     }
 
     @Inject
-    lateinit var viewModel: SplashViewModel
+    lateinit var viewModel: ErrorViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_splash, container, false)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        viewLifecycleOwnerLiveData.observe(this, {
-            it.lifecycle.addObserver(viewModel)
-        })
+                              savedInstanceState: Bundle?): View {
+        val binding: FragmentErrorBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_error, container, false)
+        binding.viewModel = viewModel
+        return binding.root
     }
 }

@@ -22,8 +22,6 @@ import java.util.*
 
 interface TimeTravelMachine {
 
-    fun initFlowCapacitor(listener: FlowCapacitorInitListener)
-
     fun getBitcoinPriceByDate(timeToTravel: Date?): Single<Double>
 
     fun getBitcoinCurrentPrice(): Single<Double>
@@ -31,12 +29,6 @@ interface TimeTravelMachine {
     fun getBitcoinStatus(timeToTravel: Date?): BitcoinStatus
 
     fun getTimeEvent(timeToTravel: Date?): TimeTravelEvent
-
-    interface FlowCapacitorInitListener {
-        fun onSuccess()
-        fun onError()
-        fun onDataNotDownloaded()
-    }
 
     enum class BitcoinStatus {
         EXIST, BASICALLY_NOTHING

@@ -37,6 +37,7 @@ private const val EVENT_USER_GETS_TO_NOT_BORN = "event_user_gets_to_not_exist"
 private const val EVENT_USER_GETS_TO_BASICALLY_NOTHING = "event_user_gets_to_2009"
 private const val EVENT_USER_GETS_TO_MAGICIAN = "event_user_gets_to_future"
 private const val EVENT_USER_FETCHES_DATA = "event_user_fetch_data"
+private const val EVENT_USER_RETRIES = "event_user_retries"
 private const val PARAMETER_TIME = "parameter_time"
 private const val PARAMETER_MONEY = "parameter_money"
 private const val PARAMETER_RESULT = "parameter_result"
@@ -82,6 +83,8 @@ interface Tracker {
     fun trackDataDownloadedError()
 
     fun trackDataNotDownloaded()
+
+    fun trackUserRetries()
 }
 
 private const val STATUS_SUCCESS = "success"
@@ -89,6 +92,10 @@ private const val STATUS_ERROR = "error"
 private const val STATUS_NOT_DOWNLOADED = "not_downloaded"
 
 class TrackerImpl(private val analytics: FirebaseAnalytics) : Tracker {
+
+    override fun trackUserRetries() {
+        analytics.logEvent(EVENT_USER_RETRIES, Bundle())
+    }
 
     override fun trackUserSetsTime(time: String) {
         val bundle = Bundle()

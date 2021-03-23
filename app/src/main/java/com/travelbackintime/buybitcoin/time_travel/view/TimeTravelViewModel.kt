@@ -101,42 +101,44 @@ class TimeTravelViewModel @Inject constructor(
         val event = timeTravelMachine.getTimeEvent(timeToTravel)
         when (event.eventType) {
             TimeTravelMachine.EventType.NO_EVENT -> {
-                val status = timeTravelMachine.getBitcoinStatus(timeToTravel)
-                when (status) {
-                    TimeTravelMachine.BitcoinStatus.EXIST -> {
-                        Single.zip(
-                                timeTravelMachine.getBitcoinPriceByDate(timeToTravel),
-                                timeTravelMachine.getBitcoinCurrentPrice(),
-                                { t1, t2 -> calculateProfit(t1, t2) }
-                        )
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribeBy(
-                                        onSuccess = {
-                                            val profit = it
-                                            val timeTravelResult = TimeTravelResult(
-                                                    status = status,
-                                                    profitMoney = profit,
-                                                    investedMoney = investedMoney,
-                                                    timeToTravel = timeToTravel)
-                                            router.openLoadingFragment(timeTravelResult)
-                                        },
-                                        onError = {
-                                            val exception = it // TODO handle exception
-                                        }
-                                )
-                                .addTo(compositeDisposable)
-                    }
+                when (val status = timeTravelMachine.getBitcoinStatus(timeToTravel)) {
+                    TimeTravelMachine.BitcoinStatus.EXIST -> processBitcoinPrice(status)
                     else -> router.openLoadingFragment(TimeTravelResult(status = status))
                 }
             }
-            else -> {
+            TimeTravelMachine.EventType.HELLO_SATOSHI,
+            TimeTravelMachine.EventType.PIZZA_LOVER -> {
                 router.openLoadingFragment(
                         TimeTravelResult(
                                 status = TimeTravelMachine.BitcoinStatus.EXIST,
                                 eventType = event.eventType))
             }
         }
+    }
+
+    private fun processBitcoinPrice(status: TimeTravelMachine.BitcoinStatus) {
+        Single.zip(
+                timeTravelMachine.getBitcoinPriceByDate(timeToTravel),
+                timeTravelMachine.getBitcoinCurrentPrice(),
+                { t1, t2 -> calculateProfit(t1, t2) }
+        )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                        onSuccess = {
+                            val profit = it
+                            val timeTravelResult = TimeTravelResult(
+                                    status = status,
+                                    profitMoney = profit,
+                                    investedMoney = investedMoney,
+                                    timeToTravel = timeToTravel)
+                            router.openLoadingFragment(timeTravelResult)
+                        },
+                        onError = {
+                            router.openErrorFragment()
+                        }
+                )
+                .addTo(compositeDisposable)
     }
 
     private fun calculateProfit(bitcoinHistoricalPrice: Double,

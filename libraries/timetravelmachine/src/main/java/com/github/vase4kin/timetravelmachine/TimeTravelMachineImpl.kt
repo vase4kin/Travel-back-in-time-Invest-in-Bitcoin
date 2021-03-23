@@ -16,7 +16,6 @@
 
 package com.github.vase4kin.timetravelmachine
 
-import android.content.SharedPreferences
 import com.github.vase4kin.repository.Repository
 import com.github.vase4kin.timetravelmachine.model.TimeTravelEvent
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -26,46 +25,20 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-private const val REF_CONNECTION = ".info/connected"
 private const val REF_EVENTS = "events"
-private const val KEY_DATA_DOWNLOADED = "key_data_downloaded"
 private const val PATTERN_TIME_DATE = "yyyy-MM-dd"
 private const val PATTERN_TIME_EVENT_DATE = "yyyy-MM-dd"
 private const val DATE_PRICE_AVAILABLE = "2010-7-18"
 
 class TimeTravelMachineImpl(
         private val database: FirebaseDatabase,
-        private val sharedPreferences: SharedPreferences,
         private val repository: Repository
 ) : TimeTravelMachine {
 
     private var timeTravelEvents: Map<String, TimeTravelEvent> = HashMap()
 
-    private var isDataDownloaded: Boolean
-        get() = sharedPreferences.getBoolean(KEY_DATA_DOWNLOADED, false)
-        set(value) = sharedPreferences.edit().putBoolean(KEY_DATA_DOWNLOADED, value).apply()
-
-    override fun initFlowCapacitor(listener: TimeTravelMachine.FlowCapacitorInitListener) {
-        database.getReference(REF_CONNECTION).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val connected = dataSnapshot.getValue(Boolean::class.java)
-                if (connected == true) {
-                    fetchData(listener)
-                    isDataDownloaded = true
-                } else {
-                    if (isDataDownloaded) {
-                        fetchData(listener)
-                    } else {
-                        listener.onDataNotDownloaded()
-                    }
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                FirebaseCrashlytics.getInstance().recordException(databaseError.toException())
-                listener.onError()
-            }
-        })
+    init {
+        fetchData()
     }
 
     override fun getBitcoinPriceByDate(timeToTravel: Date?): Single<Double> {
@@ -98,18 +71,16 @@ class TimeTravelMachineImpl(
         return dateFirst.after(date)
     }
 
-    private fun fetchData(listener: TimeTravelMachine.FlowCapacitorInitListener) {
+    private fun fetchData() {
         database.reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val timeEventsGenericTypeIndicator = object : GenericTypeIndicator<Map<@JvmSuppressWildcards String, @JvmSuppressWildcards TimeTravelEvent>>() {}
                 timeTravelEvents = dataSnapshot.child(REF_EVENTS).getValue(timeEventsGenericTypeIndicator)
                         ?: HashMap()
-                listener.onSuccess()
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
                 FirebaseCrashlytics.getInstance().recordException(databaseError.toException())
-                listener.onError()
             }
         })
     }
