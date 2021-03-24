@@ -98,13 +98,28 @@
             android:textColor="@color/colorWhite"
             android:textSize="20sp"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@id/button_copy_wallet"
+            app:layout_constraintBottom_toTopOf="@id/ads"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/info"
             app:layout_constraintVertical_weight="2"
             bind:visibility="@{viewModel.isDonateViewVisible()}"
             tools:text="Description" />
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/ads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:adSize="BANNER"
+            app:adUnitId="@string/ad_mob_id"
+            app:layout_constraintBottom_toTopOf="@id/button_copy_wallet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            bind:showAds="@{viewModel.isAdsEnabled}"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/button_copy_wallet"
@@ -119,7 +134,7 @@
             app:layout_constraintBottom_toTopOf="@id/buttom_start_over"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description"
+            app:layout_constraintTop_toBottomOf="@id/ads"
             bind:visibility="@{viewModel.isDonateViewVisible()}" />
 
         <Button

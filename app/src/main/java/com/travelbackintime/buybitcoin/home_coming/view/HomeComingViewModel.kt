@@ -56,7 +56,7 @@ class HomeComingViewModel @Inject constructor(
     val yearText = ObservableField<String>()
 
     val isAdsEnabled: Boolean
-        get() = event !is TimeTravelMachine.Event.RealWorldEvent && configService.isAdsEnabled
+        get() = shouldShowAds()
 
     var event: TimeTravelMachine.Event? = null
 
@@ -67,6 +67,15 @@ class HomeComingViewModel @Inject constructor(
             is TimeTravelMachine.Event.RealWorldEvent -> processRealWorldEvent(event)
             is TimeTravelMachine.Event.TimeTravelEvent -> processTimeTravelEvent(event)
         }
+    }
+
+    private fun shouldShowAds(): Boolean {
+        val event = event
+        return if (event is TimeTravelMachine.Event.RealWorldEvent) {
+            !event.isDonate
+        } else {
+            true
+        } && configService.isAdsEnabled
     }
 
     private fun processRealWorldEvent(event: TimeTravelMachine.Event.RealWorldEvent) {
