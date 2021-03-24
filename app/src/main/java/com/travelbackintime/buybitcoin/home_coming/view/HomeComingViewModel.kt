@@ -48,6 +48,7 @@ class HomeComingViewModel @Inject constructor(
     val isParamViewVisible = ObservableBoolean(false)
     val isProfitViewVisible = ObservableBoolean(false)
     val isDonateViewVisible = ObservableBoolean(false)
+    val isDescriptionViewVisible = ObservableBoolean(false)
     val title = ObservableField<String>()
     val description = ObservableField<String>()
     val profitMoneyText = ObservableField<String>()
@@ -81,6 +82,7 @@ class HomeComingViewModel @Inject constructor(
     private fun processRealWorldEvent(event: TimeTravelMachine.Event.RealWorldEvent) {
         title.set(event.title)
         description.set(event.description)
+        isDescriptionViewVisible.set(event.description.isNotEmpty())
         isDonateViewVisible.set(event.isDonate)
         tracker.trackUserGetsToRealWorldEvent(event.title)
     }
