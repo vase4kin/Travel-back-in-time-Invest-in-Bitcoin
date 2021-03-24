@@ -39,6 +39,7 @@ class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
 
     @Inject
     lateinit var numberFormat: NumberFormat
+
     @Inject
     lateinit var tracker: Tracker
 
@@ -74,17 +75,23 @@ class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
         view.findViewById<View>(R.id.button_set_invested_money).setOnClickListener { saveInvestedMoney(editTextWrapper) }
 
         view.findViewById<View>(R.id.button_set_1).setOnClickListener {
-            editTextWrapper.editText?.setText(R.string.text_1)
+            val amount = resources.getString(R.string.text_1)
+            editTextWrapper.editText?.setText(amount)
+            tracker.trackUserChooseMoneySuggestion(amount)
             saveInvestedMoney(editTextWrapper)
         }
 
         view.findViewById<View>(R.id.button_set_10).setOnClickListener {
-            editTextWrapper.editText?.setText(R.string.text_10)
+            val amount = resources.getString(R.string.text_10)
+            editTextWrapper.editText?.setText(amount)
+            tracker.trackUserChooseMoneySuggestion(amount)
             saveInvestedMoney(editTextWrapper)
         }
 
         view.findViewById<View>(R.id.button_set_100).setOnClickListener {
-            editTextWrapper.editText?.setText(R.string.text_100)
+            val amount = resources.getString(R.string.text_100)
+            editTextWrapper.editText?.setText(amount)
+            tracker.trackUserChooseMoneySuggestion(amount)
             saveInvestedMoney(editTextWrapper)
         }
 
