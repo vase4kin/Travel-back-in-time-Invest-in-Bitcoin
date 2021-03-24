@@ -17,16 +17,13 @@
 package com.travelbackintime.buybitcoin.time_travel.router
 
 import androidx.appcompat.app.AppCompatActivity
-import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.maxDate
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.minDate
 import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
-import com.travelbackintime.buybitcoin.error.view.ErrorFragment
-import com.travelbackintime.buybitcoin.loading.LoadingFragment
+import com.travelbackintime.buybitcoin.router.InternalRouter
 import com.travelbackintime.buybitcoin.time_travel.view.InvestMoneyBottomSheetDialog
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
-import com.travelbackintime.buybitcoin.utils.addFragmentSlideTransitions
 import java.util.*
 import javax.inject.Inject
 
@@ -38,7 +35,8 @@ interface TimeTravelRouter {
 }
 
 class TimeTravelRouterImpl @Inject constructor(
-        private val fragment: TimeTravelFragment
+        private val fragment: TimeTravelFragment,
+        private val internalRouter: InternalRouter
 ) : TimeTravelRouter {
 
     private val activity: AppCompatActivity = fragment.activity as AppCompatActivity
@@ -64,21 +62,10 @@ class TimeTravelRouterImpl @Inject constructor(
     }
 
     override fun openLoadingFragment(event: TimeTravelMachine.Event) {
-        val fragment = LoadingFragment.create(event)
-        addFragmentSlideTransitions(fragment, activity.applicationContext)
-        activity.supportFragmentManager
-                .beginTransaction()
-                .add(R.id.container, fragment)
-                .commit()
+        internalRouter.openLoading(event)
     }
 
     override fun openErrorFragment() {
-        val fragment = ErrorFragment.create()
-        addFragmentSlideTransitions(fragment, activity.applicationContext)
-        activity.supportFragmentManager
-                .beginTransaction()
-                .add(R.id.container, fragment)
-                .addToBackStack("")
-                .commit()
+        internalRouter.openError()
     }
 }

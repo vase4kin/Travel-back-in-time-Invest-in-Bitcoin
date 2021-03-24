@@ -16,19 +16,18 @@
 
 package com.travelbackintime.buybitcoin.error.router
 
-import androidx.appcompat.app.AppCompatActivity
-import com.travelbackintime.buybitcoin.error.view.ErrorFragment
+import com.travelbackintime.buybitcoin.router.InternalRouter
 import javax.inject.Inject
 
 interface ErrorRouter {
     fun openTimeTravelFragment()
 }
 
-class ErrorRouterImpl @Inject constructor(fragment: ErrorFragment) : ErrorRouter {
-
-    private val activity: AppCompatActivity = fragment.activity as AppCompatActivity
+class ErrorRouterImpl @Inject constructor(
+        private val internalRouter: InternalRouter
+) : ErrorRouter {
 
     override fun openTimeTravelFragment() {
-        activity.supportFragmentManager.popBackStackImmediate()
+        internalRouter.closeError()
     }
 }

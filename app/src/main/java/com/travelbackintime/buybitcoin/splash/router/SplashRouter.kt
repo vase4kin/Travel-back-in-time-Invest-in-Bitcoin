@@ -16,28 +16,18 @@
 
 package com.travelbackintime.buybitcoin.splash.router
 
-import androidx.appcompat.app.AppCompatActivity
-import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.travelbackintime.buybitcoin.splash.view.SplashFragment
-import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
-import com.travelbackintime.buybitcoin.utils.addFragmentFadeTransitions
+import com.travelbackintime.buybitcoin.router.InternalRouter
 import javax.inject.Inject
 
 interface SplashRouter {
-
     fun openTimeTravelFragment()
 }
 
-class SplashRouterImpl @Inject constructor(fragment: SplashFragment) : SplashRouter {
-
-    private val activity: AppCompatActivity = fragment.activity as AppCompatActivity
+class SplashRouterImpl @Inject constructor(
+        private val internalRouter: InternalRouter
+) : SplashRouter {
 
     override fun openTimeTravelFragment() {
-        val fragment = TimeTravelFragment.create()
-        addFragmentFadeTransitions(fragment, activity.applicationContext)
-        activity.supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, fragment)
-                .commitAllowingStateLoss()
+        internalRouter.openTimeTravelFromSplash()
     }
 }
