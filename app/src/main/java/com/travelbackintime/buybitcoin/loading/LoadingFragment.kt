@@ -24,10 +24,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.travelbackintime.buybitcoin.home_coming.view.EXTRA_RESULT
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
-import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.utils.addFragmentSlideTransitions
 import pl.droidsonroids.gif.GifDrawable
 
@@ -37,9 +37,9 @@ private const val SPEED: Float = 0.8f
 class LoadingFragment : Fragment() {
 
     companion object {
-        fun create(result: TimeTravelResult): Fragment {
+        fun create(event: TimeTravelMachine.Event): Fragment {
             val bundle = Bundle()
-            bundle.putParcelable(EXTRA_RESULT, result)
+            bundle.putParcelable(EXTRA_RESULT, event)
             val loadingFragment = LoadingFragment()
             loadingFragment.arguments = bundle
             return loadingFragment
@@ -72,8 +72,8 @@ class LoadingFragment : Fragment() {
     private fun openHomecoming() {
         val args = arguments
         if (args != null) {
-            val result: TimeTravelResult = args.getParcelable(EXTRA_RESULT) ?: return
-            val homeComingFragment = HomeComingFragment.create(result)
+            val event: TimeTravelMachine.Event = args.getParcelable(EXTRA_RESULT) ?: return
+            val homeComingFragment = HomeComingFragment.create(event)
             val activity = activity as AppCompatActivity
             addFragmentSlideTransitions(homeComingFragment, activity.applicationContext)
             val fragmentManager = activity.supportFragmentManager

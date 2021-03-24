@@ -16,6 +16,7 @@
 
 package com.github.vase4kin.timetravelmachine
 
+import android.content.res.Resources
 import com.github.vase4kin.repository.Repository
 import com.github.vase4kin.timetravelmachine.model.TimeTravelEvent
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -32,7 +33,8 @@ private const val DATE_PRICE_AVAILABLE = "2010-7-18"
 
 class TimeTravelMachineImpl(
         private val database: FirebaseDatabase,
-        private val repository: Repository
+        private val repository: Repository,
+        private val resources: Resources
 ) : TimeTravelMachine {
 
     private var timeTravelEvents: Map<String, TimeTravelEvent> = HashMap()
@@ -41,29 +43,60 @@ class TimeTravelMachineImpl(
         fetchData()
     }
 
-    override fun getBitcoinPriceByDate(timeToTravel: Date?): Single<Double> {
-        timeToTravel ?: return Single.just(Double.NaN)
+    override fun travelInTime(timeToTravel: Date, investedMoney: Double): Single<TimeTravelMachine.Event> {
+        val event = getTimeEvent(timeToTravel)
+        if (event != null) {
+            return Single.just(TimeTravelMachine.Event.RealWorldEvent(
+                    title = event.title,
+                    description = event.description,
+                    isDonate = event.isDonate
+            ))
+        } else {
+            return when {
+                isDateBeforePriceIsAvailable(timeToTravel) -> Single.just(TimeTravelMachine.Event.RealWorldEvent(
+                        title = resources.getString(R.string.text_basically_nothing),
+                        description = "",
+                        isDonate = false
+                ))
+                else -> calculateProfit(timeToTravel, investedMoney)
+            }
+        }
+    }
+
+    private fun calculateProfit(timeToTravel: Date, investedMoney: Double): Single<TimeTravelMachine.Event> {
+        return Single.zip(
+                getBitcoinPriceByDate(timeToTravel),
+                getBitcoinCurrentPrice(),
+                { t1, t2 -> calculateProfit(t1, t2, investedMoney) }
+        ).map { profit ->
+            TimeTravelMachine.Event.TimeTravelEvent(
+                    profitMoney = profit,
+                    investedMoney = investedMoney,
+                    timeToTravel = timeToTravel
+            )
+        }
+    }
+
+    private fun calculateProfit(bitcoinHistoricalPrice: Double,
+                                bitcoinCurrentPrice: Double,
+                                investedMoney: Double
+    ): Double {
+        val bitcoinInvestment = investedMoney / bitcoinHistoricalPrice
+        return bitcoinCurrentPrice * bitcoinInvestment
+    }
+
+    private fun getBitcoinPriceByDate(timeToTravel: Date): Single<Double> {
         val serverDate = convertDateToServerDateFormat(timeToTravel)
         return repository.getBitcoinPriceByDate(serverDate)
     }
 
-    override fun getBitcoinCurrentPrice(): Single<Double> {
+    private fun getBitcoinCurrentPrice(): Single<Double> {
         return repository.getCurrentBitcoinPrice()
     }
 
-    override fun getBitcoinStatus(timeToTravel: Date?): TimeTravelMachine.BitcoinStatus {
-        timeToTravel ?: return TimeTravelMachine.BitcoinStatus.BASICALLY_NOTHING
-        return when {
-            isDateBeforePriceIsAvailable(timeToTravel) -> TimeTravelMachine.BitcoinStatus.BASICALLY_NOTHING
-            else -> TimeTravelMachine.BitcoinStatus.EXIST
-        }
-    }
-
-    override fun getTimeEvent(timeToTravel: Date?): TimeTravelEvent {
-        timeToTravel ?: return TimeTravelEvent(TimeTravelMachine.EventType.NO_EVENT.name)
+    private fun getTimeEvent(timeToTravel: Date): TimeTravelEvent? {
         val eventServerDate = convertDateToEventServerDateFormat(timeToTravel)
-        val timeTravelEvent = timeTravelEvents[eventServerDate]
-        return timeTravelEvent ?: TimeTravelEvent(TimeTravelMachine.EventType.NO_EVENT.name)
+        return timeTravelEvents[eventServerDate]
     }
 
     private fun isDateBeforePriceIsAvailable(date: Date): Boolean {

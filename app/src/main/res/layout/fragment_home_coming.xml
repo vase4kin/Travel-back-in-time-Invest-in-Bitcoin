@@ -68,20 +68,6 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <TextView
-                    style="@style/VideoGameTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:lineSpacingMultiplier="1.2"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
-                    android:text="@{viewModel.infoText}"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="26sp"
-                    bind:visibility="@{viewModel.isInfoTextViewVisible}"
-                    tools:text="INFO" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -334,34 +320,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical"
-                    bind:visibility="@{viewModel.isDonateViewVisible}">
-
-                    <TextView
-                        style="@style/VideoGameTextStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:lineSpacingMultiplier="1.2"
-                        android:paddingTop="16dp"
-                        android:paddingBottom="16dp"
-                        android:text="@string/donate_text"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="20sp" />
-
-                    <Button
-                        style="@style/VideoGameButtonStyle"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:onClick="@{() -> viewModel.onCopyWalletAddress()}"
-                        android:text="@string/donate_button" />
-
-                </LinearLayout>
-
                 <Button
                     style="@style/VideoGameButtonStyle"
                     android:layout_width="match_parent"
@@ -381,7 +339,6 @@
                     android:textColor="@color/colorWhite" />
 
             </LinearLayout>
-
 
         </FrameLayout>
 

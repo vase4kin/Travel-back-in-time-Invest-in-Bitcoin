@@ -16,26 +16,29 @@
 
 package com.github.vase4kin.timetravelmachine
 
-import com.github.vase4kin.timetravelmachine.model.TimeTravelEvent
+import android.os.Parcelable
 import io.reactivex.Single
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 interface TimeTravelMachine {
 
-    fun getBitcoinPriceByDate(timeToTravel: Date?): Single<Double>
+    fun travelInTime(timeToTravel: Date, investedMoney: Double): Single<Event>
 
-    fun getBitcoinCurrentPrice(): Single<Double>
+    sealed class Event : Parcelable {
+        @Parcelize
+        data class RealWorldEvent(
+                val title: String,
+                val description: String,
+                val isDonate: Boolean
+        ) : Event()
 
-    fun getBitcoinStatus(timeToTravel: Date?): BitcoinStatus
-
-    fun getTimeEvent(timeToTravel: Date?): TimeTravelEvent
-
-    enum class BitcoinStatus {
-        EXIST, BASICALLY_NOTHING
-    }
-
-    enum class EventType {
-        HELLO_SATOSHI, PIZZA_LOVER, NO_EVENT
+        @Parcelize
+        data class TimeTravelEvent(
+                val profitMoney: Double,
+                val investedMoney: Double,
+                val timeToTravel: Date
+        ) : Event()
     }
 
     companion object {

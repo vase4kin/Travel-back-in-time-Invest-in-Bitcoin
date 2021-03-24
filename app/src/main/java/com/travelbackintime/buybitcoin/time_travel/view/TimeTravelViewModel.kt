@@ -23,13 +23,11 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
-import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouter
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import com.travelbackintime.buybitcoin.utils.onChanged
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -57,7 +55,7 @@ class TimeTravelViewModel @Inject constructor(
     }
 
     private var investedMoney: Double = DEFAULT_INVESTED_MONEY
-    private var timeToTravel: Date? = null
+    private var timeToTravel: Date = TimeTravelMachine.Companion.maxDate.time
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -98,41 +96,15 @@ class TimeTravelViewModel @Inject constructor(
     }
 
     private fun travelInTime() {
-        val event = timeTravelMachine.getTimeEvent(timeToTravel)
-        when (event.eventType) {
-            TimeTravelMachine.EventType.NO_EVENT -> {
-                when (val status = timeTravelMachine.getBitcoinStatus(timeToTravel)) {
-                    TimeTravelMachine.BitcoinStatus.EXIST -> processBitcoinPrice(status)
-                    else -> router.openLoadingFragment(TimeTravelResult(status = status))
-                }
-            }
-            TimeTravelMachine.EventType.HELLO_SATOSHI,
-            TimeTravelMachine.EventType.PIZZA_LOVER -> {
-                router.openLoadingFragment(
-                        TimeTravelResult(
-                                status = TimeTravelMachine.BitcoinStatus.EXIST,
-                                eventType = event.eventType))
-            }
-        }
-    }
-
-    private fun processBitcoinPrice(status: TimeTravelMachine.BitcoinStatus) {
-        Single.zip(
-                timeTravelMachine.getBitcoinPriceByDate(timeToTravel),
-                timeTravelMachine.getBitcoinCurrentPrice(),
-                { t1, t2 -> calculateProfit(t1, t2) }
+        timeTravelMachine.travelInTime(
+                timeToTravel = timeToTravel,
+                investedMoney = investedMoney
         )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onSuccess = {
-                            val profit = it
-                            val timeTravelResult = TimeTravelResult(
-                                    status = status,
-                                    profitMoney = profit,
-                                    investedMoney = investedMoney,
-                                    timeToTravel = timeToTravel)
-                            router.openLoadingFragment(timeTravelResult)
+                            router.openLoadingFragment(it)
                         },
                         onError = {
                             router.openErrorFragment()
@@ -141,14 +113,8 @@ class TimeTravelViewModel @Inject constructor(
                 .addTo(compositeDisposable)
     }
 
-    private fun calculateProfit(bitcoinHistoricalPrice: Double,
-                                bitcoinCurrentPrice: Double): Double {
-        val bitcoinInvestment = investedMoney / bitcoinHistoricalPrice
-        return bitcoinCurrentPrice * bitcoinInvestment
-    }
-
     private fun isBuyBitcoinButtonEnabled(): Boolean {
-        return timeToTravel != null && investedMoney != DEFAULT_INVESTED_MONEY
+        return timeToTravel != TimeTravelMachine.Companion.maxDate.time && investedMoney != DEFAULT_INVESTED_MONEY
     }
 
     private fun enableBuyBitcoinButton() {

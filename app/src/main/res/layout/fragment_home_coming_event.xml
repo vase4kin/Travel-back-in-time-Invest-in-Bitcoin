@@ -16,14 +16,17 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity">
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
-            type="com.travelbackintime.buybitcoin.time_travel.view.TimeTravelViewModel" />
+            type="com.travelbackintime.buybitcoin.home_coming.view.HomeComingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,73 +55,100 @@
             android:text="@string/app_name"
             android:textColor="@color/colorWhite"
             android:textSize="36sp"
-            app:layout_constraintBottom_toTopOf="@id/description"
+            app:layout_constraintBottom_toTopOf="@id/info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <TextView
+            android:id="@+id/info"
+            style="@style/VideoGameTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.2"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="@{viewModel.title}"
+            android:textColor="@color/colorWhite"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toTopOf="@id/description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintVertical_weight="1"
+            tools:text="Title" />
+
+        <TextView
             android:id="@+id/description"
             style="@style/VideoGameTextStyle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:gravity="center"
-            android:text="@string/app_description"
+            android:lineSpacingMultiplier="1.2"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:text="@{viewModel.description}"
             android:textColor="@color/colorWhite"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@id/button_set_time"
+            android:textSize="20sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/button_copy_wallet"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            app:layout_constraintTop_toBottomOf="@id/info"
+            app:layout_constraintVertical_weight="2"
+            bind:visibility="@{viewModel.isDonateViewVisible()}"
+            tools:text="Description" />
 
         <Button
-            android:id="@+id/button_set_time"
+            android:id="@+id/button_copy_wallet"
             style="@style/VideoGameButtonStyle"
             android:layout_width="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:onClick="@{() -> viewModel.onSetTimeToTravelButtonClick()}"
-            android:text="@{viewModel.timeToTravelText}"
-            app:layout_constraintBottom_toTopOf="@id/button_set_money"
+            android:onClick="@{() -> viewModel.onCopyWalletAddress()}"
+            android:text="@string/donate_button"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/buttom_start_over"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description"
-            tools:text="@string/button_set_date_title" />
+            bind:visibility="@{viewModel.isDonateViewVisible()}" />
 
         <Button
-            android:id="@+id/button_set_money"
+            android:id="@+id/buttom_start_over"
             style="@style/VideoGameButtonStyle"
             android:layout_width="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:onClick="@{() -> viewModel.onSetInvestedMoneyButtonClick()}"
-            android:text="@{viewModel.investedMoneyText}"
-            app:layout_constraintBottom_toTopOf="@id/button_buy"
+            android:onClick="@{() -> viewModel.onStartOver()}"
+            android:text="@string/button_start_over_title"
+            app:layout_constraintBottom_toTopOf="@id/powered_by_coindesk"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_set_time"
-            tools:text="@string/button_set_amount_title" />
+            app:layout_constraintTop_toBottomOf="@id/button_copy_wallet" />
 
-        <Button
-            android:id="@+id/button_buy"
-            style="@style/VideoGameButtonStyle"
+        <TextView
+            android:id="@+id/powered_by_coindesk"
             android:layout_width="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:alpha="@{viewModel.isBuyBitcoinButtonEnabled ? 1f : 0.3f}"
-            android:enabled="@{viewModel.isBuyBitcoinButtonEnabled}"
-            android:onClick="@{() -> viewModel.onBuyBitcoinButtonClick()}"
-            android:text="@string/button_buy_bitcoin_title"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.openPoweredByCoinDeskUrl()}"
+            android:text="@string/powered_by_coindesk"
+            android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_set_money" />
+            app:layout_constraintTop_toBottomOf="@id/buttom_start_over" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

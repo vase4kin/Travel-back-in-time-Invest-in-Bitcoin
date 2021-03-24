@@ -18,6 +18,7 @@ package com.travelbackintime.buybitcoin.tracker
 
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
+import java.util.*
 
 private const val EVENT_USER_SETS_TIME = "event_user_sets_time"
 private const val EVENT_USER_SETS_MONEY = "event_user_sets_money"
@@ -30,17 +31,14 @@ private const val EVENT_USER_SEES_EMPTY_AMOUNT_ERROR = "event_user_sees_empty_mo
 private const val EVENT_USER_SEES_AT_LEAST_DOLLAR_ERROR = "event_user_sees_one_dollar_error"
 private const val EVENT_USER_SEES_YOU_RICH_ERROR = "event_user_sees_you_rich_error"
 private const val EVENT_USER_COPIES_BTC_WALLET = "event_user_copies_btc_wallet"
-private const val EVENT_USER_GETS_TO_PIZZA_LOVER = "event_user_gets_to_pizza_lover"
 private const val EVENT_USER_GETS_TO_SATOSHI = "event_user_gets_to_satoshi"
 private const val EVENT_USER_GETS_TO_EXIST = "event_user_gets_to_exist"
-private const val EVENT_USER_GETS_TO_NOT_BORN = "event_user_gets_to_not_exist"
-private const val EVENT_USER_GETS_TO_BASICALLY_NOTHING = "event_user_gets_to_2009"
-private const val EVENT_USER_GETS_TO_MAGICIAN = "event_user_gets_to_future"
-private const val EVENT_USER_FETCHES_DATA = "event_user_fetch_data"
 private const val EVENT_USER_RETRIES = "event_user_retries"
 private const val PARAMETER_TIME = "parameter_time"
 private const val PARAMETER_MONEY = "parameter_money"
-private const val PARAMETER_RESULT = "parameter_result"
+private const val PARAMETER_PROFIT = "parameter_profit"
+private const val PARAMETER_INVESTED = "parameter_invested"
+private const val PARAMETER_EVENT_NAME = "parameter_name"
 
 interface Tracker {
 
@@ -62,34 +60,18 @@ interface Tracker {
 
     fun trackUserCopiesBtcWalletAddress()
 
-    fun trackUserGetsToPizzaLover()
+    fun trackUserGetsToRealWorldEvent(eventName: String)
 
-    fun trackUserGetsToSatoshi()
-
-    fun trackUserGetsToExist()
-
-    fun trackUserGetsToNotBorn()
-
-    fun trackUserGetsToBasicallyNothing()
-
-    fun trackUserGetsToMagician()
+    fun trackUserGetsToTimeTravelEvent(profitMoney: Double,
+                                       investedMoney: Double,
+                                       timeToTravel: Date)
 
     fun trackUserSharesOnFb()
 
     fun trackUserSharesOnTwitter()
 
-    fun trackDataDownloadedSuccessfully()
-
-    fun trackDataDownloadedError()
-
-    fun trackDataNotDownloaded()
-
     fun trackUserRetries()
 }
-
-private const val STATUS_SUCCESS = "success"
-private const val STATUS_ERROR = "error"
-private const val STATUS_NOT_DOWNLOADED = "not_downloaded"
 
 class TrackerImpl(private val analytics: FirebaseAnalytics) : Tracker {
 
@@ -137,28 +119,21 @@ class TrackerImpl(private val analytics: FirebaseAnalytics) : Tracker {
         analytics.logEvent(EVENT_USER_COPIES_BTC_WALLET, null)
     }
 
-    override fun trackUserGetsToPizzaLover() {
-        analytics.logEvent(EVENT_USER_GETS_TO_PIZZA_LOVER, null)
+    override fun trackUserGetsToRealWorldEvent(eventName: String) {
+        val bundle = Bundle()
+        bundle.putString(PARAMETER_EVENT_NAME, eventName)
+        analytics.logEvent(EVENT_USER_GETS_TO_SATOSHI, bundle)
     }
 
-    override fun trackUserGetsToSatoshi() {
-        analytics.logEvent(EVENT_USER_GETS_TO_SATOSHI, null)
-    }
-
-    override fun trackUserGetsToExist() {
-        analytics.logEvent(EVENT_USER_GETS_TO_EXIST, null)
-    }
-
-    override fun trackUserGetsToNotBorn() {
-        analytics.logEvent(EVENT_USER_GETS_TO_NOT_BORN, null)
-    }
-
-    override fun trackUserGetsToBasicallyNothing() {
-        analytics.logEvent(EVENT_USER_GETS_TO_BASICALLY_NOTHING, null)
-    }
-
-    override fun trackUserGetsToMagician() {
-        analytics.logEvent(EVENT_USER_GETS_TO_MAGICIAN, null)
+    override fun trackUserGetsToTimeTravelEvent(profitMoney: Double,
+                                                investedMoney: Double,
+                                                timeToTravel: Date
+    ) {
+        val bundle = Bundle()
+        bundle.putDouble(PARAMETER_PROFIT, profitMoney)
+        bundle.putDouble(PARAMETER_INVESTED, investedMoney)
+        bundle.putString(PARAMETER_TIME, timeToTravel.toString())
+        analytics.logEvent(EVENT_USER_GETS_TO_EXIST, bundle)
     }
 
     override fun trackUserSharesOnFb() {
@@ -167,23 +142,5 @@ class TrackerImpl(private val analytics: FirebaseAnalytics) : Tracker {
 
     override fun trackUserSharesOnTwitter() {
         analytics.logEvent(EVENT_USER_SHARES_ON_TWITTER, null)
-    }
-
-    override fun trackDataDownloadedSuccessfully() {
-        trackDataDownloaded(STATUS_SUCCESS)
-    }
-
-    override fun trackDataDownloadedError() {
-        trackDataDownloaded(STATUS_ERROR)
-    }
-
-    override fun trackDataNotDownloaded() {
-        trackDataDownloaded(STATUS_NOT_DOWNLOADED)
-    }
-
-    private fun trackDataDownloaded(status: String) {
-        val bundle = Bundle()
-        bundle.putString(PARAMETER_RESULT, status)
-        analytics.logEvent(EVENT_USER_FETCHES_DATA, bundle)
     }
 }
