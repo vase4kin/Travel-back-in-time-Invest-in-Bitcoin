@@ -17,15 +17,18 @@
 package com.travelbackintime.buybitcoin.home_coming.view
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentHomeComingBinding
-import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
+import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentHomeComingEventBinding
+import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -34,9 +37,9 @@ const val EXTRA_RESULT = "extra_result"
 class HomeComingFragment : DaggerFragment() {
 
     companion object {
-        fun create(result: TimeTravelResult): Fragment {
+        fun create(event: TimeTravelMachine.Event): Fragment {
             val bundle = Bundle()
-            bundle.putParcelable(EXTRA_RESULT, result)
+            bundle.putParcelable(EXTRA_RESULT, event)
             val homeComingFragment = HomeComingFragment()
             homeComingFragment.arguments = bundle
             return homeComingFragment
@@ -47,17 +50,43 @@ class HomeComingFragment : DaggerFragment() {
     lateinit var viewModel: HomeComingViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val binding: FragmentHomeComingBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_home_coming, container, false)
-        viewModel.result = arguments?.getParcelable(EXTRA_RESULT)
-        binding.viewModel = viewModel
-        return binding.root
+                              savedInstanceState: Bundle?): View {
+        val event: TimeTravelMachine.Event = arguments?.getParcelable(EXTRA_RESULT)
+                ?: TimeTravelMachine.Event.RealWorldEvent("", "", false)
+        viewModel.event = event
+        return provideView(
+                event = event,
+                inflater = inflater,
+                container = container
+        )
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.handleOnCreate()
+    private fun provideView(
+            event: TimeTravelMachine.Event,
+            inflater: LayoutInflater,
+            container: ViewGroup?
+    ): View {
+        val viewBinding: ViewBinding = when (event) {
+            is TimeTravelMachine.Event.TimeTravelEvent -> {
+                DataBindingUtil.inflate<FragmentHomeComingBinding>(
+                        inflater, R.layout.fragment_home_coming, container, false).apply {
+                    viewModel = this@HomeComingFragment.viewModel
+                }
+            }
+            is TimeTravelMachine.Event.RealWorldEvent -> {
+                DataBindingUtil.inflate<FragmentHomeComingEventBinding>(
+                        inflater, R.layout.fragment_home_coming_event, container, false).apply {
+                    viewModel = this@HomeComingFragment.viewModel
+                }
+            }
+        }
+        return viewBinding.root
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewLifecycleOwnerLiveData.observe(this, {
+            it.lifecycle.addObserver(viewModel)
+        })
+    }
 }

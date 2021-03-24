@@ -17,16 +17,14 @@
 package com.github.vase4kin.timetravelmachine.model
 
 import androidx.annotation.Keep
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 
 @Keep
-class TimeTravelEvent(val type: String? = null) {
-    val eventType: TimeTravelMachine.EventType
-        get() {
-            return if (type == null) {
-                TimeTravelMachine.EventType.NO_EVENT
-            } else {
-                TimeTravelMachine.EventType.valueOf(type)
-            }
-        }
+data class TimeTravelEvent(
+        val title: String,
+        val description: String,
+        @field:JvmField
+        val isDonate: Boolean
+) {
+    constructor(
+    ) : this("", "", false)
 }

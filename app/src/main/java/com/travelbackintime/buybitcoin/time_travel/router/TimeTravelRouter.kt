@@ -18,12 +18,12 @@ package com.travelbackintime.buybitcoin.time_travel.router
 
 import androidx.appcompat.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.maxDate
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.minDate
 import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
 import com.travelbackintime.buybitcoin.error.view.ErrorFragment
 import com.travelbackintime.buybitcoin.loading.LoadingFragment
-import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.time_travel.view.InvestMoneyBottomSheetDialog
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
 import com.travelbackintime.buybitcoin.utils.addFragmentSlideTransitions
@@ -31,7 +31,7 @@ import java.util.*
 import javax.inject.Inject
 
 interface TimeTravelRouter {
-    fun openLoadingFragment(result: TimeTravelResult)
+    fun openLoadingFragment(event: TimeTravelMachine.Event)
     fun showAmountDialog()
     fun showSetDateDialog()
     fun openErrorFragment()
@@ -63,8 +63,8 @@ class TimeTravelRouterImpl @Inject constructor(
         dateDialog.show(activity.supportFragmentManager, DatePickerDialog::class.java.name)
     }
 
-    override fun openLoadingFragment(result: TimeTravelResult) {
-        val fragment = LoadingFragment.create(result)
+    override fun openLoadingFragment(event: TimeTravelMachine.Event) {
+        val fragment = LoadingFragment.create(event)
         addFragmentSlideTransitions(fragment, activity.applicationContext)
         activity.supportFragmentManager
                 .beginTransaction()

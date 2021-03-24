@@ -34,12 +34,6 @@
     <string name="error_set_amount_empty">Come on, dude! We give you a once-in-a-lifetime opportunity and you can\'t even put a correct value in the field?</string>
     <string name="error_set_amount_zero">You gotta be kidding us! Put at least one %s!</string>
     <string name="error_set_amount_rich">Sure you need this? Looks like money is not a problem for you.</string>
-    <string name="result_title_1">That would be so easy, right? We can\'t help you, your future is whatever you make it.</string>
-    <string name="result_title_2">Hey! Take it easy, dude. You went too far in the past, Bitcoin hadn\'t been invented yet.</string>
-    <string name="result_title_3">Bitcoin price is basically nothing now. Anyway, give yourself a big hand, nobody got as close as you, my friend. Try to put the dates after 18th of July 2010.</string>
-    <string name="result_title_4">Hello, Satoshi. It\'s been a while. We\'ve finally found you.</string>
-    <string name="result_title_5">Hey, Laszlo. How was that pizza? Worth it?</string>
-    <string name="donate_text">How\'s it going, time traveller? With good luck and proper investment, you should\'ve become filthy rich already. Wanna say hi to the app developers and help them make their dreams come true (we\'re all wannabe caretakers of some tropical island)?</string>
     <string name="donate_button">Copy BTC wallet address</string>
     <string name="donate_copy_label">BTC wallet address</string>
     <string name="donate_toast">BTC wallet has been copied</string>
@@ -52,7 +46,7 @@
     <string name="result_invested_money_title">Invested money</string>
     <string name="result_profit_money_title">Profit money</string>
     <string name="url_google_play">http://play.google.com/store/apps/details?id=%s</string>
-    <string name="text_share">Hey, what’s up? I just travelled back to %1$s and bought some Bitcoins! Now I’m exorbitantly rich with my %2$s! Check this app out %3$s</string>
+    <string name="text_share">Hey, what’s up? I just travelled back in time to %1$s and bought some Bitcoins for %2$s! Now I’m exorbitantly rich with my %3$s! Check this app out %4$s</string>
     <string name="text_hashtag">backintimebuybitcoinapp</string>
     <string name="retry_title">Great Scott!</string>
     <string name="retry_button_text">Retry</string>

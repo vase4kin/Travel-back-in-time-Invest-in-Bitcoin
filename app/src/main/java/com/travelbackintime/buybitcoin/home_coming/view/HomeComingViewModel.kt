@@ -18,14 +18,19 @@ package com.travelbackintime.buybitcoin.home_coming.view
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter
 import com.travelbackintime.buybitcoin.home_coming.share.ShareHelper
 import com.travelbackintime.buybitcoin.remote_config.RemoteConfigService
-import com.travelbackintime.buybitcoin.time_travel.entity.TimeTravelResult
 import com.travelbackintime.buybitcoin.tracker.Tracker
-import com.travelbackintime.buybitcoin.utils.*
+import com.travelbackintime.buybitcoin.utils.ClipboardUtils
+import com.travelbackintime.buybitcoin.utils.FormatterUtils
+import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
+import com.travelbackintime.buybitcoin.utils.ToastUtils
 import javax.inject.Inject
 
 class HomeComingViewModel @Inject constructor(
@@ -36,58 +41,47 @@ class HomeComingViewModel @Inject constructor(
         private val formatterUtils: FormatterUtils,
         private val resourcesProviderUtils: ResourcesProviderUtils,
         private val toastUtils: ToastUtils,
-        private val clipboardUtils: ClipboardUtils) {
+        private val clipboardUtils: ClipboardUtils
+) : LifecycleObserver {
 
     val isShareViewVisible = ObservableBoolean(false)
     val isParamViewVisible = ObservableBoolean(false)
     val isProfitViewVisible = ObservableBoolean(false)
-    val isInfoTextViewVisible = ObservableBoolean(false)
     val isDonateViewVisible = ObservableBoolean(false)
-    val infoText = ObservableField<String>().onChanged {
-        isInfoTextViewVisible.set(true)
-    }
+    val title = ObservableField<String>()
+    val description = ObservableField<String>()
     val profitMoneyText = ObservableField<String>()
     val investedMoneyText = ObservableField<String>()
     val monthText = ObservableField<String>()
     val yearText = ObservableField<String>()
 
     val isAdsEnabled: Boolean
-        get() = result?.eventType != TimeTravelMachine.EventType.HELLO_SATOSHI && configService.isAdsEnabled
+        get() = event !is TimeTravelMachine.Event.RealWorldEvent && configService.isAdsEnabled
 
-    var result: TimeTravelResult? = null
+    var event: TimeTravelMachine.Event? = null
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun handleOnCreate() {
-        val result = this.result ?: return
-        when (result.eventType) {
-            TimeTravelMachine.EventType.NO_EVENT -> {
-                processResult(result)
-            }
-            TimeTravelMachine.EventType.HELLO_SATOSHI -> {
-                showInfoText(R.string.result_title_4)
-                isDonateViewVisible.set(true)
-                tracker.trackUserGetsToSatoshi()
-            }
-            TimeTravelMachine.EventType.PIZZA_LOVER -> {
-                showInfoText(R.string.result_title_5)
-                tracker.trackUserGetsToPizzaLover()
-            }
+        val event = this.event ?: return
+        when (event) {
+            is TimeTravelMachine.Event.RealWorldEvent -> processRealWorldEvent(event)
+            is TimeTravelMachine.Event.TimeTravelEvent -> processTimeTravelEvent(event)
         }
     }
 
-    private fun processResult(result: TimeTravelResult) {
-        when (result.status) {
-            TimeTravelMachine.BitcoinStatus.EXIST -> {
-                setTimeMachineDisplay(result)
-                isShareViewVisible.set(true)
-                isParamViewVisible.set(true)
-                isProfitViewVisible.set(true)
-                tracker.trackUserGetsToExist()
-            }
-            TimeTravelMachine.BitcoinStatus.BASICALLY_NOTHING -> {
-                showInfoText(R.string.result_title_3)
-                tracker.trackUserGetsToBasicallyNothing()
-            }
-        }
+    private fun processRealWorldEvent(event: TimeTravelMachine.Event.RealWorldEvent) {
+        title.set(event.title)
+        description.set(event.description)
+        isDonateViewVisible.set(event.isDonate)
+        tracker.trackUserGetsToSatoshi() // FIXME
+    }
+
+    private fun processTimeTravelEvent(event: TimeTravelMachine.Event.TimeTravelEvent) {
+        setTimeMachineDisplay(event)
+        isShareViewVisible.set(true)
+        isParamViewVisible.set(true)
+        isProfitViewVisible.set(true)
+        tracker.trackUserGetsToExist()
     }
 
     fun onStartOver() {
@@ -96,9 +90,11 @@ class HomeComingViewModel @Inject constructor(
     }
 
     fun onShareWithFriends() {
-        val result = this.result ?: return
-        shareHelper.shareWithFriends(result)
-        tracker.trackUserSharesWithFriends()
+        val event = event
+        if (event is TimeTravelMachine.Event.TimeTravelEvent) {
+            shareHelper.shareWithFriends(event)
+            tracker.trackUserSharesWithFriends()
+        }
     }
 
     fun onShareOnFacebook() {
@@ -107,9 +103,11 @@ class HomeComingViewModel @Inject constructor(
     }
 
     fun onShareOnTwitter() {
-        val result = this.result ?: return
-        shareHelper.shareToTwitter(result)
-        tracker.trackUserSharesOnTwitter()
+        val event = event
+        if (event is TimeTravelMachine.Event.TimeTravelEvent) {
+            shareHelper.shareToTwitter(event)
+            tracker.trackUserSharesOnTwitter()
+        }
     }
 
     fun onCopyWalletAddress() {
@@ -124,19 +122,15 @@ class HomeComingViewModel @Inject constructor(
         router.openPoweredByCoinDeskUrl()
     }
 
-    private fun setTimeMachineDisplay(result: TimeTravelResult) {
-        val profitMoney = formatterUtils.formatPriceAsOnlyDigits(result.profitMoney)
-        val investedMoney = formatterUtils.formatPriceAsOnlyDigits(result.investedMoney)
-        val date = result.timeToTravel
-        val month = formatterUtils.formatMonth(date!!)
+    private fun setTimeMachineDisplay(event: TimeTravelMachine.Event.TimeTravelEvent) {
+        val profitMoney = formatterUtils.formatPriceAsOnlyDigits(event.profitMoney)
+        val investedMoney = formatterUtils.formatPriceAsOnlyDigits(event.investedMoney)
+        val date = event.timeToTravel
+        val month = formatterUtils.formatMonth(date)
         val year = formatterUtils.formatYear(date)
         profitMoneyText.set(profitMoney)
         investedMoneyText.set(investedMoney)
         monthText.set(month)
         yearText.set(year)
-    }
-
-    private fun showInfoText(resourceId: Int) {
-        infoText.set(resourcesProviderUtils.getString(resourceId))
     }
 }
