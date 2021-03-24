@@ -21,7 +21,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
-import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
+import com.travelbackintime.buybitcoin.router.InternalRouter
 import javax.inject.Inject
 
 interface HomeComingRouter {
@@ -29,19 +29,15 @@ interface HomeComingRouter {
     fun openPoweredByCoinDeskUrl()
 }
 
-class HomeComingRouterImpl @Inject constructor(fragment: HomeComingFragment) : HomeComingRouter {
+class HomeComingRouterImpl @Inject constructor(
+        private val fragment: HomeComingFragment,
+        private val internalRouter: InternalRouter
+) : HomeComingRouter {
 
     private val activity = fragment.activity as AppCompatActivity
 
     override fun openTimeTravelFragment() {
-        val fragmentManager = activity.supportFragmentManager
-        if (fragmentManager.backStackEntryCount > 0) {
-            fragmentManager.popBackStackImmediate()
-        }
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.container, TimeTravelFragment.create())
-                .commit()
+        internalRouter.openTimeTravelFromHomeComing()
     }
 
     override fun openPoweredByCoinDeskUrl() {

@@ -21,20 +21,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.travelbackintime.buybitcoin.home_coming.view.EXTRA_RESULT
-import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
-import com.travelbackintime.buybitcoin.utils.addFragmentSlideTransitions
+import com.travelbackintime.buybitcoin.router.InternalRouter
+import dagger.android.support.DaggerFragment
 import pl.droidsonroids.gif.GifDrawable
+import javax.inject.Inject
 
 private const val LOOP_COUNT = 1
 private const val SPEED: Float = 0.8f
 
-class LoadingFragment : Fragment() {
+class LoadingFragment : DaggerFragment() {
 
     companion object {
         fun create(event: TimeTravelMachine.Event): Fragment {
@@ -45,6 +45,9 @@ class LoadingFragment : Fragment() {
             return loadingFragment
         }
     }
+
+    @Inject
+    lateinit var internalRouter: InternalRouter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -73,19 +76,9 @@ class LoadingFragment : Fragment() {
         val args = arguments
         if (args != null) {
             val event: TimeTravelMachine.Event = args.getParcelable(EXTRA_RESULT) ?: return
-            val homeComingFragment = HomeComingFragment.create(event)
-            val activity = activity as AppCompatActivity
-            addFragmentSlideTransitions(homeComingFragment, activity.applicationContext)
-            val fragmentManager = activity.supportFragmentManager
-            fragmentManager
-                    .beginTransaction()
-                    .remove(this)
-                    .commit()
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.container, homeComingFragment)
-                    .addToBackStack(null)
-                    .commit()
+            internalRouter.openHomeComingFromLoading(
+                    event = event
+            )
         }
     }
 }

@@ -36,6 +36,6 @@ private fun addFragmentTransitions(fragment: Fragment, context: Context, enterTr
         fragment.enterTransition = enterTransition
         val exitTransition = TransitionInflater.from(context).inflateTransition(exitTransitionRes)
         fragment.exitTransition = exitTransition
-        fragment.allowEnterTransitionOverlap = true
+        fragment.allowEnterTransitionOverlap = false
     }
 }

@@ -16,6 +16,7 @@
 
 package com.travelbackintime.buybitcoin.dagger
 
+import com.travelbackintime.buybitcoin.time_travel.dagger.TimeTravelActivityBindingModule
 import com.travelbackintime.buybitcoin.time_travel.dagger.TimeTravelActivityModule
 import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity
 import dagger.Module
@@ -25,6 +26,6 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBindingModule {
 
     @ActivityScoped
-    @ContributesAndroidInjector(modules = [TimeTravelActivityModule::class])
+    @ContributesAndroidInjector(modules = [TimeTravelActivityBindingModule::class, TimeTravelActivityModule::class])
     abstract fun timeTravelActivity(): TimeTravelActivity
 }
