@@ -73,7 +73,7 @@ class HomeComingViewModel @Inject constructor(
         title.set(event.title)
         description.set(event.description)
         isDonateViewVisible.set(event.isDonate)
-        tracker.trackUserGetsToSatoshi() // FIXME
+        tracker.trackUserGetsToRealWorldEvent(event.title)
     }
 
     private fun processTimeTravelEvent(event: TimeTravelMachine.Event.TimeTravelEvent) {
@@ -81,7 +81,11 @@ class HomeComingViewModel @Inject constructor(
         isShareViewVisible.set(true)
         isParamViewVisible.set(true)
         isProfitViewVisible.set(true)
-        tracker.trackUserGetsToExist()
+        tracker.trackUserGetsToTimeTravelEvent(
+                investedMoney = event.investedMoney,
+                profitMoney = event.profitMoney,
+                timeToTravel = event.timeToTravel
+        )
     }
 
     fun onStartOver() {
