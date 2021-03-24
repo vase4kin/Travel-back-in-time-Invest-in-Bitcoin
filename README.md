@@ -5,9 +5,9 @@
 
 <img src="https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/dev/screenshots/feature-graphic.png">
 
-# Back in time: Buy Bitcoin
+# Travel back in time: Buy Bitcoin
 
-This GitHub repository hosts the code for the Android application [Back in time: Buy Bitcoin](https://play.google.com/store/apps/details?id=com.travelbackintime.buybitcoin).
+This GitHub repository hosts the code for the Android application [Travel back in time: Buy Bitcoin](https://play.google.com/store/apps/details?id=com.travelbackintime.buybitcoin).
 
 The app is written on [Kotlin](https://kotlinlang.org/) using [Data Binding Library](https://developer.android.com/topic/libraries/data-binding/).
 

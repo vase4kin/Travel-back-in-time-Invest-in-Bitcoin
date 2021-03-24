@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="app_name">Back in time: Buy Bitcoin</string>
+    <string name="app_name">Travel back in time: Buy Bitcoin</string>
 
     <string name="app_description">Time traveling is just too dangerous. Better that I devote myself to study the other great mystery of the universe: women! © Dr. Emmett Brown</string>
     <string name="button_set_date_title">Set date to travel</string>
