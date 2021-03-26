@@ -1,7 +1,7 @@
 
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Circle CI](https://circleci.com/gh/vase4kin/Back-in-time-Buy-bitcoin/tree/dev.svg?style=shield)](https://circleci.com/gh/vase4kin/Back-in-time-Buy-bitcoin/tree/dev)
-[![Release](https://img.shields.io/badge/release-1.0.7-blue.svg)](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/releases/latest)
+[![Release](https://img.shields.io/badge/release-1.1.0-blue.svg)](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/releases/latest)
 
 <img src="https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/dev/screenshots/feature-graphic.png">
 
