@@ -28,7 +28,7 @@ class InternalRouterImpl(
         activity.supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.container, fragment)
-                .commit()
+                .commitAllowingStateLoss()
     }
 
     override fun openError() {
@@ -38,7 +38,7 @@ class InternalRouterImpl(
                 .beginTransaction()
                 .add(R.id.container, fragment)
                 .addToBackStack(null)
-                .commit()
+                .commitAllowingStateLoss()
     }
 
     override fun closeError() {
@@ -52,7 +52,7 @@ class InternalRouterImpl(
                 .beginTransaction()
                 .add(R.id.container, fragment)
                 .addToBackStack(null)
-                .commit()
+                .commitAllowingStateLoss()
     }
 
     override fun openHomeComingFromLoading(event: TimeTravelMachine.Event) {
@@ -64,7 +64,7 @@ class InternalRouterImpl(
                 .beginTransaction()
                 .add(R.id.container, homeComingFragment)
                 .addToBackStack(null)
-                .commit()
+                .commitAllowingStateLoss()
     }
 
     override fun openTimeTravelFromHomeComing() {
@@ -73,6 +73,6 @@ class InternalRouterImpl(
         fragmentManager
                 .beginTransaction()
                 .replace(R.id.container, TimeTravelFragment.create())
-                .commit()
+                .commitAllowingStateLoss()
     }
 }
