@@ -15,14 +15,14 @@
   -->
 
 <resources>
-    <string name="app_name">Travel back in time: Buy Bitcoin</string>
+    <string name="app_name">Travel back in time: Invest in Bitcoin</string>
 
     <string name="app_description">Time traveling is just too dangerous. Better that I devote myself to study the other great mystery of the universe: women! © Dr. Emmett Brown</string>
     <string name="button_set_date_title">Set date to travel</string>
     <string name="button_set_amount_title">Set money to invest</string>
     <string name="button_share_title">Share with friends</string>
     <string name="button_start_over_title">Start over</string>
-    <string name="button_buy_bitcoin_title">Buy bitcoin</string>
+    <string name="button_buy_bitcoin_title">Invest in bitcoin</string>
     <string name="button_confirm_amount_title">OK</string>
     <string name="button_confirm_amount_title_1">$1</string>
     <string name="button_confirm_amount_title_10">$10.00</string>
@@ -46,8 +46,8 @@
     <string name="result_invested_money_title">Invested money</string>
     <string name="result_profit_money_title">Profit money</string>
     <string name="url_google_play">http://play.google.com/store/apps/details?id=%s</string>
-    <string name="text_share">Hey, what’s up? I just travelled back in time to %1$s and bought some Bitcoins for %2$s! Now I’m exorbitantly rich with my %3$s! Check this app out %4$s</string>
-    <string name="text_hashtag">travelbackintimebuybitcoinapp</string>
+    <string name="text_share">Hey, what’s up? I just travelled back in time to %1$s and invested in Bitcoin for %2$s! Now I’m exorbitantly rich with my %3$s! Check this app out %4$s</string>
+    <string name="text_hashtag">travelbackintimeinvestinbitcoinapp</string>
     <string name="retry_title">Great Scott!</string>
     <string name="retry_button_text">Retry</string>
     <string name="retry_description">Nowadays time machine only needs to have a good internet connection instead of libyan plutonium.\nHappy time travelling!</string>
