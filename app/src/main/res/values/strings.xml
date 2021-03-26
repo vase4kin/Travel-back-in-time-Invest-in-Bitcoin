@@ -46,7 +46,7 @@
     <string name="result_invested_money_title">Invested money</string>
     <string name="result_profit_money_title">Profit money</string>
     <string name="url_google_play">http://play.google.com/store/apps/details?id=%s</string>
-    <string name="text_share">Hey, what’s up? I just travelled back in time to %1$s and invested in Bitcoin for %2$s! Now I’m exorbitantly rich with my %3$s! Check this app out %4$s</string>
+    <string name="text_share">Hey, what’s up? I just travelled back in time to %1$s and invested %2$s in Bitcoin! Now I’m exorbitantly rich with my %3$s! Check this app out %4$s</string>
     <string name="text_hashtag">travelbackintimeinvestinbitcoinapp</string>
     <string name="retry_title">Great Scott!</string>
     <string name="retry_button_text">Retry</string>
