@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.remote_config
+package com.github.vase4kin.coindesk.remote_config
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
