@@ -3,20 +3,6 @@ plugins {
     id 'kotlin-android'
 }
 
-android {
-    compileSdkVersion rootProject.compileSdkVersion
-
-    defaultConfig {
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-}
-
 dependencies {
     implementation project(":libraries:coindesk-service")
 }

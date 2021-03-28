@@ -21,14 +21,10 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
     defaultConfig {
         applicationId 'com.travelbackintime.buybitcoin'
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
         versionCode rootProject.versionCode
         versionName rootProject.versionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
@@ -55,11 +51,6 @@ android {
     }
 
     productFlavors {
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     dataBinding {

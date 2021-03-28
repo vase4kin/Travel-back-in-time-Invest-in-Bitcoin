@@ -45,6 +45,37 @@ allprojects {
     }
 }
 
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty('android')) {
+
+            android {
+                buildToolsVersion rootProject.buildToolsVersion
+                compileSdkVersion rootProject.compileSdkVersion
+
+                defaultConfig {
+                    minSdkVersion rootProject.minSdkVersion
+                    targetSdkVersion rootProject.targetSdkVersion
+                    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+                    consumerProguardFiles "consumer-rules.pro"
+                }
+
+                buildTypes {
+                    release {}
+                    debug {
+                        testCoverageEnabled true
+                    }
+                }
+
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_1_8
+                    targetCompatibility JavaVersion.VERSION_1_8
+                }
+            }
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
