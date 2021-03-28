@@ -22,6 +22,8 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.remote_config.RemoteConfigService
 import com.github.vase4kin.coindesk.remote_config.RemoteConfigServiceImpl
 import com.github.vase4kin.coindesk.service.CoinDeskService
+import com.github.vase4kin.coindesk.tracker.Tracker
+import com.github.vase4kin.coindesk.tracker.TrackerImpl
 import com.github.vase4kin.repository.Repository
 import com.github.vase4kin.repository.RepositoryImpl
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
@@ -30,8 +32,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import com.travelbackintime.buybitcoin.tracker.Tracker
-import com.travelbackintime.buybitcoin.tracker.TrackerImpl
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils

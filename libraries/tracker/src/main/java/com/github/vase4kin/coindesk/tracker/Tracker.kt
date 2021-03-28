@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.tracker
+package com.github.vase4kin.coindesk.tracker
 
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics

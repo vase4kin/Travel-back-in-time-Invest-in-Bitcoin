@@ -22,10 +22,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.coindesk.tracker.Tracker
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouter
-import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import com.travelbackintime.buybitcoin.utils.onChanged

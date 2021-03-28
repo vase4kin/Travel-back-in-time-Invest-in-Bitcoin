@@ -23,10 +23,10 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.remote_config.RemoteConfigService
+import com.github.vase4kin.coindesk.tracker.Tracker
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter
 import com.travelbackintime.buybitcoin.home_coming.share.ShareHelper
-import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
