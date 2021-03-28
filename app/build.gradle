@@ -107,11 +107,11 @@ dependencies {
     implementation project(":libraries:timetravelmachine")
     implementation project(":libraries:repository")
     implementation project(":libraries:coindesk-service")
+    implementation project(":libraries:remote-config")
 }
 
 dependencies {
     // Firebase dependencies
-    // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:26.7.0')
 
     // Declare the dependencies for the Crashlytics and Analytics libraries

@@ -19,6 +19,8 @@ package com.travelbackintime.buybitcoin.dagger
 import android.app.Application
 import bitcoin.backintime.com.backintimebuybitcoin.BuildConfig
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.coindesk.remote_config.RemoteConfigService
+import com.github.vase4kin.coindesk.remote_config.RemoteConfigServiceImpl
 import com.github.vase4kin.coindesk.service.CoinDeskService
 import com.github.vase4kin.repository.Repository
 import com.github.vase4kin.repository.RepositoryImpl
@@ -28,8 +30,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import com.travelbackintime.buybitcoin.remote_config.RemoteConfigService
-import com.travelbackintime.buybitcoin.remote_config.RemoteConfigServiceImpl
 import com.travelbackintime.buybitcoin.tracker.Tracker
 import com.travelbackintime.buybitcoin.tracker.TrackerImpl
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils
