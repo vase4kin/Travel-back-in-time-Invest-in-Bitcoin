@@ -16,8 +16,8 @@
 
 package com.travelbackintime.buybitcoin.error.view
 
+import com.github.vase4kin.coindesk.tracker.Tracker
 import com.travelbackintime.buybitcoin.error.router.ErrorRouter
-import com.travelbackintime.buybitcoin.tracker.Tracker
 import javax.inject.Inject
 
 class ErrorViewModel @Inject constructor(
