@@ -24,6 +24,8 @@ import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigServiceImpl
 import com.github.vase4kin.coindesk.service.CoinDeskService
 import com.github.vase4kin.coindesk.tracker.Tracker
 import com.github.vase4kin.coindesk.tracker.TrackerImpl
+import com.github.vase4kin.database.LocalFirebaseDatabase
+import com.github.vase4kin.database.LocalFirebaseDatabaseImpl
 import com.github.vase4kin.repository.Repository
 import com.github.vase4kin.repository.RepositoryImpl
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
@@ -56,11 +58,17 @@ class AppModule {
     @Singleton
     @Provides
     fun providesTimeTravelMachine(
-        database: FirebaseDatabase,
         repository: Repository,
         app: Application
     ): TimeTravelMachine {
-        return TimeTravelMachineImpl(database, repository, app.resources)
+        return TimeTravelMachineImpl(repository, app.resources)
+    }
+
+    @Provides
+    fun provideLocaleDatabase(
+        database: FirebaseDatabase
+    ): LocalFirebaseDatabase {
+        return LocalFirebaseDatabaseImpl(database)
     }
 
     @Provides
@@ -91,7 +99,7 @@ class AppModule {
     fun providesFirebaseRemoteConfig(): FirebaseRemoteConfig {
         val firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
         val configSettings = FirebaseRemoteConfigSettings.Builder()
-                .build()
+            .build()
         firebaseRemoteConfig.setConfigSettingsAsync(configSettings)
         firebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
         return FirebaseRemoteConfig.getInstance()
@@ -134,16 +142,19 @@ class AppModule {
     @Provides
     fun provideCoinDeskService(): CoinDeskService {
         return Retrofit.Builder()
-                .baseUrl(CoinDeskService.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(OkHttpClient())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-                .create(CoinDeskService::class.java)
+            .baseUrl(CoinDeskService.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+            .create(CoinDeskService::class.java)
     }
 
     @Provides
-    fun provideRepository(service: CoinDeskService): Repository {
-        return RepositoryImpl(service)
+    fun provideRepository(
+        service: CoinDeskService,
+        localFirebaseDatabase: LocalFirebaseDatabase
+    ): Repository {
+        return RepositoryImpl(service, localFirebaseDatabase)
     }
 }

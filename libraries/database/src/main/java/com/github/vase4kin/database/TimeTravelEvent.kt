@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.vase4kin.timetravelmachine.model
+package com.github.vase4kin.database
 
 import androidx.annotation.Keep
 
