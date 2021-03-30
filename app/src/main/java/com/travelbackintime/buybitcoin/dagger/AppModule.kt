@@ -19,8 +19,8 @@ package com.travelbackintime.buybitcoin.dagger
 import android.app.Application
 import bitcoin.backintime.com.backintimebuybitcoin.BuildConfig
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.github.vase4kin.coindesk.remote_config.RemoteConfigService
-import com.github.vase4kin.coindesk.remote_config.RemoteConfigServiceImpl
+import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
+import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigServiceImpl
 import com.github.vase4kin.coindesk.service.CoinDeskService
 import com.github.vase4kin.coindesk.tracker.Tracker
 import com.github.vase4kin.coindesk.tracker.TrackerImpl

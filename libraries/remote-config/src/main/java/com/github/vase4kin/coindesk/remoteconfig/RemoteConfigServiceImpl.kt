@@ -1,12 +1,14 @@
-package com.github.vase4kin.coindesk.remote_config
+package com.github.vase4kin.coindesk.remoteconfig
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 
 private const val CONFIG_VALUE_ADS_ENABLED = "ads_enabled"
 
-class RemoteConfigServiceImpl(private val firebaseRemoteConfig: FirebaseRemoteConfig,
-                              private val cacheSecs: Long) : RemoteConfigService {
+class RemoteConfigServiceImpl(
+    private val firebaseRemoteConfig: FirebaseRemoteConfig,
+    private val cacheSecs: Long
+) : RemoteConfigService {
 
     override val isAdsEnabled: Boolean
         get() = firebaseRemoteConfig.getBoolean(CONFIG_VALUE_ADS_ENABLED)

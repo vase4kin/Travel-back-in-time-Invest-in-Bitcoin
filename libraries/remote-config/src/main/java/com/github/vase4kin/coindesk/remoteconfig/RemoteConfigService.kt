@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.vase4kin.coindesk.remote_config
+package com.github.vase4kin.coindesk.remoteconfig
 
 interface RemoteConfigService {
     val isAdsEnabled: Boolean
