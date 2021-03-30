@@ -99,6 +99,7 @@ dependencies {
     implementation project(":libraries:coindesk-service")
     implementation project(":libraries:remote-config")
     implementation project(":libraries:tracker")
+    implementation project(":libraries:database")
 }
 
 dependencies {
