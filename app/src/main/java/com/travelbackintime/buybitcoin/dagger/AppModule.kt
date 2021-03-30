@@ -43,17 +43,21 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 import javax.inject.Singleton
+
+private const val DEBUG_CACHE_SECS = 30L
+private const val PROD_CACHE_SECS = 43200L
 
 @Module
 class AppModule {
 
     @Singleton
     @Provides
-    fun providesTimeTravelMachine(database: FirebaseDatabase,
-                                  repository: Repository,
-                                  app: Application
+    fun providesTimeTravelMachine(
+            database: FirebaseDatabase,
+            repository: Repository,
+            app: Application
     ): TimeTravelMachine {
         return TimeTravelMachineImpl(database, repository, app.resources)
     }
@@ -95,7 +99,7 @@ class AppModule {
     @Singleton
     @Provides
     fun providesRemoteConfigService(firebaseRemoteConfig: FirebaseRemoteConfig): RemoteConfigService {
-        val cacheSecs = if (BuildConfig.DEBUG) 30L else 43200L
+        val cacheSecs = if (BuildConfig.DEBUG) DEBUG_CACHE_SECS else PROD_CACHE_SECS
         return RemoteConfigServiceImpl(firebaseRemoteConfig, cacheSecs)
     }
 

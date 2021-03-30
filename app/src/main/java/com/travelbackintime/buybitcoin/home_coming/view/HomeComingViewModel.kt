@@ -34,14 +34,14 @@ import com.travelbackintime.buybitcoin.utils.ToastUtils
 import javax.inject.Inject
 
 class HomeComingViewModel @Inject constructor(
-        private val router: HomeComingRouter,
-        private val shareHelper: ShareHelper,
-        private val tracker: Tracker,
-        private val configService: RemoteConfigService,
-        private val formatterUtils: FormatterUtils,
-        private val resourcesProviderUtils: ResourcesProviderUtils,
-        private val toastUtils: ToastUtils,
-        private val clipboardUtils: ClipboardUtils
+    private val router: HomeComingRouter,
+    private val shareHelper: ShareHelper,
+    private val tracker: Tracker,
+    private val configService: RemoteConfigService,
+    private val formatterUtils: FormatterUtils,
+    private val resourcesProviderUtils: ResourcesProviderUtils,
+    private val toastUtils: ToastUtils,
+    private val clipboardUtils: ClipboardUtils
 ) : LifecycleObserver {
 
     val isShareViewVisible = ObservableBoolean(false)

@@ -20,7 +20,7 @@ interface InternalRouter {
 }
 
 class InternalRouterImpl(
-        private val activity: TimeTravelActivity
+    private val activity: TimeTravelActivity
 ) : InternalRouter {
     override fun openTimeTravelFromSplash() {
         val fragment = TimeTravelFragment.create()

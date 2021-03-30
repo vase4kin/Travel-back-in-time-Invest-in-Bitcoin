@@ -30,7 +30,12 @@ fun addFragmentFadeTransitions(fragment: Fragment, context: Context) {
     addFragmentTransitions(fragment, context, R.transition.fragment_fade_in, R.transition.fragment_fade_out)
 }
 
-private fun addFragmentTransitions(fragment: Fragment, context: Context, enterTransitionRes: Int, exitTransitionRes: Int) {
+private fun addFragmentTransitions(
+    fragment: Fragment,
+    context: Context,
+    enterTransitionRes: Int,
+    exitTransitionRes: Int
+) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         val enterTransition = TransitionInflater.from(context).inflateTransition(enterTransitionRes)
         fragment.enterTransition = enterTransition

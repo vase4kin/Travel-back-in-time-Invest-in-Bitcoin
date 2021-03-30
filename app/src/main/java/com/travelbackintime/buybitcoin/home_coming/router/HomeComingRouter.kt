@@ -30,8 +30,8 @@ interface HomeComingRouter {
 }
 
 class HomeComingRouterImpl @Inject constructor(
-        private val fragment: HomeComingFragment,
-        private val internalRouter: InternalRouter
+    private val fragment: HomeComingFragment,
+    private val internalRouter: InternalRouter
 ) : HomeComingRouter {
 
     private val activity = fragment.activity as AppCompatActivity
@@ -41,7 +41,10 @@ class HomeComingRouterImpl @Inject constructor(
     }
 
     override fun openPoweredByCoinDeskUrl() {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(activity.resources.getString(R.string.powered_by_coindesk_url)))
+        val browserIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(activity.resources.getString(R.string.powered_by_coindesk_url))
+        )
         activity.startActivity(browserIntent)
     }
 }

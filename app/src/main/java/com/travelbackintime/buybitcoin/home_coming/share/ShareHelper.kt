@@ -20,8 +20,8 @@ interface ShareHelper {
 }
 
 class ShareHelperImpl @Inject constructor(
-        fragment: HomeComingFragment,
-        private val formatterUtils: FormatterUtils
+    fragment: HomeComingFragment,
+    private val formatterUtils: FormatterUtils
 ) : ShareHelper {
 
     private val activity = fragment.activity as AppCompatActivity
@@ -63,6 +63,10 @@ class ShareHelperImpl @Inject constructor(
         val profitValue = event.profitMoney
         val investedValue = formatterUtils.formatPrice(event.investedMoney)
         val profit = formatterUtils.formatPrice(profitValue)
-        return activity.getString(R.string.text_share, formatterUtils.formatDateToShareText(date), investedValue, profit, googlePlayLink)
+        return activity.getString(
+            R.string.text_share,
+            formatterUtils.formatDateToShareText(date),
+            investedValue, profit, googlePlayLink
+        )
     }
 }

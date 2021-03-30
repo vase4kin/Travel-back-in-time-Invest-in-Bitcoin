@@ -21,8 +21,9 @@ import com.travelbackintime.buybitcoin.error.router.ErrorRouter
 import javax.inject.Inject
 
 class ErrorViewModel @Inject constructor(
-        private val tracker: Tracker,
-        private val router: ErrorRouter) {
+    private val tracker: Tracker,
+    private val router: ErrorRouter
+) {
 
     fun onRetryButtonClick() {
         tracker.trackUserRetries()

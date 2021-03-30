@@ -34,24 +34,29 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 private const val DEFAULT_INVESTED_MONEY: Double = 0.0
 
 class TimeTravelViewModel @Inject constructor(
-        private val tracker: Tracker,
-        private val formatterUtils: FormatterUtils,
-        private val timeTravelMachine: TimeTravelMachine,
-        private val router: TimeTravelRouter,
-        resourcesProviderUtils: ResourcesProviderUtils
+    private val tracker: Tracker,
+    private val formatterUtils: FormatterUtils,
+    private val timeTravelMachine: TimeTravelMachine,
+    private val router: TimeTravelRouter,
+    resourcesProviderUtils: ResourcesProviderUtils
 ) : LifecycleObserver {
 
     val isBuyBitcoinButtonEnabled = ObservableBoolean(false)
-    val timeToTravelText = ObservableField(resourcesProviderUtils.getString(R.string.button_set_date_title)).onChanged {
-        enableBuyBitcoinButton()
-    }
-    val investedMoneyText = ObservableField(resourcesProviderUtils.getString(R.string.button_set_amount_title)).onChanged {
+    val timeToTravelText =
+        ObservableField(resourcesProviderUtils.getString(R.string.button_set_date_title)).onChanged {
+            enableBuyBitcoinButton()
+        }
+    val investedMoneyText = ObservableField(
+        resourcesProviderUtils.getString(R.string.button_set_amount_title)
+    ).onChanged {
         enableBuyBitcoinButton()
     }
 

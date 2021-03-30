@@ -17,7 +17,8 @@
 package com.travelbackintime.buybitcoin.utils
 
 import java.text.NumberFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class FormatterUtils(private val numberFormat: NumberFormat) {
 
