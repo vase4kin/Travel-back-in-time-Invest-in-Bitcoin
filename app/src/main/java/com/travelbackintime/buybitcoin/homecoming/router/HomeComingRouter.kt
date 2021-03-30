@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.home_coming.router
+package com.travelbackintime.buybitcoin.homecoming.router
 
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
+import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.router.InternalRouter
 import javax.inject.Inject
 
@@ -30,8 +30,8 @@ interface HomeComingRouter {
 }
 
 class HomeComingRouterImpl @Inject constructor(
-        private val fragment: HomeComingFragment,
-        private val internalRouter: InternalRouter
+    private val fragment: HomeComingFragment,
+    private val internalRouter: InternalRouter
 ) : HomeComingRouter {
 
     private val activity = fragment.activity as AppCompatActivity
@@ -41,7 +41,10 @@ class HomeComingRouterImpl @Inject constructor(
     }
 
     override fun openPoweredByCoinDeskUrl() {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(activity.resources.getString(R.string.powered_by_coindesk_url)))
+        val browserIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(activity.resources.getString(R.string.powered_by_coindesk_url))
+        )
         activity.startActivity(browserIntent)
     }
 }

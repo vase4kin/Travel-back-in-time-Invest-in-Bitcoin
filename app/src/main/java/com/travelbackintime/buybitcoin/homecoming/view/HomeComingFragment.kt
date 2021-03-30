@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.home_coming.view
-
+package com.travelbackintime.buybitcoin.homecoming.view
 
 import android.content.Context
 import android.os.Bundle
@@ -49,22 +48,25 @@ class HomeComingFragment : DaggerFragment() {
     @Inject
     lateinit var viewModel: HomeComingViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         val event: TimeTravelMachine.Event = arguments?.getParcelable(EXTRA_RESULT)
-                ?: TimeTravelMachine.Event.RealWorldEvent("", "", false)
+            ?: TimeTravelMachine.Event.RealWorldEvent("", "", false)
         viewModel.event = event
         return provideView(
-                event = event,
-                inflater = inflater,
-                container = container
+            event = event,
+            inflater = inflater,
+            container = container
         )
     }
 
     private fun provideView(
-            event: TimeTravelMachine.Event,
-            inflater: LayoutInflater,
-            container: ViewGroup?
+        event: TimeTravelMachine.Event,
+        inflater: LayoutInflater,
+        container: ViewGroup?
     ): View {
         val viewBinding: ViewBinding = when (event) {
             is TimeTravelMachine.Event.TimeTravelEvent -> {

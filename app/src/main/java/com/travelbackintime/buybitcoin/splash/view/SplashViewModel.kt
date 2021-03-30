@@ -27,7 +27,7 @@ import javax.inject.Inject
 private const val TIMEOUT_SPLASH: Long = 1500
 
 class SplashViewModel @Inject constructor(
-        private val router: SplashRouter
+    private val router: SplashRouter
 ) : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)

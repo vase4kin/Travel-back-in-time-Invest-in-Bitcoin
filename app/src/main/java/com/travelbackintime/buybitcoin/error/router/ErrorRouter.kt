@@ -24,7 +24,7 @@ interface ErrorRouter {
 }
 
 class ErrorRouterImpl @Inject constructor(
-        private val internalRouter: InternalRouter
+    private val internalRouter: InternalRouter
 ) : ErrorRouter {
 
     override fun openTimeTravelFragment() {

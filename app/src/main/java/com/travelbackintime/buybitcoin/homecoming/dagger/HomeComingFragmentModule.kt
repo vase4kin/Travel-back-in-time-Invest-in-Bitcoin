@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.home_coming.dagger
+package com.travelbackintime.buybitcoin.homecoming.dagger
 
-import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter
-import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouterImpl
-import com.travelbackintime.buybitcoin.home_coming.share.ShareHelper
-import com.travelbackintime.buybitcoin.home_coming.share.ShareHelperImpl
+import com.travelbackintime.buybitcoin.homecoming.router.HomeComingRouter
+import com.travelbackintime.buybitcoin.homecoming.router.HomeComingRouterImpl
+import com.travelbackintime.buybitcoin.homecoming.share.ShareHelper
+import com.travelbackintime.buybitcoin.homecoming.share.ShareHelperImpl
 import dagger.Binds
 import dagger.Module
 

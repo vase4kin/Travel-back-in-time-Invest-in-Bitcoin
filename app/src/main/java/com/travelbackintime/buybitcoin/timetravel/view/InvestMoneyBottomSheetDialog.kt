@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel.view
+package com.travelbackintime.buybitcoin.timetravel.view
 
 import android.app.Activity
 import android.app.Dialog
@@ -32,8 +32,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.DaggerAppCompatDialogFragment
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 import javax.inject.Inject
+
+private const val MAX_MONEY = 1000000
 
 class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
 
@@ -72,7 +74,9 @@ class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
             false
         }
 
-        view.findViewById<View>(R.id.button_set_invested_money).setOnClickListener { saveInvestedMoney(editTextWrapper) }
+        view.findViewById<View>(R.id.button_set_invested_money).setOnClickListener {
+            saveInvestedMoney(editTextWrapper)
+        }
 
         view.findViewById<View>(R.id.button_set_1).setOnClickListener {
             val amount = resources.getString(R.string.text_1)
@@ -110,10 +114,13 @@ class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
             val investedMoneyAsDouble = investedMoney.toDouble()
             when {
                 investedMoneyAsDouble < 1 -> {
-                    editTextWrapper.error = getString(R.string.error_set_amount_zero, numberFormat.currency.getDisplayName(Locale.ENGLISH))
+                    editTextWrapper.error = getString(
+                            R.string.error_set_amount_zero,
+                            numberFormat.currency.getDisplayName(Locale.ENGLISH)
+                    )
                     tracker.trackUserSeesAtLeastDollarError()
                 }
-                investedMoneyAsDouble >= 1000000 && errorRichCount == 0 -> {
+                investedMoneyAsDouble >= MAX_MONEY && errorRichCount == 0 -> {
                     editTextWrapper.error = getString(R.string.error_set_amount_rich)
                     errorRichCount++
                     tracker.trackUserSeesYouReachError()

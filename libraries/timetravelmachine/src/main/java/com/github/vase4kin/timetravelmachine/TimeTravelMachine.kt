@@ -19,7 +19,9 @@ package com.github.vase4kin.timetravelmachine
 import android.os.Parcelable
 import io.reactivex.Single
 import kotlinx.android.parcel.Parcelize
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.GregorianCalendar
 
 interface TimeTravelMachine {
 
@@ -28,16 +30,16 @@ interface TimeTravelMachine {
     sealed class Event : Parcelable {
         @Parcelize
         data class RealWorldEvent(
-                val title: String,
-                val description: String,
-                val isDonate: Boolean
+            val title: String,
+            val description: String,
+            val isDonate: Boolean
         ) : Event()
 
         @Parcelize
         data class TimeTravelEvent(
-                val profitMoney: Double,
-                val investedMoney: Double,
-                val timeToTravel: Date
+            val profitMoney: Double,
+            val investedMoney: Double,
+            val timeToTravel: Date
         ) : Event()
     }
 

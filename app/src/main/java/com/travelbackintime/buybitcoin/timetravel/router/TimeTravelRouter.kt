@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel.router
+package com.travelbackintime.buybitcoin.timetravel.router
 
 import androidx.appcompat.app.AppCompatActivity
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
@@ -22,9 +22,9 @@ import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.maxDate
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.minDate
 import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
 import com.travelbackintime.buybitcoin.router.InternalRouter
-import com.travelbackintime.buybitcoin.time_travel.view.InvestMoneyBottomSheetDialog
-import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
-import java.util.*
+import com.travelbackintime.buybitcoin.timetravel.view.InvestMoneyBottomSheetDialog
+import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelFragment
+import java.util.Calendar
 import javax.inject.Inject
 
 interface TimeTravelRouter {
@@ -35,8 +35,8 @@ interface TimeTravelRouter {
 }
 
 class TimeTravelRouterImpl @Inject constructor(
-        private val fragment: TimeTravelFragment,
-        private val internalRouter: InternalRouter
+    private val fragment: TimeTravelFragment,
+    private val internalRouter: InternalRouter
 ) : TimeTravelRouter {
 
     private val activity: AppCompatActivity = fragment.activity as AppCompatActivity

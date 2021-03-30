@@ -1,4 +1,4 @@
-package com.travelbackintime.buybitcoin.home_coming.share
+package com.travelbackintime.buybitcoin.homecoming.share
 
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import com.facebook.share.model.ShareHashtag
 import com.facebook.share.model.ShareLinkContent
 import com.facebook.share.widget.ShareDialog
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
-import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
+import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.twitter.sdk.android.tweetcomposer.TweetComposer
 import javax.inject.Inject
@@ -20,8 +20,8 @@ interface ShareHelper {
 }
 
 class ShareHelperImpl @Inject constructor(
-        fragment: HomeComingFragment,
-        private val formatterUtils: FormatterUtils
+    fragment: HomeComingFragment,
+    private val formatterUtils: FormatterUtils
 ) : ShareHelper {
 
     private val activity = fragment.activity as AppCompatActivity
@@ -63,6 +63,10 @@ class ShareHelperImpl @Inject constructor(
         val profitValue = event.profitMoney
         val investedValue = formatterUtils.formatPrice(event.investedMoney)
         val profit = formatterUtils.formatPrice(profitValue)
-        return activity.getString(R.string.text_share, formatterUtils.formatDateToShareText(date), investedValue, profit, googlePlayLink)
+        return activity.getString(
+            R.string.text_share,
+            formatterUtils.formatDateToShareText(date),
+            investedValue, profit, googlePlayLink
+        )
     }
 }

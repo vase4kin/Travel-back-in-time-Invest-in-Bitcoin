@@ -24,7 +24,7 @@ interface SplashRouter {
 }
 
 class SplashRouterImpl @Inject constructor(
-        private val internalRouter: InternalRouter
+    private val internalRouter: InternalRouter
 ) : SplashRouter {
 
     override fun openTimeTravelFragment() {

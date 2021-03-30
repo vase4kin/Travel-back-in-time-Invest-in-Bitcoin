@@ -3,10 +3,10 @@ package com.travelbackintime.buybitcoin.router
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.error.view.ErrorFragment
-import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
+import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.loading.LoadingFragment
-import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity
-import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
+import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelActivity
+import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelFragment
 import com.travelbackintime.buybitcoin.utils.addFragmentFadeTransitions
 import com.travelbackintime.buybitcoin.utils.addFragmentSlideTransitions
 
@@ -20,7 +20,7 @@ interface InternalRouter {
 }
 
 class InternalRouterImpl(
-        private val activity: TimeTravelActivity
+    private val activity: TimeTravelActivity
 ) : InternalRouter {
     override fun openTimeTravelFromSplash() {
         val fragment = TimeTravelFragment.create()

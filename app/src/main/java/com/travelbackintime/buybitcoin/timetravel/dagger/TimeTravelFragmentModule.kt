@@ -14,8 +14,17 @@
  * limitations under the License.
  */
 
-package com.github.vase4kin.coindesk.remote_config
+package com.travelbackintime.buybitcoin.timetravel.dagger
 
-interface RemoteConfigService {
-    val isAdsEnabled: Boolean
+import com.travelbackintime.buybitcoin.timetravel.router.TimeTravelRouter
+import com.travelbackintime.buybitcoin.timetravel.router.TimeTravelRouterImpl
+
+import dagger.Binds
+import dagger.Module
+
+@Module
+abstract class TimeTravelFragmentModule {
+
+    @Binds
+    abstract fun providesRouter(router: TimeTravelRouterImpl): TimeTravelRouter
 }

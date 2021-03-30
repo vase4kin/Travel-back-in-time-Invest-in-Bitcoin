@@ -16,7 +16,7 @@
 
 package com.travelbackintime.buybitcoin.loading
 
-
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,10 +25,11 @@ import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.travelbackintime.buybitcoin.home_coming.view.EXTRA_RESULT
+import com.travelbackintime.buybitcoin.homecoming.view.EXTRA_RESULT
 import com.travelbackintime.buybitcoin.router.InternalRouter
 import dagger.android.support.DaggerFragment
 import pl.droidsonroids.gif.GifDrawable
+import java.io.IOException
 import javax.inject.Inject
 
 private const val LOOP_COUNT = 1
@@ -49,8 +50,11 @@ class LoadingFragment : DaggerFragment() {
     @Inject
     lateinit var internalRouter: InternalRouter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_loading, container, false)
     }
 
@@ -66,10 +70,16 @@ class LoadingFragment : DaggerFragment() {
             gifFromResource.setSpeed(SPEED)
             view.findViewById<View>(R.id.image_view).background = gifFromResource
             gifFromResource.addAnimationListener { openHomecoming() }
-        } catch (e: Exception) {
-            FirebaseCrashlytics.getInstance().recordException(e)
-            openHomecoming()
+        } catch (e: IOException) {
+            logExceptionAndOpenHomeComing(e)
+        } catch (e: Resources.NotFoundException) {
+            logExceptionAndOpenHomeComing(e)
         }
+    }
+
+    private fun logExceptionAndOpenHomeComing(e: Exception) {
+        FirebaseCrashlytics.getInstance().recordException(e)
+        openHomecoming()
     }
 
     private fun openHomecoming() {
@@ -77,7 +87,7 @@ class LoadingFragment : DaggerFragment() {
         if (args != null) {
             val event: TimeTravelMachine.Event = args.getParcelable(EXTRA_RESULT) ?: return
             internalRouter.openHomeComingFromLoading(
-                    event = event
+                event = event
             )
         }
     }

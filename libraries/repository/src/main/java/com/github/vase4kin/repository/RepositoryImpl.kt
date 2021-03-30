@@ -6,7 +6,7 @@ import io.reactivex.Single
 private const val USD = "USD"
 
 class RepositoryImpl(
-        private val coinDeskService: CoinDeskService
+    private val coinDeskService: CoinDeskService
 ) : Repository {
 
     override fun getBitcoinPriceByDate(date: String): Single<Double> {
@@ -22,5 +22,4 @@ class RepositoryImpl(
                     it.bpi[USD]?.rate_float?.toDouble() ?: Double.NaN
                 }
     }
-
 }

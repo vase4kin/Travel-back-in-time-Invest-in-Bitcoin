@@ -45,7 +45,7 @@ jobs:
           <<: *general_cache_key
       - run:
           name: Run checks
-          command: ./gradlew lintDebug
+          command: ./gradlew lintDebug detekt
   unit-tests:
     <<: *container_config
     steps:

@@ -38,10 +38,14 @@ class ErrorFragment : DaggerFragment() {
     @Inject
     lateinit var viewModel: ErrorViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         val binding: FragmentErrorBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_error, container, false)
+            inflater, R.layout.fragment_error, container, false
+        )
         binding.viewModel = viewModel
         return binding.root
     }

@@ -32,7 +32,7 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:background="@color/colorPrimary"
-        tools:context="com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity">
+        tools:context="com.travelbackintime.buybitcoin.timetravel.view.TimeTravelActivity">
 
         <ImageView
             android:id="@+id/imageView"

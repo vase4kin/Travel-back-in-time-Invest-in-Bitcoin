@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel.dagger
+package com.travelbackintime.buybitcoin.timetravel.dagger
 
 import com.travelbackintime.buybitcoin.error.dagger.ErrorModule
 import com.travelbackintime.buybitcoin.error.view.ErrorFragment
-import com.travelbackintime.buybitcoin.home_coming.dagger.HomeComingFragmentModule
-import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
+import com.travelbackintime.buybitcoin.homecoming.dagger.HomeComingFragmentModule
+import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.loading.LoadingFragment
 import com.travelbackintime.buybitcoin.splash.dagger.SplashModule
 import com.travelbackintime.buybitcoin.splash.view.SplashFragment
-import com.travelbackintime.buybitcoin.time_travel.view.InvestMoneyBottomSheetDialog
-import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelFragment
+import com.travelbackintime.buybitcoin.timetravel.view.InvestMoneyBottomSheetDialog
+import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

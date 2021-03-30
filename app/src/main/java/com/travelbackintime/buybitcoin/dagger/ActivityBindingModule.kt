@@ -16,9 +16,9 @@
 
 package com.travelbackintime.buybitcoin.dagger
 
-import com.travelbackintime.buybitcoin.time_travel.dagger.TimeTravelActivityBindingModule
-import com.travelbackintime.buybitcoin.time_travel.dagger.TimeTravelActivityModule
-import com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity
+import com.travelbackintime.buybitcoin.timetravel.dagger.TimeTravelActivityBindingModule
+import com.travelbackintime.buybitcoin.timetravel.dagger.TimeTravelActivityModule
+import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
