@@ -42,9 +42,9 @@ class TimeTravelFragment : DaggerFragment(),
     lateinit var viewModel: TimeTravelViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         val binding: FragmentTimeTravelBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_time_travel, container, false)

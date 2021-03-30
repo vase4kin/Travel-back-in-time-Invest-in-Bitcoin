@@ -16,8 +16,9 @@
 
 package com.github.vase4kin.coindesk.tracker
 
-import java.util.*
+import java.util.Date
 
+@Suppress("TooManyFunctions")
 interface Tracker {
 
     fun trackUserSetsTime(time: String)
@@ -40,9 +41,11 @@ interface Tracker {
 
     fun trackUserGetsToRealWorldEvent(eventName: String)
 
-    fun trackUserGetsToTimeTravelEvent(profitMoney: Double,
-                                       investedMoney: Double,
-                                       timeToTravel: Date)
+    fun trackUserGetsToTimeTravelEvent(
+        profitMoney: Double,
+        investedMoney: Double,
+        timeToTravel: Date
+    )
 
     fun trackUserSharesOnFb()
 

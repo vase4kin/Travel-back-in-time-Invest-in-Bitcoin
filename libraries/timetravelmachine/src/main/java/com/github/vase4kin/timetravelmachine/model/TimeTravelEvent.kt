@@ -20,11 +20,10 @@ import androidx.annotation.Keep
 
 @Keep
 data class TimeTravelEvent(
-        val title: String,
-        val description: String,
-        @field:JvmField
-        val isDonate: Boolean
+    val title: String,
+    val description: String,
+    @field:JvmField
+    val isDonate: Boolean
 ) {
-    constructor(
-    ) : this("", "", false)
+    constructor() : this("", "", false)
 }

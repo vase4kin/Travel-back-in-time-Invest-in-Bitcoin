@@ -2,7 +2,7 @@ package com.github.vase4kin.coindesk.tracker
 
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
-import java.util.*
+import java.util.Date
 
 private const val EVENT_USER_SETS_TIME = "event_user_sets_time"
 private const val EVENT_USER_SETS_MONEY = "event_user_sets_money"
@@ -26,6 +26,7 @@ private const val PARAMETER_INVESTED = "parameter_invested"
 private const val PARAMETER_EVENT_NAME = "parameter_name"
 private const val PARAMETER_MONEY_SUGGESTION = "parameter_money_suggestion"
 
+@Suppress("TooManyFunctions")
 class TrackerImpl(private val analytics: FirebaseAnalytics) : Tracker {
 
     override fun trackUserRetries() {
@@ -78,9 +79,10 @@ class TrackerImpl(private val analytics: FirebaseAnalytics) : Tracker {
         analytics.logEvent(EVENT_USER_GETS_TO_SATOSHI, bundle)
     }
 
-    override fun trackUserGetsToTimeTravelEvent(profitMoney: Double,
-                                                investedMoney: Double,
-                                                timeToTravel: Date
+    override fun trackUserGetsToTimeTravelEvent(
+        profitMoney: Double,
+        investedMoney: Double,
+        timeToTravel: Date
     ) {
         val bundle = Bundle()
         bundle.putDouble(PARAMETER_PROFIT, profitMoney)

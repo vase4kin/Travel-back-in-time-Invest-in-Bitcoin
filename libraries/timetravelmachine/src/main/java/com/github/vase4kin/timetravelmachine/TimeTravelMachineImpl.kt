@@ -20,21 +20,27 @@ import android.content.res.Resources
 import com.github.vase4kin.repository.Repository
 import com.github.vase4kin.timetravelmachine.model.TimeTravelEvent
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
+import com.google.firebase.database.ValueEventListener
 import io.reactivex.Single
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 private const val REF_EVENTS = "events"
 private const val PATTERN_TIME_DATE = "yyyy-MM-dd"
 private const val PATTERN_TIME_EVENT_DATE = "yyyy-MM-dd"
 private const val DATE_PRICE_AVAILABLE = "2010-7-18"
 
+@Suppress("TooManyFunctions")
 class TimeTravelMachineImpl(
-        private val database: FirebaseDatabase,
-        private val repository: Repository,
-        private val resources: Resources
+    private val database: FirebaseDatabase,
+    private val repository: Repository,
+    private val resources: Resources
 ) : TimeTravelMachine {
 
     private var timeTravelEvents: Map<String, TimeTravelEvent> = HashMap()
@@ -43,43 +49,54 @@ class TimeTravelMachineImpl(
         fetchData()
     }
 
-    override fun travelInTime(timeToTravel: Date, investedMoney: Double): Single<TimeTravelMachine.Event> {
+    override fun travelInTime(
+        timeToTravel: Date,
+        investedMoney: Double
+    ): Single<TimeTravelMachine.Event> {
         val event = getTimeEvent(timeToTravel)
         if (event != null) {
-            return Single.just(TimeTravelMachine.Event.RealWorldEvent(
+            return Single.just(
+                TimeTravelMachine.Event.RealWorldEvent(
                     title = event.title,
                     description = event.description,
                     isDonate = event.isDonate
-            ))
+                )
+            )
         } else {
             return when {
-                isDateBeforePriceIsAvailable(timeToTravel) -> Single.just(TimeTravelMachine.Event.RealWorldEvent(
+                isDateBeforePriceIsAvailable(timeToTravel) -> Single.just(
+                    TimeTravelMachine.Event.RealWorldEvent(
                         title = resources.getString(R.string.text_basically_nothing),
                         description = "",
                         isDonate = false
-                ))
+                    )
+                )
                 else -> calculateProfit(timeToTravel, investedMoney)
             }
         }
     }
 
-    private fun calculateProfit(timeToTravel: Date, investedMoney: Double): Single<TimeTravelMachine.Event> {
+    private fun calculateProfit(
+        timeToTravel: Date,
+        investedMoney: Double
+    ): Single<TimeTravelMachine.Event> {
         return Single.zip(
-                getBitcoinPriceByDate(timeToTravel),
-                getBitcoinCurrentPrice(),
-                { t1, t2 -> calculateProfit(t1, t2, investedMoney) }
+            getBitcoinPriceByDate(timeToTravel),
+            getBitcoinCurrentPrice(),
+            { t1, t2 -> calculateProfit(t1, t2, investedMoney) }
         ).map { profit ->
             TimeTravelMachine.Event.TimeTravelEvent(
-                    profitMoney = profit,
-                    investedMoney = investedMoney,
-                    timeToTravel = timeToTravel
+                profitMoney = profit,
+                investedMoney = investedMoney,
+                timeToTravel = timeToTravel
             )
         }
     }
 
-    private fun calculateProfit(bitcoinHistoricalPrice: Double,
-                                bitcoinCurrentPrice: Double,
-                                investedMoney: Double
+    private fun calculateProfit(
+        bitcoinHistoricalPrice: Double,
+        bitcoinCurrentPrice: Double,
+        investedMoney: Double
     ): Double {
         val bitcoinInvestment = investedMoney / bitcoinHistoricalPrice
         return bitcoinCurrentPrice * bitcoinInvestment
@@ -107,8 +124,10 @@ class TimeTravelMachineImpl(
     private fun fetchData() {
         database.reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val timeEventsGenericTypeIndicator = object : GenericTypeIndicator<Map<@JvmSuppressWildcards String, @JvmSuppressWildcards TimeTravelEvent>>() {}
-                timeTravelEvents = dataSnapshot.child(REF_EVENTS).getValue(timeEventsGenericTypeIndicator)
+                val timeEventsGenericTypeIndicator = object :
+                    GenericTypeIndicator<Map<@JvmSuppressWildcards String, @JvmSuppressWildcards TimeTravelEvent>>() {}
+                timeTravelEvents =
+                    dataSnapshot.child(REF_EVENTS).getValue(timeEventsGenericTypeIndicator)
                         ?: HashMap()
             }
 
@@ -135,6 +154,5 @@ class TimeTravelMachineImpl(
         } catch (e: ParseException) {
             Date()
         }
-
     }
 }
