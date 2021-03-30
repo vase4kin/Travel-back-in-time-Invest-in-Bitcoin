@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel.view
+package com.travelbackintime.buybitcoin.timetravel.view
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
@@ -25,7 +25,7 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.tracker.Tracker
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouter
+import com.travelbackintime.buybitcoin.timetravel.router.TimeTravelRouter
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import com.travelbackintime.buybitcoin.utils.onChanged

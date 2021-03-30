@@ -49,6 +49,7 @@ import javax.inject.Singleton
 private const val DEBUG_CACHE_SECS = 30L
 private const val PROD_CACHE_SECS = 43200L
 
+@Suppress("TooManyFunctions")
 @Module
 class AppModule {
 

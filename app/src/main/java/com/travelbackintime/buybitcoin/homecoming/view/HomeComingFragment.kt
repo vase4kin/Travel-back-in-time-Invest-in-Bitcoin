@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.home_coming.view
+package com.travelbackintime.buybitcoin.homecoming.view
 
 import android.content.Context
 import android.os.Bundle

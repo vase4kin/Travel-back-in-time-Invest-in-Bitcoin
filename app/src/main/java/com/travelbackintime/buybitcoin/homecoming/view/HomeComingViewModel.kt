@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.home_coming.view
+package com.travelbackintime.buybitcoin.homecoming.view
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
@@ -25,14 +25,15 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.remote_config.RemoteConfigService
 import com.github.vase4kin.coindesk.tracker.Tracker
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
-import com.travelbackintime.buybitcoin.home_coming.router.HomeComingRouter
-import com.travelbackintime.buybitcoin.home_coming.share.ShareHelper
+import com.travelbackintime.buybitcoin.homecoming.router.HomeComingRouter
+import com.travelbackintime.buybitcoin.homecoming.share.ShareHelper
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import com.travelbackintime.buybitcoin.utils.ToastUtils
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions", "LongParameterList")
 class HomeComingViewModel @Inject constructor(
     private val router: HomeComingRouter,
     private val shareHelper: ShareHelper,
@@ -93,9 +94,9 @@ class HomeComingViewModel @Inject constructor(
         isParamViewVisible.set(true)
         isProfitViewVisible.set(true)
         tracker.trackUserGetsToTimeTravelEvent(
-                investedMoney = event.investedMoney,
-                profitMoney = event.profitMoney,
-                timeToTravel = event.timeToTravel
+            investedMoney = event.investedMoney,
+            profitMoney = event.profitMoney,
+            timeToTravel = event.timeToTravel
         )
     }
 
@@ -127,8 +128,9 @@ class HomeComingViewModel @Inject constructor(
 
     fun onCopyWalletAddress() {
         clipboardUtils.copyToClipBoard(
-                resourcesProviderUtils.getString(R.string.donate_copy_label),
-                resourcesProviderUtils.getString(R.string.donate_btc_wallet_address))
+            resourcesProviderUtils.getString(R.string.donate_copy_label),
+            resourcesProviderUtils.getString(R.string.donate_btc_wallet_address)
+        )
         toastUtils.showToast(R.string.donate_toast)
         tracker.trackUserCopiesBtcWalletAddress()
     }

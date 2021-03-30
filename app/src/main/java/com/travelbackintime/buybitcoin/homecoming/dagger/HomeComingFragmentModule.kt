@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel.dagger
+package com.travelbackintime.buybitcoin.homecoming.dagger
 
-import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouter
-import com.travelbackintime.buybitcoin.time_travel.router.TimeTravelRouterImpl
-
+import com.travelbackintime.buybitcoin.homecoming.router.HomeComingRouter
+import com.travelbackintime.buybitcoin.homecoming.router.HomeComingRouterImpl
+import com.travelbackintime.buybitcoin.homecoming.share.ShareHelper
+import com.travelbackintime.buybitcoin.homecoming.share.ShareHelperImpl
 import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class TimeTravelFragmentModule {
+abstract class HomeComingFragmentModule {
 
     @Binds
-    abstract fun providesRouter(router: TimeTravelRouterImpl): TimeTravelRouter
+    abstract fun providesRouter(router: HomeComingRouterImpl): HomeComingRouter
+
+    @Binds
+    abstract fun providesShareHelper(shareHelperImpl: ShareHelperImpl): ShareHelper
 }

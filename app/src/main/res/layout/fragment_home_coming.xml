@@ -18,7 +18,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity">
+    tools:context="com.travelbackintime.buybitcoin.timetravel.view.TimeTravelActivity">
 
     <data>
 
@@ -26,7 +26,7 @@
 
         <variable
             name="viewModel"
-            type="com.travelbackintime.buybitcoin.home_coming.view.HomeComingViewModel" />
+            type="com.travelbackintime.buybitcoin.homecoming.view.HomeComingViewModel" />
     </data>
 
     <ScrollView

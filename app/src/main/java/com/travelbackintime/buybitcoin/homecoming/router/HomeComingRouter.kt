@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.home_coming.router
+package com.travelbackintime.buybitcoin.homecoming.router
 
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.travelbackintime.buybitcoin.home_coming.view.HomeComingFragment
+import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.router.InternalRouter
 import javax.inject.Inject
 

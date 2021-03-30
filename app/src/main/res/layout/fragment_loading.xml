@@ -20,7 +20,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:gravity="center"
-    tools:context="com.travelbackintime.buybitcoin.time_travel.view.TimeTravelActivity">
+    tools:context="com.travelbackintime.buybitcoin.timetravel.view.TimeTravelActivity">
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/image_view"

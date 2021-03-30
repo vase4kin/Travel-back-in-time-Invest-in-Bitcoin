@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.time_travel.view
+package com.travelbackintime.buybitcoin.timetravel.view
 
 import android.content.Context
 import android.os.Bundle

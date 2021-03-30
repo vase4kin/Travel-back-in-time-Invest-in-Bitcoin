@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.travelbackintime.buybitcoin.home_coming.view.EXTRA_RESULT
+import com.travelbackintime.buybitcoin.homecoming.view.EXTRA_RESULT
 import com.travelbackintime.buybitcoin.router.InternalRouter
 import dagger.android.support.DaggerFragment
 import pl.droidsonroids.gif.GifDrawable
