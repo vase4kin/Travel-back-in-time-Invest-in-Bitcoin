@@ -56,9 +56,9 @@ class AppModule {
     @Singleton
     @Provides
     fun providesTimeTravelMachine(
-            database: FirebaseDatabase,
-            repository: Repository,
-            app: Application
+        database: FirebaseDatabase,
+        repository: Repository,
+        app: Application
     ): TimeTravelMachine {
         return TimeTravelMachineImpl(database, repository, app.resources)
     }
