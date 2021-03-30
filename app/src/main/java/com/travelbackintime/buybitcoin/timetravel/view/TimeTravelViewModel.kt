@@ -103,21 +103,27 @@ class TimeTravelViewModel @Inject constructor(
 
     private fun travelInTime() {
         timeTravelMachine.travelInTime(
-                timeToTravel = timeToTravel,
-                investedMoney = investedMoney
+            timeToTravel = timeToTravel,
+            investedMoney = investedMoney
         )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onSuccess = {
-                            router.openLoadingFragment(it)
-                        },
-                        onError = {
-                            router.openErrorFragment()
-                            FirebaseCrashlytics.getInstance().recordException(it)
-                        }
-                )
-                .addTo(compositeDisposable)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                isBuyBitcoinButtonEnabled.set(false)
+            }
+            .doFinally {
+                isBuyBitcoinButtonEnabled.set(true)
+            }
+            .subscribeBy(
+                onSuccess = {
+                    router.openLoadingFragment(it)
+                },
+                onError = {
+                    router.openErrorFragment()
+                    FirebaseCrashlytics.getInstance().recordException(it)
+                }
+            )
+            .addTo(compositeDisposable)
     }
 
     private fun isBuyBitcoinButtonEnabled(): Boolean {
