@@ -54,8 +54,8 @@ class TimeTravelMachineImpl(
                         when {
                             isDateBeforePriceIsAvailable(timeToTravel) -> Single.just(
                                 TimeTravelMachine.Event.RealWorldEvent(
-                                    title = resources.getString(R.string.text_basically_nothing),
-                                    description = resources.getString(R.string.text_oops),
+                                    title = resources.getString(R.string.text_oops),
+                                    description = resources.getString(R.string.text_basically_nothing),
                                     isDonate = false
                                 )
                             )
