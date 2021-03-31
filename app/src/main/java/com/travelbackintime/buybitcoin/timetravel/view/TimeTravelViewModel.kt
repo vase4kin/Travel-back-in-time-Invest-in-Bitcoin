@@ -77,14 +77,18 @@ class TimeTravelViewModel @Inject constructor(
 
     fun onSetInvestedMoneyButtonClick() = router.showAmountDialog()
 
-    fun onSetTimeToTravelButtonClick() = router.showSetDateDialog()
+    fun onSetTimeToTravelButtonClick() {
+        router.showSetDateDialog(onDateSelected = {
+            this.timeToTravel = Date(it)
+            val formattedTimeToTravel = formatterUtils.formatDate(timeToTravel)
+            tracker.trackUserSetsTime(formattedTimeToTravel)
+            timeToTravelText.set(formattedTimeToTravel)
+        })
+    }
 
     fun setTimeToTravel(year: Int, monthOfYear: Int, dayOfMonth: Int) {
         val timeToTravel = getTimeToTravel(year, monthOfYear, dayOfMonth)
         this.timeToTravel = timeToTravel
-        val formattedTimeToTravel = formatterUtils.formatDate(timeToTravel)
-        tracker.trackUserSetsTime(formattedTimeToTravel)
-        timeToTravelText.set(formattedTimeToTravel)
     }
 
     fun setInvestedMoney(investedMoney: Double) {

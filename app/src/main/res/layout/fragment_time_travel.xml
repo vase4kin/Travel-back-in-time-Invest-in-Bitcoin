@@ -40,18 +40,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@null" />
 
         <TextView
             android:id="@+id/title"
-            style="@style/VideoGameTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:gravity="center"
             android:text="@string/app_name"
-            android:textColor="@color/colorWhite"
-            android:textSize="36sp"
+            android:textColor="?attr/colorOnBackground"
+            android:textAppearance="@style/TextAppearance.Title"
             app:layout_constraintBottom_toTopOf="@id/description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -60,22 +60,22 @@
 
         <TextView
             android:id="@+id/description"
-            style="@style/VideoGameTextStyle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="16dp"
             android:gravity="center"
             android:text="@string/app_description"
-            android:textColor="@color/colorWhite"
-            android:textSize="22sp"
+            android:textColor="?attr/colorOnBackground"
+            android:textAppearance="@style/TextAppearance.Description"
             app:layout_constraintBottom_toTopOf="@id/button_set_time"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_set_time"
-            style="@style/VideoGameButtonStyle"
+            style="@style/Widget.MaterialComponents.VideoGameButton"
+            android:layout_height="64dp"
             android:layout_width="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -88,9 +88,10 @@
             app:layout_constraintTop_toBottomOf="@id/description"
             tools:text="@string/button_set_date_title" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_set_money"
-            style="@style/VideoGameButtonStyle"
+            style="@style/Widget.MaterialComponents.VideoGameButton"
+            android:layout_height="64dp"
             android:layout_width="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -103,9 +104,10 @@
             app:layout_constraintTop_toBottomOf="@id/button_set_time"
             tools:text="@string/button_set_amount_title" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_buy"
-            style="@style/VideoGameButtonStyle"
+            style="@style/Widget.MaterialComponents.VideoGameButton"
+            android:layout_height="64dp"
             android:layout_width="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"

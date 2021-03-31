@@ -25,12 +25,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentTimeTravelBinding
-import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class TimeTravelFragment : DaggerFragment(),
-        DatePickerDialog.OnDateSetListener, InvestMoneyBottomSheetDialog.InvestMoneyListener {
+class TimeTravelFragment : DaggerFragment(), InvestMoneyBottomSheetDialog.InvestMoneyListener {
 
     companion object {
         fun create(): Fragment {
@@ -57,10 +55,6 @@ class TimeTravelFragment : DaggerFragment(),
         viewLifecycleOwnerLiveData.observe(this, {
             it.lifecycle.addObserver(viewModel)
         })
-    }
-
-    override fun onDateSet(dialog: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        viewModel.setTimeToTravel(year, monthOfYear, dayOfMonth)
     }
 
     override fun onInvestedMoneySet(investedMoney: Double) {

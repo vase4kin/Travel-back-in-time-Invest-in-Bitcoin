@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.Button" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:fontFamily">@font/vt323</item>
+        <item name="fontFamily">@font/vt323</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.Button.Suggestion" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:fontFamily">@font/vt323</item>
+        <item name="fontFamily">@font/vt323</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.Amount" parent="@style/TextAppearance.MaterialComponents.Headline5">
+        <item name="android:fontFamily">@font/vt323</item>
+        <item name="fontFamily">@font/vt323</item>
+    </style>
+
+    <style name="TextAppearance.Title" parent="@style/TextAppearance.MaterialComponents.Headline4">
+        <item name="android:fontFamily">@font/vt323</item>
+        <item name="fontFamily">@font/vt323</item>
+    </style>
+
+    <style name="TextAppearance.Description" parent="@style/TextAppearance.MaterialComponents.Headline5">
+        <item name="android:fontFamily">@font/vt323</item>
+        <item name="fontFamily">@font/vt323</item>
+    </style>
+
+</resources>

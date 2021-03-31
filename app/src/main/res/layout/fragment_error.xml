@@ -31,7 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:background="@color/colorPrimary"
         tools:context="com.travelbackintime.buybitcoin.timetravel.view.TimeTravelActivity">
 
         <ImageView
@@ -48,14 +47,13 @@
 
         <TextView
             android:id="@+id/textView"
-            style="@style/VideoGameTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/retry_title"
-            android:textColor="@color/colorWhite"
-            android:textSize="42sp"
+            android:textColor="?attr/colorOnBackground"
+            android:textAppearance="@style/TextAppearance.Title"
             app:layout_constraintBottom_toTopOf="@id/textView2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,23 +61,23 @@
 
         <TextView
             android:id="@+id/textView2"
-            style="@style/VideoGameTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/retry_description"
-            android:textColor="@color/colorWhite"
-            android:textSize="28sp"
+            android:textColor="?attr/colorOnBackground"
+            android:textAppearance="@style/TextAppearance.Title"
             app:layout_constraintBottom_toTopOf="@+id/button2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button2"
-            style="@style/VideoGameButtonStyle"
+            style="@style/Widget.MaterialComponents.VideoGameButton"
+            android:layout_height="64dp"
             android:layout_width="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"

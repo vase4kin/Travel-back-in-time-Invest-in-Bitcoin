@@ -32,7 +32,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="?android:attr/colorBackground">
 
         <ImageView
             android:id="@+id/imageView"
@@ -48,14 +48,13 @@
 
         <TextView
             android:id="@+id/title"
-            style="@style/VideoGameTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:gravity="center"
             android:text="@string/app_name"
-            android:textColor="@color/colorWhite"
-            android:textSize="36sp"
+            android:textColor="?attr/colorOnBackground"
+            android:textAppearance="@style/TextAppearance.Title"
             app:layout_constraintBottom_toTopOf="@id/info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +63,6 @@
 
         <TextView
             android:id="@+id/info"
-            style="@style/VideoGameTextStyle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -74,8 +72,8 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:text="@{viewModel.title}"
-            android:textColor="@color/colorWhite"
-            android:textSize="26sp"
+            android:textColor="?attr/colorOnBackground"
+            android:textAppearance="@style/TextAppearance.Description"
             app:layout_constraintBottom_toTopOf="@id/description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +83,6 @@
 
         <TextView
             android:id="@+id/description"
-            style="@style/VideoGameTextStyle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -95,8 +92,8 @@
             android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:text="@{viewModel.description}"
-            android:textColor="@color/colorWhite"
-            android:textSize="20sp"
+            android:textColor="?attr/colorOnBackground"
+            android:textAppearance="@style/TextAppearance.Description"
             app:layout_constraintBottom_toTopOf="@id/ads"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -120,9 +117,10 @@
             bind:showAds="@{viewModel.isAdsEnabled}"
             tools:visibility="visible" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_copy_wallet"
-            style="@style/VideoGameButtonStyle"
+            style="@style/Widget.MaterialComponents.VideoGameButton"
+            android:layout_height="64dp"
             android:layout_width="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -136,9 +134,10 @@
             app:layout_constraintTop_toBottomOf="@id/ads"
             bind:visibility="@{viewModel.isDonateViewVisible()}" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttom_start_over"
-            style="@style/VideoGameButtonStyle"
+            style="@style/Widget.MaterialComponents.VideoGameButton"
+            android:layout_height="64dp"
             android:layout_width="match_parent"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
@@ -159,7 +158,8 @@
             android:gravity="center"
             android:onClick="@{() -> viewModel.openPoweredByCoinDeskUrl()}"
             android:text="@string/powered_by_coindesk"
-            android:textColor="@color/colorWhite"
+            android:textColor="?attr/colorOnBackground"
+            android:textColorLink="?attr/colorOnBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
