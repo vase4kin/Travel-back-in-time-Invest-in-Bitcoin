@@ -17,7 +17,6 @@
 package com.travelbackintime.buybitcoin.timetravel.view
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
@@ -27,14 +26,11 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.TextView
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.tracker.Tracker
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.AndroidSupportInjection
-import dagger.android.support.DaggerAppCompatDialogFragment
 import java.text.NumberFormat
 import java.util.Locale
 import javax.inject.Inject
