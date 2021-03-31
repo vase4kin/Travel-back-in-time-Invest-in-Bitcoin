@@ -16,22 +16,16 @@
 
 package com.travelbackintime.buybitcoin.timetravel.router
 
-import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.Pair
-import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.maxDate
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.minDate
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.datepicker.MaterialStyledDatePickerDialog
 import com.travelbackintime.buybitcoin.router.InternalRouter
 import com.travelbackintime.buybitcoin.timetravel.view.InvestMoneyBottomSheetDialog
 import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelFragment
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.synthetic.main.fragment_home_coming_event.view.*
-import java.util.Calendar
 import javax.inject.Inject
 
 interface TimeTravelRouter {
@@ -52,14 +46,6 @@ class TimeTravelRouterImpl @Inject constructor(
         val dialog = InvestMoneyBottomSheetDialog()
         dialog.setListener(fragment)
         dialog.show(activity.supportFragmentManager, InvestMoneyBottomSheetDialog::class.java.name)
-    }
-
-    @Parcelize
-    class DateVal() : CalendarConstraints.DateValidator {
-        override fun isValid(date: Long): Boolean {
-            val range = minDate.timeInMillis..maxDate.timeInMillis
-            return date in range
-        }
     }
 
     override fun showSetDateDialog(onDateSelected: (date: Long) -> Unit) {
@@ -86,5 +72,13 @@ class TimeTravelRouterImpl @Inject constructor(
 
     override fun openErrorFragment() {
         internalRouter.openError()
+    }
+
+    @Parcelize
+    private class DateVal : CalendarConstraints.DateValidator {
+        override fun isValid(date: Long): Boolean {
+            val range = minDate.timeInMillis..maxDate.timeInMillis
+            return date in range
+        }
     }
 }
