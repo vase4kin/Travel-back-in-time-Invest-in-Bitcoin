@@ -20,17 +20,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.maxDate
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.minDate
-import com.philliphsu.bottomsheetpickers.date.DatePickerDialog
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.travelbackintime.buybitcoin.router.InternalRouter
 import com.travelbackintime.buybitcoin.timetravel.view.InvestMoneyBottomSheetDialog
 import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelFragment
-import java.util.Calendar
+import kotlinx.android.parcel.Parcelize
 import javax.inject.Inject
 
 interface TimeTravelRouter {
     fun openLoadingFragment(event: TimeTravelMachine.Event)
     fun showAmountDialog()
-    fun showSetDateDialog()
+    fun showSetDateDialog(onDateSelected: (date: Long) -> Unit)
     fun openErrorFragment()
 }
 
@@ -47,18 +48,22 @@ class TimeTravelRouterImpl @Inject constructor(
         dialog.show(activity.supportFragmentManager, InvestMoneyBottomSheetDialog::class.java.name)
     }
 
-    override fun showSetDateDialog() {
-        val calendar = Calendar.getInstance()
-        val dateDialog = DatePickerDialog.Builder(
-                fragment,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_WEEK))
-                .setThemeDark(true)
-                .setMaxDate(maxDate)
-                .setMinDate(minDate)
-                .build()
-        dateDialog.show(activity.supportFragmentManager, DatePickerDialog::class.java.name)
+    override fun showSetDateDialog(onDateSelected: (date: Long) -> Unit) {
+        val picker = MaterialDatePicker.Builder.datePicker()
+            .setCalendarConstraints(
+                CalendarConstraints.Builder()
+                    .setStart(minDate.timeInMillis)
+                    .setEnd(maxDate.timeInMillis)
+                    .setValidator(DateVal())
+                    .build()
+            )
+            .setSelection(maxDate.timeInMillis)
+            .setTitleText("")
+            .build()
+        picker.addOnPositiveButtonClickListener {
+            onDateSelected(it)
+        }
+        picker.show(activity.supportFragmentManager, MaterialDatePicker::class.java.name)
     }
 
     override fun openLoadingFragment(event: TimeTravelMachine.Event) {
@@ -67,5 +72,13 @@ class TimeTravelRouterImpl @Inject constructor(
 
     override fun openErrorFragment() {
         internalRouter.openError()
+    }
+
+    @Parcelize
+    private class DateVal : CalendarConstraints.DateValidator {
+        override fun isValid(date: Long): Boolean {
+            val range = minDate.timeInMillis..maxDate.timeInMillis
+            return date in range
+        }
     }
 }

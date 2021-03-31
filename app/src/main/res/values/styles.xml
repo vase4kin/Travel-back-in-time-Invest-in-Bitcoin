@@ -16,100 +16,93 @@
 
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/colorPrimary</item>
-        <item name="android:colorBackground">@color/colorPrimary</item>
+    <style name="Widget.MaterialComponents.VideoGameButton" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:textAppearance">@style/TextAppearance.Button</item>
+        <item name="strokeColor">@color/white</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="shapeAppearance">?shapeAppearanceLargeComponent</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="Widget.MaterialComponents.VideoGameButton.Icon" parent="@style/Widget.MaterialComponents.VideoGameButton">
+        <item name="iconGravity">textStart</item>
+        <item name="iconSize">48dp</item>
     </style>
 
-    <style name="VideoGameTextStyle">
-        <item name="android:fontFamily">@font/vt323</item>
-    </style>
-
-    <style name="Display" />
-
-    <style name="Display.Hint">
-        <item name="android:fontFamily">@font/press_start_2p</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">10sp</item>
+    <style name="Widget.MaterialComponents.VideoGameDisplay.Hint" parent="">
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:lines">1</item>
+        <item name="android:textAppearance">@style/TextAppearance.Hint</item>
     </style>
 
-    <style name="Display.Value">
-        <item name="android:fontFamily">@font/digitaldreamfatnarrow</item>
-        <item name="android:textSize">28sp</item>
+    <style name="Widget.MaterialComponents.VideoGameDisplay.Value" parent="">
         <item name="android:textAllCaps">false</item>
         <item name="android:background">@drawable/shape_diplay_value</item>
         <item name="android:layout_margin">2dp</item>
         <item name="android:padding">4dp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/red</item>
         <item name="android:lines">1</item>
         <item name="android:gravity">right|center_vertical</item>
         <item name="autoSizeTextType">uniform</item>
-        <item name="autoSizeMaxTextSize">28sp</item>
+        <item name="autoSizeMaxTextSize">34sp</item>
         <item name="autoSizeMinTextSize">12sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.Money</item>
     </style>
 
-    <style name="Display.Value.Dollar">
-        <item name="android:fontFamily">@font/vt323</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">30sp</item>
+    <style name="Widget.MaterialComponents.VideoGameDisplay.Value.Dollar">
+        <item name="android:textColor">?attr/colorOnBackground</item>
         <item name="android:text">@string/result_dollar_symbol</item>
+        <item name="android:textAppearance">@style/TextAppearance.Description</item>
     </style>
 
-    <style name="VideoGameButtonStyle" parent="VideoGameTextStyle">
-        <item name="android:layout_height">64dp</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">32sp</item>
-        <item name="android:background">@drawable/shape_button</item>
+    <style name="Theme.EditText" parent="">
+        <item name="colorControlNormal">?attr/colorOnSurface</item>
+        <item name="colorControlActivated">?attr/colorOnSurface</item>
     </style>
 
-    <style name="VideoGameButtonStyle.BottomSheet">
-        <item name="android:background">@drawable/shape_button_bottom_sheet</item>
+    <style name="ThemeOverlay.DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent
+        </item>
+        <item name="headerLayout">@style/Widget.MaterialComponents.MaterialCalendar.HeaderLayout
+        </item>
+        <item name="daySelectedStyle">
+            @style/Widget.MaterialComponents.MaterialCalendar.Day.Selected
+        </item>
+        <item name="yearSelectedStyle">
+            @style/Widget.MaterialComponents.MaterialCalendar.Year.Selected
+        </item>
+        <item name="materialCalendarHeaderToggleButton">
+            @style/Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton
+        </item>
     </style>
 
-    <style name="EditTextFloatingLabel" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse">
-        <item name="android:textSize">26sp</item>
-        <item name="android:fontFamily">@font/vt323</item>
+    <style name="Widget.MaterialComponents.MaterialCalendar.HeaderLayout" parent="android:Widget">
+        <item name="android:background">@color/grey_600</item>
     </style>
 
-    <style name="EditTextLayoutStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle.Inverse">
-        <item name="android:fontFamily">@font/vt323</item>
+    <style name="Widget.MaterialComponents.MaterialCalendar.Day.Selected">
+        <item name="itemFillColor">@color/material_on_primary_disabled</item>
+        <item name="itemTextColor">?attr/colorOnPrimary</item>
+        <item name="itemStrokeWidth">0dp</item>
     </style>
 
-    <style name="EditTextStyle" parent="VideoGameTextStyle">
-        <item name="android:theme">@style/EditTextTheme</item>
+    <style name="Widget.MaterialComponents.MaterialCalendar.Year.Selected" parent="Widget.MaterialComponents.MaterialCalendar.Year">
+        <item name="itemFillColor">@color/material_on_primary_disabled</item>
+        <item name="itemTextColor">?attr/colorOnPrimary</item>
+        <item name="itemStrokeColor">?attr/colorOnPrimary</item>
+        <item name="itemStrokeWidth">0dp</item>
     </style>
 
-    <style name="TextErrorAppearance" parent="@android:style/TextAppearance">
-        <item name="android:fontFamily">@font/vt323</item>
-        <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:textSize">26sp</item>
-    </style>
-
-    <style name="EditTextTheme">
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">30sp</item>
-        <item name="colorControlNormal">@color/colorWhite</item>
-        <item name="colorControlActivated">?android:attr/textColorSecondaryInverse</item>
-        <item name="android:textColorPrimary">@color/colorWhite</item>
-    </style>
-
-    <style name="DialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
+    <style name="Widget.MaterialComponents.MaterialCalendar.HeaderToggleButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@null</item>
+        <item name="android:tint">@color/grey_600</item>
     </style>
 
 </resources>

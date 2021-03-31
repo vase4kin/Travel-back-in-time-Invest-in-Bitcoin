@@ -17,7 +17,7 @@
 package com.travelbackintime.buybitcoin.timetravel.view
 
 import android.app.Activity
-import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -28,16 +28,16 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.tracker.Tracker
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
-import dagger.android.support.DaggerAppCompatDialogFragment
+import dagger.android.support.AndroidSupportInjection
 import java.text.NumberFormat
 import java.util.Locale
 import javax.inject.Inject
 
 private const val MAX_MONEY = 1000000
 
-class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
+class InvestMoneyBottomSheetDialog : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var numberFormat: NumberFormat
@@ -48,11 +48,16 @@ class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
     private var listener: InvestMoneyListener? = null
     private var errorRichCount = 0
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return BottomSheetDialog(requireContext(), R.style.DialogStyle)
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.bottom_sheet_amount, container, false)
     }
 
@@ -61,13 +66,17 @@ class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
 
         val editTextWrapper = view.findViewById<TextInputLayout>(R.id.edit_text_wrapper)
 
-        val hint = getString(R.string.hint_set_amount, numberFormat.currency.getDisplayName(Locale.ENGLISH))
+        val hint = getString(
+            R.string.hint_set_amount,
+            numberFormat.currency.getDisplayName(Locale.ENGLISH)
+        )
         editTextWrapper.hint = hint
 
         editTextWrapper.editText!!.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 saveInvestedMoney(editTextWrapper)
-                val imm = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm =
+                    context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
                 return@setOnEditorActionListener true
             }
@@ -115,8 +124,8 @@ class InvestMoneyBottomSheetDialog : DaggerAppCompatDialogFragment() {
             when {
                 investedMoneyAsDouble < 1 -> {
                     editTextWrapper.error = getString(
-                            R.string.error_set_amount_zero,
-                            numberFormat.currency.getDisplayName(Locale.ENGLISH)
+                        R.string.error_set_amount_zero,
+                        numberFormat.currency.getDisplayName(Locale.ENGLISH)
                     )
                     tracker.trackUserSeesAtLeastDollarError()
                 }
