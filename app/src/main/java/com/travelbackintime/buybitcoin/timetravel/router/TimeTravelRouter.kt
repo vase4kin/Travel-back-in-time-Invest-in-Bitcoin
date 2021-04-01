@@ -55,6 +55,7 @@ class TimeTravelRouterImpl @Inject constructor(
                     .setStart(minDate.timeInMillis)
                     .setEnd(maxDate.timeInMillis)
                     .setValidator(DateVal())
+                    .setOpenAt(maxDate.timeInMillis)
                     .build()
             )
             .setSelection(maxDate.timeInMillis)
