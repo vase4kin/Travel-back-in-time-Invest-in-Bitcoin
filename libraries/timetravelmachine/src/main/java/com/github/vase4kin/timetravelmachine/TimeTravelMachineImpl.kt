@@ -20,26 +20,22 @@ import android.content.res.Resources
 import com.github.vase4kin.database.LocalFirebaseDatabase
 import com.github.vase4kin.repository.Repository
 import io.reactivex.Single
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-private const val PATTERN_TIME_EVENT_DATE = "yyyy-MM-dd"
 private const val PATTERN_TIME_DATE = "yyyy-MM-dd"
-private const val DATE_PRICE_AVAILABLE = "2010-7-18"
 
-@Suppress("TooManyFunctions")
 class TimeTravelMachineImpl(
     private val repository: Repository,
     private val resources: Resources
 ) : TimeTravelMachine {
 
     override fun travelInTime(
-        timeToTravel: Date,
+        time: Long,
         investedMoney: Double
     ): Single<TimeTravelMachine.Event> {
-        val eventServerDate = convertDateToEventServerDateFormat(timeToTravel)
+        val eventServerDate = convertDateToTimeMachineDate(time.toDate())
         return repository.getTimeEvent(eventServerDate)
             .flatMap { event ->
                 when (event) {
@@ -52,14 +48,14 @@ class TimeTravelMachineImpl(
                     )
                     LocalFirebaseDatabase.TimeTravelEvent.NoEvent -> {
                         when {
-                            isDateBeforePriceIsAvailable(timeToTravel) -> Single.just(
+                            isDateBeforePriceIsAvailable(time.toDate()) -> Single.just(
                                 TimeTravelMachine.Event.RealWorldEvent(
                                     title = resources.getString(R.string.text_oops),
                                     description = resources.getString(R.string.text_basically_nothing),
                                     isDonate = false
                                 )
                             )
-                            else -> calculateProfit(timeToTravel, investedMoney)
+                            else -> calculateProfit(time.toDate(), investedMoney)
                         }
                     }
                 }
@@ -67,18 +63,18 @@ class TimeTravelMachineImpl(
     }
 
     private fun calculateProfit(
-        timeToTravel: Date,
+        time: Date,
         investedMoney: Double
     ): Single<TimeTravelMachine.Event> {
         return Single.zip(
-            getBitcoinPriceByDate(timeToTravel),
+            getBitcoinPriceByDate(time),
             getBitcoinCurrentPrice(),
             { t1, t2 -> calculateProfit(t1, t2, investedMoney) }
         ).map { profit ->
             TimeTravelMachine.Event.TimeTravelEvent(
                 profitMoney = profit,
                 investedMoney = investedMoney,
-                timeToTravel = timeToTravel
+                timeToTravel = time
             )
         }
     }
@@ -92,8 +88,8 @@ class TimeTravelMachineImpl(
         return bitcoinCurrentPrice * bitcoinInvestment
     }
 
-    private fun getBitcoinPriceByDate(timeToTravel: Date): Single<Double> {
-        val serverDate = convertDateToServerDateFormat(timeToTravel)
+    private fun getBitcoinPriceByDate(time: Date): Single<Double> {
+        val serverDate = convertDateToTimeMachineDate(time)
         return repository.getBitcoinPriceByDate(serverDate)
     }
 
@@ -102,26 +98,14 @@ class TimeTravelMachineImpl(
     }
 
     private fun isDateBeforePriceIsAvailable(date: Date): Boolean {
-        val dateFirst = parseServerDateToDate(DATE_PRICE_AVAILABLE)
+        val dateFirst = TimeTravelConstraints.minCoinDeskDateTimeInMillis.toDate()
         return dateFirst.after(date)
     }
 
-    private fun convertDateToServerDateFormat(date: Date): String {
+    private fun convertDateToTimeMachineDate(date: Date): String {
         val dateFormat = SimpleDateFormat(PATTERN_TIME_DATE, Locale.US)
         return dateFormat.format(date)
     }
 
-    private fun convertDateToEventServerDateFormat(date: Date): String {
-        val dateFormat = SimpleDateFormat(PATTERN_TIME_EVENT_DATE, Locale.US)
-        return dateFormat.format(date)
-    }
-
-    private fun parseServerDateToDate(date: String): Date {
-        val dateFormat = SimpleDateFormat(PATTERN_TIME_DATE, Locale.US)
-        return try {
-            dateFormat.parse(date)
-        } catch (e: ParseException) {
-            Date()
-        }
-    }
+    private fun Long.toDate() = Date(this)
 }

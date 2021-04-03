@@ -23,6 +23,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.tracker.Tracker
+import com.github.vase4kin.timetravelmachine.TimeTravelConstraints
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.travelbackintime.buybitcoin.timetravel.router.TimeTravelRouter
@@ -34,9 +35,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import java.util.Calendar
 import java.util.Date
-import java.util.Locale
 import javax.inject.Inject
 
 private const val DEFAULT_INVESTED_MONEY: Double = 0.0
@@ -61,7 +60,7 @@ class TimeTravelViewModel @Inject constructor(
     }
 
     private var investedMoney: Double = DEFAULT_INVESTED_MONEY
-    private var timeToTravel: Date = TimeTravelMachine.Companion.maxDate.time
+    private var timeToTravel: Long = TimeTravelConstraints.maxDateTimeInMillis
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -79,16 +78,11 @@ class TimeTravelViewModel @Inject constructor(
 
     fun onSetTimeToTravelButtonClick() {
         router.showSetDateDialog(onDateSelected = {
-            this.timeToTravel = Date(it)
-            val formattedTimeToTravel = formatterUtils.formatDate(timeToTravel)
+            this.timeToTravel = it
+            val formattedTimeToTravel = formatterUtils.formatDate(Date(timeToTravel))
             tracker.trackUserSetsTime(formattedTimeToTravel)
             timeToTravelText.set(formattedTimeToTravel)
         })
-    }
-
-    fun setTimeToTravel(year: Int, monthOfYear: Int, dayOfMonth: Int) {
-        val timeToTravel = getTimeToTravel(year, monthOfYear, dayOfMonth)
-        this.timeToTravel = timeToTravel
     }
 
     fun setInvestedMoney(investedMoney: Double) {
@@ -98,16 +92,9 @@ class TimeTravelViewModel @Inject constructor(
         investedMoneyText.set(formattedInvestedMoney)
     }
 
-    private fun getTimeToTravel(year: Int, monthOfYear: Int, dayOfMonth: Int): Date {
-        val timeToTravelCalendar = Calendar.getInstance(Locale.US)
-        timeToTravelCalendar.clear()
-        timeToTravelCalendar.set(year, monthOfYear, dayOfMonth, 0, 0, 0)
-        return timeToTravelCalendar.time
-    }
-
     private fun travelInTime() {
         timeTravelMachine.travelInTime(
-            timeToTravel = timeToTravel,
+            time = timeToTravel,
             investedMoney = investedMoney
         )
             .subscribeOn(Schedulers.io())
@@ -131,7 +118,7 @@ class TimeTravelViewModel @Inject constructor(
     }
 
     private fun isBuyBitcoinButtonEnabled(): Boolean {
-        return timeToTravel != TimeTravelMachine.Companion.maxDate.time && investedMoney != DEFAULT_INVESTED_MONEY
+        return timeToTravel != TimeTravelConstraints.maxDateTimeInMillis && investedMoney != DEFAULT_INVESTED_MONEY
     }
 
     private fun enableBuyBitcoinButton() {

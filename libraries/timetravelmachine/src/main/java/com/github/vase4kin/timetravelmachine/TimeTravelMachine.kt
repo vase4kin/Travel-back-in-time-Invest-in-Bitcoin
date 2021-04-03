@@ -19,13 +19,15 @@ package com.github.vase4kin.timetravelmachine
 import android.os.Parcelable
 import io.reactivex.Single
 import kotlinx.android.parcel.Parcelize
-import java.util.Calendar
 import java.util.Date
-import java.util.GregorianCalendar
 
 interface TimeTravelMachine {
 
-    fun travelInTime(timeToTravel: Date, investedMoney: Double): Single<Event>
+    /**
+     * @param time          - the time as UTC milliseconds from the epoch
+     * @param investedMoney - the amount of invested money in double
+     */
+    fun travelInTime(time: Long, investedMoney: Double): Single<Event>
 
     sealed class Event : Parcelable {
         @Parcelize
@@ -41,15 +43,5 @@ interface TimeTravelMachine {
             val investedMoney: Double,
             val timeToTravel: Date
         ) : Event()
-    }
-
-    companion object {
-        // Set a max date to minus one as coin desk does not support current date
-        val maxDate: Calendar = Calendar.getInstance().apply {
-            add(Calendar.DAY_OF_WEEK, -1)
-        }
-
-        // Set a minimum date to 2009/1/03
-        val minDate = GregorianCalendar(2009, 0, 3)
     }
 }
