@@ -17,9 +17,8 @@
 package com.travelbackintime.buybitcoin.timetravel.router
 
 import androidx.appcompat.app.AppCompatActivity
+import com.github.vase4kin.timetravelmachine.TimeTravelConstraints
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.maxDate
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine.Companion.minDate
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.travelbackintime.buybitcoin.router.InternalRouter
@@ -52,13 +51,13 @@ class TimeTravelRouterImpl @Inject constructor(
         val picker = MaterialDatePicker.Builder.datePicker()
             .setCalendarConstraints(
                 CalendarConstraints.Builder()
-                    .setStart(minDate.timeInMillis)
-                    .setEnd(maxDate.timeInMillis)
+                    .setStart(TimeTravelConstraints.minDateTimeInMillis)
+                    .setEnd(TimeTravelConstraints.maxDateTimeInMillis)
                     .setValidator(DateVal())
-                    .setOpenAt(maxDate.timeInMillis)
+                    .setOpenAt(TimeTravelConstraints.maxDateTimeInMillis)
                     .build()
             )
-            .setSelection(maxDate.timeInMillis)
+            .setSelection(TimeTravelConstraints.maxDateTimeInMillis)
             .setTitleText("")
             .build()
         picker.addOnPositiveButtonClickListener {
@@ -78,8 +77,9 @@ class TimeTravelRouterImpl @Inject constructor(
     @Parcelize
     private class DateVal : CalendarConstraints.DateValidator {
         override fun isValid(date: Long): Boolean {
-            val range = minDate.timeInMillis..maxDate.timeInMillis
-            return date in range
+            val timeRange =
+                TimeTravelConstraints.minDateTimeInMillis..TimeTravelConstraints.maxDateTimeInMillis
+            return date in timeRange
         }
     }
 }
