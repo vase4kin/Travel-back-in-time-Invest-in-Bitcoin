@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Andrey Tolpeev
+ * Copyright 2019 Andrey Tolpeev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-include ':app'
-include ':libraries:timetravelmachine'
-include ':libraries:repository'
-include ':libraries:coindesk-service'
-include ':libraries:remote-config'
-include ':libraries:tracker'
-include ':libraries:database'
-include ':libraries:crashlytics'
-include ':shared'
-include ':libraries:shared-coindesk-service'
+
+repositories {
+    jcenter()
+}
+plugins {
+    `kotlin-dsl`
+}

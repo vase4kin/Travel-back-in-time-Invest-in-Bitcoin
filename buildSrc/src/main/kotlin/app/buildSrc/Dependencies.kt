@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Andrey Tolpeev
+ * Copyright 2020 Andrey Tolpeev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-include ':app'
-include ':libraries:timetravelmachine'
-include ':libraries:repository'
-include ':libraries:coindesk-service'
-include ':libraries:remote-config'
-include ':libraries:tracker'
-include ':libraries:database'
-include ':libraries:crashlytics'
-include ':shared'
-include ':libraries:shared-coindesk-service'
+package app.buildSrc
+
+object Libs {
+    object Kmm {
+        object Ktor {
+            private const val version = "1.5.2"
+            const val clientCore = "io.ktor:ktor-client-core:$version"
+            const val clientCio = "io.ktor:ktor-client-cio:$version"
+            const val clientSerialization = "io.ktor:ktor-client-serialization:$version"
+            const val clientAndroid = "io.ktor:ktor-client-android:$version"
+            const val clientIos = "io.ktor:ktor-client-ios:$version"
+        }
+    }
+}
