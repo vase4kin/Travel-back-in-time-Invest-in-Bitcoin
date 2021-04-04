@@ -22,7 +22,7 @@ object TimeTravelConstraints {
     private const val MIN_COIN_DESK_DATE_TIME_DAY = 18
 
     // Minimum date for available price at coin desk
-    val minCoinDeskDateTimeInMillis =
+    internal val minCoinDeskDateTimeInMillis =
         GregorianCalendar(
             MIN_COIN_DESK_DATE_TIME_YEAR,
             MIN_COIN_DESK_DATE_TIME_MONTH,
