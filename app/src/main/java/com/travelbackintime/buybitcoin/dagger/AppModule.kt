@@ -25,6 +25,7 @@ import com.github.vase4kin.coindesk.service.CoinDeskService
 import com.github.vase4kin.coindesk.tracker.Analytics
 import com.github.vase4kin.coindesk.tracker.Tracker
 import com.github.vase4kin.coindesk.tracker.TrackerImpl
+import com.github.vase4kin.crashlytics.Crashlytics
 import com.github.vase4kin.database.LocalFirebaseDatabase
 import com.github.vase4kin.database.LocalFirebaseDatabaseImpl
 import com.github.vase4kin.repository.Repository
@@ -32,10 +33,12 @@ import com.github.vase4kin.repository.RepositoryImpl
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.timetravelmachine.TimeTravelMachineImpl
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.travelbackintime.buybitcoin.impl.AnalyticsImpl
+import com.travelbackintime.buybitcoin.impl.CrashlyticsImpl
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
@@ -68,9 +71,10 @@ class AppModule {
 
     @Provides
     fun provideLocaleDatabase(
-        database: FirebaseDatabase
+        database: FirebaseDatabase,
+        crashlytics: Crashlytics
     ): LocalFirebaseDatabase {
-        return LocalFirebaseDatabaseImpl(database)
+        return LocalFirebaseDatabaseImpl(database, crashlytics)
     }
 
     @Provides
@@ -93,6 +97,11 @@ class AppModule {
     @Provides
     fun provideAnalytics(analytics: FirebaseAnalytics): Analytics {
         return AnalyticsImpl(analytics)
+    }
+
+    @Provides
+    fun provideCrashlytics(): Crashlytics {
+        return CrashlyticsImpl(FirebaseCrashlytics.getInstance())
     }
 
     @Singleton

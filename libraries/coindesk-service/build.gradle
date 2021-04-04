@@ -1,12 +1,11 @@
 plugins {
     id 'java-library'
-    id 'org.jetbrains.kotlin.jvm'
+    id 'kotlin'
     id 'io.gitlab.arturbosch.detekt'
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    testImplementation "junit:junit:$rootProject.junitVersion"
 }
 
 dependencies {
