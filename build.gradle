@@ -51,6 +51,7 @@ allprojects {
 
 subprojects {
     afterEvaluate { project ->
+        // For Android related projects
         if (project.hasProperty('android')) {
 
             android {
@@ -84,7 +85,30 @@ subprojects {
                 autoCorrect = true
 
                 reports {
-                    html.enabled = true // observe findings in your browser with structure and code snippets
+                    html.enabled = true
+                    // observe findings in your browser with structure and code snippets
+                }
+            }
+
+            dependencies {
+                detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0")
+            }
+
+            tasks.detekt {
+                jvmTarget = "1.8"
+            }
+            // For java related projects
+        } else if (project.hasProperty('java')) {
+
+            detekt {
+                toolVersion = "1.16.0"
+                buildUponDefaultConfig = true // preconfigure defaults
+                allRules = false // activate all available (even unstable) rules.
+                autoCorrect = true
+
+                reports {
+                    html.enabled = true
+                    // observe findings in your browser with structure and code snippets
                 }
             }
 
