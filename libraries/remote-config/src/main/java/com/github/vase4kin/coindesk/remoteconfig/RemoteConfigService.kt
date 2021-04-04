@@ -18,4 +18,8 @@ package com.github.vase4kin.coindesk.remoteconfig
 
 interface RemoteConfigService {
     val isAdsEnabled: Boolean
+
+    companion object {
+        const val CONFIG_VALUE_ADS_ENABLED = "ads_enabled"
+    }
 }
