@@ -66,7 +66,14 @@ class AppModule {
         repository: Repository,
         app: Application
     ): TimeTravelMachine {
-        return TimeTravelMachineImpl(repository, app.resources)
+        return TimeTravelMachineImpl(
+            repository = repository,
+            defaultEvent = TimeTravelMachine.Event.RealWorldEvent(
+                title = app.resources.getString(R.string.text_oops),
+                description = app.resources.getString(R.string.text_basically_nothing),
+                isDonate = false
+            )
+        )
     }
 
     @Provides
