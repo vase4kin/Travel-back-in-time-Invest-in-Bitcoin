@@ -24,7 +24,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.travelbackintime.buybitcoin.router.InternalRouter
 import com.travelbackintime.buybitcoin.timetravel.view.InvestMoneyBottomSheetDialog
 import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelFragment
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
 interface TimeTravelRouter {

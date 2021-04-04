@@ -299,13 +299,14 @@
                             android:layout_weight="1"
                             android:onClick="@{() -> viewModel.onShareOnTwitter()}"
                             android:padding="12dp"
+                            android:layout_marginEnd="4dp"
+                            android:visibility="gone"
                             app:icon="@drawable/ic_twitter" />
 
                         <com.google.android.material.button.MaterialButton
                             style="@style/Widget.MaterialComponents.VideoGameButton.Icon"
                             android:layout_height="64dp"
                             android:layout_width="0dp"
-                            android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:onClick="@{() -> viewModel.onShareWithFriends()}"
                             android:padding="12dp"
