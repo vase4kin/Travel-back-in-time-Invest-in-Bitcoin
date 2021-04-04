@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import app.buildSrc.Libs
 
 plugins {
     kotlin("multiplatform")
@@ -11,18 +12,28 @@ kotlin {
     ios {
         binaries {
             framework {
-                baseName = "libraries:shared-repository"
+                baseName = "shared-libraries:coindesk-service"
             }
         }
     }
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":libraries:shared-coindesk-service"))
+                implementation(Libs.Kmm.Ktor.clientCore)
+                implementation(Libs.Kmm.Ktor.clientCio)
+                implementation(Libs.Kmm.Ktor.clientSerialization)
             }
         }
-        val androidMain by getting
-        val iosMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(Libs.Kmm.Ktor.clientAndroid)
+            }
+        }
+        val iosMain by getting {
+            dependencies {
+                implementation(Libs.Kmm.Ktor.clientIos)
+            }
+        }
     }
 }
 
