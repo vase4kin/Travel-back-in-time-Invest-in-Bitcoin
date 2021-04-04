@@ -20,7 +20,7 @@ import android.app.Application
 import bitcoin.backintime.com.backintimebuybitcoin.BuildConfig
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
-import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigServiceImpl
+import com.travelbackintime.buybitcoin.impl.RemoteConfigServiceImpl
 import com.github.vase4kin.coindesk.service.CoinDeskService
 import com.github.vase4kin.coindesk.tracker.Analytics
 import com.github.vase4kin.coindesk.tracker.Tracker
