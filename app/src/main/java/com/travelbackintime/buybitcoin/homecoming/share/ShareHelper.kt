@@ -1,16 +1,11 @@
 package com.travelbackintime.buybitcoin.homecoming.share
 
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.facebook.share.model.ShareHashtag
-import com.facebook.share.model.ShareLinkContent
-import com.facebook.share.widget.ShareDialog
 import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
-import com.twitter.sdk.android.tweetcomposer.TweetComposer
 import javax.inject.Inject
 
 interface ShareHelper {
@@ -39,20 +34,12 @@ class ShareHelperImpl @Inject constructor(
         val textToShareBuilder = StringBuilder(textToShare)
         textToShareBuilder.append(" #")
         textToShareBuilder.append(activity.getString(R.string.text_hashtag))
-        val builder = TweetComposer.Builder(activity)
-            .text(textToShareBuilder.toString())
-        builder.show()
+        // Share logic is supposed to be here
     }
 
     override fun shareToFaceBook() {
         val googlePlayLink = createGooglePlayLink()
-        val content = ShareLinkContent.Builder()
-            .setContentUrl(Uri.parse(googlePlayLink))
-            .setShareHashtag(
-                ShareHashtag.Builder().setHashtag(activity.getString(R.string.text_hashtag)).build()
-            )
-            .build()
-        ShareDialog.show(activity, content)
+        // Share logic is supposed to be here
     }
 
     private fun createGooglePlayLink(): String {

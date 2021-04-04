@@ -2,7 +2,7 @@ package com.travelbackintime.buybitcoin.impl
 
 import android.os.Parcelable
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import java.util.Date
 
 sealed class TimeTravelEvenWrapper : Parcelable {
