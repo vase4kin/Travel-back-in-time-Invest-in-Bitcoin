@@ -1,6 +1,7 @@
-package com.github.vase4kin.database
+package com.travelbackintime.buybitcoin.impl
 
 import com.github.vase4kin.crashlytics.Crashlytics
+import com.github.vase4kin.database.LocalDatabase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.GenericTypeIndicator
@@ -9,10 +10,10 @@ import io.reactivex.Single
 
 private const val REF_EVENTS = "events"
 
-class LocalFirebaseDatabaseImpl(
+class LocalDatabaseImpl(
     private val database: com.google.firebase.database.FirebaseDatabase,
     private val crashlytics: Crashlytics
-) : LocalFirebaseDatabase {
+) : LocalDatabase {
 
     private var timeTravelEvents: Map<String, TimeTravelEvent> = HashMap()
 
@@ -20,13 +21,13 @@ class LocalFirebaseDatabaseImpl(
         fetchData()
     }
 
-    override fun getTimeEvent(date: String): Single<LocalFirebaseDatabase.TimeTravelEvent> {
+    override fun getTimeEvent(date: String): Single<LocalDatabase.TimeTravelEvent> {
         val event = timeTravelEvents[date]
         return if (event == null) {
-            Single.just(LocalFirebaseDatabase.TimeTravelEvent.NoEvent)
+            Single.just(LocalDatabase.TimeTravelEvent.NoEvent)
         } else {
             Single.just(
-                LocalFirebaseDatabase.TimeTravelEvent.Event(
+                LocalDatabase.TimeTravelEvent.Event(
                     title = event.title,
                     description = event.description,
                     isDonate = event.isDonate

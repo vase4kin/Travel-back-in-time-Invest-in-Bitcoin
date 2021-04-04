@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.vase4kin.database
+package com.travelbackintime.buybitcoin.impl
 
 import androidx.annotation.Keep
 
@@ -25,5 +25,6 @@ data class TimeTravelEvent(
     @field:JvmField
     val isDonate: Boolean
 ) {
+    @Suppress("unused")
     constructor() : this("", "", false)
 }

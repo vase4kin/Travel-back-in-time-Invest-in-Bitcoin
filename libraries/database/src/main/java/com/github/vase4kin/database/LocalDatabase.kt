@@ -2,7 +2,7 @@ package com.github.vase4kin.database
 
 import io.reactivex.Single
 
-interface LocalFirebaseDatabase {
+interface LocalDatabase {
     /**
      * Get time travel event by date
      * date format is yyyy-MM-dd

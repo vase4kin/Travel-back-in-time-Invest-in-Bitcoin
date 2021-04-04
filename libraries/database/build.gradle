@@ -1,6 +1,8 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'io.gitlab.arturbosch.detekt'
+plugins {
+    id 'java-library'
+    id 'kotlin'
+    id 'io.gitlab.arturbosch.detekt'
+}
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -12,13 +14,4 @@ dependencies {
 
 dependencies {
     implementation project(":libraries:crashlytics")
-}
-
-dependencies {
-    // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:26.7.0')
-
-    // Declare the dependencies for the Crashlytics and Analytics libraries
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation "com.google.firebase:firebase-database-ktx"
 }

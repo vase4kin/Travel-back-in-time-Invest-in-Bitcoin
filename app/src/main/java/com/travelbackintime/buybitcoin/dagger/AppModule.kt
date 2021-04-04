@@ -26,8 +26,8 @@ import com.github.vase4kin.coindesk.tracker.Analytics
 import com.github.vase4kin.coindesk.tracker.Tracker
 import com.github.vase4kin.coindesk.tracker.TrackerImpl
 import com.github.vase4kin.crashlytics.Crashlytics
-import com.github.vase4kin.database.LocalFirebaseDatabase
-import com.github.vase4kin.database.LocalFirebaseDatabaseImpl
+import com.github.vase4kin.database.LocalDatabase
+import com.travelbackintime.buybitcoin.impl.LocalDatabaseImpl
 import com.github.vase4kin.repository.Repository
 import com.github.vase4kin.repository.RepositoryImpl
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
@@ -73,8 +73,8 @@ class AppModule {
     fun provideLocaleDatabase(
         database: FirebaseDatabase,
         crashlytics: Crashlytics
-    ): LocalFirebaseDatabase {
-        return LocalFirebaseDatabaseImpl(database, crashlytics)
+    ): LocalDatabase {
+        return LocalDatabaseImpl(database, crashlytics)
     }
 
     @Provides
@@ -169,8 +169,8 @@ class AppModule {
     @Provides
     fun provideRepository(
         service: CoinDeskService,
-        localFirebaseDatabase: LocalFirebaseDatabase
+        localDatabase: LocalDatabase
     ): Repository {
-        return RepositoryImpl(service, localFirebaseDatabase)
+        return RepositoryImpl(service, localDatabase)
     }
 }

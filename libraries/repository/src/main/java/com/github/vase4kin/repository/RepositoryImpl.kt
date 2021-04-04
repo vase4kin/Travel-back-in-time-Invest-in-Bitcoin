@@ -1,14 +1,14 @@
 package com.github.vase4kin.repository
 
 import com.github.vase4kin.coindesk.service.CoinDeskService
-import com.github.vase4kin.database.LocalFirebaseDatabase
+import com.github.vase4kin.database.LocalDatabase
 import io.reactivex.Single
 
 private const val USD = "USD"
 
 class RepositoryImpl(
     private val coinDeskService: CoinDeskService,
-    private val database: LocalFirebaseDatabase,
+    private val database: LocalDatabase,
 ) : Repository {
 
     override fun getBitcoinPriceByDate(date: String): Single<Double> {
@@ -25,7 +25,7 @@ class RepositoryImpl(
             }
     }
 
-    override fun getTimeEvent(date: String): Single<LocalFirebaseDatabase.TimeTravelEvent> {
+    override fun getTimeEvent(date: String): Single<LocalDatabase.TimeTravelEvent> {
         return database.getTimeEvent(date)
     }
 }
