@@ -2,6 +2,7 @@ package com.github.vase4kin.shared.coindesk.service
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
+import io.ktor.client.features.defaultRequest
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.get
@@ -13,12 +14,16 @@ class CoinDeskServiceImpl : CoinDeskService {
         install(JsonFeature) {
             serializer = KotlinxSerializer()
         }
+        defaultRequest {
+            url {
+                host = CoinDeskService.BASE_URL
+            }
+        }
     }
 
     override suspend fun getBitcoinHistoricalPrice(date: String): BitcoinHistoricalPrice {
-        val url = "${CoinDeskService.BASE_URL}${CoinDeskService.URL_GET_BITCOIN_PRICE_BY_DATE}"
         return client.use {
-            client.get(url) {
+            client.get(CoinDeskService.URL_GET_BITCOIN_PRICE_BY_DATE) {
                 parameter("start", date)
                 parameter("end", date)
             }
@@ -26,9 +31,8 @@ class CoinDeskServiceImpl : CoinDeskService {
     }
 
     override suspend fun getBitcoinCurrentPrice(): BitcoinCurrentPrice {
-        val url = "${CoinDeskService.BASE_URL}${CoinDeskService.URL_GET_CURRENT_BITCOIN_PRICE}"
         return client.use {
-            client.get(url)
+            client.get(CoinDeskService.URL_GET_CURRENT_BITCOIN_PRICE)
         }
     }
 }
