@@ -1,6 +1,6 @@
 package com.github.vase4kin.database
 
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.github.vase4kin.crashlytics.Crashlytics
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.GenericTypeIndicator
@@ -10,7 +10,8 @@ import io.reactivex.Single
 private const val REF_EVENTS = "events"
 
 class LocalFirebaseDatabaseImpl(
-    private val database: com.google.firebase.database.FirebaseDatabase
+    private val database: com.google.firebase.database.FirebaseDatabase,
+    private val crashlytics: Crashlytics
 ) : LocalFirebaseDatabase {
 
     private var timeTravelEvents: Map<String, TimeTravelEvent> = HashMap()
@@ -45,7 +46,7 @@ class LocalFirebaseDatabaseImpl(
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                FirebaseCrashlytics.getInstance().recordException(databaseError.toException())
+                crashlytics.recordException(databaseError.toException())
             }
         })
     }
