@@ -1,4 +1,4 @@
-package com.github.vase4kin.shared_repository
+package com.github.vase4kin.shared.repository
 
 interface Repository {
     /**

@@ -1,4 +1,4 @@
-package com.github.vase4kin.shared_repository
+package com.github.vase4kin.shared.repository
 
 import com.github.vase4kin.shared.coindesk.service.CoinDeskService
 import com.github.vase4kin.shared.coindesk.service.CoinDeskServiceImpl
@@ -9,6 +9,7 @@ class RepositoryImpl(
     /**
      * FIXME: Provide through DI?
      */
+    @Suppress("ForbiddenComment")
     private val coinDeskService: CoinDeskService = CoinDeskServiceImpl()
 ) : Repository {
 

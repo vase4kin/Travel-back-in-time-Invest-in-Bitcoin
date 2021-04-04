@@ -41,6 +41,14 @@ android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 }
 
+detekt {
+    input = files(
+        "src/commonMain/kotlin",
+        "src/iOSMain/kotlin",
+        "src/jvmMain/kotlin"
+    )
+}
+
 val packForXcode by tasks.creating(Sync::class) {
     group = "build"
     val mode = System.getenv("CONFIGURATION") ?: "DEBUG"
