@@ -17,7 +17,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'io.gitlab.arturbosch.detekt'
 
@@ -52,12 +52,8 @@ android {
     productFlavors {
     }
 
-    dataBinding {
-        enabled = true
-    }
-
-    androidExtensions {
-        experimental = true
+    buildFeatures {
+        dataBinding = true
     }
 }
 
