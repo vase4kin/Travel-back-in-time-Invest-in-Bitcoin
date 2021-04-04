@@ -1,7 +1,5 @@
 package com.github.vase4kin.coindesk.tracker
 
-import android.os.Bundle
-import com.google.firebase.analytics.FirebaseAnalytics
 import java.util.Date
 
 private const val EVENT_USER_SETS_TIME = "event_user_sets_time"
@@ -27,81 +25,93 @@ private const val PARAMETER_EVENT_NAME = "parameter_name"
 private const val PARAMETER_MONEY_SUGGESTION = "parameter_money_suggestion"
 
 @Suppress("TooManyFunctions")
-class TrackerImpl(private val analytics: FirebaseAnalytics) : Tracker {
+class TrackerImpl(
+    private val analytics: Analytics
+) : Tracker {
 
     override fun trackUserRetries() {
-        analytics.logEvent(EVENT_USER_RETRIES, Bundle())
+        analytics.logEvent(EVENT_USER_RETRIES)
     }
 
     override fun trackUserSetsTime(time: String) {
-        val bundle = Bundle()
-        bundle.putString(PARAMETER_TIME, time)
-        analytics.logEvent(EVENT_USER_SETS_TIME, bundle)
+        analytics.logEvent(
+            EVENT_USER_SETS_TIME, mapOf(
+                PARAMETER_TIME to time
+            )
+        )
     }
 
     override fun trackUserSetsMoney(money: String) {
-        val bundle = Bundle()
-        bundle.putString(PARAMETER_MONEY, money)
-        analytics.logEvent(EVENT_USER_SETS_MONEY, bundle)
+        analytics.logEvent(
+            EVENT_USER_SETS_MONEY, mapOf(
+                PARAMETER_MONEY to money
+            )
+        )
     }
 
     override fun trackUserTravelsBackAndBuys() {
-        analytics.logEvent(EVENT_USER_TRAVELS_BACK, null)
+        analytics.logEvent(EVENT_USER_TRAVELS_BACK)
     }
 
     override fun trackUserSeesEmptyAmountError() {
-        analytics.logEvent(EVENT_USER_SEES_EMPTY_AMOUNT_ERROR, null)
+        analytics.logEvent(EVENT_USER_SEES_EMPTY_AMOUNT_ERROR)
     }
 
     override fun trackUserSeesAtLeastDollarError() {
-        analytics.logEvent(EVENT_USER_SEES_AT_LEAST_DOLLAR_ERROR, null)
+        analytics.logEvent(EVENT_USER_SEES_AT_LEAST_DOLLAR_ERROR)
     }
 
     override fun trackUserSeesYouReachError() {
-        analytics.logEvent(EVENT_USER_SEES_YOU_RICH_ERROR, null)
+        analytics.logEvent(EVENT_USER_SEES_YOU_RICH_ERROR)
     }
 
     override fun trackUserStartsOver() {
-        analytics.logEvent(EVENT_USER_STARTS_OVER, null)
+        analytics.logEvent(EVENT_USER_STARTS_OVER)
     }
 
     override fun trackUserSharesWithFriends() {
-        analytics.logEvent(EVENT_USER_SHARES_WITH_FRIENDS, null)
+        analytics.logEvent(EVENT_USER_SHARES_WITH_FRIENDS)
     }
 
     override fun trackUserCopiesBtcWalletAddress() {
-        analytics.logEvent(EVENT_USER_COPIES_BTC_WALLET, null)
+        analytics.logEvent(EVENT_USER_COPIES_BTC_WALLET)
     }
 
     override fun trackUserGetsToRealWorldEvent(eventName: String) {
-        val bundle = Bundle()
-        bundle.putString(PARAMETER_EVENT_NAME, eventName)
-        analytics.logEvent(EVENT_USER_GETS_TO_SATOSHI, bundle)
+        analytics.logEvent(
+            EVENT_USER_GETS_TO_SATOSHI, mapOf(
+                PARAMETER_EVENT_NAME to eventName
+            )
+        )
     }
 
     override fun trackUserGetsToTimeTravelEvent(
         profitMoney: Double,
         investedMoney: Double,
-        timeToTravel: Date
+        time: Long
     ) {
-        val bundle = Bundle()
-        bundle.putDouble(PARAMETER_PROFIT, profitMoney)
-        bundle.putDouble(PARAMETER_INVESTED, investedMoney)
-        bundle.putString(PARAMETER_TIME, timeToTravel.toString())
-        analytics.logEvent(EVENT_USER_GETS_TO_EXIST, bundle)
+        analytics.logEvent(
+            EVENT_USER_GETS_TO_EXIST, mapOf(
+                PARAMETER_PROFIT to profitMoney.toString(),
+                PARAMETER_INVESTED to investedMoney.toString(),
+                PARAMETER_TIME to Date(time).toString()
+            )
+        )
     }
 
     override fun trackUserSharesOnFb() {
-        analytics.logEvent(EVENT_USER_SHARES_ON_FB, null)
+        analytics.logEvent(EVENT_USER_SHARES_ON_FB)
     }
 
     override fun trackUserSharesOnTwitter() {
-        analytics.logEvent(EVENT_USER_SHARES_ON_TWITTER, null)
+        analytics.logEvent(EVENT_USER_SHARES_ON_TWITTER)
     }
 
     override fun trackUserChooseMoneySuggestion(amount: String) {
-        val bundle = Bundle()
-        bundle.putString(PARAMETER_MONEY_SUGGESTION, amount)
-        analytics.logEvent(EVENT_USER_CHOOSE_SUGGESTION, bundle)
+        analytics.logEvent(
+            EVENT_USER_CHOOSE_SUGGESTION, mapOf(
+                PARAMETER_MONEY_SUGGESTION to amount
+            )
+        )
     }
 }

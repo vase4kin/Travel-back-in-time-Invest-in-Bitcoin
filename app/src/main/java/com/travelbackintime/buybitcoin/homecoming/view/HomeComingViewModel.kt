@@ -96,7 +96,7 @@ class HomeComingViewModel @Inject constructor(
         tracker.trackUserGetsToTimeTravelEvent(
             investedMoney = event.investedMoney,
             profitMoney = event.profitMoney,
-            timeToTravel = event.timeToTravel
+            time = event.timeToTravel.time
         )
     }
 
