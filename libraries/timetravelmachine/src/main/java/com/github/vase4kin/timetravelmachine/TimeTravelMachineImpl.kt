@@ -17,7 +17,7 @@
 package com.github.vase4kin.timetravelmachine
 
 import android.content.res.Resources
-import com.github.vase4kin.database.LocalFirebaseDatabase
+import com.github.vase4kin.database.LocalDatabase
 import com.github.vase4kin.repository.Repository
 import io.reactivex.Single
 import java.text.SimpleDateFormat
@@ -39,14 +39,14 @@ class TimeTravelMachineImpl(
         return repository.getTimeEvent(eventServerDate)
             .flatMap { event ->
                 when (event) {
-                    is LocalFirebaseDatabase.TimeTravelEvent.Event -> Single.just(
+                    is LocalDatabase.TimeTravelEvent.Event -> Single.just(
                         TimeTravelMachine.Event.RealWorldEvent(
                             title = event.title,
                             description = event.description,
                             isDonate = event.isDonate
                         )
                     )
-                    LocalFirebaseDatabase.TimeTravelEvent.NoEvent -> {
+                    LocalDatabase.TimeTravelEvent.NoEvent -> {
                         when {
                             isDateBeforePriceIsAvailable(time.toDate()) -> Single.just(
                                 TimeTravelMachine.Event.RealWorldEvent(

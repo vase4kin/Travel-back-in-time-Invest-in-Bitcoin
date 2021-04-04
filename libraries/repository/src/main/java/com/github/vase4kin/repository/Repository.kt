@@ -1,6 +1,6 @@
 package com.github.vase4kin.repository
 
-import com.github.vase4kin.database.LocalFirebaseDatabase
+import com.github.vase4kin.database.LocalDatabase
 import io.reactivex.Single
 
 interface Repository {
@@ -19,5 +19,5 @@ interface Repository {
      * Get time travel event by date
      * date format is yyyy-MM-dd
      */
-    fun getTimeEvent(date: String): Single<LocalFirebaseDatabase.TimeTravelEvent>
+    fun getTimeEvent(date: String): Single<LocalDatabase.TimeTravelEvent>
 }
