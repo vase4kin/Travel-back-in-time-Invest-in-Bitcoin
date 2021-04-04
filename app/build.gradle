@@ -88,6 +88,7 @@ dependencies {
     implementation project(":libraries:tracker")
     implementation project(":libraries:database")
     implementation project(":libraries:crashlytics")
+    implementation project(":shared")
 }
 
 dependencies {
