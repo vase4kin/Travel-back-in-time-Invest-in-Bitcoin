@@ -26,6 +26,8 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.travelbackintime.buybitcoin.homecoming.view.EXTRA_RESULT
+import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper
+import com.travelbackintime.buybitcoin.impl.wrap
 import com.travelbackintime.buybitcoin.router.InternalRouter
 import dagger.android.support.DaggerFragment
 import pl.droidsonroids.gif.GifDrawable
@@ -40,7 +42,7 @@ class LoadingFragment : DaggerFragment() {
     companion object {
         fun create(event: TimeTravelMachine.Event): Fragment {
             val bundle = Bundle()
-            bundle.putParcelable(EXTRA_RESULT, event)
+            bundle.putParcelable(EXTRA_RESULT, event.wrap())
             val loadingFragment = LoadingFragment()
             loadingFragment.arguments = bundle
             return loadingFragment
@@ -85,7 +87,7 @@ class LoadingFragment : DaggerFragment() {
     private fun openHomecoming() {
         val args = arguments
         if (args != null) {
-            val event: TimeTravelMachine.Event = args.getParcelable(EXTRA_RESULT) ?: return
+            val event: TimeTravelEvenWrapper = args.getParcelable(EXTRA_RESULT) ?: return
             internalRouter.openHomeComingFromLoading(
                 event = event
             )

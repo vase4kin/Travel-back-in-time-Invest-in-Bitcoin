@@ -27,7 +27,7 @@ import androidx.viewbinding.ViewBinding
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentHomeComingBinding
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentHomeComingEventBinding
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine
+import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -36,7 +36,7 @@ const val EXTRA_RESULT = "extra_result"
 class HomeComingFragment : DaggerFragment() {
 
     companion object {
-        fun create(event: TimeTravelMachine.Event): Fragment {
+        fun create(event: TimeTravelEvenWrapper): Fragment {
             val bundle = Bundle()
             bundle.putParcelable(EXTRA_RESULT, event)
             val homeComingFragment = HomeComingFragment()
@@ -53,8 +53,8 @@ class HomeComingFragment : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val event: TimeTravelMachine.Event = arguments?.getParcelable(EXTRA_RESULT)
-            ?: TimeTravelMachine.Event.RealWorldEvent("", "", false)
+        val event: TimeTravelEvenWrapper = arguments?.getParcelable(EXTRA_RESULT)
+            ?: TimeTravelEvenWrapper.RealWorldEvent("", "", false)
         viewModel.event = event
         return provideView(
             event = event,
@@ -64,20 +64,22 @@ class HomeComingFragment : DaggerFragment() {
     }
 
     private fun provideView(
-        event: TimeTravelMachine.Event,
+        event: TimeTravelEvenWrapper,
         inflater: LayoutInflater,
         container: ViewGroup?
     ): View {
         val viewBinding: ViewBinding = when (event) {
-            is TimeTravelMachine.Event.TimeTravelEvent -> {
+            is TimeTravelEvenWrapper.TimeTravelEvent -> {
                 DataBindingUtil.inflate<FragmentHomeComingBinding>(
-                        inflater, R.layout.fragment_home_coming, container, false).apply {
+                    inflater, R.layout.fragment_home_coming, container, false
+                ).apply {
                     viewModel = this@HomeComingFragment.viewModel
                 }
             }
-            is TimeTravelMachine.Event.RealWorldEvent -> {
+            is TimeTravelEvenWrapper.RealWorldEvent -> {
                 DataBindingUtil.inflate<FragmentHomeComingEventBinding>(
-                        inflater, R.layout.fragment_home_coming_event, container, false).apply {
+                    inflater, R.layout.fragment_home_coming_event, container, false
+                ).apply {
                     viewModel = this@HomeComingFragment.viewModel
                 }
             }

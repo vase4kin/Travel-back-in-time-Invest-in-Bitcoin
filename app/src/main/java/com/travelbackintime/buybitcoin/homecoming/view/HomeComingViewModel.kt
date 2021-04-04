@@ -24,9 +24,9 @@ import androidx.lifecycle.OnLifecycleEvent
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
 import com.github.vase4kin.coindesk.tracker.Tracker
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.homecoming.router.HomeComingRouter
 import com.travelbackintime.buybitcoin.homecoming.share.ShareHelper
+import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
@@ -60,27 +60,27 @@ class HomeComingViewModel @Inject constructor(
     val isAdsEnabled: Boolean
         get() = shouldShowAds()
 
-    var event: TimeTravelMachine.Event? = null
+    var event: TimeTravelEvenWrapper? = null
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun handleOnCreate() {
         val event = this.event ?: return
         when (event) {
-            is TimeTravelMachine.Event.RealWorldEvent -> processRealWorldEvent(event)
-            is TimeTravelMachine.Event.TimeTravelEvent -> processTimeTravelEvent(event)
+            is TimeTravelEvenWrapper.RealWorldEvent -> processRealWorldEvent(event)
+            is TimeTravelEvenWrapper.TimeTravelEvent -> processTimeTravelEvent(event)
         }
     }
 
     private fun shouldShowAds(): Boolean {
         val event = event
-        return if (event is TimeTravelMachine.Event.RealWorldEvent) {
+        return if (event is TimeTravelEvenWrapper.RealWorldEvent) {
             !event.isDonate
         } else {
             true
         } && configService.isAdsEnabled
     }
 
-    private fun processRealWorldEvent(event: TimeTravelMachine.Event.RealWorldEvent) {
+    private fun processRealWorldEvent(event: TimeTravelEvenWrapper.RealWorldEvent) {
         title.set(event.title)
         description.set(event.description)
         isDescriptionViewVisible.set(event.description.isNotEmpty())
@@ -88,7 +88,7 @@ class HomeComingViewModel @Inject constructor(
         tracker.trackUserGetsToRealWorldEvent(event.title)
     }
 
-    private fun processTimeTravelEvent(event: TimeTravelMachine.Event.TimeTravelEvent) {
+    private fun processTimeTravelEvent(event: TimeTravelEvenWrapper.TimeTravelEvent) {
         setTimeMachineDisplay(event)
         isShareViewVisible.set(true)
         isParamViewVisible.set(true)
@@ -107,7 +107,7 @@ class HomeComingViewModel @Inject constructor(
 
     fun onShareWithFriends() {
         val event = event
-        if (event is TimeTravelMachine.Event.TimeTravelEvent) {
+        if (event is TimeTravelEvenWrapper.TimeTravelEvent) {
             shareHelper.shareWithFriends(event)
             tracker.trackUserSharesWithFriends()
         }
@@ -120,7 +120,7 @@ class HomeComingViewModel @Inject constructor(
 
     fun onShareOnTwitter() {
         val event = event
-        if (event is TimeTravelMachine.Event.TimeTravelEvent) {
+        if (event is TimeTravelEvenWrapper.TimeTravelEvent) {
             shareHelper.shareToTwitter(event)
             tracker.trackUserSharesOnTwitter()
         }
@@ -139,7 +139,7 @@ class HomeComingViewModel @Inject constructor(
         router.openPoweredByCoinDeskUrl()
     }
 
-    private fun setTimeMachineDisplay(event: TimeTravelMachine.Event.TimeTravelEvent) {
+    private fun setTimeMachineDisplay(event: TimeTravelEvenWrapper.TimeTravelEvent) {
         val profitMoney = formatterUtils.formatPriceAsOnlyDigits(event.profitMoney)
         val investedMoney = formatterUtils.formatPriceAsOnlyDigits(event.investedMoney)
         val date = event.timeToTravel

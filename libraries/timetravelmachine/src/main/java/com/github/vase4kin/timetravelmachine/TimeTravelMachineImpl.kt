@@ -16,7 +16,6 @@
 
 package com.github.vase4kin.timetravelmachine
 
-import android.content.res.Resources
 import com.github.vase4kin.database.LocalDatabase
 import com.github.vase4kin.repository.Repository
 import io.reactivex.Single
@@ -28,7 +27,7 @@ private const val PATTERN_TIME_DATE = "yyyy-MM-dd"
 
 class TimeTravelMachineImpl(
     private val repository: Repository,
-    private val resources: Resources
+    private val defaultEvent: TimeTravelMachine.Event.RealWorldEvent
 ) : TimeTravelMachine {
 
     override fun travelInTime(
@@ -48,13 +47,7 @@ class TimeTravelMachineImpl(
                     )
                     LocalDatabase.TimeTravelEvent.NoEvent -> {
                         when {
-                            isDateBeforePriceIsAvailable(time.toDate()) -> Single.just(
-                                TimeTravelMachine.Event.RealWorldEvent(
-                                    title = resources.getString(R.string.text_oops),
-                                    description = resources.getString(R.string.text_basically_nothing),
-                                    isDonate = false
-                                )
-                            )
+                            isDateBeforePriceIsAvailable(time.toDate()) -> Single.just(defaultEvent)
                             else -> calculateProfit(time.toDate(), investedMoney)
                         }
                     }

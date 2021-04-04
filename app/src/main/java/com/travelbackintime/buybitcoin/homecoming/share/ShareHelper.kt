@@ -7,15 +7,15 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.facebook.share.model.ShareHashtag
 import com.facebook.share.model.ShareLinkContent
 import com.facebook.share.widget.ShareDialog
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
+import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.twitter.sdk.android.tweetcomposer.TweetComposer
 import javax.inject.Inject
 
 interface ShareHelper {
-    fun shareWithFriends(event: TimeTravelMachine.Event.TimeTravelEvent)
-    fun shareToTwitter(event: TimeTravelMachine.Event.TimeTravelEvent)
+    fun shareWithFriends(event: TimeTravelEvenWrapper.TimeTravelEvent)
+    fun shareToTwitter(event: TimeTravelEvenWrapper.TimeTravelEvent)
     fun shareToFaceBook()
 }
 
@@ -26,30 +26,32 @@ class ShareHelperImpl @Inject constructor(
 
     private val activity = fragment.activity as AppCompatActivity
 
-    override fun shareWithFriends(event: TimeTravelMachine.Event.TimeTravelEvent) {
+    override fun shareWithFriends(event: TimeTravelEvenWrapper.TimeTravelEvent) {
         val textToShare = createShareText(event)
         ShareCompat.IntentBuilder.from(activity)
-                .setHtmlText(textToShare)
-                .setType("text/plain")
-                .startChooser()
+            .setHtmlText(textToShare)
+            .setType("text/plain")
+            .startChooser()
     }
 
-    override fun shareToTwitter(event: TimeTravelMachine.Event.TimeTravelEvent) {
+    override fun shareToTwitter(event: TimeTravelEvenWrapper.TimeTravelEvent) {
         val textToShare = createShareText(event)
         val textToShareBuilder = StringBuilder(textToShare)
         textToShareBuilder.append(" #")
         textToShareBuilder.append(activity.getString(R.string.text_hashtag))
         val builder = TweetComposer.Builder(activity)
-                .text(textToShareBuilder.toString())
+            .text(textToShareBuilder.toString())
         builder.show()
     }
 
     override fun shareToFaceBook() {
         val googlePlayLink = createGooglePlayLink()
         val content = ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse(googlePlayLink))
-                .setShareHashtag(ShareHashtag.Builder().setHashtag(activity.getString(R.string.text_hashtag)).build())
-                .build()
+            .setContentUrl(Uri.parse(googlePlayLink))
+            .setShareHashtag(
+                ShareHashtag.Builder().setHashtag(activity.getString(R.string.text_hashtag)).build()
+            )
+            .build()
         ShareDialog.show(activity, content)
     }
 
@@ -57,7 +59,7 @@ class ShareHelperImpl @Inject constructor(
         return activity.getString(R.string.url_google_play, activity.packageName)
     }
 
-    private fun createShareText(event: TimeTravelMachine.Event.TimeTravelEvent): String {
+    private fun createShareText(event: TimeTravelEvenWrapper.TimeTravelEvent): String {
         val googlePlayLink = createGooglePlayLink()
         val date = event.timeToTravel
         val profitValue = event.profitMoney

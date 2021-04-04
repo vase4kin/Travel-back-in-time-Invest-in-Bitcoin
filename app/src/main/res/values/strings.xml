@@ -53,7 +53,8 @@
     <string name="retry_description">Nowadays time machine only needs to have a good internet connection instead of libyan plutonium.\nHappy time travelling!</string>
     <string name="powered_by_coindesk">Powered by <a href="https://www.coindesk.com/price/bitcoin/">CoinDesk</a></string>
     <string name="powered_by_coindesk_url">https://www.coindesk.com/price/bitcoin/</string>
-
+    <string name="text_basically_nothing">Bitcoin price is basically nothing now. Anyway, give yourself a big hand, nobody got as close as you, my friend. Try to put the dates after 18th of July 2010.</string>
+    <string name="text_oops">Oops!</string>
 
     <!--FB-->
     <string name="facebook_app_id">155974878366011</string>
