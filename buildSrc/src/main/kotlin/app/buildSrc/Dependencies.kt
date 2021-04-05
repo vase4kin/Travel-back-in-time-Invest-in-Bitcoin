@@ -38,4 +38,7 @@ object Libs {
         const val timeTravelMachine = ":shared-libraries:timetravelmachine"
         const val database = ":shared-libraries:database"
     }
+
+    const val crashlytics = ":libraries:crashlytics"
+    const val remoteConfig = ":libraries:remote-config"
 }

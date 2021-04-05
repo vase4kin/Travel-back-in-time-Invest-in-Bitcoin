@@ -84,8 +84,8 @@ dependencies {
 }
 
 dependencies {
-    implementation project(":libraries:remote-config")
-    implementation project(":libraries:crashlytics")
+    implementation project(Libs.crashlytics)
+    implementation project(Libs.remoteConfig)
     implementation project(Libs.Shared.timeTravelMachine)
     implementation project(Libs.Shared.repository)
     implementation project(Libs.Shared.coinDeskService)
