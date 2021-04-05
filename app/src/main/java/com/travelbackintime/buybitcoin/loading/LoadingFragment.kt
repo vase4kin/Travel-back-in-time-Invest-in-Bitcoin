@@ -23,7 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine
+import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.travelbackintime.buybitcoin.homecoming.view.EXTRA_RESULT
 import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper

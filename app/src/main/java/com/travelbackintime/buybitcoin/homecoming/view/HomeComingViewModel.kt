@@ -31,6 +31,7 @@ import com.travelbackintime.buybitcoin.utils.ClipboardUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import com.travelbackintime.buybitcoin.utils.ToastUtils
+import java.util.Date
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions", "LongParameterList")
@@ -96,7 +97,7 @@ class HomeComingViewModel @Inject constructor(
         tracker.trackUserGetsToTimeTravelEvent(
             investedMoney = event.investedMoney,
             profitMoney = event.profitMoney,
-            time = event.timeToTravel.time
+            time = event.timeToTravel
         )
     }
 
@@ -143,8 +144,8 @@ class HomeComingViewModel @Inject constructor(
         val profitMoney = formatterUtils.formatPriceAsOnlyDigits(event.profitMoney)
         val investedMoney = formatterUtils.formatPriceAsOnlyDigits(event.investedMoney)
         val date = event.timeToTravel
-        val month = formatterUtils.formatMonth(date)
-        val year = formatterUtils.formatYear(date)
+        val month = formatterUtils.formatMonth(Date(date))
+        val year = formatterUtils.formatYear(Date(date))
         profitMoneyText.set(profitMoney)
         investedMoneyText.set(investedMoney)
         monthText.set(month)

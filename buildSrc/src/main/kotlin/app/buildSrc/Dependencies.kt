@@ -24,6 +24,11 @@ object Libs {
             const val clientSerialization = "io.ktor:ktor-client-serialization:$version"
             const val clientAndroid = "io.ktor:ktor-client-android:$version"
             const val clientIos = "io.ktor:ktor-client-ios:$version"
+            const val logBack = "ch.qos.logback:logback-classic:1.2.3"
+            const val clientLogging = "io.ktor:ktor-client-logging:$version"
+        }
+        object KotlinX {
+            const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.1"
         }
     }
 }

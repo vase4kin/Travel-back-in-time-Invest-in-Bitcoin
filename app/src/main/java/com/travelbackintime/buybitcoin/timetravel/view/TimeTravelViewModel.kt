@@ -18,23 +18,21 @@ package com.travelbackintime.buybitcoin.timetravel.view
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.tracker.Tracker
-import com.github.vase4kin.timetravelmachine.TimeTravelConstraints
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine
+import com.github.vase4kin.shared.timetravelmachine.TimeTravelConstraints
+import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.travelbackintime.buybitcoin.timetravel.router.TimeTravelRouter
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import com.travelbackintime.buybitcoin.utils.onChanged
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import dagger.Lazy
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Date
 import javax.inject.Inject
 
@@ -45,6 +43,7 @@ class TimeTravelViewModel @Inject constructor(
     private val formatterUtils: FormatterUtils,
     private val timeTravelMachine: TimeTravelMachine,
     private val router: TimeTravelRouter,
+    private val coroutineScope: Lazy<LifecycleCoroutineScope>,
     resourcesProviderUtils: ResourcesProviderUtils
 ) : LifecycleObserver {
 
@@ -61,13 +60,6 @@ class TimeTravelViewModel @Inject constructor(
 
     private var investedMoney: Double = DEFAULT_INVESTED_MONEY
     private var timeToTravel: Long = TimeTravelConstraints.maxDateTimeInMillis
-
-    private val compositeDisposable = CompositeDisposable()
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onUnBind() {
-        compositeDisposable.clear()
-    }
 
     fun onBuyBitcoinButtonClick() {
         tracker.trackUserTravelsBackAndBuys()
@@ -92,29 +84,28 @@ class TimeTravelViewModel @Inject constructor(
         investedMoneyText.set(formattedInvestedMoney)
     }
 
+    @Suppress("TooGenericExceptionCaught")
     private fun travelInTime() {
-        timeTravelMachine.travelInTime(
-            time = timeToTravel,
-            investedMoney = investedMoney
-        )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
+        coroutineScope.get().launch {
+            withContext(Dispatchers.IO) {
                 isBuyBitcoinButtonEnabled.set(false)
-            }
-            .doFinally {
-                isBuyBitcoinButtonEnabled.set(true)
-            }
-            .subscribeBy(
-                onSuccess = {
-                    router.openLoadingFragment(it)
-                },
-                onError = {
-                    router.openErrorFragment()
-                    FirebaseCrashlytics.getInstance().recordException(it)
+                val event = try {
+                    timeTravelMachine.travelInTime(
+                        time = timeToTravel,
+                        investedMoney = investedMoney
+                    )
+                } catch (e: Exception) {
+                    FirebaseCrashlytics.getInstance().recordException(e)
                 }
-            )
-            .addTo(compositeDisposable)
+                isBuyBitcoinButtonEnabled.set(true)
+                withContext(Dispatchers.Main) {
+                    when (event) {
+                        is TimeTravelMachine.Event -> router.openLoadingFragment(event)
+                        else -> router.openErrorFragment()
+                    }
+                }
+            }
+        }
     }
 
     private fun isBuyBitcoinButtonEnabled(): Boolean {

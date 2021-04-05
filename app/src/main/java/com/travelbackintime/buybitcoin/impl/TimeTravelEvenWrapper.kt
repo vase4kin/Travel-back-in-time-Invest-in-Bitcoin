@@ -1,9 +1,8 @@
 package com.travelbackintime.buybitcoin.impl
 
 import android.os.Parcelable
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine
+import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import kotlinx.parcelize.Parcelize
-import java.util.Date
 
 sealed class TimeTravelEvenWrapper : Parcelable {
     @Parcelize
@@ -17,7 +16,7 @@ sealed class TimeTravelEvenWrapper : Parcelable {
     data class TimeTravelEvent(
         val profitMoney: Double,
         val investedMoney: Double,
-        val timeToTravel: Date
+        val timeToTravel: Long
     ) : TimeTravelEvenWrapper()
 }
 

@@ -5,7 +5,6 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("io.gitlab.arturbosch.detekt")
-    id ("org.jetbrains.kotlin.plugin.serialization")
 }
 
 kotlin {
@@ -13,43 +12,24 @@ kotlin {
     ios {
         binaries {
             framework {
-                baseName = "shared-libraries:coindesk-service"
+                baseName = "shared-libraries:timetravelmachine"
             }
         }
     }
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(Libs.Kmm.Ktor.clientCore)
-                implementation(Libs.Kmm.Ktor.clientCio)
-                implementation(Libs.Kmm.Ktor.clientSerialization)
-                implementation(Libs.Kmm.Ktor.logBack)
-                implementation(Libs.Kmm.Ktor.clientLogging)
+                implementation(project(":shared-libraries:repository"))
+                implementation(Libs.Kmm.KotlinX.dateTime)
             }
         }
-        val androidMain by getting {
-            dependencies {
-                implementation(Libs.Kmm.Ktor.clientAndroid)
-            }
-        }
-        val iosMain by getting {
-            dependencies {
-                implementation(Libs.Kmm.Ktor.clientIos)
-            }
-        }
+        val androidMain by getting
+        val iosMain by getting
     }
 }
 
 android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-}
-
-detekt {
-    input = files(
-        "src/commonMain/kotlin",
-        "src/iOSMain/kotlin",
-        "src/jvmMain/kotlin"
-    )
 }
 
 val packForXcode by tasks.creating(Sync::class) {

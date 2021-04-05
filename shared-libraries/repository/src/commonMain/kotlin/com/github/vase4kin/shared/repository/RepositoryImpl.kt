@@ -1,16 +1,11 @@
 package com.github.vase4kin.shared.repository
 
 import com.github.vase4kin.shared.coindesk.service.CoinDeskService
-import com.github.vase4kin.shared.coindesk.service.CoinDeskServiceImpl
 
 private const val USD = "USD"
 
 class RepositoryImpl(
-    /**
-     * FIXME: Provide through DI?
-     */
-    @Suppress("ForbiddenComment")
-    private val coinDeskService: CoinDeskService = CoinDeskServiceImpl()
+    private val coinDeskService: CoinDeskService
 ) : Repository {
 
     override suspend fun getBitcoinPriceByDate(date: String): Double {

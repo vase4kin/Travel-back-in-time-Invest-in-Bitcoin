@@ -4,7 +4,7 @@ interface Repository {
     /**
      * Get bitcoin price by date in double
      *
-     * startDate and endDate format is yyyy-MM-dd
+     * @param date - the date, format is yyyy-MM-dd
      */
     suspend fun getBitcoinPriceByDate(date: String): Double
 

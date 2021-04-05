@@ -17,8 +17,8 @@
 package com.travelbackintime.buybitcoin.timetravel.router
 
 import androidx.appcompat.app.AppCompatActivity
-import com.github.vase4kin.timetravelmachine.TimeTravelConstraints
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine
+import com.github.vase4kin.shared.timetravelmachine.TimeTravelConstraints
+import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.travelbackintime.buybitcoin.router.InternalRouter
