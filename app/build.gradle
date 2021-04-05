@@ -83,8 +83,6 @@ dependencies {
     implementation project(Libs.Local.crashlytics)
     implementation project(Libs.Local.remoteConfig)
     implementation project(Libs.Shared.timeTravelMachine)
-    implementation project(Libs.Shared.repository)
-    implementation project(Libs.Shared.coinDeskService)
     implementation project(Libs.Shared.tracker)
     implementation project(Libs.Shared.database)
 }

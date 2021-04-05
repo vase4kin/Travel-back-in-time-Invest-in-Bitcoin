@@ -22,7 +22,7 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
-class TimeTravelMachineImpl(
+internal class TimeTravelMachineImpl(
     private val repository: Repository,
     private val eventWithNoPrice: TimeTravelMachine.Event.RealWorldEvent
 ) : TimeTravelMachine {
