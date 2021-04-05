@@ -31,4 +31,10 @@ object Libs {
             const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.1"
         }
     }
+    object Shared {
+        const val tracker = ":shared-libraries:tracker"
+        const val coinDeskService = ":shared-libraries:coindesk-service"
+        const val repository = ":shared-libraries:repository"
+        const val timeTravelMachine = ":shared-libraries:timetravelmachine"
+    }
 }

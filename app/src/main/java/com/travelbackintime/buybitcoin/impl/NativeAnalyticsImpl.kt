@@ -1,12 +1,12 @@
 package com.travelbackintime.buybitcoin.impl
 
 import android.os.Bundle
-import com.github.vase4kin.coindesk.tracker.Analytics
+import com.github.vase4kin.shared.tracker.NativeAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics
 
-class AnalyticsImpl(
+class NativeAnalyticsImpl(
     private val analytics: FirebaseAnalytics
-) : Analytics {
+) : NativeAnalytics {
 
     override fun logEvent(eventName: String, parameters: Map<String, String>) {
         analytics.logEvent(eventName, parametersToBundle(parameters))

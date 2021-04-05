@@ -1,6 +1,6 @@
-package com.github.vase4kin.coindesk.tracker
+package com.github.vase4kin.shared.tracker
 
-import java.util.Date
+import kotlinx.datetime.Instant
 
 private const val EVENT_USER_SETS_TIME = "event_user_sets_time"
 private const val EVENT_USER_SETS_MONEY = "event_user_sets_money"
@@ -26,7 +26,7 @@ private const val PARAMETER_MONEY_SUGGESTION = "parameter_money_suggestion"
 
 @Suppress("TooManyFunctions")
 class TrackerImpl(
-    private val analytics: Analytics
+    private val analytics: NativeAnalytics
 ) : Tracker {
 
     override fun trackUserRetries() {
@@ -94,7 +94,7 @@ class TrackerImpl(
             EVENT_USER_GETS_TO_EXIST, mapOf(
                 PARAMETER_PROFIT to profitMoney.toString(),
                 PARAMETER_INVESTED to investedMoney.toString(),
-                PARAMETER_TIME to Date(time).toString()
+                PARAMETER_TIME to Instant.fromEpochMilliseconds(time).toString()
             )
         )
     }

@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import app.buildSrc.Libs
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -86,12 +88,12 @@ dependencies {
     implementation project(":libraries:repository")
     implementation project(":libraries:coindesk-service")
     implementation project(":libraries:remote-config")
-    implementation project(":libraries:tracker")
     implementation project(":libraries:database")
     implementation project(":libraries:crashlytics")
-    implementation project(":shared-libraries:timetravelmachine")
-    implementation project(":shared-libraries:repository")
-    implementation project(":shared-libraries:coindesk-service")
+    implementation project(Libs.Shared.timeTravelMachine)
+    implementation project(Libs.Shared.repository)
+    implementation project(Libs.Shared.coinDeskService)
+    implementation project(Libs.Shared.tracker)
 }
 
 dependencies {

@@ -23,7 +23,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
-import com.github.vase4kin.coindesk.tracker.Tracker
+import com.github.vase4kin.shared.tracker.Tracker
 import com.travelbackintime.buybitcoin.homecoming.router.HomeComingRouter
 import com.travelbackintime.buybitcoin.homecoming.share.ShareHelper
 import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper

@@ -16,7 +16,7 @@
 
 package com.travelbackintime.buybitcoin.error.view
 
-import com.github.vase4kin.coindesk.tracker.Tracker
+import com.github.vase4kin.shared.tracker.Tracker
 import com.travelbackintime.buybitcoin.error.router.ErrorRouter
 import javax.inject.Inject
 

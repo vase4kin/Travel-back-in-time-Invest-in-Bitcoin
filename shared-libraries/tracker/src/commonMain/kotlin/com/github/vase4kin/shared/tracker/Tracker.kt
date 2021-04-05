@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.vase4kin.coindesk.tracker
+package com.github.vase4kin.shared.tracker
 
 @Suppress("TooManyFunctions")
 interface Tracker {

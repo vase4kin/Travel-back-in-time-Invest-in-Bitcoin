@@ -19,7 +19,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":shared-libraries:repository"))
+                implementation(project(Libs.Shared.repository))
                 implementation(Libs.Kmm.KotlinX.dateTime)
             }
         }
@@ -30,6 +30,14 @@ kotlin {
 
 android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+}
+
+detekt {
+    input = files(
+        "src/commonMain/kotlin",
+        "src/iOSMain/kotlin",
+        "src/jvmMain/kotlin"
+    )
 }
 
 val packForXcode by tasks.creating(Sync::class) {

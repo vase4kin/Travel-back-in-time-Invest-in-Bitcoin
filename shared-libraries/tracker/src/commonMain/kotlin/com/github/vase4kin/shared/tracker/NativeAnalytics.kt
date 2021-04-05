@@ -1,6 +1,6 @@
-package com.github.vase4kin.coindesk.tracker
+package com.github.vase4kin.shared.tracker
 
-interface Analytics {
+interface NativeAnalytics {
     /**
      * Log analytic event
      *

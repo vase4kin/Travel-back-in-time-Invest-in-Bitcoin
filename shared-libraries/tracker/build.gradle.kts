@@ -12,14 +12,14 @@ kotlin {
     ios {
         binaries {
             framework {
-                baseName = "shared-libraries:repository"
+                baseName = "shared-libraries:tracker"
             }
         }
     }
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(Libs.Shared.coinDeskService))
+                implementation(Libs.Kmm.KotlinX.dateTime)
             }
         }
         val androidMain by getting
