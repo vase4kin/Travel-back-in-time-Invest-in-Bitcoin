@@ -15,8 +15,78 @@
  */
 package app.buildSrc
 
+object Config {
+    const val minSdkVersion = 21
+    const val compileSdkVersion = 30
+    const val targetSdkVersion = 30
+    const val buildToolsVersion = "30.0.2"
+    const val versionCode = 16
+    const val versionName = "1.1.1"
+    const val applicationId = "com.travelbackintime.buybitcoin"
+}
+
 object Libs {
+
+    object Gradle {
+        const val gradlePlugin = "com.android.tools.build:gradle:4.2.0-beta06"
+    }
+
+    object Google {
+        const val googleServicesPlugin = "com.google.gms:google-services:4.3.5"
+
+        object Firebase {
+            const val bom = "com.google.firebase:firebase-bom:26.7.0"
+
+            object Crashlytics {
+                const val gradlePlugin = "com.google.firebase:firebase-crashlytics-gradle:2.5.2"
+            }
+        }
+
+        object AndroidX {
+            const val appCompat = "androidx.appcompat:appcompat:1.2.0"
+            const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+            const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+        }
+
+        object Material {
+            const val material = "com.google.android.material:material:1.3.0"
+        }
+    }
+
+    object Dagger {
+        private const val version = "2.29.1"
+
+        const val dagger = "com.google.dagger:dagger:$version"
+        const val androidSupport = "com.google.dagger:dagger-android-support:$version"
+        const val compiler = "com.google.dagger:dagger-compiler:$version"
+        const val androidProcessor = "com.google.dagger:dagger-android-processor:$version"
+    }
+
+    object Detekt {
+        const val version = "1.16.0"
+
+        const val gradlePlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$version"
+        const val jvmTarget = "1.8"
+
+        object Plugins {
+            const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$version"
+        }
+    }
+
+    object Kotlin {
+        private const val version = "1.4.31"
+
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
+        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
+
+        object Plugins {
+            const val gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+            const val serialization = "org.jetbrains.kotlin:kotlin-serialization:$version"
+        }
+    }
+
     object Kmm {
+
         object Ktor {
             private const val version = "1.5.2"
             const val clientCore = "io.ktor:ktor-client-core:$version"
@@ -27,10 +97,12 @@ object Libs {
             const val logBack = "ch.qos.logback:logback-classic:1.2.3"
             const val clientLogging = "io.ktor:ktor-client-logging:$version"
         }
+
         object KotlinX {
             const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.1"
         }
     }
+
     object Shared {
         const val tracker = ":shared-libraries:tracker"
         const val coinDeskService = ":shared-libraries:coindesk-service"
@@ -39,6 +111,14 @@ object Libs {
         const val database = ":shared-libraries:database"
     }
 
-    const val crashlytics = ":libraries:crashlytics"
-    const val remoteConfig = ":libraries:remote-config"
+    object Local {
+        const val crashlytics = ":libraries:crashlytics"
+        const val remoteConfig = ":libraries:remote-config"
+    }
+
+    object Test {
+        const val jUnit = "junit:junit:4.13.2"
+    }
+
+    const val androidGifDrawable = "pl.droidsonroids.gif:android-gif-drawable:1.2.22"
 }
