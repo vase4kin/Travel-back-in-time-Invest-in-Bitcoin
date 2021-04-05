@@ -21,10 +21,10 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LifecycleObserver
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.crashlytics.Crashlytics
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelConstraints
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.shared.tracker.Tracker
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.travelbackintime.buybitcoin.timetravel.router.TimeTravelRouter
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
@@ -44,6 +44,7 @@ class TimeTravelViewModel @Inject constructor(
     private val timeTravelMachine: TimeTravelMachine,
     private val router: TimeTravelRouter,
     private val coroutineScope: Lazy<LifecycleCoroutineScope>,
+    private val crashlytics: Crashlytics,
     resourcesProviderUtils: ResourcesProviderUtils
 ) : LifecycleObserver {
 
@@ -95,7 +96,7 @@ class TimeTravelViewModel @Inject constructor(
                         investedMoney = investedMoney
                     )
                 } catch (e: Exception) {
-                    FirebaseCrashlytics.getInstance().recordException(e)
+                    crashlytics.recordException(e)
                 }
                 isBuyBitcoinButtonEnabled.set(true)
                 withContext(Dispatchers.Main) {

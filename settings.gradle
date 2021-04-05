@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 include ':app'
-include ':libraries:timetravelmachine'
-include ':libraries:repository'
-include ':libraries:coindesk-service'
 include ':libraries:remote-config'
-include ':libraries:database'
 include ':libraries:crashlytics'
 include ':shared-libraries:coindesk-service'
 include ':shared-libraries:repository'
 include ':shared-libraries:timetravelmachine'
 include ':shared-libraries:tracker'
+include ':shared-libraries:database'

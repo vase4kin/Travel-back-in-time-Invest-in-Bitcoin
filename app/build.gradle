@@ -84,16 +84,13 @@ dependencies {
 }
 
 dependencies {
-    implementation project(":libraries:timetravelmachine")
-    implementation project(":libraries:repository")
-    implementation project(":libraries:coindesk-service")
     implementation project(":libraries:remote-config")
-    implementation project(":libraries:database")
     implementation project(":libraries:crashlytics")
     implementation project(Libs.Shared.timeTravelMachine)
     implementation project(Libs.Shared.repository)
     implementation project(Libs.Shared.coinDeskService)
     implementation project(Libs.Shared.tracker)
+    implementation project(Libs.Shared.database)
 }
 
 dependencies {
@@ -111,17 +108,7 @@ dependencies {
 }
 
 dependencies {
-    implementation "io.reactivex.rxjava2:rxjava:2.2.19"
-    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
-    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
-}
-
-dependencies {
-    implementation "com.squareup.okhttp3:okhttp:3.10.0"
-    implementation "com.squareup.retrofit2:retrofit:2.4.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
 }
 
 apply plugin: 'com.google.gms.google-services'

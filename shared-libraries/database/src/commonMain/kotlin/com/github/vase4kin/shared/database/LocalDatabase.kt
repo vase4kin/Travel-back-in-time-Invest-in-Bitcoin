@@ -1,13 +1,12 @@
-package com.github.vase4kin.database
-
-import io.reactivex.Single
+package com.github.vase4kin.shared.database
 
 interface LocalDatabase {
     /**
      * Get time travel event by date
-     * date format is yyyy-MM-dd
+     *
+     * @param date - the date, format is yyyy-MM-dd
      */
-    fun getTimeEvent(date: String): Single<TimeTravelEvent>
+    suspend fun getTimeEvent(date: String): TimeTravelEvent
 
     sealed class TimeTravelEvent {
         data class Event(

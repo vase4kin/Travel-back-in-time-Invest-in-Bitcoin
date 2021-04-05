@@ -36,5 +36,6 @@ object Libs {
         const val coinDeskService = ":shared-libraries:coindesk-service"
         const val repository = ":shared-libraries:repository"
         const val timeTravelMachine = ":shared-libraries:timetravelmachine"
+        const val database = ":shared-libraries:database"
     }
 }

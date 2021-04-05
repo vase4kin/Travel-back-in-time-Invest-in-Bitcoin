@@ -45,14 +45,6 @@ private const val PROD_CACHE_SECS = 43200L
 @Module
 class AppModule {
 
-    // @Provides
-    // fun provideLocaleDatabase(
-    //     database: FirebaseDatabase,
-    //     crashlytics: Crashlytics
-    // ): LocalDatabase {
-    //     return LocalDatabaseImpl(database, crashlytics)
-    // }
-
     @Provides
     fun providesNumberFormat(): NumberFormat {
         return NumberFormat.getCurrencyInstance(Locale.US)

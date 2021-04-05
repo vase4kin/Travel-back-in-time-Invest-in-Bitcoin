@@ -16,6 +16,7 @@
 
 package com.github.vase4kin.shared.timetravelmachine
 
+import com.github.vase4kin.shared.database.LocalDatabase
 import com.github.vase4kin.shared.repository.Repository
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -30,9 +31,21 @@ class TimeTravelMachineImpl(
         time: Long,
         investedMoney: Double
     ): TimeTravelMachine.Event {
-        return when {
-            isDateBeforePriceIsAvailable(time) -> eventWithNoPrice
-            else -> calculateProfit(time, investedMoney)
+        val serverDate = convertDateToServerDateFormat(time)
+        return when (val event = repository.getTimeEvent(serverDate)) {
+            is LocalDatabase.TimeTravelEvent.Event -> {
+                TimeTravelMachine.Event.RealWorldEvent(
+                    title = event.title,
+                    description = event.description,
+                    isDonate = event.isDonate
+                )
+            }
+            is LocalDatabase.TimeTravelEvent.NoEvent -> {
+                when {
+                    isDateBeforePriceIsAvailable(time) -> eventWithNoPrice
+                    else -> calculateProfit(time, investedMoney)
+                }
+            }
         }
     }
 

@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import app.buildSrc.Libs
 
 plugins {
     kotlin("multiplatform")
@@ -12,17 +11,12 @@ kotlin {
     ios {
         binaries {
             framework {
-                baseName = "shared-libraries:repository"
+                baseName = "shared-libraries:database"
             }
         }
     }
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(project(Libs.Shared.coinDeskService))
-                implementation(project(Libs.Shared.database))
-            }
-        }
+        val commonMain by getting
         val androidMain by getting
         val iosMain by getting
     }
