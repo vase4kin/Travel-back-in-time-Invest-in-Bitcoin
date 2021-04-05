@@ -1,9 +1,11 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import app.buildSrc.Libs
 
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("io.gitlab.arturbosch.detekt")
+    id ("org.jetbrains.kotlin.plugin.serialization")
 }
 
 kotlin {
@@ -16,7 +18,13 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation(Libs.Kmm.Firebase.realtimeDatabase)
+                implementation(Libs.Kmm.KotlinX.coroutines)
+                implementation(Libs.Kmm.KotlinX.serialization)
+            }
+        }
         val androidMain by getting
         val iosMain by getting
     }
