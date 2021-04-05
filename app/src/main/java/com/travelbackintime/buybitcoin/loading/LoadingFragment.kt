@@ -23,8 +23,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
+import com.github.vase4kin.crashlytics.Crashlytics
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.travelbackintime.buybitcoin.homecoming.view.EXTRA_RESULT
 import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.impl.wrap
@@ -51,6 +51,9 @@ class LoadingFragment : DaggerFragment() {
 
     @Inject
     lateinit var internalRouter: InternalRouter
+
+    @Inject
+    lateinit var crashlytics: Crashlytics
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -80,7 +83,7 @@ class LoadingFragment : DaggerFragment() {
     }
 
     private fun logExceptionAndOpenHomeComing(e: Exception) {
-        FirebaseCrashlytics.getInstance().recordException(e)
+        crashlytics.recordException(e)
         openHomecoming()
     }
 

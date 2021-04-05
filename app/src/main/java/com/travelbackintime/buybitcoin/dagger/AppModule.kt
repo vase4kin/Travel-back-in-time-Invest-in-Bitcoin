@@ -80,9 +80,12 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun providesRemoteConfigService(firebaseRemoteConfig: FirebaseRemoteConfig): RemoteConfigService {
+    fun providesRemoteConfigService(
+        firebaseRemoteConfig: FirebaseRemoteConfig,
+        crashlytics: Crashlytics
+    ): RemoteConfigService {
         val cacheSecs = if (BuildConfig.DEBUG) DEBUG_CACHE_SECS else PROD_CACHE_SECS
-        return RemoteConfigServiceImpl(firebaseRemoteConfig, cacheSecs)
+        return RemoteConfigServiceImpl(firebaseRemoteConfig, crashlytics, cacheSecs)
     }
 
     @Singleton
