@@ -38,6 +38,7 @@ import javax.inject.Inject
 
 private const val DEFAULT_INVESTED_MONEY: Double = 0.0
 
+@Suppress("LongParameterList")
 class TimeTravelViewModel @Inject constructor(
     private val tracker: Tracker,
     private val formatterUtils: FormatterUtils,
