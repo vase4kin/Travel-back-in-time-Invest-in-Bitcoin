@@ -16,9 +16,10 @@
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-buildscript {
+import app.buildSrc.Config
+import app.buildSrc.Libs
 
-    ext.kotlin_version = '1.4.31'
+buildscript {
 
     repositories {
         google()
@@ -28,12 +29,12 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.0-beta06'
-        classpath 'com.google.gms:google-services:4.3.5'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
-        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.16.0"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath Libs.Gradle.gradlePlugin
+        classpath Libs.Google.googleServicesPlugin
+        classpath Libs.Google.Firebase.Crashlytics.gradlePlugin
+        classpath Libs.Detekt.gradlePlugin
+        classpath Libs.Kotlin.Plugins.gradle
+        classpath Libs.Kotlin.Plugins.serialization
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -56,12 +57,12 @@ subprojects {
         if (project.hasProperty('android')) {
 
             android {
-                buildToolsVersion rootProject.buildToolsVersion
-                compileSdkVersion rootProject.compileSdkVersion
+                buildToolsVersion Config.buildToolsVersion
+                compileSdkVersion Config.compileSdkVersion
 
                 defaultConfig {
-                    minSdkVersion rootProject.minSdkVersion
-                    targetSdkVersion rootProject.targetSdkVersion
+                    minSdkVersion Config.minSdkVersion
+                    targetSdkVersion Config.targetSdkVersion
                     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
                     consumerProguardFiles "consumer-rules.pro"
                 }
@@ -80,7 +81,7 @@ subprojects {
             }
 
             detekt {
-                toolVersion = "1.16.0"
+                toolVersion = Libs.Detekt.version
                 buildUponDefaultConfig = true // preconfigure defaults
                 allRules = false // activate all available (even unstable) rules.
                 autoCorrect = true
@@ -92,17 +93,17 @@ subprojects {
             }
 
             dependencies {
-                detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0")
+                detektPlugins(Libs.Detekt.Plugins.formatting)
             }
 
             tasks.detekt {
-                jvmTarget = "1.8"
+                jvmTarget = Libs.Detekt.jvmTarget
             }
             // For java related projects
         } else if (project.hasProperty('java')) {
 
             detekt {
-                toolVersion = "1.16.0"
+                toolVersion = Libs.Detekt.version
                 buildUponDefaultConfig = true // preconfigure defaults
                 allRules = false // activate all available (even unstable) rules.
                 autoCorrect = true
@@ -114,11 +115,11 @@ subprojects {
             }
 
             dependencies {
-                detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0")
+                detektPlugins(Libs.Detekt.Plugins.formatting)
             }
 
             tasks.detekt {
-                jvmTarget = "1.8"
+                jvmTarget = Libs.Detekt.jvmTarget
             }
         }
     }
@@ -126,22 +127,4 @@ subprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    // versions
-    versionCode = 16
-    versionName = "1.1.1"
-
-    // sdk and tools
-    minSdkVersion = 21
-    targetSdkVersion = 30
-    compileSdkVersion = 30
-    buildToolsVersion = '30.0.2'
-
-    // dependencies
-    daggerVersion = '2.29.1'
-    gif = '1.2.22'
-
-    junitVersion = '4.13.2'
 }

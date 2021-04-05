@@ -1,3 +1,5 @@
+import app.buildSrc.Libs
+
 plugins {
     id 'java-library'
     id 'kotlin'
@@ -5,5 +7,5 @@ plugins {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation Libs.Kotlin.stdlib
 }
