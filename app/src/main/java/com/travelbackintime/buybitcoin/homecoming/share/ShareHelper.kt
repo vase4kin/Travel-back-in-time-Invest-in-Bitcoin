@@ -6,6 +6,7 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
+import java.util.Date
 import javax.inject.Inject
 
 interface ShareHelper {
@@ -54,7 +55,7 @@ class ShareHelperImpl @Inject constructor(
         val profit = formatterUtils.formatPrice(profitValue)
         return activity.getString(
             R.string.text_share,
-            formatterUtils.formatDateToShareText(date),
+            formatterUtils.formatDateToShareText(Date(date)),
             investedValue, profit, googlePlayLink
         )
     }

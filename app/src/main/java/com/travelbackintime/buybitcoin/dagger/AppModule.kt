@@ -20,35 +20,20 @@ import android.app.Application
 import bitcoin.backintime.com.backintimebuybitcoin.BuildConfig
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
-import com.travelbackintime.buybitcoin.impl.RemoteConfigServiceImpl
-import com.github.vase4kin.coindesk.service.CoinDeskService
-import com.github.vase4kin.coindesk.tracker.Analytics
-import com.github.vase4kin.coindesk.tracker.Tracker
-import com.github.vase4kin.coindesk.tracker.TrackerImpl
 import com.github.vase4kin.crashlytics.Crashlytics
-import com.github.vase4kin.database.LocalDatabase
-import com.travelbackintime.buybitcoin.impl.LocalDatabaseImpl
-import com.github.vase4kin.repository.Repository
-import com.github.vase4kin.repository.RepositoryImpl
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine
-import com.github.vase4kin.timetravelmachine.TimeTravelMachineImpl
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import com.travelbackintime.buybitcoin.impl.AnalyticsImpl
 import com.travelbackintime.buybitcoin.impl.CrashlyticsImpl
+import com.travelbackintime.buybitcoin.impl.RemoteConfigServiceImpl
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
 import com.travelbackintime.buybitcoin.utils.ToastUtils
 import dagger.Module
 import dagger.Provides
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import java.text.NumberFormat
 import java.util.Locale
 import javax.inject.Singleton
@@ -60,30 +45,6 @@ private const val PROD_CACHE_SECS = 43200L
 @Module
 class AppModule {
 
-    @Singleton
-    @Provides
-    fun providesTimeTravelMachine(
-        repository: Repository,
-        app: Application
-    ): TimeTravelMachine {
-        return TimeTravelMachineImpl(
-            repository = repository,
-            defaultEvent = TimeTravelMachine.Event.RealWorldEvent(
-                title = app.resources.getString(R.string.text_oops),
-                description = app.resources.getString(R.string.text_basically_nothing),
-                isDonate = false
-            )
-        )
-    }
-
-    @Provides
-    fun provideLocaleDatabase(
-        database: FirebaseDatabase,
-        crashlytics: Crashlytics
-    ): LocalDatabase {
-        return LocalDatabaseImpl(database, crashlytics)
-    }
-
     @Provides
     fun providesNumberFormat(): NumberFormat {
         return NumberFormat.getCurrencyInstance(Locale.US)
@@ -93,17 +54,6 @@ class AppModule {
     @Provides
     fun providesFirebaseAnalytics(app: Application): FirebaseAnalytics {
         return FirebaseAnalytics.getInstance(app.applicationContext)
-    }
-
-    @Singleton
-    @Provides
-    fun providesTracker(analytics: Analytics): Tracker {
-        return TrackerImpl(analytics)
-    }
-
-    @Provides
-    fun provideAnalytics(analytics: FirebaseAnalytics): Analytics {
-        return AnalyticsImpl(analytics)
     }
 
     @Provides
@@ -160,24 +110,5 @@ class AppModule {
     @Provides
     fun providesClipboardUtils(app: Application): ClipboardUtils {
         return ClipboardUtils(app.applicationContext)
-    }
-
-    @Provides
-    fun provideCoinDeskService(): CoinDeskService {
-        return Retrofit.Builder()
-            .baseUrl(CoinDeskService.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(OkHttpClient())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(CoinDeskService::class.java)
-    }
-
-    @Provides
-    fun provideRepository(
-        service: CoinDeskService,
-        localDatabase: LocalDatabase
-    ): Repository {
-        return RepositoryImpl(service, localDatabase)
     }
 }

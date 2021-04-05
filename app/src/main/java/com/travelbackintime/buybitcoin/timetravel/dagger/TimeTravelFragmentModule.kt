@@ -16,15 +16,26 @@
 
 package com.travelbackintime.buybitcoin.timetravel.dagger
 
+import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.lifecycleScope
 import com.travelbackintime.buybitcoin.timetravel.router.TimeTravelRouter
 import com.travelbackintime.buybitcoin.timetravel.router.TimeTravelRouterImpl
+import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelFragment
 
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 
 @Module
 abstract class TimeTravelFragmentModule {
 
     @Binds
     abstract fun providesRouter(router: TimeTravelRouterImpl): TimeTravelRouter
+
+    companion object {
+        @Provides
+        fun providesScope(fragment: TimeTravelFragment): LifecycleCoroutineScope {
+            return fragment.viewLifecycleOwner.lifecycleScope
+        }
+    }
 }

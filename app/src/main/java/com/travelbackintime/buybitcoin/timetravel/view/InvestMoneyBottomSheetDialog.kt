@@ -27,7 +27,7 @@ import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.github.vase4kin.coindesk.tracker.Tracker
+import com.github.vase4kin.shared.tracker.Tracker
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
 import dagger.android.support.AndroidSupportInjection

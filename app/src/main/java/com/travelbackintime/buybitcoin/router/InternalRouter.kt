@@ -1,7 +1,7 @@
 package com.travelbackintime.buybitcoin.router
 
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.github.vase4kin.timetravelmachine.TimeTravelMachine
+import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.error.view.ErrorFragment
 import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper
