@@ -1,11 +1,12 @@
 package com.travelbackintime.buybitcoin.impl
 
 import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.github.vase4kin.crashlytics.Crashlytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 
 class RemoteConfigServiceImpl(
     private val firebaseRemoteConfig: FirebaseRemoteConfig,
+    private val crashlytics: Crashlytics,
     private val cacheSecs: Long
 ) : RemoteConfigService {
 
@@ -22,7 +23,7 @@ class RemoteConfigServiceImpl(
                 firebaseRemoteConfig.activate()
             } else {
                 task.exception?.let {
-                    FirebaseCrashlytics.getInstance().recordException(it)
+                    crashlytics.recordException(it)
                 }
             }
         }
