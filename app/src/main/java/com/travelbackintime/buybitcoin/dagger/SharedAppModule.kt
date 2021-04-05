@@ -3,13 +3,9 @@ package com.travelbackintime.buybitcoin.dagger
 import android.app.Application
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.crashlytics.Crashlytics
-import com.github.vase4kin.shared.coindesk.service.CoinDeskService
-import com.github.vase4kin.shared.coindesk.service.CoinDeskServiceImpl
 import com.github.vase4kin.shared.database.LocalDatabase
-import com.github.vase4kin.shared.repository.Repository
-import com.github.vase4kin.shared.repository.RepositoryImpl
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
-import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachineImpl
+import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachineFactory
 import com.github.vase4kin.shared.tracker.NativeAnalytics
 import com.github.vase4kin.shared.tracker.Tracker
 import com.github.vase4kin.shared.tracker.TrackerImpl
@@ -27,12 +23,12 @@ object SharedAppModule {
     @Singleton
     @Provides
     fun providesTimeTravelMachine(
-        repository: Repository,
+        localDatabase: LocalDatabase,
         app: Application
     ): TimeTravelMachine {
-        return TimeTravelMachineImpl(
-            repository = repository,
-            eventWithNoPrice = TimeTravelMachine.Event.RealWorldEvent(
+        return TimeTravelMachineFactory.create(
+            localDatabase = localDatabase,
+            eventWithAbsentPrice = TimeTravelMachine.Event.RealWorldEvent(
                 title = app.resources.getString(R.string.text_oops),
                 description = app.resources.getString(R.string.text_basically_nothing),
                 isDonate = false
@@ -41,20 +37,7 @@ object SharedAppModule {
     }
 
     @Provides
-    fun provideRepository(
-        service: CoinDeskService,
-        localDatabase: LocalDatabase
-    ): Repository {
-        return RepositoryImpl(service, localDatabase)
-    }
-
-    @Provides
-    fun provideCoindeskService(): CoinDeskService {
-        return CoinDeskServiceImpl()
-    }
-
-    @Provides
-    fun provideAnalytics(analytics: FirebaseAnalytics): NativeAnalytics {
+    fun provideNativeAnalytics(analytics: FirebaseAnalytics): NativeAnalytics {
         return NativeAnalyticsImpl(analytics)
     }
 
