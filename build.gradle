@@ -128,9 +128,3 @@ subprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-ext {
-
-    // dependencies
-    daggerVersion = '2.29.1'
-}
