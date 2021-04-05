@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.impl
+package com.github.vase4kin.shared.database
 
-import androidx.annotation.Keep
+import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmField
 
-@Keep
+@Serializable
 data class TimeTravelEvent(
     val title: String,
     val description: String,

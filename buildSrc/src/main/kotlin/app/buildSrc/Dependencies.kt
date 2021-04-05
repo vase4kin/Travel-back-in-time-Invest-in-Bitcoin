@@ -74,7 +74,7 @@ object Libs {
     }
 
     object Kotlin {
-        private const val version = "1.4.31"
+        internal const val version = "1.4.31"
 
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
         const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
@@ -100,6 +100,12 @@ object Libs {
 
         object KotlinX {
             const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.1"
+            const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
+            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0"
+        }
+
+        object Firebase {
+            const val realtimeDatabase = "dev.gitlive:firebase-database:1.2.0"
         }
     }
 

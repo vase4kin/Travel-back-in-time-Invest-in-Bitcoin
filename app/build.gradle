@@ -84,7 +84,6 @@ dependencies {
     implementation project(Libs.Local.remoteConfig)
     implementation project(Libs.Shared.timeTravelMachine)
     implementation project(Libs.Shared.tracker)
-    implementation project(Libs.Shared.database)
 }
 
 dependencies {
@@ -98,7 +97,6 @@ dependencies {
     implementation "com.google.firebase:firebase-core"
     implementation "com.google.firebase:firebase-ads"
     implementation "com.google.firebase:firebase-config-ktx"
-    implementation "com.google.firebase:firebase-database-ktx"
 }
 
 dependencies {

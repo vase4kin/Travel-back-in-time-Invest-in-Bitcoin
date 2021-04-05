@@ -23,7 +23,6 @@ import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
 import com.github.vase4kin.crashlytics.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.travelbackintime.buybitcoin.impl.CrashlyticsImpl
@@ -86,15 +85,6 @@ class AppModule {
     ): RemoteConfigService {
         val cacheSecs = if (BuildConfig.DEBUG) DEBUG_CACHE_SECS else PROD_CACHE_SECS
         return RemoteConfigServiceImpl(firebaseRemoteConfig, crashlytics, cacheSecs)
-    }
-
-    @Singleton
-    @Provides
-    fun providesFirebaseDatabase(): FirebaseDatabase {
-        val firebaseDatabase = FirebaseDatabase.getInstance()
-        firebaseDatabase.setPersistenceEnabled(true)
-        firebaseDatabase.reference.keepSynced(true)
-        return FirebaseDatabase.getInstance()
     }
 
     @Singleton
