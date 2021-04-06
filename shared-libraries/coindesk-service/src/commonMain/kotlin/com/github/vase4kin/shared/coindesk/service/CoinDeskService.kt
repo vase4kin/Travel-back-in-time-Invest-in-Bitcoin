@@ -16,6 +16,9 @@
 
 package com.github.vase4kin.shared.coindesk.service
 
+import com.github.vase4kin.shared.coindesk.service.models.BitcoinCurrentPrice
+import com.github.vase4kin.shared.coindesk.service.models.BitcoinHistoricalPrice
+
 /**
  * https://www.coindesk.com/coindesk-api
  */

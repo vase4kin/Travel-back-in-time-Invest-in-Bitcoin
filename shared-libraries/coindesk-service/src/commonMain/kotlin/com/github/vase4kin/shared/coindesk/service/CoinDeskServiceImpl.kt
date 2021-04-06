@@ -16,6 +16,8 @@
 
 package com.github.vase4kin.shared.coindesk.service
 
+import com.github.vase4kin.shared.coindesk.service.models.BitcoinCurrentPrice
+import com.github.vase4kin.shared.coindesk.service.models.BitcoinHistoricalPrice
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.features.defaultRequest

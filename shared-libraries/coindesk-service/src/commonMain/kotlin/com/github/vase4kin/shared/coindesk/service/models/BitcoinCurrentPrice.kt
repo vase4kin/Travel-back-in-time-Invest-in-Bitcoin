@@ -14,22 +14,11 @@
  * limitations under the License.
  */
 
-package com.github.vase4kin.shared.coindesk.service
+package com.github.vase4kin.shared.coindesk.service.models
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BitcoinHistoricalPrice(
-    val bpi: Map<String, Float>
-)
-
-@Serializable
 data class BitcoinCurrentPrice(
     val bpi: Map<String, BitcoinPrice>
-)
-
-@Suppress("ConstructorParameterNaming")
-@Serializable
-data class BitcoinPrice(
-    val rate_float: Float
 )

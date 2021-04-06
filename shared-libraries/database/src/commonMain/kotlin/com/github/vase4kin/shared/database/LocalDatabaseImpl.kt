@@ -16,6 +16,7 @@
 
 package com.github.vase4kin.shared.database
 
+import com.github.vase4kin.shared.database.models.TimeTravelEvent
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.database.FirebaseDatabase
 import dev.gitlive.firebase.database.database
