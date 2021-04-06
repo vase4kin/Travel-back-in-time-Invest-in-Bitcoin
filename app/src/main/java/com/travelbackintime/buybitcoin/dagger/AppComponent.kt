@@ -27,7 +27,11 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        AppModule::class, SharedAppModule::class, ActivityBindingModule::class, AndroidSupportInjectionModule::class]
+        AppModule::class,
+        FirebaseModule::class,
+        SharedLibsModule::class,
+        ActivityBindingModule::class,
+        AndroidSupportInjectionModule::class]
 )
 interface AppComponent : AndroidInjector<BackInTimeBuyBitcoinApplication> {
 

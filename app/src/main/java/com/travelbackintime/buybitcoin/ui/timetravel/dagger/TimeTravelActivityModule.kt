@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.dagger
+package com.travelbackintime.buybitcoin.ui.timetravel.dagger
 
-import com.travelbackintime.buybitcoin.ui.timetravel.dagger.TimeTravelActivityBindingModule
-import com.travelbackintime.buybitcoin.ui.timetravel.dagger.TimeTravelActivityModule
+import com.travelbackintime.buybitcoin.ui.router.InternalRouter
+import com.travelbackintime.buybitcoin.ui.router.InternalRouterImpl
 import com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelActivity
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import dagger.Provides
 
 @Module
-abstract class ActivityBindingModule {
+class TimeTravelActivityModule {
 
-    @ActivityScoped
-    @ContributesAndroidInjector(modules = [TimeTravelActivityBindingModule::class, TimeTravelActivityModule::class])
-    abstract fun timeTravelActivity(): TimeTravelActivity
+    @Provides
+    fun provideInternalRouter(activity: TimeTravelActivity): InternalRouter {
+        return InternalRouterImpl(activity)
+    }
 }

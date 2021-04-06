@@ -17,16 +17,10 @@
 package com.travelbackintime.buybitcoin.dagger
 
 import android.app.Application
-import bitcoin.backintime.com.backintimebuybitcoin.BuildConfig
-import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
 import com.github.vase4kin.crashlytics.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
-import com.travelbackintime.buybitcoin.impl.CrashlyticsImpl
-import com.travelbackintime.buybitcoin.impl.RemoteConfigServiceImpl
+import com.travelbackintime.buybitcoin.impl.crashlytics.CrashlyticsImpl
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
@@ -36,9 +30,6 @@ import dagger.Provides
 import java.text.NumberFormat
 import java.util.Locale
 import javax.inject.Singleton
-
-private const val DEBUG_CACHE_SECS = 30L
-private const val PROD_CACHE_SECS = 43200L
 
 @Suppress("TooManyFunctions")
 @Module
@@ -64,27 +55,6 @@ class AppModule {
     @Provides
     fun providesFormatterUtils(numberFormat: NumberFormat): FormatterUtils {
         return FormatterUtils(numberFormat)
-    }
-
-    @Singleton
-    @Provides
-    fun providesFirebaseRemoteConfig(): FirebaseRemoteConfig {
-        val firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
-        val configSettings = FirebaseRemoteConfigSettings.Builder()
-            .build()
-        firebaseRemoteConfig.setConfigSettingsAsync(configSettings)
-        firebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
-        return FirebaseRemoteConfig.getInstance()
-    }
-
-    @Singleton
-    @Provides
-    fun providesRemoteConfigService(
-        firebaseRemoteConfig: FirebaseRemoteConfig,
-        crashlytics: Crashlytics
-    ): RemoteConfigService {
-        val cacheSecs = if (BuildConfig.DEBUG) DEBUG_CACHE_SECS else PROD_CACHE_SECS
-        return RemoteConfigServiceImpl(firebaseRemoteConfig, crashlytics, cacheSecs)
     }
 
     @Singleton
