@@ -29,7 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.travelbackintime.buybitcoin.timetravel.view.TimeTravelActivity"
+            android:name="com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>

@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.dagger
+package com.travelbackintime.buybitcoin.ui.homecoming.dagger
 
-import com.travelbackintime.buybitcoin.ui.timetravel.dagger.TimeTravelActivityBindingModule
-import com.travelbackintime.buybitcoin.ui.timetravel.dagger.TimeTravelActivityModule
-import com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelActivity
+import com.travelbackintime.buybitcoin.ui.homecoming.router.HomeComingRouter
+import com.travelbackintime.buybitcoin.ui.homecoming.router.HomeComingRouterImpl
+import com.travelbackintime.buybitcoin.ui.homecoming.share.ShareHelper
+import com.travelbackintime.buybitcoin.ui.homecoming.share.ShareHelperImpl
+import dagger.Binds
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class ActivityBindingModule {
+abstract class HomeComingFragmentModule {
 
-    @ActivityScoped
-    @ContributesAndroidInjector(modules = [TimeTravelActivityBindingModule::class, TimeTravelActivityModule::class])
-    abstract fun timeTravelActivity(): TimeTravelActivity
+    @Binds
+    abstract fun providesRouter(router: HomeComingRouterImpl): HomeComingRouter
+
+    @Binds
+    abstract fun providesShareHelper(shareHelperImpl: ShareHelperImpl): ShareHelper
 }

@@ -17,13 +17,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.travelbackintime.buybitcoin.timetravel.view.TimeTravelActivity">
+    tools:context="com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelActivity">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.travelbackintime.buybitcoin.timetravel.view.TimeTravelViewModel" />
+            type="com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.dagger
+package com.travelbackintime.buybitcoin.ui.error.dagger
 
-import com.travelbackintime.buybitcoin.ui.timetravel.dagger.TimeTravelActivityBindingModule
-import com.travelbackintime.buybitcoin.ui.timetravel.dagger.TimeTravelActivityModule
-import com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelActivity
+import com.travelbackintime.buybitcoin.ui.error.router.ErrorRouter
+import com.travelbackintime.buybitcoin.ui.error.router.ErrorRouterImpl
+
+import dagger.Binds
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class ActivityBindingModule {
+abstract class ErrorModule {
 
-    @ActivityScoped
-    @ContributesAndroidInjector(modules = [TimeTravelActivityBindingModule::class, TimeTravelActivityModule::class])
-    abstract fun timeTravelActivity(): TimeTravelActivity
+    @Binds
+    abstract fun providesErrorRouter(router: ErrorRouterImpl): ErrorRouter
 }
