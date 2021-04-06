@@ -266,51 +266,19 @@
                     android:orientation="vertical"
                     bind:visibility="@{viewModel.isShareViewVisible}">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingBottom="8dp"
-                        android:text="@string/button_share_title"
-                        android:textColor="?attr/colorOnBackground"
-                        android:textAppearance="@style/TextAppearance.Description" />
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.VideoGameButton.Icon"
-                            android:layout_width="0dp"
-                            android:layout_height="64dp"
-                            android:layout_marginEnd="4dp"
-                            android:layout_weight="1"
-                            android:onClick="@{() -> viewModel.onShareOnFacebook()}"
-                            android:padding="12dp"
-                            android:visibility="gone"
-                            app:icon="@drawable/ic_facebook" />
-
-                        <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.VideoGameButton.Icon"
+                            style="@style/Widget.MaterialComponents.VideoGameButton"
                             android:layout_height="64dp"
                             android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:onClick="@{() -> viewModel.onShareOnTwitter()}"
-                            android:padding="12dp"
-                            android:layout_marginEnd="4dp"
-                            android:visibility="gone"
-                            app:icon="@drawable/ic_twitter" />
-
-                        <com.google.android.material.button.MaterialButton
-                            style="@style/Widget.MaterialComponents.VideoGameButton.Icon"
-                            android:layout_height="64dp"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
+                            android:text="@string/button_share_title"
                             android:onClick="@{() -> viewModel.onShareWithFriends()}"
-                            android:padding="12dp"
-                            app:icon="@drawable/ic_share" />
+                            android:padding="12dp" />
 
                     </LinearLayout>
 

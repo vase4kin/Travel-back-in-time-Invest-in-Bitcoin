@@ -27,8 +27,6 @@ import javax.inject.Inject
 
 interface ShareHelper {
     fun shareWithFriends(event: TimeTravelEvenWrapper.TimeTravelEvent)
-    fun shareToTwitter(event: TimeTravelEvenWrapper.TimeTravelEvent)
-    fun shareToFaceBook()
 }
 
 class ShareHelperImpl @Inject constructor(
@@ -44,19 +42,6 @@ class ShareHelperImpl @Inject constructor(
             .setHtmlText(textToShare)
             .setType("text/plain")
             .startChooser()
-    }
-
-    override fun shareToTwitter(event: TimeTravelEvenWrapper.TimeTravelEvent) {
-        val textToShare = createShareText(event)
-        val textToShareBuilder = StringBuilder(textToShare)
-        textToShareBuilder.append(" #")
-        textToShareBuilder.append(activity.getString(R.string.text_hashtag))
-        // Share logic is supposed to be here
-    }
-
-    override fun shareToFaceBook() {
-        val googlePlayLink = createGooglePlayLink()
-        // Share logic is supposed to be here
     }
 
     private fun createGooglePlayLink(): String {

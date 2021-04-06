@@ -114,19 +114,6 @@ class HomeComingViewModel @Inject constructor(
         }
     }
 
-    fun onShareOnFacebook() {
-        shareHelper.shareToFaceBook()
-        tracker.trackUserSharesOnFb()
-    }
-
-    fun onShareOnTwitter() {
-        val event = event
-        if (event is TimeTravelEvenWrapper.TimeTravelEvent) {
-            shareHelper.shareToTwitter(event)
-            tracker.trackUserSharesOnTwitter()
-        }
-    }
-
     fun onCopyWalletAddress() {
         clipboardUtils.copyToClipBoard(
             resourcesProviderUtils.getString(R.string.donate_copy_label),
