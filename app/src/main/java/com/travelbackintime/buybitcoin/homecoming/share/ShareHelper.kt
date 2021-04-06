@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
-import com.travelbackintime.buybitcoin.impl.shared.TimeTravelEvenWrapper
+import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import java.util.Date
 import javax.inject.Inject

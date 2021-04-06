@@ -27,7 +27,7 @@ import androidx.viewbinding.ViewBinding
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentHomeComingBinding
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentHomeComingEventBinding
-import com.travelbackintime.buybitcoin.impl.shared.TimeTravelEvenWrapper
+import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 

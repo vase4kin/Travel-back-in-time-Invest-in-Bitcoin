@@ -26,7 +26,7 @@ import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
 import com.github.vase4kin.shared.tracker.Tracker
 import com.travelbackintime.buybitcoin.homecoming.router.HomeComingRouter
 import com.travelbackintime.buybitcoin.homecoming.share.ShareHelper
-import com.travelbackintime.buybitcoin.impl.shared.TimeTravelEvenWrapper
+import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
