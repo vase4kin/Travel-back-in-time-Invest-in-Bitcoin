@@ -7,9 +7,13 @@
 
 # Travel back in time: Invest in Bitcoin
 
-This GitHub repository hosts the code for the Android application [Travel back in time: Invest in Bitcoin](https://play.google.com/store/apps/details?id=com.travelbackintime.buybitcoin).
+This GitHub repository hosts the code for the applications:
+* Android [Travel back in time: Invest in Bitcoin](https://play.google.com/store/apps/details?id=com.travelbackintime.buybitcoin)
+* Ios (TODO)
 
-The app is written on [Kotlin](https://kotlinlang.org/) using [Data Binding Library](https://developer.android.com/topic/libraries/data-binding/).
+The Android application is written on [Kotlin](https://kotlinlang.org/) using [Data Binding Library](https://developer.android.com/topic/libraries/data-binding/).
+
+The business logic is written with [KMM](https://kotlinlang.org/docs/mobile/home.html).
 
 ## Details
 
