@@ -32,45 +32,43 @@
 -dontwarn sun.misc.**
 #-keep class com.google.gson.stream.** { *; }
 
-# Prevent proguard from stripping interface information from TypeAdapterFactory,
-# JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
--keep class * implements com.google.gson.TypeAdapterFactory
--keep class * implements com.google.gson.JsonSerializer
--keep class * implements com.google.gson.JsonDeserializer
-
 ##---------------End: proguard configuration for Gson  ----------
 
 # Keep models from obfuscation
 -keepclassmembers enum * { *; }
 
--dontwarn com.squareup.okhttp.**
--dontwarn com.google.appengine.api.urlfetch.**
--dontwarn rx.**
--dontwarn retrofit.**
--keepattributes Signature
--keepattributes *Annotation*
--keep class com.squareup.okhttp.** { *; }
--keep interface com.squareup.okhttp.** { *; }
--keep class retrofit.** { *; }
--keepclasseswithmembers class * {
-    @retrofit.http.* *;
-}
-
--dontwarn sun.misc.**
-
--keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
-   long producerIndex;
-   long consumerIndex;
-}
-
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode producerNode;
-}
-
--keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
-    rx.internal.util.atomic.LinkedQueueNode consumerNode;
-}
-
 -dontnote rx.internal.util.PlatformDependent
 
 -dontwarn com.google.errorprone.annotations.**
+
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.AnnotationsKt # core serialization annotations
+
+# kotlinx-serialization-json specific. Add this if you have java.lang.NoClassDefFoundError kotlinx.serialization.json.JsonObjectSerializer
+-keepclassmembers class kotlinx.serialization.json.** {
+    *** Companion;
+}
+-keepclasseswithmembers class kotlinx.serialization.json.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+-keep,includedescriptorclasses class com.github.vase4kin.shared.coindesk.service.models.**$$serializer { *; }
+-keep,includedescriptorclasses class com.github.vase4kin.shared.database.models.**$$serializer { *; }
+-keepclassmembers class com.github.vase4kin.shared.coindesk.service.models.** {
+    *** Companion;
+}
+-keepclassmembers class com.github.vase4kin.shared.database.models.** {
+    *** Companion;
+}
+-keepclasseswithmembers class com.github.vase4kin.shared.coindesk.service.models.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+-keepclasseswithmembers class com.github.vase4kin.shared.database.models.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+-dontwarn javax.mail.Authenticator
+-dontwarn org.codehaus.groovy.runtime.GeneratedClosure
+-dontwarn groovy.lang.**
+-dontwarn javax.servlet.**
+-dontwarn javax.servlet.**
