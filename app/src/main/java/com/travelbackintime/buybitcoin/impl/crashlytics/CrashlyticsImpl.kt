@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.impl
+package com.travelbackintime.buybitcoin.impl.crashlytics
 
 import com.github.vase4kin.crashlytics.Crashlytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics

@@ -24,13 +24,13 @@ import com.github.vase4kin.shared.tracker.NativeAnalytics
 import com.github.vase4kin.shared.tracker.Tracker
 import com.github.vase4kin.shared.tracker.TrackerImpl
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.travelbackintime.buybitcoin.impl.NativeAnalyticsImpl
+import com.travelbackintime.buybitcoin.impl.shared.NativeAnalyticsImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-object SharedAppModule {
+object SharedLibsModule {
 
     @Singleton
     @Provides

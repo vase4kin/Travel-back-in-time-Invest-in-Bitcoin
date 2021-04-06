@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.impl
+package com.travelbackintime.buybitcoin.impl.shared
 
 import android.os.Bundle
 import com.github.vase4kin.shared.tracker.NativeAnalytics

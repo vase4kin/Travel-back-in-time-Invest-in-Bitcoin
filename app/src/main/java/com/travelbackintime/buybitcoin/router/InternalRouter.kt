@@ -20,7 +20,7 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.error.view.ErrorFragment
 import com.travelbackintime.buybitcoin.homecoming.view.HomeComingFragment
-import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper
+import com.travelbackintime.buybitcoin.impl.shared.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.loading.LoadingFragment
 import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelActivity
 import com.travelbackintime.buybitcoin.timetravel.view.TimeTravelFragment

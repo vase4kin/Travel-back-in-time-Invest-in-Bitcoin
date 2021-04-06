@@ -26,8 +26,8 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.crashlytics.Crashlytics
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.homecoming.view.EXTRA_RESULT
-import com.travelbackintime.buybitcoin.impl.TimeTravelEvenWrapper
-import com.travelbackintime.buybitcoin.impl.wrap
+import com.travelbackintime.buybitcoin.impl.shared.TimeTravelEvenWrapper
+import com.travelbackintime.buybitcoin.impl.shared.wrap
 import com.travelbackintime.buybitcoin.router.InternalRouter
 import dagger.android.support.DaggerFragment
 import pl.droidsonroids.gif.GifDrawable

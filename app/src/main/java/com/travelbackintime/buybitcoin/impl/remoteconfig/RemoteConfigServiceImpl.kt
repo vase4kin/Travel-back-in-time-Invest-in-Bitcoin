@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.impl
+package com.travelbackintime.buybitcoin.impl.remoteconfig
 
 import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
 import com.github.vase4kin.crashlytics.Crashlytics

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.impl
+package com.travelbackintime.buybitcoin.utils
 
 import android.os.Parcelable
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
