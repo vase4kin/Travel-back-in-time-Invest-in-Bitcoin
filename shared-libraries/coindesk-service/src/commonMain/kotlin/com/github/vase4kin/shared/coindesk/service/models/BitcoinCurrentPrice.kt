@@ -14,18 +14,11 @@
  * limitations under the License.
  */
 
-package com.github.vase4kin.shared.database
+package com.github.vase4kin.shared.coindesk.service.models
 
 import kotlinx.serialization.Serializable
-import kotlin.jvm.JvmField
 
 @Serializable
-data class TimeTravelEvent(
-    val title: String,
-    val description: String,
-    @field:JvmField
-    val isDonate: Boolean
-) {
-    @Suppress("unused")
-    constructor() : this("", "", false)
-}
+data class BitcoinCurrentPrice(
+    val bpi: Map<String, BitcoinPrice>
+)
