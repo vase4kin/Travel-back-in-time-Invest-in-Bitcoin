@@ -12,6 +12,7 @@ This GitHub repository hosts the code for the applications:
 * Ios (TODO)
 
 The Android application is written on [Kotlin](https://kotlinlang.org/) using [Data Binding Library](https://developer.android.com/topic/libraries/data-binding/).
+
 The business logic is written with [KMM](https://kotlinlang.org/docs/mobile/home.html).
 
 ## Details
