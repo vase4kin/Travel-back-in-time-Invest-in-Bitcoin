@@ -17,6 +17,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 import app.buildSrc.Config
+import app.buildSrc.KmmConfig
 import app.buildSrc.Libs
 
 buildscript {
@@ -54,7 +55,8 @@ allprojects {
 subprojects {
     afterEvaluate { project ->
         // For Android related projects
-        if (project.hasProperty('android')) {
+        def isAndroid = project.hasProperty('android')
+        if (isAndroid) {
 
             android {
                 buildToolsVersion Config.buildToolsVersion
@@ -80,28 +82,15 @@ subprojects {
                 }
             }
 
-            detekt {
-                toolVersion = Libs.Detekt.version
-                buildUponDefaultConfig = true // preconfigure defaults
-                allRules = false // activate all available (even unstable) rules.
-                autoCorrect = true
-
-                reports {
-                    html.enabled = true
-                    // observe findings in your browser with structure and code snippets
+            // For multiplatform shared libraries
+            if (project.getParent().name == "shared-libraries") {
+                kotlin {
+                    version = KmmConfig.version
                 }
             }
+        }
 
-            dependencies {
-                detektPlugins(Libs.Detekt.Plugins.formatting)
-            }
-
-            tasks.detekt {
-                jvmTarget = Libs.Detekt.jvmTarget
-            }
-            // For java related projects
-        } else if (project.hasProperty('java')) {
-
+        if (project.hasProperty('java') || isAndroid) {
             detekt {
                 toolVersion = Libs.Detekt.version
                 buildUponDefaultConfig = true // preconfigure defaults
