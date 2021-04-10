@@ -33,7 +33,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(Libs.Kmm.Ktor.clientCore)
-                implementation(Libs.Kmm.Ktor.clientCio)
                 implementation(Libs.Kmm.Ktor.clientSerialization)
                 implementation(Libs.Kmm.Ktor.logBack)
                 implementation(Libs.Kmm.Ktor.clientLogging)

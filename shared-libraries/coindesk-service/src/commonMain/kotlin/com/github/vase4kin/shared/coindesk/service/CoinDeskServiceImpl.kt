@@ -52,7 +52,7 @@ class CoinDeskServiceImpl : CoinDeskService {
     }
 
     private fun createClient(): HttpClient {
-        return HttpClient(CIO) {
+        return HttpClient {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(Json {
                     ignoreUnknownKeys = true
