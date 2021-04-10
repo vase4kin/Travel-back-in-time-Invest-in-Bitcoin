@@ -25,6 +25,11 @@ object Config {
     const val applicationId = "com.travelbackintime.buybitcoin"
 }
 
+object KmmConfig {
+    const val version = "1.0"
+    const val deploymentTarget = "13.5"
+}
+
 object Libs {
 
     object Gradle {
@@ -100,8 +105,8 @@ object Libs {
 
         object KotlinX {
             const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.1"
-            const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
-            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0"
+            const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3-native-mt"
+            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
         }
 
         object Firebase {
