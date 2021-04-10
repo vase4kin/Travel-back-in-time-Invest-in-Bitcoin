@@ -95,7 +95,6 @@ object Libs {
         object Ktor {
             private const val version = "1.5.2"
             const val clientCore = "io.ktor:ktor-client-core:$version"
-            const val clientCio = "io.ktor:ktor-client-cio:$version"
             const val clientSerialization = "io.ktor:ktor-client-serialization:$version"
             const val clientAndroid = "io.ktor:ktor-client-android:$version"
             const val clientIos = "io.ktor:ktor-client-ios:$version"

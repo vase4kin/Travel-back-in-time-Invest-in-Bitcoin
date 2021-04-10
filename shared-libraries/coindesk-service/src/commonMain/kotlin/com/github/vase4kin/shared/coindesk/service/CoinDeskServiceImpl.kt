@@ -19,7 +19,6 @@ package com.github.vase4kin.shared.coindesk.service
 import com.github.vase4kin.shared.coindesk.service.models.BitcoinCurrentPrice
 import com.github.vase4kin.shared.coindesk.service.models.BitcoinHistoricalPrice
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
 import io.ktor.client.features.defaultRequest
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
@@ -52,7 +51,7 @@ class CoinDeskServiceImpl : CoinDeskService {
     }
 
     private fun createClient(): HttpClient {
-        return HttpClient(CIO) {
+        return HttpClient {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(Json {
                     ignoreUnknownKeys = true
