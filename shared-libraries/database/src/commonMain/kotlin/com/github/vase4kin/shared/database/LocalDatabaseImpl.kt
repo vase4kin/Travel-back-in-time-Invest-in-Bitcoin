@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.map
 private const val REF_EVENTS = "events"
 
 class LocalDatabaseImpl : LocalDatabase {
+
     private val database: FirebaseDatabase = Firebase.database.apply {
         setLoggingEnabled(true)
         setPersistenceEnabled(true)
@@ -34,11 +35,11 @@ class LocalDatabaseImpl : LocalDatabase {
 
     private fun eventsFlow(): Flow<Map<String, TimeTravelEvent>> =
         database
-            .reference("")
+            .reference(REF_EVENTS)
             .valueEvents
             .map {
                 if (it.exists) {
-                    it.child(REF_EVENTS).value()
+                    it.value()
                 } else {
                     emptyMap()
                 }
