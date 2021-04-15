@@ -9,7 +9,7 @@
 
 This GitHub repository hosts the code for the applications:
 * Android [Travel back in time: Invest in Bitcoin](https://play.google.com/store/apps/details?id=com.travelbackintime.buybitcoin)
-* Ios (TODO)
+* iOS (TODO)
 
 The Android application is written on [Kotlin](https://kotlinlang.org/) using [Data Binding Library](https://developer.android.com/topic/libraries/data-binding/).
 
@@ -19,7 +19,7 @@ The business logic is written with [KMM](https://kotlinlang.org/docs/mobile/home
 
 Screenshot 1 | Screenshot 2 | Screenshot 3  
 :-------------------------:|:-------------------------:|:-------------------------:
-![Screenshot 1](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/master/screenshots/Phone%20Screenshot%201.png) | ![Screenshot 2](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/master/screenshots/Phone%20Screenshot%202.png) | ![Screenshot 3](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/master/screenshots/Phone%20Screenshot%203.png)
+![Screenshot 1](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/dev/screenshots/Phone%20Screenshot%201.png) | ![Screenshot 2](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/dev/screenshots/Phone%20Screenshot%202.png) | ![Screenshot 3](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/dev/screenshots/Phone%20Screenshot%203.png)
 
 ## License
 ```
