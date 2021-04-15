@@ -131,4 +131,5 @@ object Libs {
     }
 
     const val androidGifDrawable = "pl.droidsonroids.gif:android-gif-drawable:1.2.22"
+    const val coreLibraryDesugaring = "com.android.tools:desugar_jdk_libs:1.1.5"
 }
