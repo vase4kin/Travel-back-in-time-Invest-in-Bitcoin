@@ -20,8 +20,8 @@ object Config {
     const val compileSdkVersion = 30
     const val targetSdkVersion = 30
     const val buildToolsVersion = "30.0.2"
-    const val versionCode = 18
-    const val versionName = "1.1.2"
+    const val versionCode = 19
+    const val versionName = "1.1.3"
     const val applicationId = "com.travelbackintime.buybitcoin"
 }
 
