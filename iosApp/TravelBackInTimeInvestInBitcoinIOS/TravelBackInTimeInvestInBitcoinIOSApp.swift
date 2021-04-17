@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Firebase
 import timetravelmachine
 
 @main
@@ -25,7 +24,6 @@ struct TravelBackInTimeInvestInBitcoinIOSApp: App {
     }
     
     func getData(_ completion: @escaping ((String) -> Void)) {
-        FirebaseApp.configure()
         let eventWithAbsentPrice = TimeTravelMachineEvent.RealWorldEvent.init(title: "Oops", description: "No price available!", isDonate: false)
         let timeTravelMachine = TimeTravelMachineFactory.init().create(eventWithAbsentPrice: eventWithAbsentPrice)
         timeTravelMachine.travelInTime(
