@@ -52,9 +52,5 @@ android {
 }
 
 detekt {
-    input = files(
-        "src/commonMain/kotlin",
-        "src/iOSMain/kotlin",
-        "src/jvmMain/kotlin"
-    )
+    input = files(KmmConfig.Detekt.sourcePaths)
 }
