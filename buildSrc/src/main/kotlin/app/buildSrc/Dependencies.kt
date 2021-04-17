@@ -28,6 +28,15 @@ object Config {
 object KmmConfig {
     const val version = "1.0"
     const val deploymentTarget = "13.5"
+
+    object Detekt {
+        val sourcePaths = listOf(
+            "src/commonMain/kotlin",
+            "src/iOSMain/kotlin",
+            "src/jvmMain/kotlin",
+            "src/androidMain/kotlin"
+        )
+    }
 }
 
 object Libs {
