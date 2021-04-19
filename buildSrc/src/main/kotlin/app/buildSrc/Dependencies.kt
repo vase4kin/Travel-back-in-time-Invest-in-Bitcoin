@@ -42,7 +42,7 @@ object KmmConfig {
 object Libs {
 
     object Gradle {
-        const val gradlePlugin = "com.android.tools.build:gradle:4.2.0-beta06"
+        const val gradlePlugin = "com.android.tools.build:gradle:4.2.0-rc01"
     }
 
     object Google {
