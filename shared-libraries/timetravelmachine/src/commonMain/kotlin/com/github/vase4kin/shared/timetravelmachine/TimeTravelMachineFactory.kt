@@ -20,7 +20,14 @@ import com.github.vase4kin.shared.coindesk.service.CoinDeskServiceImpl
 import com.github.vase4kin.shared.database.LocalDatabaseImpl
 import com.github.vase4kin.shared.repository.RepositoryImpl
 
+/**
+ * Factory to create TimeTravelMachine instance
+ */
 object TimeTravelMachineFactory {
+    /**
+     * @param eventWithAbsentPrice - the default event placeholder that needs to be provided
+     *                               in the case of the bitcoin price being absent
+     */
     fun create(
         eventWithAbsentPrice: TimeTravelMachine.Event.RealWorldEvent
     ): TimeTravelMachine {

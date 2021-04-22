@@ -26,7 +26,9 @@ import kotlinx.datetime.toInstant
 
 object TimeTravelConstraints {
     /**
-     * Maximum date is the current date minus one day as coin desk does not support current date
+     * Maximum date of time travel's availability
+     *
+     * It is the today's date minus one day as the coin desk does not support today's date
      */
     val maxDateTimeInMillis = Clock.System.now()
         .minus(1, DateTimeUnit.DAY, TimeZone.currentSystemDefault())
@@ -37,7 +39,9 @@ object TimeTravelConstraints {
     private const val MIN_DATE_TIME_DAY = 3
 
     /**
-     * Minimum date of the calendar 2009/1/03 (first bitcoin block)
+     * Minimum date of time travel's availability
+     *
+     * 2009/1/03 (first bitcoin block)
      */
     val minDateTimeInMillis =
         LocalDate(MIN_DATE_TIME_YEAR, MIN_DATE_TIME_MONTH, MIN_DATE_TIME_DAY)
@@ -50,7 +54,7 @@ object TimeTravelConstraints {
     private const val MIN_COIN_DESK_DATE_TIME_DAY = 18
 
     /**
-     * Minimum date for available price at coin desk
+     * Minimum date of available bitcoin price at the coin desk
      */
     internal val minCoinDeskDateTimeInMillis =
         LocalDate(
