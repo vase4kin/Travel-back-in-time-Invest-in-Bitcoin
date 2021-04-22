@@ -18,4 +18,5 @@ package com.github.vase4kin.shared.database
 
 internal const val REF_EVENTS = "events"
 
+@Suppress("EmptyDefaultConstructor")
 expect class LocalDatabaseImpl() : LocalDatabase

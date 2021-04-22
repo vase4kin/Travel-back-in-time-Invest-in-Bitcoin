@@ -25,7 +25,8 @@ import com.github.vase4kin.shared.repository.RepositoryImpl
  */
 object TimeTravelMachineFactory {
     /**
-     * @param eventWithAbsentPrice - the default event placeholder that needs to be provided in the case of the bitcoin price being absent
+     * @param eventWithAbsentPrice - the default event placeholder that needs to be provided
+     *                               in the case of the bitcoin price being absent
      */
     fun create(
         eventWithAbsentPrice: TimeTravelMachine.Event.RealWorldEvent
