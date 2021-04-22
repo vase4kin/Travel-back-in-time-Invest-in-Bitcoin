@@ -18,4 +18,4 @@ package com.github.vase4kin.shared.database
 
 internal const val REF_EVENTS = "events"
 
-expect class LocalDatabaseImpl : LocalDatabase
+expect class LocalDatabaseImpl() : LocalDatabase
