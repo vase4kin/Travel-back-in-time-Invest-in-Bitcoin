@@ -56,7 +56,7 @@ object TimeTravelConstraints {
     /**
      * Minimum date of available bitcoin price at the coin desk
      */
-    internal val minCoinDeskDateTimeInMillis =
+    val minCoinDeskDateTimeInMillis =
         LocalDate(
             MIN_COIN_DESK_DATE_TIME_YEAR,
             MIN_COIN_DESK_DATE_TIME_MONTH,
