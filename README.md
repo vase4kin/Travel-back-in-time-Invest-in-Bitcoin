@@ -1,6 +1,6 @@
 
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![Circle CI](https://circleci.com/gh/vase4kin/Travel-back-in-time-Invest-in-Bitcoin/tree/dev.svg?style=shield)](https://app.circleci.com/pipelines/github/vase4kin/Travel-back-in-time-Invest-in-Bitcoin?branch=dev)
+[![CI](https://github.com/vase4kin/Travel-back-in-time-Invest-in-Bitcoin/actions/workflows/build.yml/badge.svg)](https://github.com/vase4kin/Travel-back-in-time-Invest-in-Bitcoin/actions/workflows/build.yml)
 [![Android](https://img.shields.io/badge/android-1.1.3-blue.svg)](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/releases/latest)
 
 <img src="https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/dev/screenshots/feature-graphic.png">
