@@ -21,8 +21,8 @@ jobs:
     - name: Install NDK
       run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669" --sdk_root=${ANDROID_SDK_ROOT}
     
-    - name: Build app with gradle
-      run: ./gradlew assembleDebug -Dorg.gradle.jvmargs=-Xmx1536m -Dorg.gradle.parallel=true -Dorg.gradle.daemon=false -Dorg.gradle.caching=false -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+    - name: Build app and run checks
+      run: ./gradlew assembleDebug testDebugUnitTest lintDebug detekt -Dorg.gradle.jvmargs=-Xmx1536m -Dorg.gradle.parallel=true -Dorg.gradle.daemon=false -Dorg.gradle.caching=false -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
     
     - name: Upload build outputs
       if: success()
