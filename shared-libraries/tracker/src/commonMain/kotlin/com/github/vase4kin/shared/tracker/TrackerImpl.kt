@@ -30,6 +30,8 @@ private const val EVENT_USER_SEES_AT_LEAST_DOLLAR_ERROR = "event_user_sees_one_d
 private const val EVENT_USER_SEES_YOU_RICH_ERROR = "event_user_sees_you_rich_error"
 private const val EVENT_USER_COPIES_BTC_WALLET = "event_user_copies_btc_wallet"
 private const val EVENT_USER_GETS_TO_SATOSHI = "event_user_gets_to_satoshi"
+private const val EVENT_USER_GETS_TO_NO_PRICE_AVAILABLE_EVENT =
+    "event_user_gets_to_no_price_available_event"
 private const val EVENT_USER_GETS_TO_EXIST = "event_user_gets_to_exist"
 private const val EVENT_USER_RETRIES = "event_user_retries"
 private const val EVENT_USER_CHOOSE_SUGGESTION = "event_user_choose_money_suggestion"
@@ -99,6 +101,10 @@ class TrackerImpl(
                 PARAMETER_EVENT_NAME to eventName
             )
         )
+    }
+
+    override fun trackUserGetsToNoPriceAvailableEvent() {
+        analytics.logEvent(EVENT_USER_GETS_TO_NO_PRICE_AVAILABLE_EVENT)
     }
 
     override fun trackUserGetsToTimeTravelEvent(

@@ -32,8 +32,7 @@ object SharedLibsModule {
 
     @Singleton
     @Provides
-    fun providesTimeTravelMachine(
-    ): TimeTravelMachine {
+    fun providesTimeTravelMachine(): TimeTravelMachine {
         return TimeTravelMachineFactory.create()
     }
 
