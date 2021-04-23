@@ -42,6 +42,11 @@ interface TimeTravelMachine {
         ) : Event()
 
         /**
+         * Event with no price data available
+         */
+        object NoPriceAvailableEvent : Event()
+
+        /**
          * Event that represents the profit calculation of the time travel
          *
          * @param profitMoney   - the profit money

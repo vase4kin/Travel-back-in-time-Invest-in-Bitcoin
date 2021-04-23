@@ -16,8 +16,6 @@
 
 package com.travelbackintime.buybitcoin.dagger
 
-import android.app.Application
-import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachineFactory
 import com.github.vase4kin.shared.tracker.NativeAnalytics
@@ -34,16 +32,8 @@ object SharedLibsModule {
 
     @Singleton
     @Provides
-    fun providesTimeTravelMachine(
-        app: Application
-    ): TimeTravelMachine {
-        return TimeTravelMachineFactory.create(
-            eventWithAbsentPrice = TimeTravelMachine.Event.RealWorldEvent(
-                title = app.resources.getString(R.string.text_oops),
-                description = app.resources.getString(R.string.text_basically_nothing),
-                isDonate = false
-            )
-        )
+    fun providesTimeTravelMachine(): TimeTravelMachine {
+        return TimeTravelMachineFactory.create()
     }
 
     @Provides

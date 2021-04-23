@@ -39,6 +39,8 @@ interface Tracker {
 
     fun trackUserGetsToRealWorldEvent(eventName: String)
 
+    fun trackUserGetsToNoPriceAvailableEvent()
+
     fun trackUserGetsToTimeTravelEvent(
         profitMoney: Double,
         investedMoney: Double,

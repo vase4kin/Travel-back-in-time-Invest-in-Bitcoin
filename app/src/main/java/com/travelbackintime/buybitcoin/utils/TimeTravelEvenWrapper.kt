@@ -34,6 +34,9 @@ sealed class TimeTravelEvenWrapper : Parcelable {
         val investedMoney: Double,
         val timeToTravel: Long
     ) : TimeTravelEvenWrapper()
+
+    @Parcelize
+    object NoPriceAvailableEvent : TimeTravelEvenWrapper()
 }
 
 fun TimeTravelMachine.Event.wrap(): TimeTravelEvenWrapper {
@@ -48,5 +51,6 @@ fun TimeTravelMachine.Event.wrap(): TimeTravelEvenWrapper {
             investedMoney = this.investedMoney,
             timeToTravel = this.timeToTravel
         )
+        TimeTravelMachine.Event.NoPriceAvailableEvent -> TimeTravelEvenWrapper.NoPriceAvailableEvent
     }
 }

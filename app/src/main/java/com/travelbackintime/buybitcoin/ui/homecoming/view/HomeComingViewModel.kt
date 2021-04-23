@@ -69,6 +69,7 @@ class HomeComingViewModel @Inject constructor(
         when (event) {
             is TimeTravelEvenWrapper.RealWorldEvent -> processRealWorldEvent(event)
             is TimeTravelEvenWrapper.TimeTravelEvent -> processTimeTravelEvent(event)
+            is TimeTravelEvenWrapper.NoPriceAvailableEvent -> processNoPriceAvailableEvent()
         }
     }
 
@@ -87,6 +88,14 @@ class HomeComingViewModel @Inject constructor(
         isDescriptionViewVisible.set(event.description.isNotEmpty())
         isDonateViewVisible.set(event.isDonate)
         tracker.trackUserGetsToRealWorldEvent(event.title)
+    }
+
+    private fun processNoPriceAvailableEvent() {
+        title.set(resourcesProviderUtils.getString(R.string.text_oops))
+        description.set(resourcesProviderUtils.getString(R.string.text_basically_nothing))
+        isDescriptionViewVisible.set(true)
+        isDonateViewVisible.set(false)
+        tracker.trackUserGetsToNoPriceAvailableEvent()
     }
 
     private fun processTimeTravelEvent(event: TimeTravelEvenWrapper.TimeTravelEvent) {

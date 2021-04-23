@@ -23,8 +23,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
 internal class TimeTravelMachineImpl(
-    private val repository: Repository,
-    private val eventWithNoPrice: TimeTravelMachine.Event.RealWorldEvent
+    private val repository: Repository
 ) : TimeTravelMachine {
 
     override suspend fun travelInTime(
@@ -42,7 +41,7 @@ internal class TimeTravelMachineImpl(
             }
             is LocalDatabase.TimeTravelEvent.NoEvent -> {
                 when {
-                    isDateBeforePriceIsAvailable(time) -> eventWithNoPrice
+                    isDateBeforePriceIsAvailable(time) -> TimeTravelMachine.Event.NoPriceAvailableEvent
                     else -> calculateProfit(time, investedMoney)
                 }
             }

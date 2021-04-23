@@ -24,8 +24,7 @@ struct TravelBackInTimeInvestInBitcoinIOSApp: App {
     }
     
     func getData(_ completion: @escaping ((String) -> Void)) {
-        let eventWithAbsentPrice = TimeTravelMachineEvent.RealWorldEvent.init(title: "Oops", description: "No price available!", isDonate: false)
-        let timeTravelMachine = TimeTravelMachineFactory.init().create(eventWithAbsentPrice: eventWithAbsentPrice)
+        let timeTravelMachine = TimeTravelMachineFactory.init().create()
         timeTravelMachine.travelInTime(
             time: TimeTravelConstraints.init().maxDateTimeInMillis,
             investedMoney: 99.9
