@@ -76,7 +76,7 @@ class HomeComingFragment : DaggerFragment() {
                     viewModel = this@HomeComingFragment.viewModel
                 }
             }
-            is TimeTravelEvenWrapper.RealWorldEvent -> {
+            is TimeTravelEvenWrapper.NoPriceAvailableEvent, is TimeTravelEvenWrapper.RealWorldEvent -> {
                 DataBindingUtil.inflate<FragmentHomeComingEventBinding>(
                     inflater, R.layout.fragment_home_coming_event, container, false
                 ).apply {
