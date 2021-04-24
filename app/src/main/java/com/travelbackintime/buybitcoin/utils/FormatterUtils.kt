@@ -19,30 +19,47 @@ package com.travelbackintime.buybitcoin.utils
 import java.text.NumberFormat
 import java.util.Date
 import java.util.Locale
+import javax.inject.Inject
 
-class FormatterUtils(private val numberFormat: NumberFormat) {
+interface FormatterUtils {
 
-    fun formatPrice(amount: Double?): String {
+    fun formatPrice(amount: Double?): String
+
+    fun formatPriceAsOnlyDigits(amount: Double?): String
+
+    fun formatDate(date: Date): String
+
+    fun formatDateToShareText(date: Date): String
+
+    fun formatMonth(date: Date): String
+
+    fun formatYear(date: Date): String
+}
+
+class FormatterUtilsImpl @Inject constructor(private val numberFormat: NumberFormat) :
+    FormatterUtils {
+
+    override fun formatPrice(amount: Double?): String {
         return numberFormat.format(amount)
     }
 
-    fun formatPriceAsOnlyDigits(amount: Double?): String {
+    override fun formatPriceAsOnlyDigits(amount: Double?): String {
         return String.format(Locale.US, "%,.2f", amount)
     }
 
-    fun formatDate(date: Date): String {
+    override fun formatDate(date: Date): String {
         return String.format(Locale.US, "%1\$td %1\$tb %1\$tY", date)
     }
 
-    fun formatDateToShareText(date: Date): String {
+    override fun formatDateToShareText(date: Date): String {
         return String.format(Locale.US, "%1\$tB %1\$tY", date)
     }
 
-    fun formatMonth(date: Date): String {
+    override fun formatMonth(date: Date): String {
         return String.format(Locale.US, "%1\$tb", date)
     }
 
-    fun formatYear(date: Date): String {
+    override fun formatYear(date: Date): String {
         return String.format(Locale.US, "%1\$tY", date)
     }
 }

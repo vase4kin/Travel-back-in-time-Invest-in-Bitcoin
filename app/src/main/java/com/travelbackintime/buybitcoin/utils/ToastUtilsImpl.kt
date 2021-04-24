@@ -14,9 +14,19 @@
  * limitations under the License.
  */
 
-package com.travelbackintime.buybitcoin.dagger
+package com.travelbackintime.buybitcoin.utils
 
-import javax.inject.Scope
+import android.content.Context
+import android.widget.Toast
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-@Scope
-annotation class ActivityScoped
+interface ToastUtils {
+    fun showToast(resourceId: Int)
+}
+
+class ToastUtilsImpl @Inject constructor(@ApplicationContext private val context: Context) : ToastUtils {
+    override fun showToast(resourceId: Int) {
+        Toast.makeText(context, resourceId, Toast.LENGTH_SHORT).show()
+    }
+}

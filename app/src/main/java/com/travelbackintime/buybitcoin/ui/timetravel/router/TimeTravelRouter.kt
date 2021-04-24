@@ -17,6 +17,7 @@
 package com.travelbackintime.buybitcoin.ui.timetravel.router
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelConstraints
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.google.android.material.datepicker.CalendarConstraints
@@ -35,7 +36,7 @@ interface TimeTravelRouter {
 }
 
 class TimeTravelRouterImpl @Inject constructor(
-    private val fragment: TimeTravelFragment,
+    private val fragment: Fragment,
     private val internalRouter: InternalRouter
 ) : TimeTravelRouter {
 
@@ -43,7 +44,7 @@ class TimeTravelRouterImpl @Inject constructor(
 
     override fun showAmountDialog() {
         val dialog = InvestMoneyBottomSheetDialog()
-        dialog.setListener(fragment)
+        dialog.setListener(fragment as TimeTravelFragment)
         dialog.show(activity.supportFragmentManager, InvestMoneyBottomSheetDialog::class.java.name)
     }
 

@@ -28,12 +28,13 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentHomeComingBinding
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentHomeComingEventBinding
 import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 const val EXTRA_RESULT = "extra_result"
 
-class HomeComingFragment : DaggerFragment() {
+@AndroidEntryPoint
+class HomeComingFragment : Fragment() {
 
     companion object {
         fun create(event: TimeTravelEvenWrapper): Fragment {

@@ -21,10 +21,13 @@ import com.travelbackintime.buybitcoin.ui.splash.router.SplashRouterImpl
 
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.FragmentComponent
 
 @Module
-abstract class SplashModule {
+@InstallIn(FragmentComponent::class)
+interface SplashModule {
 
     @Binds
-    abstract fun providesSplashRouter(router: SplashRouterImpl): SplashRouter
+    fun providesSplashRouter(router: SplashRouterImpl): SplashRouter
 }

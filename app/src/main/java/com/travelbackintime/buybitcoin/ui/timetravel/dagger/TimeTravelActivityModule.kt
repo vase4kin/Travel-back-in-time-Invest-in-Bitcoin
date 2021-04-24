@@ -18,15 +18,15 @@ package com.travelbackintime.buybitcoin.ui.timetravel.dagger
 
 import com.travelbackintime.buybitcoin.ui.router.InternalRouter
 import com.travelbackintime.buybitcoin.ui.router.InternalRouterImpl
-import com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelActivity
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
 
 @Module
-class TimeTravelActivityModule {
+@InstallIn(ActivityComponent::class)
+interface TimeTravelActivityModule {
 
-    @Provides
-    fun provideInternalRouter(activity: TimeTravelActivity): InternalRouter {
-        return InternalRouterImpl(activity)
-    }
+    @Binds
+    fun provideInternalRouter(impl: InternalRouterImpl): InternalRouter
 }

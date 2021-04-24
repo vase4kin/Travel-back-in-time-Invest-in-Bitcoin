@@ -23,6 +23,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'io.gitlab.arturbosch.detekt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     defaultConfig {
@@ -80,10 +81,12 @@ dependencies {
 }
 
 dependencies {
-    implementation Libs.Dagger.dagger
-    implementation Libs.Dagger.androidSupport
-    kapt Libs.Dagger.compiler
-    kapt Libs.Dagger.androidProcessor
+    implementation Libs.Dagger.hilt
+    kapt Libs.Dagger.hiltCompiler
+}
+
+kapt {
+    correctErrorTypes true
 }
 
 dependencies {

@@ -22,13 +22,16 @@ import com.travelbackintime.buybitcoin.ui.homecoming.share.ShareHelper
 import com.travelbackintime.buybitcoin.ui.homecoming.share.ShareHelperImpl
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.FragmentComponent
 
 @Module
-abstract class HomeComingFragmentModule {
+@InstallIn(FragmentComponent::class)
+interface HomeComingModule {
 
     @Binds
-    abstract fun providesRouter(router: HomeComingRouterImpl): HomeComingRouter
+    fun providesRouter(router: HomeComingRouterImpl): HomeComingRouter
 
     @Binds
-    abstract fun providesShareHelper(shareHelperImpl: ShareHelperImpl): ShareHelper
+    fun providesShareHelper(shareHelperImpl: ShareHelperImpl): ShareHelper
 }

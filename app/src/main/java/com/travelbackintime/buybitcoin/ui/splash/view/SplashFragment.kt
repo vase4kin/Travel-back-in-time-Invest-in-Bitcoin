@@ -23,10 +23,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class SplashFragment : DaggerFragment() {
+@AndroidEntryPoint
+class SplashFragment : Fragment() {
 
     companion object {
         fun create(): Fragment {
