@@ -17,9 +17,16 @@
 package com.travelbackintime.buybitcoin.utils
 
 import android.content.Context
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class ResourcesProviderUtils(private val context: Context) {
-    fun getString(resourceId: Int): String {
+interface ResourcesProvider {
+    fun getString(resourceId: Int): String
+}
+
+class ResourcesProviderImpl @Inject constructor(@ApplicationContext private val context: Context) :
+    ResourcesProvider {
+    override fun getString(resourceId: Int): String {
         return context.getString(resourceId)
     }
 }

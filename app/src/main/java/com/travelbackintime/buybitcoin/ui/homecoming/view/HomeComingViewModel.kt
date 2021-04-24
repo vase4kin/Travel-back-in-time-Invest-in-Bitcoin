@@ -26,10 +26,10 @@ import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
 import com.github.vase4kin.shared.tracker.Tracker
 import com.travelbackintime.buybitcoin.ui.homecoming.router.HomeComingRouter
 import com.travelbackintime.buybitcoin.ui.homecoming.share.ShareHelper
-import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.ClipboardUtils
+import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
-import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
+import com.travelbackintime.buybitcoin.utils.ResourcesProvider
 import com.travelbackintime.buybitcoin.utils.ToastUtils
 import java.util.Date
 import javax.inject.Inject
@@ -41,7 +41,7 @@ class HomeComingViewModel @Inject constructor(
     private val tracker: Tracker,
     private val configService: RemoteConfigService,
     private val formatterUtils: FormatterUtils,
-    private val resourcesProviderUtils: ResourcesProviderUtils,
+    private val resourcesProvider: ResourcesProvider,
     private val toastUtils: ToastUtils,
     private val clipboardUtils: ClipboardUtils
 ) : LifecycleObserver {
@@ -91,8 +91,8 @@ class HomeComingViewModel @Inject constructor(
     }
 
     private fun processNoPriceAvailableEvent() {
-        title.set(resourcesProviderUtils.getString(R.string.text_oops))
-        description.set(resourcesProviderUtils.getString(R.string.text_basically_nothing))
+        title.set(resourcesProvider.getString(R.string.text_oops))
+        description.set(resourcesProvider.getString(R.string.text_basically_nothing))
         isDescriptionViewVisible.set(true)
         isDonateViewVisible.set(false)
         tracker.trackUserGetsToNoPriceAvailableEvent()
@@ -125,8 +125,8 @@ class HomeComingViewModel @Inject constructor(
 
     fun onCopyWalletAddress() {
         clipboardUtils.copyToClipBoard(
-            resourcesProviderUtils.getString(R.string.donate_copy_label),
-            resourcesProviderUtils.getString(R.string.donate_btc_wallet_address)
+            resourcesProvider.getString(R.string.donate_copy_label),
+            resourcesProvider.getString(R.string.donate_btc_wallet_address)
         )
         toastUtils.showToast(R.string.donate_toast)
         tracker.trackUserCopiesBtcWalletAddress()

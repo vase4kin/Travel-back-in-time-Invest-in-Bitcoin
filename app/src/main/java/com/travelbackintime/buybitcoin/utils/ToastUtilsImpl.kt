@@ -18,9 +18,15 @@ package com.travelbackintime.buybitcoin.utils
 
 import android.content.Context
 import android.widget.Toast
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class ToastUtils(private val context: Context) {
-    fun showToast(resourceId: Int) {
+interface ToastUtils {
+    fun showToast(resourceId: Int)
+}
+
+class ToastUtilsImpl @Inject constructor(@ApplicationContext private val context: Context) : ToastUtils {
+    override fun showToast(resourceId: Int) {
         Toast.makeText(context, resourceId, Toast.LENGTH_SHORT).show()
     }
 }

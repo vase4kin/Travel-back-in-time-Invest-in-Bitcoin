@@ -27,7 +27,7 @@ import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.shared.tracker.Tracker
 import com.travelbackintime.buybitcoin.ui.timetravel.router.TimeTravelRouter
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
-import com.travelbackintime.buybitcoin.utils.ResourcesProviderUtils
+import com.travelbackintime.buybitcoin.utils.ResourcesProvider
 import com.travelbackintime.buybitcoin.utils.onChanged
 import dagger.Lazy
 import kotlinx.coroutines.Dispatchers
@@ -46,16 +46,16 @@ class TimeTravelViewModel @Inject constructor(
     private val router: TimeTravelRouter,
     private val coroutineScope: Lazy<LifecycleCoroutineScope>,
     private val crashlytics: Crashlytics,
-    resourcesProviderUtils: ResourcesProviderUtils
+    resourcesProvider: ResourcesProvider
 ) : LifecycleObserver {
 
     val isBuyBitcoinButtonEnabled = ObservableBoolean(false)
     val timeToTravelText =
-        ObservableField(resourcesProviderUtils.getString(R.string.button_set_date_title)).onChanged {
+        ObservableField(resourcesProvider.getString(R.string.button_set_date_title)).onChanged {
             enableBuyBitcoinButton()
         }
     val investedMoneyText = ObservableField(
-        resourcesProviderUtils.getString(R.string.button_set_amount_title)
+        resourcesProvider.getString(R.string.button_set_amount_title)
     ).onChanged {
         enableBuyBitcoinButton()
     }

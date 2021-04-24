@@ -31,7 +31,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object SharedLibsModule {
+object SharedLibrariesModule {
 
     @Singleton
     @Provides
