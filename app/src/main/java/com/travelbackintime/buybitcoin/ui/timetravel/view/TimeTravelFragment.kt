@@ -25,10 +25,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentTimeTravelBinding
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class TimeTravelFragment : DaggerFragment(), InvestMoneyBottomSheetDialog.InvestMoneyListener {
+@AndroidEntryPoint
+class TimeTravelFragment : Fragment(), InvestMoneyBottomSheetDialog.InvestMoneyListener {
 
     companion object {
         fun create(): Fragment {
@@ -45,7 +46,8 @@ class TimeTravelFragment : DaggerFragment(), InvestMoneyBottomSheetDialog.Invest
         savedInstanceState: Bundle?
     ): View {
         val binding: FragmentTimeTravelBinding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_time_travel, container, false)
+            inflater, R.layout.fragment_time_travel, container, false
+        )
         binding.viewModel = viewModel
         return binding.root
     }

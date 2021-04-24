@@ -16,16 +16,17 @@
 
 package com.travelbackintime.buybitcoin.ui.router
 
+import androidx.fragment.app.FragmentActivity
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.ui.error.view.ErrorFragment
 import com.travelbackintime.buybitcoin.ui.homecoming.view.HomeComingFragment
-import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.ui.loading.LoadingFragment
-import com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelActivity
 import com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelFragment
+import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.addFragmentFadeTransitions
 import com.travelbackintime.buybitcoin.utils.addFragmentSlideTransitions
+import javax.inject.Inject
 
 interface InternalRouter {
     fun openTimeTravelFromSplash()
@@ -36,8 +37,8 @@ interface InternalRouter {
     fun openTimeTravelFromHomeComing()
 }
 
-class InternalRouterImpl(
-    private val activity: TimeTravelActivity
+class InternalRouterImpl @Inject constructor(
+    private val activity: FragmentActivity
 ) : InternalRouter {
     override fun openTimeTravelFromSplash() {
         val fragment = TimeTravelFragment.create()

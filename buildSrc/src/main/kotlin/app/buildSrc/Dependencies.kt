@@ -68,12 +68,14 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.29.1"
+        private const val version = "2.35"
 
-        const val dagger = "com.google.dagger:dagger:$version"
-        const val androidSupport = "com.google.dagger:dagger-android-support:$version"
-        const val compiler = "com.google.dagger:dagger-compiler:$version"
-        const val androidProcessor = "com.google.dagger:dagger-android-processor:$version"
+        const val hilt = "com.google.dagger:hilt-android:$version"
+        const val hiltCompiler = "com.google.dagger:hilt-compiler:$version"
+
+        object Plugins {
+            const val hiltAndroid = "com.google.dagger:hilt-android-gradle-plugin:$version"
+        }
     }
 
     object Detekt {

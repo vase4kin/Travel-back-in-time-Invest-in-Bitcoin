@@ -24,10 +24,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentErrorBinding
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class ErrorFragment : DaggerFragment() {
+@AndroidEntryPoint
+class ErrorFragment : Fragment() {
 
     companion object {
         fun create(): Fragment {

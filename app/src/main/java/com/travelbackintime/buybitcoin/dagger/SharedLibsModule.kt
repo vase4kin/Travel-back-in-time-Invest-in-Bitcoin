@@ -25,9 +25,12 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.travelbackintime.buybitcoin.impl.shared.NativeAnalyticsImpl
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 object SharedLibsModule {
 
     @Singleton

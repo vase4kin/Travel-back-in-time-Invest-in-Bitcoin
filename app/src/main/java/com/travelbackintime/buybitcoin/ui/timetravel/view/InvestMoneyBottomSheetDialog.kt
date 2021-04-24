@@ -30,13 +30,14 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.shared.tracker.Tracker
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputLayout
-import dagger.android.support.AndroidSupportInjection
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.Locale
 import javax.inject.Inject
 
 private const val MAX_MONEY = 1000000
 
+@AndroidEntryPoint
 class InvestMoneyBottomSheetDialog : BottomSheetDialogFragment() {
 
     @Inject
@@ -47,11 +48,6 @@ class InvestMoneyBottomSheetDialog : BottomSheetDialogFragment() {
 
     private var listener: InvestMoneyListener? = null
     private var errorRichCount = 0
-
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

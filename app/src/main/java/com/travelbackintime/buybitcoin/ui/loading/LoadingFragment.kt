@@ -26,10 +26,10 @@ import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.crashlytics.Crashlytics
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.travelbackintime.buybitcoin.ui.homecoming.view.EXTRA_RESULT
+import com.travelbackintime.buybitcoin.ui.router.InternalRouter
 import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.wrap
-import com.travelbackintime.buybitcoin.ui.router.InternalRouter
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import pl.droidsonroids.gif.GifDrawable
 import java.io.IOException
 import javax.inject.Inject
@@ -37,7 +37,8 @@ import javax.inject.Inject
 private const val LOOP_COUNT = 1
 private const val SPEED: Float = 0.8f
 
-class LoadingFragment : DaggerFragment() {
+@AndroidEntryPoint
+class LoadingFragment : Fragment() {
 
     companion object {
         fun create(event: TimeTravelMachine.Event): Fragment {

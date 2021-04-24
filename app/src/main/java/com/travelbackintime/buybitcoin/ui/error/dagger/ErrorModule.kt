@@ -21,10 +21,13 @@ import com.travelbackintime.buybitcoin.ui.error.router.ErrorRouterImpl
 
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.FragmentComponent
 
 @Module
-abstract class ErrorModule {
+@InstallIn(FragmentComponent::class)
+interface ErrorModule {
 
     @Binds
-    abstract fun providesErrorRouter(router: ErrorRouterImpl): ErrorRouter
+    fun providesErrorRouter(router: ErrorRouterImpl): ErrorRouter
 }

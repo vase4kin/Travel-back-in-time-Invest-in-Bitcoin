@@ -19,6 +19,7 @@ package com.travelbackintime.buybitcoin.ui.homecoming.router
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.travelbackintime.buybitcoin.ui.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.ui.router.InternalRouter
@@ -30,7 +31,7 @@ interface HomeComingRouter {
 }
 
 class HomeComingRouterImpl @Inject constructor(
-    private val fragment: HomeComingFragment,
+    fragment: Fragment,
     private val internalRouter: InternalRouter
 ) : HomeComingRouter {
 

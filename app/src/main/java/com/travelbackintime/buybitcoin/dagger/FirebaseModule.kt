@@ -25,12 +25,15 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.travelbackintime.buybitcoin.impl.remoteconfig.RemoteConfigServiceImpl
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 private const val DEBUG_CACHE_SECS = 30L
 private const val PROD_CACHE_SECS = 43200L
 
 @Module
+@InstallIn(SingletonComponent::class)
 object FirebaseModule {
 
     @Singleton

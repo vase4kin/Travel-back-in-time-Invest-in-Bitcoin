@@ -18,6 +18,7 @@ package com.travelbackintime.buybitcoin.ui.homecoming.share
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
+import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.travelbackintime.buybitcoin.ui.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
@@ -30,7 +31,7 @@ interface ShareHelper {
 }
 
 class ShareHelperImpl @Inject constructor(
-    fragment: HomeComingFragment,
+    fragment: Fragment,
     private val formatterUtils: FormatterUtils
 ) : ShareHelper {
 

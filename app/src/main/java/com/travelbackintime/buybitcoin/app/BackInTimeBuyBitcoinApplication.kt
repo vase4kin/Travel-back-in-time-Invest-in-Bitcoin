@@ -16,19 +16,15 @@
 
 package com.travelbackintime.buybitcoin.app
 
+import android.app.Application
 import com.google.android.gms.ads.MobileAds
-import com.travelbackintime.buybitcoin.dagger.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import dagger.hilt.android.HiltAndroidApp
 
-class BackInTimeBuyBitcoinApplication : DaggerApplication() {
+@HiltAndroidApp
+class BackInTimeBuyBitcoinApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
         MobileAds.initialize(this)
-    }
-
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder().application(this).build()
     }
 }
