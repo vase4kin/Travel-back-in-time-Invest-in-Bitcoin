@@ -17,7 +17,6 @@
 package com.travelbackintime.buybitcoin.ui.timetravel.view
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater

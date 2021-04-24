@@ -21,7 +21,6 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import com.travelbackintime.buybitcoin.ui.timetravel.router.TimeTravelRouter
 import com.travelbackintime.buybitcoin.ui.timetravel.router.TimeTravelRouterImpl
-import com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelFragment
 
 import dagger.Binds
 import dagger.Module

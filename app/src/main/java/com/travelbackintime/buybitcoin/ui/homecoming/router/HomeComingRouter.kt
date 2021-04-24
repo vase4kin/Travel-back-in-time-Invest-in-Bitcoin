@@ -21,7 +21,6 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.travelbackintime.buybitcoin.ui.homecoming.view.HomeComingFragment
 import com.travelbackintime.buybitcoin.ui.router.InternalRouter
 import javax.inject.Inject
 
