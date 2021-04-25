@@ -32,8 +32,8 @@ jobs:
         path: app/build/outputs/
 
     - name: Upload reports
-        if: success()
-        uses: actions/upload-artifact@v1
-        with:
-          name: reports
-          path: app/build/reports/
+      if: success()
+      uses: actions/upload-artifact@v1
+      with:
+        name: reports
+        path: app/build/reports/
