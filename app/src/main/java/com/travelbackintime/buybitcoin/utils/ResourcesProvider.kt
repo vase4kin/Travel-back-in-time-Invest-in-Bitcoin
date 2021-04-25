@@ -16,21 +16,18 @@
 
 package com.travelbackintime.buybitcoin.utils
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-interface ClipboardUtils {
-    fun copyToClipBoard(label: String, textToCopy: String)
+interface ResourcesProvider {
+    fun getString(resourceId: Int): String
 }
 
-class ClipboardUtilsImpl @Inject constructor(@ApplicationContext private val context: Context) : ClipboardUtils {
-
-    override fun copyToClipBoard(label: String, textToCopy: String) {
-        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText(label, textToCopy)
-        clipboard.setPrimaryClip(clip)
+class ResourcesProviderImpl @Inject constructor(
+    @ApplicationContext private val context: Context
+) : ResourcesProvider {
+    override fun getString(resourceId: Int): String {
+        return context.getString(resourceId)
     }
 }

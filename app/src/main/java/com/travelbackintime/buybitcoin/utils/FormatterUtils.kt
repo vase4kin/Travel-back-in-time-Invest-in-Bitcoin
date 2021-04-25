@@ -23,9 +23,9 @@ import javax.inject.Inject
 
 interface FormatterUtils {
 
-    fun formatPrice(amount: Double?): String
+    fun formatPrice(amount: Double): String
 
-    fun formatPriceAsOnlyDigits(amount: Double?): String
+    fun formatPriceAsOnlyDigits(amount: Double): String
 
     fun formatDate(date: Date): String
 
@@ -39,11 +39,11 @@ interface FormatterUtils {
 class FormatterUtilsImpl @Inject constructor(private val numberFormat: NumberFormat) :
     FormatterUtils {
 
-    override fun formatPrice(amount: Double?): String {
+    override fun formatPrice(amount: Double): String {
         return numberFormat.format(amount)
     }
 
-    override fun formatPriceAsOnlyDigits(amount: Double?): String {
+    override fun formatPriceAsOnlyDigits(amount: Double): String {
         return String.format(Locale.US, "%,.2f", amount)
     }
 

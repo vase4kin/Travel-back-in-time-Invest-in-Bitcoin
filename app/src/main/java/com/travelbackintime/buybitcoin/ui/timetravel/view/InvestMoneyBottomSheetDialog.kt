@@ -63,11 +63,11 @@ class InvestMoneyBottomSheetDialog : BottomSheetDialogFragment() {
 
         val hint = getString(
             R.string.hint_set_amount,
-            numberFormat.currency.getDisplayName(Locale.ENGLISH)
+            numberFormat.currency?.getDisplayName(Locale.ENGLISH)
         )
         editTextWrapper.hint = hint
 
-        editTextWrapper.editText!!.setOnEditorActionListener { _, actionId, _ ->
+        editTextWrapper.editText?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 saveInvestedMoney(editTextWrapper)
                 val imm =
@@ -120,7 +120,7 @@ class InvestMoneyBottomSheetDialog : BottomSheetDialogFragment() {
                 investedMoneyAsDouble < 1 -> {
                     editTextWrapper.error = getString(
                         R.string.error_set_amount_zero,
-                        numberFormat.currency.getDisplayName(Locale.ENGLISH)
+                        numberFormat.currency?.getDisplayName(Locale.ENGLISH)
                     )
                     tracker.trackUserSeesAtLeastDollarError()
                 }

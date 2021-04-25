@@ -17,17 +17,26 @@
 package com.travelbackintime.buybitcoin.utils
 
 import android.content.Context
-import android.os.Build
 import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 
 fun addFragmentSlideTransitions(fragment: Fragment, context: Context) {
-    addFragmentTransitions(fragment, context, R.transition.fragment_slide_right, R.transition.fragment_slide_left)
+    addFragmentTransitions(
+        fragment,
+        context,
+        R.transition.fragment_slide_right,
+        R.transition.fragment_slide_left
+    )
 }
 
 fun addFragmentFadeTransitions(fragment: Fragment, context: Context) {
-    addFragmentTransitions(fragment, context, R.transition.fragment_fade_in, R.transition.fragment_fade_out)
+    addFragmentTransitions(
+        fragment,
+        context,
+        R.transition.fragment_fade_in,
+        R.transition.fragment_fade_out
+    )
 }
 
 private fun addFragmentTransitions(
@@ -36,11 +45,9 @@ private fun addFragmentTransitions(
     enterTransitionRes: Int,
     exitTransitionRes: Int
 ) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        val enterTransition = TransitionInflater.from(context).inflateTransition(enterTransitionRes)
-        fragment.enterTransition = enterTransition
-        val exitTransition = TransitionInflater.from(context).inflateTransition(exitTransitionRes)
-        fragment.exitTransition = exitTransition
-        fragment.allowEnterTransitionOverlap = false
-    }
+    val enterTransition = TransitionInflater.from(context).inflateTransition(enterTransitionRes)
+    fragment.enterTransition = enterTransition
+    val exitTransition = TransitionInflater.from(context).inflateTransition(exitTransitionRes)
+    fragment.exitTransition = exitTransition
+    fragment.allowEnterTransitionOverlap = false
 }
