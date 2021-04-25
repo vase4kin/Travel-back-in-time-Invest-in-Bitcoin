@@ -71,5 +71,5 @@ jobs:
     - name: Build kmm and install pods
       run: ./gradlew podInstall -Dorg.gradle.jvmargs=-Xmx1536m -Dorg.gradle.parallel=true -Dorg.gradle.daemon=false -Dorg.gradle.caching=false -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
-    - name: build iOS app
+    - name: Build iOS app
       run: cd iosApp && pod install && sh build.sh
