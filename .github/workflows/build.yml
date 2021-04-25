@@ -46,7 +46,10 @@ jobs:
     outputs:
       iosApp: ${{ steps.filter.outputs.iosApp }}
     steps:
-      # For pull requests it's not necessary to checkout the code
+
+      steps:
+      - uses: actions/checkout@v2
+
       - uses: dorny/paths-filter@v2
         id: filter
         with:
