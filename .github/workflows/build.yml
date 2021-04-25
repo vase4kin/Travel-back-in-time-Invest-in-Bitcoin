@@ -37,3 +37,12 @@ jobs:
       with:
         name: reports
         path: app/build/reports/
+
+  build-ios:
+    runs-on: macOS-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: build iOS app
+      run: sh iosApp/build.sh
