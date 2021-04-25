@@ -50,6 +50,7 @@ class TimeTravelViewModel @Inject constructor(
 ) : LifecycleObserver {
 
     val isBuyBitcoinButtonEnabled = ObservableBoolean(false)
+    val isWarpingThroughSpaceAndTime = ObservableBoolean(false)
     val timeToTravelText =
         ObservableField(resourcesProvider.getString(R.string.button_set_date_title)).onChanged {
             enableBuyBitcoinButton()
@@ -90,7 +91,7 @@ class TimeTravelViewModel @Inject constructor(
     private fun travelInTime() {
         coroutineScope.get().launch {
             withContext(Dispatchers.IO) {
-                isBuyBitcoinButtonEnabled.set(false)
+                isWarpingThroughSpaceAndTime.set(true)
                 val event = try {
                     timeTravelMachine.travelInTime(
                         time = timeToTravel,
@@ -99,7 +100,7 @@ class TimeTravelViewModel @Inject constructor(
                 } catch (e: Exception) {
                     crashlytics.recordException(e)
                 }
-                isBuyBitcoinButtonEnabled.set(true)
+                isWarpingThroughSpaceAndTime.set(false)
                 withContext(Dispatchers.Main) {
                     when (event) {
                         is TimeTravelMachine.Event -> router.openLoadingFragment(event)
