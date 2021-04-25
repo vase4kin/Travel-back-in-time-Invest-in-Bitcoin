@@ -44,7 +44,7 @@ jobs:
   detect-ios-app-changes:
     runs-on: ubuntu-latest
     outputs:
-      iosApp: ${{ steps.filter.outputs.iosapp }}
+      iosApp: ${{ steps.filter.outputs.iosApp }}
     steps:
       # For pull requests it's not necessary to checkout the code
       - uses: dorny/paths-filter@v2
@@ -57,7 +57,7 @@ jobs:
   # Job to build iOS app sources
   build-ios:
     needs: detect-ios-app-changes
-    if: ${{ needs.changes.outputs.iosapp == 'true' }}
+    if: ${{ needs.changes.outputs.iosApp == 'true' }}
     runs-on: macOS-latest
 
     steps:
