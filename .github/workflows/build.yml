@@ -44,5 +44,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 8
+
+    - name: Build app and run checks
+      run: ./gradlew podInstall -Dorg.gradle.jvmargs=-Xmx1536m -Dorg.gradle.parallel=true -Dorg.gradle.daemon=false -Dorg.gradle.caching=false -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+
     - name: build iOS app
       run: cd iosApp && pod install && sh build.sh
