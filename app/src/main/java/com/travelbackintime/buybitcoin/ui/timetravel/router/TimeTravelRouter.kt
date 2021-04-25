@@ -24,7 +24,6 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.travelbackintime.buybitcoin.ui.router.InternalRouter
 import com.travelbackintime.buybitcoin.ui.timetravel.view.InvestMoneyBottomSheetDialog
-import com.travelbackintime.buybitcoin.ui.timetravel.view.TimeTravelFragment
 import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
@@ -44,7 +43,7 @@ class TimeTravelRouterImpl @Inject constructor(
 
     override fun showAmountDialog() {
         val dialog = InvestMoneyBottomSheetDialog()
-        dialog.setListener(fragment as TimeTravelFragment)
+        dialog.setListener(fragment as InvestMoneyBottomSheetDialog.InvestMoneyListener)
         dialog.show(activity.supportFragmentManager, InvestMoneyBottomSheetDialog::class.java.name)
     }
 

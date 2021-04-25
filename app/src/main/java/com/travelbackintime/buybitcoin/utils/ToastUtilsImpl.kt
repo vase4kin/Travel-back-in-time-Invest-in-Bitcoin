@@ -25,7 +25,9 @@ interface ToastUtils {
     fun showToast(resourceId: Int)
 }
 
-class ToastUtilsImpl @Inject constructor(@ApplicationContext private val context: Context) : ToastUtils {
+class ToastUtilsImpl @Inject constructor(
+    @ApplicationContext private val context: Context
+) : ToastUtils {
     override fun showToast(resourceId: Int) {
         Toast.makeText(context, resourceId, Toast.LENGTH_SHORT).show()
     }
