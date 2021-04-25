@@ -7,6 +7,8 @@ on:
   pull_request:
 
 jobs:
+
+  # Job to build android sources
   build:
     runs-on: ubuntu-latest
 
@@ -38,7 +40,24 @@ jobs:
         name: reports
         path: app/build/reports/
 
+  # Job to detect iOS app changes
+  detect-ios-app-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      iosApp: ${{ steps.filter.outputs.iosapp }}
+    steps:
+      # For pull requests it's not necessary to checkout the code
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            iosApp:
+              - 'iosApp/**'
+
+  # Job to build iOS app sources
   build-ios:
+    needs: detect-ios-app-changes
+    if: ${{ needs.changes.outputs.iosapp == 'true' }}
     runs-on: macOS-latest
 
     steps:
@@ -49,7 +68,7 @@ jobs:
       with:
         java-version: 8
 
-    - name: Build app and run checks
+    - name: Build kmm and install pods
       run: ./gradlew podInstall -Dorg.gradle.jvmargs=-Xmx1536m -Dorg.gradle.parallel=true -Dorg.gradle.daemon=false -Dorg.gradle.caching=false -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
 
     - name: build iOS app
