@@ -57,7 +57,7 @@ jobs:
   # Job to build iOS app sources
   build-ios:
     needs: detect-ios-app-changes
-    if: ${{ needs.changes.outputs.iosApp == 'true' }}
+    if: ${{ needs.detect-ios-app-changes.outputs.iosApp == 'true' }}
     runs-on: macOS-latest
 
     steps:
