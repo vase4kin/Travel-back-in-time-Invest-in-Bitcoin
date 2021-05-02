@@ -16,9 +16,9 @@
 
 package com.travelbackintime.buybitcoin.ui.homecoming.router
 
-import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.travelbackintime.buybitcoin.ui.router.InternalRouter
@@ -41,10 +41,10 @@ class HomeComingRouterImpl @Inject constructor(
     }
 
     override fun openPoweredByCoinDeskUrl() {
-        val browserIntent = Intent(
-            Intent.ACTION_VIEW,
+        val customTabsIntent = CustomTabsIntent.Builder().build()
+        customTabsIntent.launchUrl(
+            activity,
             Uri.parse(activity.resources.getString(R.string.powered_by_coindesk_url))
         )
-        activity.startActivity(browserIntent)
     }
 }

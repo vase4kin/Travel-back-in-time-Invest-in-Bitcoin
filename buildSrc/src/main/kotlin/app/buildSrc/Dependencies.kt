@@ -60,6 +60,7 @@ object Libs {
             const val appCompat = "androidx.appcompat:appcompat:1.2.0"
             const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
             const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+            const val browser = "androidx.browser:browser:1.3.0"
         }
 
         object Material {

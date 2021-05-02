@@ -83,6 +83,7 @@ dependencies {
     implementation Libs.Google.AndroidX.appCompat
     implementation Libs.Google.AndroidX.constraintLayout
     implementation Libs.Google.AndroidX.lifecycleRuntimeKtx
+    implementation Libs.Google.AndroidX.browser
 }
 
 dependencies {
