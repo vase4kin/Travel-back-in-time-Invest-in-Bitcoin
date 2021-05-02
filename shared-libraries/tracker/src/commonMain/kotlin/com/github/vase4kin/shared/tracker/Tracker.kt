@@ -47,11 +47,9 @@ interface Tracker {
         time: Long
     )
 
-    fun trackUserSharesOnFb()
-
-    fun trackUserSharesOnTwitter()
-
     fun trackUserRetries()
 
     fun trackUserChooseMoneySuggestion(amount: String)
+
+    fun trackUserClicksOnPoweredByCoinDesk()
 }

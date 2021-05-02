@@ -87,7 +87,7 @@ class HomeComingViewModel @Inject constructor(
         description.set(event.description)
         isDescriptionViewVisible.set(event.description.isNotEmpty())
         isDonateViewVisible.set(event.isDonate)
-        tracker.trackUserGetsToRealWorldEvent(event.title)
+        tracker.trackUserGetsToRealWorldEvent(event.toString())
     }
 
     private fun processNoPriceAvailableEvent() {
@@ -134,6 +134,7 @@ class HomeComingViewModel @Inject constructor(
 
     fun openPoweredByCoinDeskUrl() {
         router.openPoweredByCoinDeskUrl()
+        tracker.trackUserClicksOnPoweredByCoinDesk()
     }
 
     private fun setTimeMachineDisplay(event: TimeTravelEvenWrapper.TimeTravelEvent) {
