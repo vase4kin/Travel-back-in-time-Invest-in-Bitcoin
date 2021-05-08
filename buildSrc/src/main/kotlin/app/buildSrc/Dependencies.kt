@@ -41,6 +41,10 @@ object KmmConfig {
 
 object Libs {
 
+    object Plugins {
+        const val versions = "com.github.ben-manes:gradle-versions-plugin:0.38.0"
+    }
+
     object Gradle {
         const val gradlePlugin = "com.android.tools.build:gradle:4.2.0-rc01"
     }

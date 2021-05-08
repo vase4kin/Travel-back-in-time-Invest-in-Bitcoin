@@ -19,6 +19,7 @@
 import app.buildSrc.Config
 import app.buildSrc.KmmConfig
 import app.buildSrc.Libs
+import com.github.benmanes.gradle.versions.VersionsPlugin
 
 buildscript {
 
@@ -28,6 +29,7 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
+        gradlePluginPortal()
     }
     dependencies {
         classpath Libs.Gradle.gradlePlugin
@@ -37,6 +39,7 @@ buildscript {
         classpath Libs.Kotlin.Plugins.gradle
         classpath Libs.Kotlin.Plugins.serialization
         classpath Libs.Dagger.Plugins.hiltAndroid
+        classpath Libs.Plugins.versions
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -50,6 +53,28 @@ allprojects {
         maven {
             url 'https://maven.google.com/'
         }
+    }
+}
+
+allprojects {
+    apply plugin: VersionsPlugin
+
+    def isNonStable = { String version ->
+        def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { keyword -> version.toUpperCase().contains(keyword) }
+        def regex = /^[0-9,.v-]+(-r)?$/
+        return !stableKeyword && !(version ==~ regex)
+    }
+
+    tasks.named("dependencyUpdates").configure {
+
+        rejectVersionIf {
+            isNonStable(it.candidate.version) && !isNonStable(it.currentVersion)
+        }
+
+        checkForGradleUpdate = true
+        outputFormatter = "plain"
+        outputDir = "build/dependencyUpdates"
+        reportfileName = "report"
     }
 }
 
