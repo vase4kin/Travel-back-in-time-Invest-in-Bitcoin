@@ -46,14 +46,14 @@ object Libs {
     }
 
     object Gradle {
-        const val gradlePlugin = "com.android.tools.build:gradle:4.2.0-rc01"
+        const val gradlePlugin = "com.android.tools.build:gradle:4.2.0"
     }
 
     object Google {
         const val googleServicesPlugin = "com.google.gms:google-services:4.3.5"
 
         object Firebase {
-            const val bom = "com.google.firebase:firebase-bom:26.7.0"
+            const val bom = "com.google.firebase:firebase-bom:27.1.0"
 
             object Crashlytics {
                 const val gradlePlugin = "com.google.firebase:firebase-crashlytics-gradle:2.5.2"
@@ -73,7 +73,7 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.35"
+        private const val version = "2.35.1"
 
         const val hilt = "com.google.dagger:hilt-android:$version"
         const val hiltCompiler = "com.google.dagger:hilt-compiler:$version"
@@ -95,10 +95,10 @@ object Libs {
     }
 
     object Kotlin {
-        internal const val version = "1.4.31"
+        internal const val version = "1.5.0"
 
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
-        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
+        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
 
         object Plugins {
             const val gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
@@ -109,7 +109,7 @@ object Libs {
     object Kmm {
 
         object Ktor {
-            private const val version = "1.5.2"
+            private const val version = "1.5.4"
             const val clientCore = "io.ktor:ktor-client-core:$version"
             const val clientSerialization = "io.ktor:ktor-client-serialization:$version"
             const val clientAndroid = "io.ktor:ktor-client-android:$version"
@@ -119,7 +119,7 @@ object Libs {
         }
 
         object KotlinX {
-            const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.1"
+            const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.2.0"
             const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3-native-mt"
             const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
         }
@@ -146,6 +146,6 @@ object Libs {
         const val jUnit = "junit:junit:4.13.2"
     }
 
-    const val androidGifDrawable = "pl.droidsonroids.gif:android-gif-drawable:1.2.22"
+    const val androidGifDrawable = "pl.droidsonroids.gif:android-gif-drawable:1.2.23"
     const val coreLibraryDesugaring = "com.android.tools:desugar_jdk_libs:1.1.5"
 }
