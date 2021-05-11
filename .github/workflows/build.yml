@@ -53,6 +53,8 @@ jobs:
         filters: |
           iosApp:
             - 'iosApp/**'
+            - 'shared-libraries/**'
+            - 'buildSrc/**'
 
   # Job to build iOS app sources
   build-ios:
