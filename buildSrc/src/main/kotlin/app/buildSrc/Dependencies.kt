@@ -23,6 +23,7 @@ object Config {
     const val versionCode = 19
     const val versionName = "1.1.3"
     const val applicationId = "com.travelbackintime.buybitcoin"
+    const val test = "test"
 }
 
 object KmmConfig {
