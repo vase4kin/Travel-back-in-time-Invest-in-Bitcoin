@@ -21,7 +21,7 @@ import com.github.vase4kin.shared.database.LocalDatabaseImpl
 import com.github.vase4kin.shared.repository.RepositoryImpl
 
 /**
- * Factory to create TimeTravelMachine instance
+ * Factory to create TimeTravelMachine instance // test
  */
 object TimeTravelMachineFactory {
     fun create(): TimeTravelMachine {
