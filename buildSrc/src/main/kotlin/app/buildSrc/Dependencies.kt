@@ -53,7 +53,7 @@ object Libs {
         const val googleServicesPlugin = "com.google.gms:google-services:4.3.5"
 
         object Firebase {
-            const val bom = "com.google.firebase:firebase-bom:28.0.0"
+            const val bom = "com.google.firebase:firebase-bom:27.1.0"
 
             object Crashlytics {
                 const val gradlePlugin = "com.google.firebase:firebase-crashlytics-gradle:2.5.2"
