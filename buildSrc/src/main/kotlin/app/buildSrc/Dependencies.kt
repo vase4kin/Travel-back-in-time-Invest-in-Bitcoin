@@ -50,7 +50,7 @@ object Libs {
     }
 
     object Google {
-        const val googleServicesPlugin = "com.google.gms:google-services:4.3.6"
+        const val googleServicesPlugin = "com.google.gms:google-services:4.3.5"
 
         object Firebase {
             const val bom = "com.google.firebase:firebase-bom:28.0.0"
