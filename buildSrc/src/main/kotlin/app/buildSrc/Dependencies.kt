@@ -46,11 +46,11 @@ object Libs {
     }
 
     object Gradle {
-        const val gradlePlugin = "com.android.tools.build:gradle:4.2.0"
+        const val gradlePlugin = "com.android.tools.build:gradle:4.2.1"
     }
 
     object Google {
-        const val googleServicesPlugin = "com.google.gms:google-services:4.3.5"
+        const val googleServicesPlugin = "com.google.gms:google-services:4.3.8"
 
         object Firebase {
             const val bom = "com.google.firebase:firebase-bom:27.1.0"
@@ -61,7 +61,7 @@ object Libs {
         }
 
         object AndroidX {
-            const val appCompat = "androidx.appcompat:appcompat:1.2.0"
+            const val appCompat = "androidx.appcompat:appcompat:1.3.0"
             const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
             const val lifecycleRuntimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
             const val browser = "androidx.browser:browser:1.3.0"
@@ -84,7 +84,7 @@ object Libs {
     }
 
     object Detekt {
-        const val version = "1.16.0"
+        const val version = "1.17.1"
 
         const val gradlePlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$version"
         const val jvmTarget = "1.8"
