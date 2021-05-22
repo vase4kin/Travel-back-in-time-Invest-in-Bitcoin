@@ -18,7 +18,7 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v1
       with:
-        java-version: 8
+        java-version: 11
 
     - name: Build app and run checks
       run: ./gradlew assembleDebug testDebugUnitTest lintDebug detekt -Dorg.gradle.jvmargs=-Xmx1536m -Dorg.gradle.parallel=true -Dorg.gradle.daemon=false -Dorg.gradle.caching=false -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
@@ -68,7 +68,7 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v1
       with:
-        java-version: 8
+        java-version: 11
 
     - name: Build kmm and install pods
       run: ./gradlew podInstall -Dorg.gradle.jvmargs=-Xmx1536m -Dorg.gradle.parallel=true -Dorg.gradle.daemon=false -Dorg.gradle.caching=false -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false

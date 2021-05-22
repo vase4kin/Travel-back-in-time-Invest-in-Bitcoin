@@ -38,7 +38,7 @@ class ShareHelperImpl @Inject constructor(
 
     override fun shareWithFriends(event: TimeTravelEvenWrapper.TimeTravelEvent) {
         val textToShare = createShareText(event)
-        ShareCompat.IntentBuilder.from(activity)
+        ShareCompat.IntentBuilder(activity)
             .setHtmlText(textToShare)
             .setType("text/plain")
             .startChooser()
