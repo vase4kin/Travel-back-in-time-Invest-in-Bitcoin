@@ -46,7 +46,7 @@ object Libs {
     }
 
     object Gradle {
-        const val gradlePlugin = "com.android.tools.build:gradle:4.2.1"
+        const val gradlePlugin = "com.android.tools.build:gradle:7.0.0-beta02"
     }
 
     object Google {
