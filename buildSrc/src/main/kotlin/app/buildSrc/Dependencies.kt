@@ -42,11 +42,11 @@ object KmmConfig {
 object Libs {
 
     object Plugins {
-        const val versions = "com.github.ben-manes:gradle-versions-plugin:0.38.0"
+        const val versions = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
     }
 
     object Gradle {
-        const val gradlePlugin = "com.android.tools.build:gradle:7.0.0-beta02"
+        const val gradlePlugin = "com.android.tools.build:gradle:7.0.0-beta03"
     }
 
     object Google {
@@ -73,7 +73,7 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.35.1"
+        private const val version = "2.36"
 
         const val hilt = "com.google.dagger:hilt-android:$version"
         const val hiltCompiler = "com.google.dagger:hilt-compiler:$version"
@@ -95,7 +95,7 @@ object Libs {
     }
 
     object Kotlin {
-        internal const val version = "1.5.0"
+        internal const val version = "1.5.10"
 
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
         const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
@@ -109,7 +109,7 @@ object Libs {
     object Kmm {
 
         object Ktor {
-            private const val version = "1.5.4"
+            private const val version = "1.6.0"
             const val clientCore = "io.ktor:ktor-client-core:$version"
             const val clientSerialization = "io.ktor:ktor-client-serialization:$version"
             const val clientAndroid = "io.ktor:ktor-client-android:$version"
@@ -119,13 +119,13 @@ object Libs {
         }
 
         object KotlinX {
-            const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.2.0"
-            const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3-native-mt"
-            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
+            const val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.2.1"
+            const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
+            const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1"
         }
 
         object Firebase {
-            const val realtimeDatabase = "dev.gitlive:firebase-database:1.2.0"
+            const val realtimeDatabase = "dev.gitlive:firebase-database:1.3.1"
         }
     }
 
