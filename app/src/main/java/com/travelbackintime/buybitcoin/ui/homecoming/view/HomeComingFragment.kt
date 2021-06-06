@@ -26,7 +26,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import bitcoin.backintime.com.backintimebuybitcoin.R
 import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentHomeComingBinding
-import bitcoin.backintime.com.backintimebuybitcoin.databinding.FragmentHomeComingEventBinding
 import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -55,7 +54,7 @@ class HomeComingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val event: TimeTravelEvenWrapper = arguments?.getParcelable(EXTRA_RESULT)
-            ?: TimeTravelEvenWrapper.RealWorldEvent("", "", false)
+            ?: TimeTravelEvenWrapper.TimeTravelEvent(0.0, 0.0, 0L)
         viewModel.event = event
         return provideView(
             event = event,
@@ -73,13 +72,6 @@ class HomeComingFragment : Fragment() {
             is TimeTravelEvenWrapper.TimeTravelEvent -> {
                 DataBindingUtil.inflate<FragmentHomeComingBinding>(
                     inflater, R.layout.fragment_home_coming, container, false
-                ).apply {
-                    viewModel = this@HomeComingFragment.viewModel
-                }
-            }
-            is TimeTravelEvenWrapper.NoPriceAvailableEvent, is TimeTravelEvenWrapper.RealWorldEvent -> {
-                DataBindingUtil.inflate<FragmentHomeComingEventBinding>(
-                    inflater, R.layout.fragment_home_coming_event, container, false
                 ).apply {
                     viewModel = this@HomeComingFragment.viewModel
                 }

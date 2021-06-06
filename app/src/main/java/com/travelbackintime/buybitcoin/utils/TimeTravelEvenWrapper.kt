@@ -22,21 +22,11 @@ import kotlinx.parcelize.Parcelize
 
 sealed class TimeTravelEvenWrapper : Parcelable {
     @Parcelize
-    data class RealWorldEvent(
-        val title: String,
-        val description: String,
-        val isDonate: Boolean
-    ) : TimeTravelEvenWrapper()
-
-    @Parcelize
     data class TimeTravelEvent(
         val profitMoney: Double,
         val investedMoney: Double,
         val timeToTravel: Long
     ) : TimeTravelEvenWrapper()
-
-    @Parcelize
-    object NoPriceAvailableEvent : TimeTravelEvenWrapper()
 }
 
 fun TimeTravelMachine.Event.wrap(): TimeTravelEvenWrapper {

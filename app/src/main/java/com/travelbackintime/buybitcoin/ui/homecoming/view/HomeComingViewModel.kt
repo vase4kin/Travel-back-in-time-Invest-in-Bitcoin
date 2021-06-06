@@ -21,16 +21,12 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import bitcoin.backintime.com.backintimebuybitcoin.R
 import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
 import com.github.vase4kin.shared.tracker.Tracker
 import com.travelbackintime.buybitcoin.ui.homecoming.router.HomeComingRouter
 import com.travelbackintime.buybitcoin.ui.homecoming.share.ShareHelper
-import com.travelbackintime.buybitcoin.utils.ClipboardUtils
-import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
-import com.travelbackintime.buybitcoin.utils.ResourcesProvider
-import com.travelbackintime.buybitcoin.utils.ToastUtils
+import com.travelbackintime.buybitcoin.utils.TimeTravelEvenWrapper
 import java.util.Date
 import javax.inject.Inject
 
@@ -40,19 +36,12 @@ class HomeComingViewModel @Inject constructor(
     private val shareHelper: ShareHelper,
     private val tracker: Tracker,
     private val configService: RemoteConfigService,
-    private val formatterUtils: FormatterUtils,
-    private val resourcesProvider: ResourcesProvider,
-    private val toastUtils: ToastUtils,
-    private val clipboardUtils: ClipboardUtils
+    private val formatterUtils: FormatterUtils
 ) : LifecycleObserver {
 
     val isShareViewVisible = ObservableBoolean(false)
     val isParamViewVisible = ObservableBoolean(false)
     val isProfitViewVisible = ObservableBoolean(false)
-    val isDonateViewVisible = ObservableBoolean(false)
-    val isDescriptionViewVisible = ObservableBoolean(false)
-    val title = ObservableField<String>()
-    val description = ObservableField<String>()
     val profitMoneyText = ObservableField<String>()
     val investedMoneyText = ObservableField<String>()
     val monthText = ObservableField<String>()
@@ -67,35 +56,12 @@ class HomeComingViewModel @Inject constructor(
     fun handleOnCreate() {
         val event = this.event ?: return
         when (event) {
-            is TimeTravelEvenWrapper.RealWorldEvent -> processRealWorldEvent(event)
             is TimeTravelEvenWrapper.TimeTravelEvent -> processTimeTravelEvent(event)
-            is TimeTravelEvenWrapper.NoPriceAvailableEvent -> processNoPriceAvailableEvent()
         }
     }
 
     private fun shouldShowAds(): Boolean {
-        val event = event
-        return if (event is TimeTravelEvenWrapper.RealWorldEvent) {
-            !event.isDonate
-        } else {
-            true
-        } && configService.isAdsEnabled
-    }
-
-    private fun processRealWorldEvent(event: TimeTravelEvenWrapper.RealWorldEvent) {
-        title.set(event.title)
-        description.set(event.description)
-        isDescriptionViewVisible.set(event.description.isNotEmpty())
-        isDonateViewVisible.set(event.isDonate)
-        tracker.trackUserGetsToRealWorldEvent(event.toString())
-    }
-
-    private fun processNoPriceAvailableEvent() {
-        title.set(resourcesProvider.getString(R.string.text_oops))
-        description.set(resourcesProvider.getString(R.string.text_basically_nothing))
-        isDescriptionViewVisible.set(true)
-        isDonateViewVisible.set(false)
-        tracker.trackUserGetsToNoPriceAvailableEvent()
+        return configService.isAdsEnabled
     }
 
     private fun processTimeTravelEvent(event: TimeTravelEvenWrapper.TimeTravelEvent) {
@@ -121,15 +87,6 @@ class HomeComingViewModel @Inject constructor(
             shareHelper.shareWithFriends(event)
             tracker.trackUserSharesWithFriends()
         }
-    }
-
-    fun onCopyWalletAddress() {
-        clipboardUtils.copyToClipBoard(
-            resourcesProvider.getString(R.string.donate_copy_label),
-            resourcesProvider.getString(R.string.donate_btc_wallet_address)
-        )
-        toastUtils.showToast(R.string.donate_toast)
-        tracker.trackUserCopiesBtcWalletAddress()
     }
 
     fun openPoweredByCoinDeskUrl() {
