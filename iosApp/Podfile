@@ -6,10 +6,6 @@ target 'TravelBackInTimeInvestInBitcoinIOS' do
   use_frameworks!
 
   # Pods for TravelBackInTimeInvestInBitcoinIOS
-
-  pod("Firebase/Core")
-  pod("Firebase/Database")
-
   pod 'timetravelmachine', :path => '../shared-libraries/timetravelmachine'
 
 end

@@ -48,7 +48,7 @@ class HomeComingViewModel @Inject constructor(
     val yearText = ObservableField<String>()
 
     val isAdsEnabled: Boolean
-        get() = shouldShowAds()
+        get() = configService.isAdsEnabled
 
     var event: TimeTravelEvenWrapper? = null
 
@@ -58,10 +58,6 @@ class HomeComingViewModel @Inject constructor(
         when (event) {
             is TimeTravelEvenWrapper.TimeTravelEvent -> processTimeTravelEvent(event)
         }
-    }
-
-    private fun shouldShowAds(): Boolean {
-        return configService.isAdsEnabled
     }
 
     private fun processTimeTravelEvent(event: TimeTravelEvenWrapper.TimeTravelEvent) {
