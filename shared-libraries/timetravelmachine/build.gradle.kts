@@ -32,7 +32,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(Libs.Shared.repository))
-                implementation(project(Libs.Shared.database))
                 implementation(project(Libs.Shared.coinDeskService))
                 implementation(Libs.Kmm.KotlinX.dateTime)
             }

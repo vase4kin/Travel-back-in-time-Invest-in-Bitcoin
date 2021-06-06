@@ -123,10 +123,6 @@ object Libs {
             const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
             const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1"
         }
-
-        object Firebase {
-            const val realtimeDatabase = "dev.gitlive:firebase-database:1.3.1"
-        }
     }
 
     object Shared {
@@ -134,7 +130,6 @@ object Libs {
         const val coinDeskService = ":shared-libraries:coindesk-service"
         const val repository = ":shared-libraries:repository"
         const val timeTravelMachine = ":shared-libraries:timetravelmachine"
-        const val database = ":shared-libraries:database"
     }
 
     object Local {

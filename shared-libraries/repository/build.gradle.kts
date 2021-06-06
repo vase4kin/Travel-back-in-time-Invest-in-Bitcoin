@@ -32,7 +32,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(Libs.Shared.coinDeskService))
-                implementation(project(Libs.Shared.database))
             }
         }
         val androidMain by getting

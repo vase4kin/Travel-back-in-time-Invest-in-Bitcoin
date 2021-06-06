@@ -34,21 +34,6 @@ object TimeTravelConstraints {
         .minus(1, DateTimeUnit.DAY, TimeZone.currentSystemDefault())
         .toEpochMilliseconds()
 
-    private const val MIN_DATE_TIME_YEAR = 2009
-    private const val MIN_DATE_TIME_MONTH = 1
-    private const val MIN_DATE_TIME_DAY = 3
-
-    /**
-     * Minimum date of time travel's availability
-     *
-     * 2009/1/03 (first bitcoin block)
-     */
-    val minDateTimeInMillis =
-        LocalDate(MIN_DATE_TIME_YEAR, MIN_DATE_TIME_MONTH, MIN_DATE_TIME_DAY)
-            .atTime(0, 0, 0)
-            .toInstant(TimeZone.currentSystemDefault())
-            .toEpochMilliseconds()
-
     private const val MIN_COIN_DESK_DATE_TIME_YEAR = 2010
     private const val MIN_COIN_DESK_DATE_TIME_MONTH = 7
     private const val MIN_COIN_DESK_DATE_TIME_DAY = 18
@@ -56,7 +41,7 @@ object TimeTravelConstraints {
     /**
      * Minimum date of available bitcoin price at the coin desk
      */
-    val minCoinDeskDateTimeInMillis =
+    val minDateTimeInMillis =
         LocalDate(
             MIN_COIN_DESK_DATE_TIME_YEAR,
             MIN_COIN_DESK_DATE_TIME_MONTH,

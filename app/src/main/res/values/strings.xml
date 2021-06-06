@@ -34,10 +34,6 @@
     <string name="error_set_amount_empty">Come on, dude! We give you a once-in-a-lifetime opportunity and you can\'t even put a correct value in the field?</string>
     <string name="error_set_amount_zero">You gotta be kidding us! Put at least one %s!</string>
     <string name="error_set_amount_rich">Sure you need this? Looks like money is not a problem for you.</string>
-    <string name="donate_button">Copy BTC wallet address</string>
-    <string name="donate_copy_label">BTC wallet address</string>
-    <string name="donate_toast">BTC wallet has been copied</string>
-    <string name="donate_btc_wallet_address">12YMXvm4etDaDQU6uBbhvaS13cYoZXsz66</string>
     <string name="result_dollar_symbol">$</string>
     <string name="result_destination_time">Destination time</string>
     <string name="result_present_time">Present time</string>
