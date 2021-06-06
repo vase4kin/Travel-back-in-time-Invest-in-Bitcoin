@@ -16,7 +16,6 @@
 
 package com.github.vase4kin.shared.timetravelmachine
 
-import com.github.vase4kin.shared.database.LocalDatabase
 import com.github.vase4kin.shared.repository.Repository
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -30,22 +29,7 @@ internal class TimeTravelMachineImpl(
         time: Long,
         investedMoney: Double
     ): TimeTravelMachine.Event {
-        val serverDate = convertDateToServerDateFormat(time)
-        return when (val event = repository.getTimeEvent(serverDate)) {
-            is LocalDatabase.TimeTravelEvent.Event -> {
-                TimeTravelMachine.Event.RealWorldEvent(
-                    title = event.title,
-                    description = event.description,
-                    isDonate = event.isDonate
-                )
-            }
-            is LocalDatabase.TimeTravelEvent.NoEvent -> {
-                when {
-                    isDateBeforePriceIsAvailable(time) -> TimeTravelMachine.Event.NoPriceAvailableEvent
-                    else -> calculateProfit(time, investedMoney)
-                }
-            }
-        }
+        return calculateProfit(time, investedMoney)
     }
 
     private suspend fun calculateProfit(
@@ -78,11 +62,6 @@ internal class TimeTravelMachineImpl(
 
     private suspend fun getBitcoinCurrentPrice(): Double {
         return repository.getCurrentBitcoinPrice()
-    }
-
-    private fun isDateBeforePriceIsAvailable(date: Long): Boolean {
-        val dateFirst = TimeTravelConstraints.minCoinDeskDateTimeInMillis
-        return dateFirst > date
     }
 
     private fun convertDateToServerDateFormat(date: Long): String {
