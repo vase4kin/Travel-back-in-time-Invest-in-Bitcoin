@@ -19,8 +19,10 @@ package com.github.vase4kin.shared.timetravelmachine
 interface TimeTravelMachine {
 
     /**
-     * @param time          - the time as UTC milliseconds from the epoch
-     * @param investedMoney - the amount of invested money in double
+     * Travel back in time
+     *
+     * @param time the time as UTC milliseconds from the epoch
+     * @param investedMoney the amount of invested money in double
      */
     suspend fun travelInTime(time: Long, investedMoney: Double): Event
 
@@ -29,29 +31,11 @@ interface TimeTravelMachine {
      */
     sealed class Event {
         /**
-         * Event that is a specific date event, e.g. the date bitcoin was created (2009/01/03)
-         *
-         * @param title       - the title of the real world event
-         * @param description - the description of the real world event
-         * @param isDonate    - the flag that indicates if the donate button should be shown
-         */
-        data class RealWorldEvent(
-            val title: String,
-            val description: String,
-            val isDonate: Boolean
-        ) : Event()
-
-        /**
-         * Event with no price data available
-         */
-        object NoPriceAvailableEvent : Event()
-
-        /**
          * Event that represents the profit calculation of the time travel
          *
-         * @param profitMoney   - the profit money
-         * @param investedMoney - the amount of the money that have been invested
-         * @param timeToTravel  - the time of the time travel represented as UTC milliseconds from the epoch
+         * @param profitMoney the profit money
+         * @param investedMoney the amount of the money that have been invested
+         * @param timeToTravel the time of the time travel represented as UTC milliseconds from the epoch
          */
         data class TimeTravelEvent(
             val profitMoney: Double,

@@ -41,16 +41,10 @@ sealed class TimeTravelEvenWrapper : Parcelable {
 
 fun TimeTravelMachine.Event.wrap(): TimeTravelEvenWrapper {
     return when (this) {
-        is TimeTravelMachine.Event.RealWorldEvent -> TimeTravelEvenWrapper.RealWorldEvent(
-            title = this.title,
-            description = this.description,
-            isDonate = this.isDonate
-        )
         is TimeTravelMachine.Event.TimeTravelEvent -> TimeTravelEvenWrapper.TimeTravelEvent(
             profitMoney = this.profitMoney,
             investedMoney = this.investedMoney,
             timeToTravel = this.timeToTravel
         )
-        TimeTravelMachine.Event.NoPriceAvailableEvent -> TimeTravelEvenWrapper.NoPriceAvailableEvent
     }
 }
