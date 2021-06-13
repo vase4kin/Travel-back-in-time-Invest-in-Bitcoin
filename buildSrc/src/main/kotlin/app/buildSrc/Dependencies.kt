@@ -73,7 +73,7 @@ object Libs {
     }
 
     object Dagger {
-        private const val version = "2.36"
+        private const val version = "2.37"
 
         const val hilt = "com.google.dagger:hilt-android:$version"
         const val hiltCompiler = "com.google.dagger:hilt-compiler:$version"
@@ -98,7 +98,7 @@ object Libs {
         internal const val version = "1.5.10"
 
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version"
-        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3"
+        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0"
 
         object Plugins {
             const val gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
