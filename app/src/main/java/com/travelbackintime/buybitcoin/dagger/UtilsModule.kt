@@ -16,14 +16,10 @@
 
 package com.travelbackintime.buybitcoin.dagger
 
-import com.travelbackintime.buybitcoin.utils.ClipboardUtils
-import com.travelbackintime.buybitcoin.utils.ClipboardUtilsImpl
 import com.travelbackintime.buybitcoin.utils.FormatterUtils
 import com.travelbackintime.buybitcoin.utils.FormatterUtilsImpl
 import com.travelbackintime.buybitcoin.utils.ResourcesProvider
 import com.travelbackintime.buybitcoin.utils.ResourcesProviderImpl
-import com.travelbackintime.buybitcoin.utils.ToastUtils
-import com.travelbackintime.buybitcoin.utils.ToastUtilsImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -45,15 +41,8 @@ interface UtilsModule {
     @Binds
     fun providesResourceProvider(impl: ResourcesProviderImpl): ResourcesProvider
 
-    @Singleton
-    @Binds
-    fun providesToastUtils(impl: ToastUtilsImpl): ToastUtils
-
-    @Singleton
-    @Binds
-    fun providesClipboardUtils(impl: ClipboardUtilsImpl): ClipboardUtils
-
     companion object {
+        @Singleton
         @Provides
         fun providesNumberFormat(): NumberFormat {
             return NumberFormat.getCurrencyInstance(Locale.US)
