@@ -41,15 +41,11 @@ interface Tracker {
 
     fun trackUserGetsToNoPriceAvailableEvent()
 
-    fun trackUserGetsToTimeTravelEvent(
-        profitMoney: Double,
-        investedMoney: Double,
-        time: Long
-    )
+    fun trackUserGetsToTimeTravelEvent(profitMoney: Double, investedMoney: Double, time: Long)
 
     fun trackUserRetries()
 
     fun trackUserChooseMoneySuggestion(amount: String)
 
-    fun trackUserClicksOnPoweredByCoinDesk()
+    fun trackUserClicksOnPriceProvider()
 }

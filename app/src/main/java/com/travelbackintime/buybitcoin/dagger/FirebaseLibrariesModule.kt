@@ -19,7 +19,7 @@ package com.travelbackintime.buybitcoin.dagger
 import android.app.Application
 import bitcoin.backintime.com.backintimebuybitcoin.BuildConfig
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
+import com.github.vase4kin.bitcoin.remoteconfig.RemoteConfigService
 import com.github.vase4kin.crashlytics.Crashlytics
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -55,7 +55,7 @@ object FirebaseLibrariesModule {
     @Provides
     fun providesRemoteConfigService(
         firebaseRemoteConfig: FirebaseRemoteConfig,
-        crashlytics: Crashlytics
+        crashlytics: Crashlytics,
     ): RemoteConfigService {
         val cacheSecs = if (BuildConfig.DEBUG) DEBUG_CACHE_SECS else PROD_CACHE_SECS
         return RemoteConfigServiceImpl(firebaseRemoteConfig, crashlytics, cacheSecs)
@@ -63,12 +63,9 @@ object FirebaseLibrariesModule {
 
     @Singleton
     @Provides
-    fun providesFirebaseAnalytics(app: Application): FirebaseAnalytics {
-        return FirebaseAnalytics.getInstance(app.applicationContext)
-    }
+    fun providesFirebaseAnalytics(app: Application): FirebaseAnalytics =
+        FirebaseAnalytics.getInstance(app.applicationContext)
 
     @Provides
-    fun provideCrashlytics(): Crashlytics {
-        return CrashlyticsImpl(FirebaseCrashlytics.getInstance())
-    }
+    fun provideCrashlytics(): Crashlytics = CrashlyticsImpl(FirebaseCrashlytics.getInstance())
 }

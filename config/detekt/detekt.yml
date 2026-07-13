@@ -1,0 +1,18 @@
+complexity:
+  LongMethod:
+    ignoreAnnotated:
+      - Composable
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated:
+      - Composable
+
+formatting:
+  ImportOrdering:
+    active: false
+
+style:
+  MagicNumber:
+    ignoreAnnotated:
+      - Composable

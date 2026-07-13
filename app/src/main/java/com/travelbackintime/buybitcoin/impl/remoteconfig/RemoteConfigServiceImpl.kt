@@ -16,14 +16,14 @@
 
 package com.travelbackintime.buybitcoin.impl.remoteconfig
 
-import com.github.vase4kin.coindesk.remoteconfig.RemoteConfigService
+import com.github.vase4kin.bitcoin.remoteconfig.RemoteConfigService
 import com.github.vase4kin.crashlytics.Crashlytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 
 class RemoteConfigServiceImpl(
     private val firebaseRemoteConfig: FirebaseRemoteConfig,
     private val crashlytics: Crashlytics,
-    private val cacheSecs: Long
+    private val cacheSecs: Long,
 ) : RemoteConfigService {
 
     override val isAdsEnabled: Boolean

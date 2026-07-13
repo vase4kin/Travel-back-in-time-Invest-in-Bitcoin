@@ -52,15 +52,15 @@
     kotlinx.serialization.KSerializer serializer(...);
 }
 
--keep,includedescriptorclasses class com.github.vase4kin.shared.coindesk.service.models.**$$serializer { *; }
+-keep,includedescriptorclasses class com.github.vase4kin.shared.bitcoinprice.service.models.**$$serializer { *; }
 -keep,includedescriptorclasses class com.github.vase4kin.shared.database.models.**$$serializer { *; }
--keepclassmembers class com.github.vase4kin.shared.coindesk.service.models.** {
+-keepclassmembers class com.github.vase4kin.shared.bitcoinprice.service.models.** {
     *** Companion;
 }
 -keepclassmembers class com.github.vase4kin.shared.database.models.** {
     *** Companion;
 }
--keepclasseswithmembers class com.github.vase4kin.shared.coindesk.service.models.** {
+-keepclasseswithmembers class com.github.vase4kin.shared.bitcoinprice.service.models.** {
     kotlinx.serialization.KSerializer serializer(...);
 }
 -keepclasseswithmembers class com.github.vase4kin.shared.database.models.** {

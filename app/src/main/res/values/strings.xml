@@ -24,6 +24,7 @@
     <string name="button_start_over_title">Start over</string>
     <string name="button_buy_bitcoin_title">Invest in bitcoin</string>
     <string name="button_confirm_amount_title">OK</string>
+    <string name="button_cancel">Cancel</string>
     <string name="button_confirm_amount_title_1">$1</string>
     <string name="button_confirm_amount_title_10">$10.00</string>
     <string name="button_confirm_amount_title_100">$100.00</string>
@@ -46,8 +47,8 @@
     <string name="retry_title">Great Scott!</string>
     <string name="retry_button_text">Retry</string>
     <string name="retry_description">Nowadays time machine only needs to have a good internet connection instead of libyan plutonium.\nHappy time travelling!</string>
-    <string name="powered_by_coindesk">Powered by <a href="https://www.coindesk.com/price/bitcoin/">CoinDesk</a></string>
-    <string name="powered_by_coindesk_url">https://www.coindesk.com/price/bitcoin/</string>
+    <string name="powered_by_price_provider">Bitcoin price data by Blockchain.com</string>
+    <string name="price_provider_url">https://www.blockchain.com/explorer/charts/market-price</string>
     <string name="text_basically_nothing">Bitcoin price is basically nothing now. Anyway, give yourself a big hand, nobody got as close as you, my friend. Try to put the dates after 18th of July 2010.</string>
     <string name="text_oops">Oops!</string>
 </resources>

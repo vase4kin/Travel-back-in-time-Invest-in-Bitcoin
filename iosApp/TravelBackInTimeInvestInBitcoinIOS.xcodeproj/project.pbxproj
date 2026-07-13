@@ -104,6 +104,7 @@
 				C038E90A261D8C3A004D7EDF /* Sources */,
 				C038E90B261D8C3A004D7EDF /* Frameworks */,
 				C038E90C261D8C3A004D7EDF /* Resources */,
+				0C7AE6B7EBEC2887495BA862 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -159,6 +160,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0C7AE6B7EBEC2887495BA862 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TravelBackInTimeInvestInBitcoinIOS/Pods-TravelBackInTimeInvestInBitcoinIOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TravelBackInTimeInvestInBitcoinIOS/Pods-TravelBackInTimeInvestInBitcoinIOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TravelBackInTimeInvestInBitcoinIOS/Pods-TravelBackInTimeInvestInBitcoinIOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		19C7042A2CF66427178E6264 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -1,3 +1,5 @@
+#!/bin/sh
+
 #
 # Copyright 2021  Andrey Tolpeev
 #
@@ -13,8 +15,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+set -eu
 
-xcodebuild -workspace TravelBackInTimeInvestInBitcoinIOS.xcworkspace \
-           -scheme TravelBackInTimeInvestInBitcoinIOS \
-           -destination platform=iOS\ Simulator,OS=14.4,name=iPhone\ 11 \
-           clean build | xcpretty
+xcodebuild \
+    -workspace TravelBackInTimeInvestInBitcoinIOS.xcworkspace \
+    -scheme TravelBackInTimeInvestInBitcoinIOS \
+    -configuration Debug \
+    -sdk iphonesimulator \
+    -destination 'generic/platform=iOS Simulator' \
+    CODE_SIGNING_ALLOWED=NO \
+    build

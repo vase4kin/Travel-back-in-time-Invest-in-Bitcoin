@@ -16,21 +16,16 @@
 
 package com.github.vase4kin.shared.repository
 
-import com.github.vase4kin.shared.coindesk.service.CoinDeskService
+import com.github.vase4kin.shared.bitcoinprice.service.BitcoinPriceService
 
 private const val USD = "USD"
 
-class RepositoryImpl(
-    private val coinDeskService: CoinDeskService
-) : Repository {
+class RepositoryImpl(private val bitcoinPriceService: BitcoinPriceService) : Repository {
 
-    override suspend fun getBitcoinPriceByDate(date: String): Double {
-        return coinDeskService.getBitcoinHistoricalPrice(date).bpi.values.firstOrNull()?.toDouble()
+    override suspend fun getBitcoinPriceByDate(date: String): Double =
+        bitcoinPriceService.getBitcoinHistoricalPrice(date).values.firstOrNull()?.y
             ?: Double.NaN
-    }
 
-    override suspend fun getCurrentBitcoinPrice(): Double {
-        return coinDeskService.getBitcoinCurrentPrice().bpi[USD]?.rate_float?.toDouble()
-            ?: Double.NaN
-    }
+    override suspend fun getCurrentBitcoinPrice(): Double = bitcoinPriceService.getBitcoinCurrentPrice()[USD]?.last
+        ?: Double.NaN
 }

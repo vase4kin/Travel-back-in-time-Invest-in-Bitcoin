@@ -37,10 +37,7 @@ interface TimeTravelMachine {
          * @param investedMoney the amount of the money that have been invested
          * @param timeToTravel the time of the time travel represented as UTC milliseconds from the epoch
          */
-        data class TimeTravelEvent(
-            val profitMoney: Double,
-            val investedMoney: Double,
-            val timeToTravel: Long
-        ) : Event()
+        data class TimeTravelEvent(val profitMoney: Double, val investedMoney: Double, val timeToTravel: Long) :
+            Event()
     }
 }
