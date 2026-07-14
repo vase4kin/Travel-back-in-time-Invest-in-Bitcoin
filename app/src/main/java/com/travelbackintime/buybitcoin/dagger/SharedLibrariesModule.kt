@@ -35,18 +35,12 @@ object SharedLibrariesModule {
 
     @Singleton
     @Provides
-    fun providesTimeTravelMachine(): TimeTravelMachine {
-        return TimeTravelMachineFactory.create()
-    }
+    fun providesTimeTravelMachine(): TimeTravelMachine = TimeTravelMachineFactory.create()
 
     @Provides
-    fun provideNativeAnalytics(analytics: FirebaseAnalytics): NativeAnalytics {
-        return NativeAnalyticsImpl(analytics)
-    }
+    fun provideNativeAnalytics(analytics: FirebaseAnalytics): NativeAnalytics = NativeAnalyticsImpl(analytics)
 
     @Singleton
     @Provides
-    fun providesTracker(analytics: NativeAnalytics): Tracker {
-        return TrackerImpl(analytics)
-    }
+    fun providesTracker(analytics: NativeAnalytics): Tracker = TrackerImpl(analytics)
 }

@@ -33,7 +33,7 @@ private const val EVENT_USER_GETS_TO_NO_PRICE_AVAILABLE_EVENT =
 private const val EVENT_USER_GETS_TO_EXIST = "event_user_gets_time_travel_event"
 private const val EVENT_USER_RETRIES = "event_user_retries"
 private const val EVENT_USER_CHOOSE_SUGGESTION = "event_user_choose_money_suggestion"
-private const val EVENT_USER_CLICKS_ON_POWERED_BY_COIN_DESK =
+private const val EVENT_USER_CLICKS_ON_PRICE_PROVIDER =
     "event_user_clicks_on_powered_by_coin_desk"
 private const val PARAMETER_TIME = "parameter_time"
 private const val PARAMETER_MONEY = "parameter_money"
@@ -43,9 +43,7 @@ private const val PARAMETER_EVENT_NAME = "parameter_name"
 private const val PARAMETER_MONEY_SUGGESTION = "parameter_money_suggestion"
 
 @Suppress("TooManyFunctions")
-class TrackerImpl(
-    private val analytics: NativeAnalytics
-) : Tracker {
+class TrackerImpl(private val analytics: NativeAnalytics) : Tracker {
 
     override fun trackUserRetries() {
         analytics.logEvent(EVENT_USER_RETRIES)
@@ -53,17 +51,19 @@ class TrackerImpl(
 
     override fun trackUserSetsTime(time: String) {
         analytics.logEvent(
-            EVENT_USER_SETS_TIME, mapOf(
-                PARAMETER_TIME to time
-            )
+            EVENT_USER_SETS_TIME,
+            mapOf(
+                PARAMETER_TIME to time,
+            ),
         )
     }
 
     override fun trackUserSetsMoney(money: String) {
         analytics.logEvent(
-            EVENT_USER_SETS_MONEY, mapOf(
-                PARAMETER_MONEY to money
-            )
+            EVENT_USER_SETS_MONEY,
+            mapOf(
+                PARAMETER_MONEY to money,
+            ),
         )
     }
 
@@ -97,9 +97,10 @@ class TrackerImpl(
 
     override fun trackUserGetsToRealWorldEvent(eventName: String) {
         analytics.logEvent(
-            EVENT_USER_GETS_TO_SATOSHI, mapOf(
-                PARAMETER_EVENT_NAME to eventName
-            )
+            EVENT_USER_GETS_TO_SATOSHI,
+            mapOf(
+                PARAMETER_EVENT_NAME to eventName,
+            ),
         )
     }
 
@@ -107,29 +108,28 @@ class TrackerImpl(
         analytics.logEvent(EVENT_USER_GETS_TO_NO_PRICE_AVAILABLE_EVENT)
     }
 
-    override fun trackUserGetsToTimeTravelEvent(
-        profitMoney: Double,
-        investedMoney: Double,
-        time: Long
-    ) {
+    override fun trackUserGetsToTimeTravelEvent(profitMoney: Double, investedMoney: Double, time: Long) {
         analytics.logEvent(
-            EVENT_USER_GETS_TO_EXIST, mapOf(
+            EVENT_USER_GETS_TO_EXIST,
+            mapOf(
                 PARAMETER_PROFIT to profitMoney.toString(),
                 PARAMETER_INVESTED to investedMoney.toString(),
-                PARAMETER_TIME to Instant.fromEpochMilliseconds(time).toString()
-            )
+                PARAMETER_TIME to Instant.fromEpochMilliseconds(time).toString(),
+            ),
         )
     }
 
     override fun trackUserChooseMoneySuggestion(amount: String) {
         analytics.logEvent(
-            EVENT_USER_CHOOSE_SUGGESTION, mapOf(
-                PARAMETER_MONEY_SUGGESTION to amount
-            )
+            EVENT_USER_CHOOSE_SUGGESTION,
+            mapOf(
+                PARAMETER_MONEY_SUGGESTION to amount,
+            ),
         )
     }
 
-    override fun trackUserClicksOnPoweredByCoinDesk() {
-        analytics.logEvent(EVENT_USER_CLICKS_ON_POWERED_BY_COIN_DESK)
+    override fun trackUserClicksOnPriceProvider() {
+        // Keep the historical event name so existing analytics dashboards remain continuous.
+        analytics.logEvent(EVENT_USER_CLICKS_ON_PRICE_PROVIDER)
     }
 }

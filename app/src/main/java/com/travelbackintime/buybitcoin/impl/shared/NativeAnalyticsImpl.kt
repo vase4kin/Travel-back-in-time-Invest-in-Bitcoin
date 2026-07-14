@@ -20,9 +20,7 @@ import android.os.Bundle
 import com.github.vase4kin.shared.tracker.NativeAnalytics
 import com.google.firebase.analytics.FirebaseAnalytics
 
-class NativeAnalyticsImpl(
-    private val analytics: FirebaseAnalytics
-) : NativeAnalytics {
+class NativeAnalyticsImpl(private val analytics: FirebaseAnalytics) : NativeAnalytics {
 
     override fun logEvent(eventName: String, parameters: Map<String, String>) {
         analytics.logEvent(eventName, parametersToBundle(parameters))

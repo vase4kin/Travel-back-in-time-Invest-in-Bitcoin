@@ -28,24 +28,24 @@ object TimeTravelConstraints {
     /**
      * Maximum date of time travel's availability
      *
-     * It is the today's date minus one day as the coin desk does not support today's date
+     * It is today's date minus one day because the historical feed publishes daily values.
      */
     val maxDateTimeInMillis = Clock.System.now()
         .minus(1, DateTimeUnit.DAY, TimeZone.currentSystemDefault())
         .toEpochMilliseconds()
 
-    private const val MIN_COIN_DESK_DATE_TIME_YEAR = 2010
-    private const val MIN_COIN_DESK_DATE_TIME_MONTH = 7
-    private const val MIN_COIN_DESK_DATE_TIME_DAY = 18
+    private const val MIN_BITCOIN_PRICE_DATE_TIME_YEAR = 2010
+    private const val MIN_BITCOIN_PRICE_DATE_TIME_MONTH = 7
+    private const val MIN_BITCOIN_PRICE_DATE_TIME_DAY = 18
 
     /**
-     * Minimum date of available bitcoin price at the coin desk
+     * Minimum date exposed by the product's historical Bitcoin price range.
      */
     val minDateTimeInMillis =
         LocalDate(
-            MIN_COIN_DESK_DATE_TIME_YEAR,
-            MIN_COIN_DESK_DATE_TIME_MONTH,
-            MIN_COIN_DESK_DATE_TIME_DAY
+            MIN_BITCOIN_PRICE_DATE_TIME_YEAR,
+            MIN_BITCOIN_PRICE_DATE_TIME_MONTH,
+            MIN_BITCOIN_PRICE_DATE_TIME_DAY,
         ).atTime(0, 0, 0)
             .toInstant(TimeZone.currentSystemDefault())
             .toEpochMilliseconds()

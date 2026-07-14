@@ -16,18 +16,13 @@
 
 package com.github.vase4kin.shared.timetravelmachine
 
-import com.github.vase4kin.shared.coindesk.service.CoinDeskServiceImpl
-import com.github.vase4kin.shared.repository.RepositoryImpl
+import com.github.vase4kin.shared.repository.RepositoryFactory
 
 /**
  * Factory to create TimeTravelMachine instance
  */
 object TimeTravelMachineFactory {
-    fun create(): TimeTravelMachine {
-        return TimeTravelMachineImpl(
-            repository = RepositoryImpl(
-                coinDeskService = CoinDeskServiceImpl()
-            )
-        )
-    }
+    fun create(): TimeTravelMachine = TimeTravelMachineImpl(
+        repository = RepositoryFactory.create(),
+    )
 }

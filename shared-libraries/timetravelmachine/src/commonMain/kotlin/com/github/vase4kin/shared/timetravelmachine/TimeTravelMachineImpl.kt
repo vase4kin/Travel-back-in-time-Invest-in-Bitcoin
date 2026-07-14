@@ -21,35 +21,26 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
-internal class TimeTravelMachineImpl(
-    private val repository: Repository
-) : TimeTravelMachine {
+internal class TimeTravelMachineImpl(private val repository: Repository) : TimeTravelMachine {
 
-    override suspend fun travelInTime(
-        time: Long,
-        investedMoney: Double
-    ): TimeTravelMachine.Event {
-        return calculateProfit(time, investedMoney)
-    }
+    override suspend fun travelInTime(time: Long, investedMoney: Double): TimeTravelMachine.Event =
+        calculateProfit(time, investedMoney)
 
-    private suspend fun calculateProfit(
-        time: Long,
-        investedMoney: Double
-    ): TimeTravelMachine.Event {
+    private suspend fun calculateProfit(time: Long, investedMoney: Double): TimeTravelMachine.Event {
         val bitcoinPriceByDate = getBitcoinPriceByDate(time)
         val bitcoinCurrentPrice = getBitcoinCurrentPrice()
         val profit = calculateProfit(bitcoinPriceByDate, bitcoinCurrentPrice, investedMoney)
         return TimeTravelMachine.Event.TimeTravelEvent(
             profitMoney = profit,
             investedMoney = investedMoney,
-            timeToTravel = time
+            timeToTravel = time,
         )
     }
 
     private fun calculateProfit(
         bitcoinHistoricalPrice: Double,
         bitcoinCurrentPrice: Double,
-        investedMoney: Double
+        investedMoney: Double,
     ): Double {
         val bitcoinInvestment = investedMoney / bitcoinHistoricalPrice
         return bitcoinCurrentPrice * bitcoinInvestment
@@ -60,13 +51,9 @@ internal class TimeTravelMachineImpl(
         return repository.getBitcoinPriceByDate(serverDate)
     }
 
-    private suspend fun getBitcoinCurrentPrice(): Double {
-        return repository.getCurrentBitcoinPrice()
-    }
+    private suspend fun getBitcoinCurrentPrice(): Double = repository.getCurrentBitcoinPrice()
 
-    private fun convertDateToServerDateFormat(date: Long): String {
-        return Instant.fromEpochMilliseconds(date)
-            .toLocalDateTime(TimeZone.currentSystemDefault())
-            .date.toString()
-    }
+    private fun convertDateToServerDateFormat(date: Long): String = Instant.fromEpochMilliseconds(date)
+        .toLocalDateTime(TimeZone.currentSystemDefault())
+        .date.toString()
 }
