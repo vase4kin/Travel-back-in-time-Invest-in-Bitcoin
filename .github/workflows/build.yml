@@ -23,7 +23,22 @@ jobs:
         cache: gradle
 
     - name: Build app and run checks
-      run: ./gradlew assembleDebug testDebugUnitTest lintDebug detekt spotlessCheck :app:compileDebugAndroidTestKotlin -Dorg.gradle.jvmargs=-Xmx1536m -Dorg.gradle.parallel=true -Dorg.gradle.daemon=false -Dorg.gradle.caching=false -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      run: >-
+        ./gradlew
+        assembleDebug
+        testDebugUnitTest
+        :app:verifyRoborazziDebug
+        lintDebug
+        detekt
+        spotlessCheck
+        :app:compileDebugAndroidTestKotlin
+        -Dorg.gradle.jvmargs=-Xmx1536m
+        -Dorg.gradle.parallel=true
+        -Dorg.gradle.daemon=false
+        -Dorg.gradle.caching=false
+        -Dorg.gradle.configureondemand=true
+        -Dkotlin.compiler.execution.strategy=in-process
+        -Dkotlin.incremental=false
     
     - name: Upload build outputs
       if: success()
@@ -33,11 +48,15 @@ jobs:
         path: app/build/outputs/
 
     - name: Upload reports
-      if: success()
+      if: always()
       uses: actions/upload-artifact@v7
       with:
         name: reports
-        path: app/build/reports/
+        if-no-files-found: ignore
+        path: |
+          app/build/reports/
+          app/build/test-results/
+          app/build/outputs/roborazzi/
 
   # Job to detect iOS app changes
   detect-ios-app-changes:
