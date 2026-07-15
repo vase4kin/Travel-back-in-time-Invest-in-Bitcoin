@@ -1,7 +1,6 @@
 package com.travelbackintime.buybitcoin.ui.timetravel.compose
 
 import androidx.activity.ComponentActivity
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
@@ -22,7 +21,7 @@ class TimeTravelScreenTest {
     @Test
     fun initialStateShowsRequiredActionsAndDisablesInvestment() {
         composeRule.setContent {
-            MaterialTheme {
+            BitcoinTheme {
                 TimeTravelScreen(
                     uiState = TimeTravelUiState(),
                     onDateSelected = {},
@@ -41,7 +40,7 @@ class TimeTravelScreenTest {
     fun amountSheetReturnsSelectedSuggestion() {
         var selectedAmount: Double? = null
         composeRule.setContent {
-            MaterialTheme {
+            BitcoinTheme {
                 TimeTravelScreen(
                     uiState = TimeTravelUiState(),
                     onDateSelected = {},
@@ -53,7 +52,6 @@ class TimeTravelScreenTest {
 
         composeRule.onNodeWithText(string(R.string.button_set_amount_title)).performClick()
         composeRule.onNodeWithText("$10").performClick()
-        composeRule.onNodeWithText(string(R.string.button_confirm_amount_title)).performClick()
 
         composeRule.runOnIdle { assertEquals(10.0, selectedAmount ?: 0.0, 0.0) }
     }
