@@ -46,7 +46,7 @@ detekt {
     buildUponDefaultConfig = true
     config.setFrom(rootProject.files("config/detekt/detekt.yml"))
     source.setFrom(files("src/commonMain/kotlin", "src/commonTest/kotlin"))
-    autoCorrect = true
+    autoCorrect = false
 }
 
 dependencies {
