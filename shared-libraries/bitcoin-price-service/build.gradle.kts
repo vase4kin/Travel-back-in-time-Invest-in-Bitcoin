@@ -4,13 +4,19 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.cocoapods)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.detekt)
 }
 
 kotlin {
-    androidTarget {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+    android {
+        namespace = "com.github.vase4kin.shared.bitcoinprice.service"
+        compileSdk = 36
+        minSdk = 23
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+        }
+        withHostTest {}
     }
     iosX64()
     iosArm64()
@@ -45,21 +51,11 @@ kotlin {
     }
 }
 
-android {
-    namespace = "com.github.vase4kin.shared.bitcoinprice.service"
-    compileSdk = 36
-    defaultConfig.minSdk = 23
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-}
-
 detekt {
     buildUponDefaultConfig = true
     config.setFrom(rootProject.files("config/detekt/detekt.yml"))
     source.setFrom(files("src/commonMain/kotlin", "src/commonTest/kotlin"))
-    autoCorrect = true
+    autoCorrect = false
 }
 
 dependencies {

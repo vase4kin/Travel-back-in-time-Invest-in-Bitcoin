@@ -6,7 +6,7 @@ plugins {
 detekt {
     buildUponDefaultConfig = true
     config.setFrom(rootProject.files("config/detekt/detekt.yml"))
-    autoCorrect = true
+    autoCorrect = false
 }
 
 dependencies {

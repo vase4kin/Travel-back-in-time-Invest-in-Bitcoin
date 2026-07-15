@@ -1,6 +1,6 @@
 plugins {
     id("travelbackintime.android.application")
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
@@ -29,7 +29,8 @@ android {
         }
         debug {
             applicationIdSuffix = ".debug"
-            enableUnitTestCoverage = true
+            enableUnitTestCoverage =
+                providers.gradleProperty("enableUnitTestCoverage").map(String::toBoolean).getOrElse(false)
         }
     }
 
@@ -47,14 +48,10 @@ android {
     }
 }
 
-kapt {
-    correctErrorTypes = true
-}
-
 detekt {
     buildUponDefaultConfig = true
     config.setFrom(rootProject.files("config/detekt/detekt.yml"))
-    autoCorrect = true
+    autoCorrect = false
 }
 
 dependencies {
@@ -79,7 +76,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
 
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
