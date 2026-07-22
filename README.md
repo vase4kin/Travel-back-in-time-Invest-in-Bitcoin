@@ -2,7 +2,7 @@
 [![CI](https://github.com/vase4kin/Travel-back-in-time-Invest-in-Bitcoin/actions/workflows/build.yml/badge.svg)](https://github.com/vase4kin/Travel-back-in-time-Invest-in-Bitcoin/actions/workflows/build.yml)
 [![Android](https://img.shields.io/badge/android-1.1.3-blue.svg)](https://github.com/vase4kin/Back-in-time-Buy-bitcoin/releases/latest)
 
-<img src="https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/dev/screenshots/feature-graphic.png" alt="Travel back in time: Invest in Bitcoin">
+<img src="https://github.com/vase4kin/Back-in-time-Buy-bitcoin/raw/main/screenshots/feature-graphic.png" alt="Travel back in time: Invest in Bitcoin">
 
 # Travel back in time: Invest in Bitcoin
 
