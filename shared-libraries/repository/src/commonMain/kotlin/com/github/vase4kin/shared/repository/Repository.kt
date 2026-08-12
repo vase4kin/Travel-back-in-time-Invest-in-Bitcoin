@@ -18,14 +18,23 @@ package com.github.vase4kin.shared.repository
 
 interface Repository {
     /**
-     * Get bitcoin price by date in double
+     * Get positive, finite historical and current Bitcoin/USD prices from one provider.
      *
      * @param date - the date, format is yyyy-MM-dd
+     * @throws IllegalStateException when neither provider returns a usable pair
      */
-    suspend fun getBitcoinPriceByDate(date: String): Double
+    suspend fun getBitcoinPrices(date: String): BitcoinPrices
+}
 
-    /**
-     * Get current bitcoin price by today in double
-     */
-    suspend fun getCurrentBitcoinPrice(): Double
+data class BitcoinPrices(val historicalPrice: Double, val currentPrice: Double, val provider: BitcoinPriceProvider)
+
+enum class BitcoinPriceProvider(val displayName: String, val websiteUrl: String) {
+    BLOCKCHAIN_COM(
+        displayName = "Blockchain.com",
+        websiteUrl = "https://www.blockchain.com/explorer/charts/market-price",
+    ),
+    COIN_METRICS(
+        displayName = "Coin Metrics",
+        websiteUrl = "https://coinmetrics.io/",
+    ),
 }

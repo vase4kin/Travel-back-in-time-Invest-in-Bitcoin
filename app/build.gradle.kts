@@ -56,7 +56,6 @@ detekt {
 
 dependencies {
     implementation(projects.libraries.crashlytics)
-    implementation(projects.libraries.remoteConfig)
     implementation(projects.sharedLibraries.timetravelmachine)
     implementation(projects.sharedLibraries.tracker)
 
@@ -81,8 +80,6 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
-    implementation(libs.firebase.config)
-    implementation(libs.play.services.ads)
 
     testImplementation(libs.junit4)
     testImplementation(libs.kotlinx.coroutines.test)

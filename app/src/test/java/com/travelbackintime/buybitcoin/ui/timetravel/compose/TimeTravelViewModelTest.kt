@@ -1,6 +1,5 @@
 package com.travelbackintime.buybitcoin.ui.timetravel.compose
 
-import com.github.vase4kin.bitcoin.remoteconfig.RemoteConfigService
 import com.github.vase4kin.crashlytics.Crashlytics
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.shared.tracker.Tracker
@@ -58,7 +57,7 @@ class TimeTravelViewModelTest {
 
     @Test
     fun successfulInvestmentNavigatesToResult() = runTest(dispatcher) {
-        val event = TimeTravelMachine.Event.TimeTravelEvent(3_000.0, AMOUNT, DATE)
+        val event = sampleEvent()
         val viewModel = createViewModel(FakeTimeTravelMachine { event })
         viewModel.selectDate(DATE)
         viewModel.selectInvestment(AMOUNT)
@@ -93,20 +92,29 @@ class TimeTravelViewModelTest {
 
     private fun createViewModel(
         machine: TimeTravelMachine = FakeTimeTravelMachine {
-            TimeTravelMachine.Event.TimeTravelEvent(3_000.0, AMOUNT, DATE)
+            sampleEvent()
         },
         crashlytics: Crashlytics = RecordingCrashlytics(),
     ) = TimeTravelViewModel(
         timeTravelMachine = machine,
         tracker = NoOpTracker,
         crashlytics = crashlytics,
-        remoteConfigService = FakeRemoteConfigService,
         ioDispatcher = dispatcher,
     )
 
     private companion object {
         const val DATE = 1_600_000_000_000L
         const val AMOUNT = 500.0
+
+        fun sampleEvent() = TimeTravelMachine.Event.TimeTravelEvent(
+            profitMoney = 3_000.0,
+            investedMoney = AMOUNT,
+            timeToTravel = DATE,
+            priceProvider = TimeTravelMachine.PriceProvider(
+                displayName = "Blockchain.com",
+                websiteUrl = "https://www.blockchain.com/explorer/charts/market-price",
+            ),
+        )
     }
 }
 
@@ -120,10 +128,6 @@ private class RecordingCrashlytics : Crashlytics {
     override fun recordException(throwable: Throwable) {
         recorded = throwable
     }
-}
-
-private object FakeRemoteConfigService : RemoteConfigService {
-    override val isAdsEnabled = false
 }
 
 private object NoOpTracker : Tracker {

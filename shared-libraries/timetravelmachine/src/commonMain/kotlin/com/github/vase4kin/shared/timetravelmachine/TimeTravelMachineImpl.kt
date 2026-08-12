@@ -27,13 +27,17 @@ internal class TimeTravelMachineImpl(private val repository: Repository) : TimeT
         calculateProfit(time, investedMoney)
 
     private suspend fun calculateProfit(time: Long, investedMoney: Double): TimeTravelMachine.Event {
-        val bitcoinPriceByDate = getBitcoinPriceByDate(time)
-        val bitcoinCurrentPrice = getBitcoinCurrentPrice()
-        val profit = calculateProfit(bitcoinPriceByDate, bitcoinCurrentPrice, investedMoney)
+        val serverDate = convertDateToServerDateFormat(time)
+        val prices = repository.getBitcoinPrices(serverDate)
+        val profit = calculateProfit(prices.historicalPrice, prices.currentPrice, investedMoney)
         return TimeTravelMachine.Event.TimeTravelEvent(
             profitMoney = profit,
             investedMoney = investedMoney,
             timeToTravel = time,
+            priceProvider = TimeTravelMachine.PriceProvider(
+                displayName = prices.provider.displayName,
+                websiteUrl = prices.provider.websiteUrl,
+            ),
         )
     }
 
@@ -45,13 +49,6 @@ internal class TimeTravelMachineImpl(private val repository: Repository) : TimeT
         val bitcoinInvestment = investedMoney / bitcoinHistoricalPrice
         return bitcoinCurrentPrice * bitcoinInvestment
     }
-
-    private suspend fun getBitcoinPriceByDate(time: Long): Double {
-        val serverDate = convertDateToServerDateFormat(time)
-        return repository.getBitcoinPriceByDate(serverDate)
-    }
-
-    private suspend fun getBitcoinCurrentPrice(): Double = repository.getCurrentBitcoinPrice()
 
     private fun convertDateToServerDateFormat(date: Long): String = Instant.fromEpochMilliseconds(date)
         .toLocalDateTime(TimeZone.currentSystemDefault())

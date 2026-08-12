@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../shared-libraries/timetravelmachine"
 
 SPEC CHECKSUMS:
-  timetravelmachine: 05a4e66052a371d1686c20e7329d73846ae51052
+  timetravelmachine: a9035024f8864a50e736d81a625fab976f95e41b
 
 PODFILE CHECKSUM: afa4f17491d5af455e233074cd373181f14e12d9
 

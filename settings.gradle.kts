@@ -28,7 +28,6 @@ rootProject.name = "TravelBackInTimeBuyBitcoin"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
-include(":libraries:remote-config")
 include(":libraries:crashlytics")
 include(":shared-libraries:bitcoin-price-service")
 include(":shared-libraries:repository")

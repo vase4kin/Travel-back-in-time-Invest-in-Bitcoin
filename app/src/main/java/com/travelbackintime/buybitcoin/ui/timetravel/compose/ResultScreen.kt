@@ -20,25 +20,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
 import bitcoin.backintime.com.backintimebuybitcoin.R
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -47,7 +38,6 @@ import java.util.Locale
 @Composable
 internal fun ResultScreen(
     result: ResultRoute,
-    showAds: Boolean,
     onShare: () -> Unit,
     onPriceProvider: () -> Unit,
     onStartOver: () -> Unit,
@@ -77,14 +67,13 @@ internal fun ResultScreen(
         stringResource(R.string.url_google_play, context.packageName),
     )
     val shareTitle = stringResource(R.string.button_share_title)
-    val priceProviderUrl = stringResource(R.string.price_provider_url)
 
     RetroScreenBackground {
         BoxWithConstraints(
             modifier = Modifier.fillMaxSize().safeDrawingPadding(),
             contentAlignment = Alignment.TopCenter,
         ) {
-            val flexibleGap = resultFlexibleGap(maxHeight, showAds)
+            val flexibleGap = ((maxHeight - 520.dp) / 2).coerceAtLeast(8.dp)
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -109,10 +98,6 @@ internal fun ResultScreen(
                 Spacer(Modifier.height(16.dp))
                 ProfitDisplay(profitMoney = profitMoney)
                 Spacer(Modifier.height(flexibleGap))
-                if (showAds) {
-                    AdBanner()
-                    Spacer(Modifier.height(8.dp))
-                }
                 RetroButton(
                     text = stringResource(R.string.button_share_title),
                     onClick = {
@@ -139,13 +124,13 @@ internal fun ResultScreen(
                     onClick = {
                         onPriceProvider()
                         context.startActivity(
-                            Intent(Intent.ACTION_VIEW, Uri.parse(priceProviderUrl)),
+                            Intent(Intent.ACTION_VIEW, Uri.parse(result.priceProviderUrl)),
                         )
                     },
                     modifier = Modifier.padding(vertical = 8.dp),
                 ) {
                     Text(
-                        text = stringResource(R.string.powered_by_price_provider),
+                        text = stringResource(R.string.powered_by_price_provider, result.priceProviderName),
                         style = MaterialTheme.typography.bodyMedium.copy(
                             fontFamily = FontFamily.Default,
                             fontSize = 14.sp,
@@ -271,28 +256,4 @@ private fun DisplayCaption(text: String) {
         color = RetroWhite,
         textAlign = TextAlign.Center,
     )
-}
-
-@Composable
-private fun AdBanner() {
-    val adUnitId = stringResource(R.string.ad_mob_id)
-    var adView by remember { mutableStateOf<AdView?>(null) }
-    AndroidView(
-        factory = { context ->
-            AdView(context).apply {
-                setAdSize(AdSize.BANNER)
-                this.adUnitId = adUnitId
-                loadAd(AdRequest.Builder().build())
-                adView = this
-            }
-        },
-    )
-    DisposableEffect(Unit) {
-        onDispose { adView?.destroy() }
-    }
-}
-
-private fun resultFlexibleGap(maxHeight: Dp, showAds: Boolean): Dp {
-    val fixedHeight = if (showAds) 590.dp else 520.dp
-    return ((maxHeight - fixedHeight) / 2).coerceAtLeast(8.dp)
 }

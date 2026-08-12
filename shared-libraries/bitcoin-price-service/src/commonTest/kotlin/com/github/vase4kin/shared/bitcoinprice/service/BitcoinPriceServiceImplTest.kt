@@ -2,16 +2,22 @@ package com.github.vase4kin.shared.bitcoinprice.service
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
+import io.ktor.client.engine.mock.MockRequestHandleScope
 import io.ktor.client.engine.mock.respond
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.HttpRequestData
+import io.ktor.client.request.HttpResponseData
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.Url
 import io.ktor.http.headersOf
-import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.json.Json
+import kotlinx.io.IOException
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFails
+import kotlin.test.assertFailsWith
 
 class BitcoinPriceServiceImplTest {
     @Test
@@ -43,22 +49,167 @@ class BitcoinPriceServiceImplTest {
         assertEquals(62_621.99, result.getValue("USD").last)
     }
 
-    private fun serviceReturning(body: String, verifyRequest: (io.ktor.http.Url) -> Unit): BitcoinPriceService {
-        val engine = MockEngine { request ->
-            verifyRequest(request.url)
-            respond(
-                content = body,
-                status = HttpStatusCode.OK,
-                headers = headersOf(HttpHeaders.ContentType, "application/json"),
-            )
+    @Test
+    fun requestTimeoutIsRetriedOnceBeforeBeingPropagated() = runTest {
+        var attempts = 0
+        val service = serviceWithEngine(requestTimeoutMillis = 10) {
+            attempts++
+            delay(50)
+            jsonResponse(CURRENT_RESPONSE)
         }
-        val client = HttpClient(engine) {
-            install(ContentNegotiation) {
-                json(Json { ignoreUnknownKeys = true })
+
+        assertFails { service.getBitcoinCurrentPrice() }
+
+        assertEquals(2, attempts)
+    }
+
+    @Test
+    fun retryableHttpStatusesAreRetriedOnce() = runTest {
+        listOf(
+            HttpStatusCode.RequestTimeout,
+            HttpStatusCode.TooManyRequests,
+            HttpStatusCode.InternalServerError,
+        ).forEach { retryableStatus ->
+            var attempts = 0
+            val service = serviceWithEngine {
+                attempts++
+                if (attempts == 1) {
+                    jsonResponse("{}", retryableStatus)
+                } else {
+                    jsonResponse(CURRENT_RESPONSE)
+                }
             }
+
+            val result = service.getBitcoinCurrentPrice()
+
+            assertEquals(2, attempts, "Expected a retry for $retryableStatus")
+            assertEquals(62_621.99, result.getValue("USD").last)
+        }
+    }
+
+    @Test
+    fun retryAfterHeaderOverridesFixedDelay() = runTest {
+        var attempts = 0
+        val delays = mutableListOf<Long>()
+        val service = serviceWithEngine(retryDelay = delays::add) {
+            attempts++
+            if (attempts == 1) {
+                respond(
+                    content = "{}",
+                    status = HttpStatusCode.TooManyRequests,
+                    headers = headersOf(
+                        HttpHeaders.ContentType to listOf("application/json"),
+                        HttpHeaders.RetryAfter to listOf("2"),
+                    ),
+                )
+            } else {
+                jsonResponse(CURRENT_RESPONSE)
+            }
+        }
+
+        service.getBitcoinCurrentPrice()
+
+        assertEquals(2, attempts)
+        assertEquals(listOf(2_000L), delays)
+    }
+
+    @Test
+    fun retryStopsAfterTwoAttempts() = runTest {
+        var attempts = 0
+        val service = serviceWithEngine {
+            attempts++
+            jsonResponse("{}", HttpStatusCode.ServiceUnavailable)
+        }
+
+        assertEquals(emptyMap(), service.getBitcoinCurrentPrice())
+
+        assertEquals(2, attempts)
+    }
+
+    @Test
+    fun ordinaryClientErrorIsNotRetried() = runTest {
+        var attempts = 0
+        val service = serviceWithEngine {
+            attempts++
+            jsonResponse("{}", HttpStatusCode.NotFound)
+        }
+
+        assertEquals(emptyMap(), service.getBitcoinCurrentPrice())
+
+        assertEquals(1, attempts)
+    }
+
+    @Test
+    fun networkFailureIsRetriedOnce() = runTest {
+        var attempts = 0
+        val service = serviceWithEngine {
+            attempts++
+            if (attempts == 1) {
+                throw IOException("network unavailable")
+            }
+            jsonResponse(CURRENT_RESPONSE)
+        }
+
+        val result = service.getBitcoinCurrentPrice()
+
+        assertEquals(2, attempts)
+        assertEquals(62_621.99, result.getValue("USD").last)
+    }
+
+    @Test
+    fun decodingFailureIsNotRetried() = runTest {
+        var attempts = 0
+        val service = serviceWithEngine {
+            attempts++
+            jsonResponse("not-json")
+        }
+
+        assertFails { service.getBitcoinCurrentPrice() }
+
+        assertEquals(1, attempts)
+    }
+
+    @Test
+    fun cancellationIsNotRetried() = runTest {
+        var attempts = 0
+        val service = serviceWithEngine {
+            attempts++
+            throw CancellationException("cancelled")
+        }
+
+        assertFailsWith<CancellationException> { service.getBitcoinCurrentPrice() }
+
+        assertEquals(1, attempts)
+    }
+
+    private fun serviceReturning(body: String, verifyRequest: (Url) -> Unit): BitcoinPriceService =
+        serviceWithEngine { request ->
+            verifyRequest(request.url)
+            jsonResponse(body)
+        }
+
+    private fun serviceWithEngine(
+        requestTimeoutMillis: Long = 10_000,
+        retryDelay: suspend (Long) -> Unit = {},
+        handler: suspend MockRequestHandleScope.(HttpRequestData) -> HttpResponseData,
+    ): BitcoinPriceService {
+        val client = HttpClient(MockEngine(handler)) {
+            configureBitcoinPriceHttpClient(
+                requestTimeoutMillis = requestTimeoutMillis,
+                retryDelay = retryDelay,
+            )
         }
         return BitcoinPriceServiceImpl(client)
     }
+
+    private fun MockRequestHandleScope.jsonResponse(
+        content: String,
+        status: HttpStatusCode = HttpStatusCode.OK,
+    ): HttpResponseData = respond(
+        content = content,
+        status = status,
+        headers = headersOf(HttpHeaders.ContentType, "application/json"),
+    )
 
     private companion object {
         val HISTORICAL_RESPONSE = """

@@ -17,14 +17,7 @@
 package com.travelbackintime.buybitcoin.app
 
 import android.app.Application
-import com.google.android.gms.ads.MobileAds
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class BackInTimeBuyBitcoinApplication : Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-        MobileAds.initialize(this)
-    }
-}
+class BackInTimeBuyBitcoinApplication : Application()

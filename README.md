@@ -52,8 +52,8 @@ sh build.sh
 
 ## Project layout
 
-- `app/`: Android Compose application, navigation, ViewModel, DI, Firebase, ads, and Android tests.
-- `libraries/`: JVM-only abstractions for crash reporting and remote configuration.
+- `app/`: Android Compose application, navigation, ViewModel, DI, Firebase, and Android tests.
+- `libraries/`: JVM-only crash-reporting abstraction.
 - `shared-libraries/bitcoin-price-service/`: KMP network client and provider DTOs.
 - `shared-libraries/repository/`: KMP repository boundary and iOS composition root.
 - `shared-libraries/timetravelmachine/`: KMP Bitcoin investment domain calculation.
