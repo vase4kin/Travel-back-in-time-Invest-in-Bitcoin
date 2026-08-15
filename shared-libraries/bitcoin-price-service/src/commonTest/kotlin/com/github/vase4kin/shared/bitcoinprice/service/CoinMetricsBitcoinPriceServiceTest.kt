@@ -34,6 +34,7 @@ class CoinMetricsBitcoinPriceServiceTest {
             assertEquals("ReferenceRateUSD", request.url.parameters["metrics"])
             assertEquals("1s", request.url.parameters["frequency"])
             assertEquals("1", request.url.parameters["limit_per_asset"])
+            assertEquals("end", request.url.parameters["paging_from"])
             assertEquals(null, request.url.parameters["start_time"])
         }
 

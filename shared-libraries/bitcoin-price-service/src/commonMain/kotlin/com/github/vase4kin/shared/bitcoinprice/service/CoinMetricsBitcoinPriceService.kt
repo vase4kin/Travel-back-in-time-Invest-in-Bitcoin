@@ -53,6 +53,7 @@ class CoinMetricsBitcoinPriceService(private val client: HttpClient = createBitc
             parameter("metrics", CURRENT_PRICE_METRIC)
             parameter("frequency", CURRENT_FREQUENCY)
             parameter("limit_per_asset", 1)
+            parameter("paging_from", PAGING_FROM_END)
         }.body<CoinMetricsPriceResponse>()
 
         return response.data.firstOrNull()?.currentPrice.toBitcoinPriceOrNull()?.let { price ->
@@ -68,6 +69,7 @@ class CoinMetricsBitcoinPriceService(private val client: HttpClient = createBitc
         const val CURRENT_PRICE_METRIC = "ReferenceRateUSD"
         const val DAILY_FREQUENCY = "1d"
         const val CURRENT_FREQUENCY = "1s"
+        const val PAGING_FROM_END = "end"
         const val USD = "USD"
     }
 }
