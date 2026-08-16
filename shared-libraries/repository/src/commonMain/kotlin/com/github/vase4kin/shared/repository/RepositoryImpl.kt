@@ -17,15 +17,67 @@
 package com.github.vase4kin.shared.repository
 
 import com.github.vase4kin.shared.bitcoinprice.service.BitcoinPriceService
+import kotlin.coroutines.cancellation.CancellationException
 
 private const val USD = "USD"
 
-class RepositoryImpl(private val bitcoinPriceService: BitcoinPriceService) : Repository {
+class RepositoryImpl(
+    private val primaryBitcoinPriceService: BitcoinPriceService,
+    private val fallbackBitcoinPriceService: BitcoinPriceService,
+) : Repository {
 
-    override suspend fun getBitcoinPriceByDate(date: String): Double =
-        bitcoinPriceService.getBitcoinHistoricalPrice(date).values.firstOrNull()?.y
-            ?: Double.NaN
+    @Suppress("TooGenericExceptionCaught")
+    override suspend fun getBitcoinPrices(date: String): BitcoinPrices = try {
+        primaryBitcoinPriceService.getBitcoinPrices(
+            date = date,
+            provider = BitcoinPriceProvider.BLOCKCHAIN_COM,
+        )
+    } catch (primaryFailure: Exception) {
+        primaryFailure.rethrowIfCancellation()
+        try {
+            fallbackBitcoinPriceService.getBitcoinPrices(
+                date = date,
+                provider = BitcoinPriceProvider.COIN_METRICS,
+            )
+        } catch (fallbackFailure: Exception) {
+            fallbackFailure.rethrowIfCancellation()
+            throw BitcoinPriceUnavailableException(
+                primaryFailure = primaryFailure,
+                fallbackFailure = fallbackFailure,
+            )
+        }
+    }
+}
 
-    override suspend fun getCurrentBitcoinPrice(): Double = bitcoinPriceService.getBitcoinCurrentPrice()[USD]?.last
-        ?: Double.NaN
+private suspend fun BitcoinPriceService.getBitcoinPrices(date: String, provider: BitcoinPriceProvider): BitcoinPrices {
+    val historicalPrice = getBitcoinHistoricalPrice(date).values.firstOrNull()?.y
+        .requireUsableBitcoinPrice("historical")
+    val currentPrice = getBitcoinCurrentPrice()[USD]?.last
+        .requireUsableBitcoinPrice("current")
+    return BitcoinPrices(
+        historicalPrice = historicalPrice,
+        currentPrice = currentPrice,
+        provider = provider,
+    )
+}
+
+private fun Double?.requireUsableBitcoinPrice(priceType: String): Double {
+    if (this == null || !isFinite() || this <= 0.0) {
+        throw InvalidBitcoinPriceException(priceType = priceType, value = this)
+    }
+    return this
+}
+
+internal class InvalidBitcoinPriceException(priceType: String, value: Double?) :
+    IllegalStateException("Invalid $priceType Bitcoin/USD price: ${value ?: "missing"}")
+
+internal class BitcoinPriceUnavailableException(primaryFailure: Exception, fallbackFailure: Exception) :
+    IllegalStateException(
+        "No Bitcoin price provider returned a usable price pair. " +
+            "Primary: ${primaryFailure.message}; fallback: ${fallbackFailure.message}",
+        fallbackFailure,
+    )
+
+private fun Exception.rethrowIfCancellation() {
+    if (this is CancellationException) throw this
 }

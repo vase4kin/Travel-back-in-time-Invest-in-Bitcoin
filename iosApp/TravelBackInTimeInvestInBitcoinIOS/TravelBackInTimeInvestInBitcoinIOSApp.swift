@@ -10,27 +10,51 @@ import timetravelmachine
 
 @main
 struct TravelBackInTimeInvestInBitcoinIOSApp: App {
-    
-    @State var placeHolder = ContentView(text: "Loading")
+    @State private var result = ResultContent.loading
     
     var body: some Scene {
         WindowGroup {
-            placeHolder.onAppear(perform: {
-                getData { (data) in
-                    self.placeHolder = ContentView(text: data)
+            ContentView(
+                text: result.text,
+                priceProviderName: result.priceProviderName,
+                priceProviderURL: result.priceProviderURL
+            )
+            .onAppear {
+                getData { content in
+                    DispatchQueue.main.async {
+                        result = content
+                    }
                 }
-            })
+            }
         }
     }
-    
-    func getData(_ completion: @escaping ((String) -> Void)) {
-        let timeTravelMachine = TimeTravelMachineFactory.init().create()
+
+    private func getData(_ completion: @escaping (ResultContent) -> Void) {
+        let timeTravelMachine = TimeTravelMachineFactory().create()
         timeTravelMachine.travelInTime(
-            time: TimeTravelConstraints.init().maxDateTimeInMillis,
+            time: TimeTravelConstraints().maxDateTimeInMillis,
             investedMoney: 99.9
-        ) {
-            (event: TimeTravelMachineEvent?, error: Error?) in
-            completion(event?.description ?? "Error")
+        ) { event, _ in
+            guard let event = event as? TimeTravelMachineEvent.TimeTravelEvent else {
+                completion(.error)
+                return
+            }
+            completion(
+                ResultContent(
+                    text: event.description(),
+                    priceProviderName: event.priceProvider.displayName,
+                    priceProviderURL: URL(string: event.priceProvider.websiteUrl)
+                )
+            )
         }
     }
+}
+
+private struct ResultContent {
+    let text: String
+    let priceProviderName: String?
+    let priceProviderURL: URL?
+
+    static let loading = ResultContent(text: "Loading", priceProviderName: nil, priceProviderURL: nil)
+    static let error = ResultContent(text: "Error", priceProviderName: nil, priceProviderURL: nil)
 }

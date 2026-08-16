@@ -118,12 +118,28 @@ class TimeTravelScreenshotTest {
         captureScreen("result") {
             ResultScreen(
                 result = sampleResult,
-                showAds = false,
                 onShare = {},
                 onPriceProvider = {},
                 onStartOver = {},
             )
         }
+    }
+
+    @Test
+    fun resultAttributesTheProviderThatSuppliedThePrices() {
+        setScreen {
+            ResultScreen(
+                result = sampleResult.copy(
+                    priceProviderName = "Coin Metrics",
+                    priceProviderUrl = "https://coinmetrics.io/",
+                ),
+                onShare = {},
+                onPriceProvider = {},
+                onStartOver = {},
+            )
+        }
+
+        composeRule.onNodeWithText("Bitcoin price data by Coin Metrics").assertExists()
     }
 
     @Test
@@ -134,7 +150,6 @@ class TimeTravelScreenshotTest {
         ) {
             ResultScreen(
                 result = sampleResult,
-                showAds = false,
                 onShare = {},
                 onPriceProvider = {},
                 onStartOver = {},
@@ -191,6 +206,8 @@ class TimeTravelScreenshotTest {
             profitMoney = 71_262.57,
             investedMoney = 100.0,
             timeToTravel = SCREENSHOT_DATE_MILLIS,
+            priceProviderName = "Blockchain.com",
+            priceProviderUrl = "https://www.blockchain.com/explorer/charts/market-price",
         )
     }
 }

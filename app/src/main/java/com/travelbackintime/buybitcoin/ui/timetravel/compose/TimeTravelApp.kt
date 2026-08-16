@@ -35,14 +35,28 @@ private data object TimeTravelRoute : NavKey
 private data object ErrorRoute : NavKey
 
 @Serializable
-internal data class ResultRoute(val profitMoney: Double, val investedMoney: Double, val timeToTravel: Long) : NavKey
+internal data class ResultRoute(
+    val profitMoney: Double,
+    val investedMoney: Double,
+    val timeToTravel: Long,
+    val priceProviderName: String,
+    val priceProviderUrl: String,
+) : NavKey
 
 @Serializable
-private data class LoadingRoute(val profitMoney: Double, val investedMoney: Double, val timeToTravel: Long) : NavKey {
+private data class LoadingRoute(
+    val profitMoney: Double,
+    val investedMoney: Double,
+    val timeToTravel: Long,
+    val priceProviderName: String,
+    val priceProviderUrl: String,
+) : NavKey {
     fun resultRoute() = ResultRoute(
         profitMoney = profitMoney,
         investedMoney = investedMoney,
         timeToTravel = timeToTravel,
+        priceProviderName = priceProviderName,
+        priceProviderUrl = priceProviderUrl,
     )
 }
 
@@ -60,6 +74,8 @@ fun TimeTravelApp(viewModel: TimeTravelViewModel) {
                         profitMoney = destination.event.profitMoney,
                         investedMoney = destination.event.investedMoney,
                         timeToTravel = destination.event.timeToTravel,
+                        priceProviderName = destination.event.priceProvider.displayName,
+                        priceProviderUrl = destination.event.priceProvider.websiteUrl,
                     ),
                 )
             }
@@ -102,7 +118,6 @@ fun TimeTravelApp(viewModel: TimeTravelViewModel) {
                 entry<ResultRoute> { result ->
                     ResultScreen(
                         result = result,
-                        showAds = uiState.isAdsEnabled,
                         onShare = viewModel::trackShare,
                         onPriceProvider = viewModel::trackPriceProvider,
                         onStartOver = {

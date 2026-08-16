@@ -2,7 +2,6 @@ package com.travelbackintime.buybitcoin.ui.timetravel.compose
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.vase4kin.bitcoin.remoteconfig.RemoteConfigService
 import com.github.vase4kin.crashlytics.Crashlytics
 import com.github.vase4kin.shared.timetravelmachine.TimeTravelMachine
 import com.github.vase4kin.shared.tracker.Tracker
@@ -24,12 +23,9 @@ class TimeTravelViewModel @Inject constructor(
     private val timeTravelMachine: TimeTravelMachine,
     private val tracker: Tracker,
     private val crashlytics: Crashlytics,
-    remoteConfigService: RemoteConfigService,
     @param:IoDispatcher private val ioDispatcher: CoroutineDispatcher,
 ) : ViewModel() {
-    private val mutableUiState = MutableStateFlow(
-        TimeTravelUiState(isAdsEnabled = remoteConfigService.isAdsEnabled),
-    )
+    private val mutableUiState = MutableStateFlow(TimeTravelUiState())
     val uiState: StateFlow<TimeTravelUiState> = mutableUiState.asStateFlow()
 
     private val navigationChannel = Channel<TimeTravelNavigation>(Channel.BUFFERED)
@@ -79,9 +75,7 @@ class TimeTravelViewModel @Inject constructor(
     }
 
     fun reset() {
-        mutableUiState.update {
-            TimeTravelUiState(isAdsEnabled = it.isAdsEnabled)
-        }
+        mutableUiState.value = TimeTravelUiState()
         tracker.trackUserStartsOver()
     }
 

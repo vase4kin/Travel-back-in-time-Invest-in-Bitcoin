@@ -47,8 +47,7 @@
     <string name="retry_title">Great Scott!</string>
     <string name="retry_button_text">Retry</string>
     <string name="retry_description">Nowadays time machine only needs to have a good internet connection instead of libyan plutonium.\nHappy time travelling!</string>
-    <string name="powered_by_price_provider">Bitcoin price data by Blockchain.com</string>
-    <string name="price_provider_url">https://www.blockchain.com/explorer/charts/market-price</string>
+    <string name="powered_by_price_provider">Bitcoin price data by %1$s</string>
     <string name="text_basically_nothing">Bitcoin price is basically nothing now. Anyway, give yourself a big hand, nobody got as close as you, my friend. Try to put the dates after 18th of July 2010.</string>
     <string name="text_oops">Oops!</string>
 </resources>

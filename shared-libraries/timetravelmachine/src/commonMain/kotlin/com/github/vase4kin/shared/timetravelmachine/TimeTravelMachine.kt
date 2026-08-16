@@ -24,6 +24,7 @@ interface TimeTravelMachine {
      * @param time the time as UTC milliseconds from the epoch
      * @param investedMoney the amount of invested money in double
      */
+    @Throws(Exception::class)
     suspend fun travelInTime(time: Long, investedMoney: Double): Event
 
     /**
@@ -36,8 +37,15 @@ interface TimeTravelMachine {
          * @param profitMoney the profit money
          * @param investedMoney the amount of the money that have been invested
          * @param timeToTravel the time of the time travel represented as UTC milliseconds from the epoch
+         * @param priceProvider the provider that supplied both Bitcoin/USD prices
          */
-        data class TimeTravelEvent(val profitMoney: Double, val investedMoney: Double, val timeToTravel: Long) :
-            Event()
+        data class TimeTravelEvent(
+            val profitMoney: Double,
+            val investedMoney: Double,
+            val timeToTravel: Long,
+            val priceProvider: PriceProvider,
+        ) : Event()
     }
+
+    data class PriceProvider(val displayName: String, val websiteUrl: String)
 }

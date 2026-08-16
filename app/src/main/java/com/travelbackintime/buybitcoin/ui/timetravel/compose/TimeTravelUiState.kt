@@ -6,7 +6,6 @@ data class TimeTravelUiState(
     val selectedDateMillis: Long? = null,
     val investedMoney: Double? = null,
     val isLoading: Boolean = false,
-    val isAdsEnabled: Boolean = false,
 ) {
     val canInvest: Boolean
         get() = selectedDateMillis != null && investedMoney != null && !isLoading
