@@ -164,3 +164,38 @@ and clear module boundaries.
 
 - The upstream project is hosted at `https://github.com/android/nowinandroid`.
 - Keep commits focused and explain user-visible behavior, tests run, and any skipped verification.
+
+### Commit & PR Titles
+
+**Conventional Commits** format is enforced by a GitHub Actions workflow on every PR:
+
+```css
+<type>[optional scope][!]: <description>
+```
+
+Use the same format for commit messages and PR titles. Only these commit types are allowed:
+
+- `feat` — a releasable addition or intentional change to the deployed
+  application, UI, runtime behavior, or delivery pipeline.
+- `fix` — a releasable correction to the deployed application, UI, runtime
+  behavior, or delivery pipeline.
+- `chore` — work that does not change the deployed application or release
+  behavior, such as documentation, tests, internal tooling, or repository
+  housekeeping.
+
+Use the optional scope to describe the affected area or work category. Labels
+such as `docs`, `ci`, `style`, `test`, `build`, `refactor`, and `perf` are
+scopes, not commit types. If a UI, application, or pipeline change requires a
+redeploy or should create a release, it must be `feat` or `fix`, even when its
+scope is `style`, `ci`, or another non-product label. Use `chore(<scope>)` only
+when the change should not create an application release.
+
+Examples:
+
+```scss
+feat(ui): add dark mode toggle
+fix(zoom): prevent pinch zoom from exceeding bounds
+fix(ci): restore production deployment
+chore(docs): document family-data validation
+chore(test): reorganize parser fixtures
+```

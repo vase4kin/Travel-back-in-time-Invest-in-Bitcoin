@@ -10,13 +10,20 @@ plugins {
     alias(libs.plugins.roborazzi)
 }
 
+val releaseVersion = "1.1.3" // x-release-please-version
+val (releaseMajor, releaseMinor, releasePatch) = releaseVersion.split('.').map { it.toInt() }
+require(releaseMajor in 1..9_999 && releaseMinor in 0..99 && releasePatch in 0..99) {
+    "Release versions must fit the Android version code scheme"
+}
+val releaseVersionCode = releaseMajor * 10_000 + releaseMinor * 100 + releasePatch
+
 android {
     namespace = "bitcoin.backintime.com.backintimebuybitcoin"
 
     defaultConfig {
         applicationId = "com.travelbackintime.buybitcoin"
-        versionCode = 19
-        versionName = "1.1.3"
+        versionCode = releaseVersionCode
+        versionName = releaseVersion
     }
 
     buildTypes {
