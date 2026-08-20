@@ -10,7 +10,7 @@ plugins {
     alias(libs.plugins.roborazzi)
 }
 
-val releaseVersion = "1.2.0" // x-release-please-version
+val releaseVersion = "1.2.1" // x-release-please-version
 val (releaseMajor, releaseMinor, releasePatch) = releaseVersion.split('.').map { it.toInt() }
 require(releaseMajor in 1..9_999 && releaseMinor in 0..99 && releasePatch in 0..99) {
     "Release versions must fit the Android version code scheme"
