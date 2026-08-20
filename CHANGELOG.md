@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/vase4kin/Travel-back-in-time-Invest-in-Bitcoin/compare/v1.2.0...v1.2.1) (2026-08-20)
+
+
+### Bug Fixes
+
+* **release-please:** use default release name ([#122](https://github.com/vase4kin/Travel-back-in-time-Invest-in-Bitcoin/issues/122)) ([d2a5829](https://github.com/vase4kin/Travel-back-in-time-Invest-in-Bitcoin/commit/d2a58297a31da2731b923604b4ef286fdbf407a2))
+
 ## [1.2.0](https://github.com/vase4kin/Travel-back-in-time-Invest-in-Bitcoin/compare/v1.1.3...v1.2.0) (2026-08-17)
 
 
