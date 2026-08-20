@@ -2,7 +2,6 @@
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "release-type": "simple",
   "include-component-in-tag": false,
-  "pull-request-title-pattern": "chore(release): release ${version}",
   "packages": {
     ".": {
       "component": "travel-back-in-time-buy-bitcoin",
